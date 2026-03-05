@@ -17,7 +17,7 @@ sources:
     enabled: true
     feeds:
       - { url: "https://openai.com/blog/rss.xml", name: "OpenAI Blog" }
-      - { url: "https://anthropic.com/news/feed_anthropic.xml", name: "Anthropic" }
+      - { url: "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic.xml", name: "Anthropic" }
       - { url: "https://blog.google/technology/ai/rss/", name: "Google AI" }
       - { url: "https://huggingface.co/blog/feed.xml", name: "Hugging Face" }
       - { url: "https://blog.google/products/gemini/rss/", name: "Gemini Blog" }
