@@ -48,17 +48,22 @@ sources:
       - { id: "UCLkTlEeB0IGFA40peNRFbcQ", name: "Matt Wolfe" }
 
   bilibili:
-    enabled: false  # Phase 2 (via RSSHub)
+    enabled: true
     rsshub_base: "http://localhost:1200"
     users:
       - { uid: "946974", name: "Ele实验室" }
+      - { uid: "291229", name: "机器之心" }
+      - { uid: "517327498", name: "ComfyUI官方" }
 
   twitter:
-    enabled: false  # Phase 2 (via RSSHub)
+    enabled: true
     rsshub_base: "http://localhost:1200"
     users:
       - { id: "karpathy", name: "Andrej Karpathy" }
       - { id: "ClementDelangue", name: "Clement Delangue" }
+      - { id: "StabilityAI", name: "Stability AI" }
+      - { id: "OpenAI", name: "OpenAI" }
+      - { id: "AnthropicAI", name: "Anthropic" }
 
   reddit:
     enabled: true
