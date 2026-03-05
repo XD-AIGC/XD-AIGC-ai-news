@@ -21,7 +21,7 @@ sources:
       - { url: "https://blog.google/technology/ai/rss/", name: "Google AI" }
       - { url: "https://huggingface.co/blog/feed.xml", name: "Hugging Face" }
       - { url: "https://blog.google/products/gemini/rss/", name: "Gemini Blog" }
-      - { url: "https://mistral.ai/feed.xml", name: "Mistral AI" }
+      - { url: "https://www.marktechpost.com/feed/", name: "MarkTechPost AI" }
 
   github:
     enabled: true
