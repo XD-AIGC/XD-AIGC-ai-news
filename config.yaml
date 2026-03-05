@@ -17,10 +17,11 @@ sources:
     enabled: true
     feeds:
       - { url: "https://openai.com/blog/rss.xml", name: "OpenAI Blog" }
-      - { url: "https://www.anthropic.com/research/rss.xml", name: "Anthropic" }
+      - { url: "https://anthropic.com/news/feed_anthropic.xml", name: "Anthropic" }
       - { url: "https://blog.google/technology/ai/rss/", name: "Google AI" }
       - { url: "https://huggingface.co/blog/feed.xml", name: "Hugging Face" }
-      - { url: "https://stability.ai/news/feed", name: "Stability AI" }
+      - { url: "https://blog.google/products/gemini/rss/", name: "Gemini Blog" }
+      - { url: "https://mistral.ai/feed.xml", name: "Mistral AI" }
 
   github:
     enabled: true
