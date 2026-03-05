@@ -25,7 +25,7 @@ BILIBILI_HEADERS = {
 
 
 class BilibiliCollector(BaseScraper):
-    """Collect videos from Bilibili UP主 via API."""
+    """Collect videos from Bilibili UP主 via API (direct, no proxy)."""
 
     def __init__(self, config: dict, http_client: httpx.AsyncClient):
         super().__init__(config, http_client)
@@ -34,18 +34,21 @@ class BilibiliCollector(BaseScraper):
 
     async def fetch(self, since: datetime) -> list[ContentItem]:
         items: list[ContentItem] = []
-        for user in self.users:
-            uid = str(user["uid"])
-            name = user.get("name", uid)
-            try:
-                user_items = await self._fetch_user_dynamic(uid, name, since)
-                items.extend(user_items)
-            except Exception as e:
-                logger.warning("Bilibili [%s] error: %s", name, e)
+        async with httpx.AsyncClient(timeout=httpx.Timeout(15.0)) as direct_client:
+            for user in self.users:
+                uid = str(user["uid"])
+                name = user.get("name", uid)
+                try:
+                    user_items = await self._fetch_user_dynamic(
+                        direct_client, uid, name, since
+                    )
+                    items.extend(user_items)
+                except Exception as e:
+                    logger.warning("Bilibili [%s] error: %s", name, e)
         return items
 
     async def _fetch_user_dynamic(
-        self, uid: str, name: str, since: datetime
+        self, client: httpx.AsyncClient, uid: str, name: str, since: datetime
     ) -> list[ContentItem]:
         """Fetch user's recent dynamics (videos, articles, etc.)."""
         headers = {**BILIBILI_HEADERS}
@@ -56,11 +59,10 @@ class BilibiliCollector(BaseScraper):
         items: list[ContentItem] = []
 
         try:
-            resp = await self.client.get(
+            resp = await client.get(
                 DYNAMIC_API,
                 params=params,
                 headers=headers,
-                timeout=15.0,
                 follow_redirects=True,
             )
             resp.raise_for_status()
