@@ -15,8 +15,7 @@ BEARER_TOKEN = (
     "=1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"
 )
 
-USER_BY_SCREEN_NAME = "https://x.com/i/api/graphql/xmU6X_CKcnQ5lSrCbAmJsg/UserByScreenName"
-USER_TWEETS = "https://x.com/i/api/graphql/Y9WM4Id6UcGFE8Z-hbnixw/UserTweets"
+USER_TIMELINE_API = "https://api.twitter.com/1.1/statuses/user_timeline.json"
 
 TWITTER_HEADERS = {
     "User-Agent": (
@@ -24,58 +23,12 @@ TWITTER_HEADERS = {
         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
     ),
     "Authorization": f"Bearer {BEARER_TOKEN}",
-    "X-Twitter-Active-User": "yes",
-    "X-Twitter-Client-Language": "en",
-    "Accept": "*/*",
+    "Accept": "application/json",
     "Accept-Language": "en-US,en;q=0.9",
-    "Referer": "https://x.com/",
-    "Origin": "https://x.com",
 }
-
-FEATURES_USER = (
-    '{"hidden_profile_subscriptions_enabled":true,'
-    '"rweb_tipjar_consumption_enabled":true,'
-    '"responsive_web_graphql_exclude_directive_enabled":true,'
-    '"verified_phone_label_enabled":false,'
-    '"subscriptions_verification_info_is_identity_verified_enabled":true,'
-    '"subscriptions_verification_info_verified_since_enabled":true,'
-    '"highlights_tweets_tab_ui_enabled":true,'
-    '"responsive_web_twitter_article_notes_tab_enabled":true,'
-    '"subscriptions_feature_can_gift_premium":true,'
-    '"creator_subscriptions_tweet_preview_api_enabled":true,'
-    '"responsive_web_graphql_skip_user_profile_image_extensions_enabled":false,'
-    '"responsive_web_graphql_timeline_navigation_enabled":true}'
-)
-
-FEATURES_TWEETS = (
-    '{"rweb_tipjar_consumption_enabled":true,'
-    '"responsive_web_graphql_exclude_directive_enabled":true,'
-    '"verified_phone_label_enabled":false,'
-    '"creator_subscriptions_tweet_preview_api_enabled":true,'
-    '"responsive_web_graphql_timeline_navigation_enabled":true,'
-    '"responsive_web_graphql_skip_user_profile_image_extensions_enabled":false,'
-    '"communities_web_enable_tweet_community_results_fetch":true,'
-    '"c9s_tweet_anatomy_moderator_badge_enabled":true,'
-    '"articles_preview_enabled":true,'
-    '"responsive_web_edit_tweet_api_enabled":true,'
-    '"graphql_is_translatable_rweb_tweet_is_translatable_enabled":true,'
-    '"view_counts_everywhere_api_enabled":true,'
-    '"longform_notetweets_consumption_enabled":true,'
-    '"responsive_web_twitter_article_tweet_consumption_enabled":true,'
-    '"tweet_awards_web_tipping_enabled":false,'
-    '"creator_subscriptions_quote_tweet_preview_enabled":false,'
-    '"freedom_of_speech_not_reach_fetch_enabled":true,'
-    '"standardized_nudges_misinfo":true,'
-    '"tweet_with_visibility_results_prefer_gql_limited_actions_policy_enabled":true,'
-    '"rweb_video_timestamps_enabled":true,'
-    '"longform_notetweets_rich_text_read_enabled":true,'
-    '"longform_notetweets_inline_media_enabled":true,'
-    '"responsive_web_enhance_cards_enabled":false}'
-)
 
 
 def _get_csrf_token(auth_token: str) -> str:
-    """Generate a csrf token (ct0) from auth_token - use a random hex."""
     return md5(auth_token.encode()).hexdigest()[:32]
 
 
@@ -113,7 +66,7 @@ class TwitterCollector(BaseScraper):
                 screen_name = user_cfg["id"]
                 name = user_cfg.get("name", screen_name)
                 try:
-                    user_items = await self._fetch_user_tweets(
+                    user_items = await self._fetch_user_timeline(
                         client, screen_name, name, since
                     )
                     items.extend(user_items)
@@ -122,70 +75,43 @@ class TwitterCollector(BaseScraper):
 
         return items
 
-    async def _get_user_id(
-        self, client: httpx.AsyncClient, screen_name: str
-    ) -> str | None:
-        params = {
-            "variables": f'{{"screen_name":"{screen_name}","withSafetyModeUserFields":true}}',
-            "features": FEATURES_USER,
-            "fieldToggles": '{"withAuxiliaryUserLabels":false}',
-        }
-        try:
-            resp = await client.get(
-                USER_BY_SCREEN_NAME, params=params, follow_redirects=True
-            )
-            resp.raise_for_status()
-            data = resp.json()
-            return data["data"]["user"]["result"]["rest_id"]
-        except Exception as e:
-            logger.warning("Twitter user lookup [%s] failed: %s", screen_name, e)
-            return None
-
-    async def _fetch_user_tweets(
+    async def _fetch_user_timeline(
         self,
         client: httpx.AsyncClient,
         screen_name: str,
         name: str,
         since: datetime,
     ) -> list[ContentItem]:
-        user_id = await self._get_user_id(client, screen_name)
-        if not user_id:
-            return []
-
-        variables = (
-            f'{{"userId":"{user_id}","count":20,'
-            f'"includePromotedContent":false,'
-            f'"withQuickPromoteEligibilityTweetFields":true,'
-            f'"withVoice":true,"withV2Timeline":true}}'
-        )
+        """Fetch user's recent tweets via v1.1 REST API."""
         params = {
-            "variables": variables,
-            "features": FEATURES_TWEETS,
+            "screen_name": screen_name,
+            "count": 20,
+            "exclude_replies": "false",
+            "include_rts": "false",
+            "tweet_mode": "extended",
         }
 
         items: list[ContentItem] = []
         try:
             resp = await client.get(
-                USER_TWEETS, params=params, follow_redirects=True
+                USER_TIMELINE_API,
+                params=params,
+                follow_redirects=True,
             )
             resp.raise_for_status()
-            data = resp.json()
+            tweets = resp.json()
 
-            timeline = (
-                data.get("data", {})
-                .get("user", {})
-                .get("result", {})
-                .get("timeline_v2", {})
-                .get("timeline", {})
-                .get("instructions", [])
-            )
+            if not isinstance(tweets, list):
+                logger.warning(
+                    "Twitter [%s] unexpected response: %s",
+                    name, str(tweets)[:200],
+                )
+                return items
 
-            for instruction in timeline:
-                entries = instruction.get("entries", [])
-                for entry in entries:
-                    item = self._parse_entry(entry, screen_name, name, since)
-                    if item:
-                        items.append(item)
+            for tweet in tweets:
+                item = self._parse_tweet(tweet, screen_name, name, since)
+                if item:
+                    items.append(item)
 
             logger.info("Twitter [%s]: fetched %d items", name, len(items))
 
@@ -194,31 +120,14 @@ class TwitterCollector(BaseScraper):
 
         return items
 
-    def _parse_entry(
+    def _parse_tweet(
         self,
-        entry: dict,
+        tweet: dict,
         screen_name: str,
         name: str,
         since: datetime,
     ) -> ContentItem | None:
-        content = entry.get("content", {})
-        if content.get("entryType") != "TimelineTimelineItem":
-            return None
-
-        tweet_result = (
-            content.get("itemContent", {})
-            .get("tweet_results", {})
-            .get("result", {})
-        )
-
-        if tweet_result.get("__typename") == "TweetWithVisibilityResults":
-            tweet_result = tweet_result.get("tweet", {})
-
-        legacy = tweet_result.get("legacy", {})
-        if not legacy:
-            return None
-
-        created_str = legacy.get("created_at", "")
+        created_str = tweet.get("created_at", "")
         if created_str:
             try:
                 published_at = datetime.strptime(
@@ -231,9 +140,10 @@ class TwitterCollector(BaseScraper):
         else:
             published_at = None
 
-        full_text = legacy.get("full_text", "")
-        tweet_id = legacy.get("id_str", "")
-        url = f"https://x.com/{screen_name}/status/{tweet_id}" if tweet_id else ""
+        full_text = tweet.get("full_text", "") or tweet.get("text", "")
+        tweet_id = tweet.get("id_str", "")
+        user_sn = tweet.get("user", {}).get("screen_name", screen_name)
+        url = f"https://x.com/{user_sn}/status/{tweet_id}" if tweet_id else ""
 
         if not full_text or not url:
             return None
@@ -243,9 +153,6 @@ class TwitterCollector(BaseScraper):
             title += "..."
 
         uid = md5(url.encode()).hexdigest()[:12]
-
-        retweet_count = legacy.get("retweet_count", 0)
-        favorite_count = legacy.get("favorite_count", 0)
 
         return ContentItem(
             id=self._generate_id("twitter", screen_name, uid),
@@ -257,7 +164,7 @@ class TwitterCollector(BaseScraper):
             published_at=published_at,
             metadata={
                 "platform": "twitter",
-                "retweet_count": retweet_count,
-                "favorite_count": favorite_count,
+                "retweet_count": tweet.get("retweet_count", 0),
+                "favorite_count": tweet.get("favorite_count", 0),
             },
         )
