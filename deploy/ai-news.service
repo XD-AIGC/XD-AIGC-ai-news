@@ -1,0 +1,17 @@
+[Unit]
+Description=AI News Aggregator - daily collection and processing
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/AIGC/XD-AIGC-ai-news
+ExecStart=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin/python main.py --days 1
+TimeoutStartSec=600
+Environment="PATH=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin:/usr/local/bin:/usr/bin:/bin"
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
