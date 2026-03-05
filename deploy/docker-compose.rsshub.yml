@@ -11,7 +11,7 @@ services:
       NODE_ENV: production
       CACHE_TYPE: memory
       CACHE_EXPIRE: 300
-      TWITTER_AUTH_TOKEN: "317093aa8f673900b8ba793beeb432dd50d84f72"
+      # No longer needed for Twitter (using direct API collector)
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:1200/"]
       interval: 30s

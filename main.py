@@ -19,6 +19,7 @@ from collectors.hackernews_collector import HackerNewsCollector
 from collectors.reddit_collector import RedditCollector
 from collectors.rss_collector import RSSCollector
 from collectors.telegram_collector import TelegramCollector
+from collectors.twitter_collector import TwitterCollector
 from collectors.youtube_collector import YouTubeCollector
 from outputs.feishu_bot import FeishuBot
 from outputs.markdown_writer import MarkdownWriter
@@ -84,18 +85,9 @@ def build_collectors(
         collectors.append(("Bilibili", BilibiliCollector(bili_cfg, client)))
 
     if sources.get("twitter", {}).get("enabled"):
-        rsshub_base = sources["twitter"].get("rsshub_base", "http://localhost:1200")
-        feeds = [
-            {
-                "url": f"{rsshub_base}/twitter/user/{u['id']}",
-                "name": u.get("name", u["id"]),
-            }
-            for u in sources["twitter"].get("users", [])
-        ]
-        if feeds:
-            collectors.append(
-                ("Twitter", RSSCollector(feeds, client, SourceType.TWITTER))
-            )
+        tw_cfg = sources["twitter"]
+        tw_cfg["auth_token"] = os.getenv("TWITTER_AUTH_TOKEN", tw_cfg.get("auth_token", ""))
+        collectors.append(("Twitter", TwitterCollector(tw_cfg, client)))
 
     if sources.get("reddit", {}).get("enabled"):
         collectors.append(

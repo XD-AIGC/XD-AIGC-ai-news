@@ -56,7 +56,6 @@ sources:
 
   twitter:
     enabled: true
-    rsshub_base: "http://localhost:1200"
     users:
       - { id: "karpathy", name: "Andrej Karpathy" }
       - { id: "ClementDelangue", name: "Clement Delangue" }
