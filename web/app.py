@@ -1,0 +1,117 @@
+"""FastAPI web dashboard for AI News Aggregator."""
+
+import os
+from pathlib import Path
+from typing import Optional
+
+from dotenv import load_dotenv
+from fastapi import FastAPI, Query
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+
+from storage.database import NewsDatabase
+
+load_dotenv()
+
+STATIC_DIR = Path(__file__).parent / "static"
+DB_PATH = os.getenv("NEWS_DB_PATH", "./data/news.db")
+
+app = FastAPI(title="AI News Dashboard", docs_url="/api/docs")
+
+
+class NewsItemResponse(BaseModel):
+    id: str
+    source_type: str
+    title: str
+    url: str
+    content: str
+    author: str
+    published_at: Optional[str]
+    collected_at: str
+    ai_score: Optional[float]
+    ai_summary: Optional[str]
+    ai_categories: list[str]
+    ai_tags: list[str]
+
+
+class PaginatedNews(BaseModel):
+    items: list[NewsItemResponse]
+    total: int
+    page: int
+    page_size: int
+    pages: int
+
+
+def _get_db() -> NewsDatabase:
+    db = NewsDatabase(DB_PATH)
+    db.connect()
+    return db
+
+
+@app.get("/api/news", response_model=PaginatedNews)
+def list_news(
+    date: Optional[str] = Query(None, description="YYYY-MM-DD"),
+    source: Optional[str] = Query(None),
+    category: Optional[str] = Query(None),
+    q: Optional[str] = Query(None, description="Search query"),
+    min_score: Optional[float] = Query(None),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(50, ge=1, le=200),
+):
+    db = _get_db()
+    try:
+        items, total = db.search_items(
+            date=date, source=source, category=category,
+            q=q, min_score=min_score, page=page, page_size=page_size,
+        )
+        pages = (total + page_size - 1) // page_size if total else 0
+        return PaginatedNews(
+            items=[_item_to_resp(i) for i in items],
+            total=total, page=page, page_size=page_size, pages=pages,
+        )
+    finally:
+        db.close()
+
+
+@app.get("/api/dates")
+def available_dates():
+    db = _get_db()
+    try:
+        return db.get_available_dates()
+    finally:
+        db.close()
+
+
+@app.get("/api/stats")
+def stats(date: Optional[str] = Query(None)):
+    db = _get_db()
+    try:
+        return db.get_stats(date)
+    finally:
+        db.close()
+
+
+def _item_to_resp(item) -> NewsItemResponse:
+    return NewsItemResponse(
+        id=item.id,
+        source_type=item.source_type.value,
+        title=item.title,
+        url=item.url,
+        content=item.content[:500],
+        author=item.author,
+        published_at=item.published_at.isoformat() if item.published_at else None,
+        collected_at=item.collected_at.isoformat(),
+        ai_score=item.ai_score,
+        ai_summary=item.ai_summary,
+        ai_categories=item.ai_categories,
+        ai_tags=item.ai_tags,
+    )
+
+
+app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+
+@app.get("/")
+def index():
+    return FileResponse(STATIC_DIR / "index.html")

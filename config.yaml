@@ -1,0 +1,100 @@
+# AI News Aggregator 配置文件
+
+focus_areas:
+  - name: "开源模型"
+    keywords: ["open source", "开源", "weights release", "model release", "Stable Diffusion", "Flux", "HunyuanVideo", "CogView", "Wan", "LoRA", "Hugging Face"]
+  - name: "ComfyUI"
+    keywords: ["ComfyUI", "custom node", "workflow", "comfy", "ComfyUI-Manager"]
+  - name: "商用产品"
+    keywords: ["Lovart", "Gemini", "GPT", "OpenAI", "Claude", "Anthropic", "Midjourney", "DALL-E", "Sora", "Runway"]
+  - name: "Agent & Skills"
+    keywords: ["agent", "MCP", "tool use", "function calling", "autonomous", "agentic", "cursor", "copilot"]
+  - name: "训练与部署"
+    keywords: ["fine-tune", "training", "LoRA", "RLHF", "inference", "quantization", "deployment", "distillation"]
+
+sources:
+  rss:
+    enabled: true
+    feeds:
+      - { url: "https://openai.com/blog/rss.xml", name: "OpenAI Blog" }
+      - { url: "https://www.anthropic.com/research/rss.xml", name: "Anthropic" }
+      - { url: "https://blog.google/technology/ai/rss/", name: "Google AI" }
+      - { url: "https://huggingface.co/blog/feed.xml", name: "Hugging Face" }
+      - { url: "https://stability.ai/news/feed", name: "Stability AI" }
+
+  github:
+    enabled: true
+    trending_rss: "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml"
+    watch_repos:
+      - { owner: "comfyanonymous", repo: "ComfyUI" }
+      - { owner: "black-forest-labs", repo: "flux" }
+      - { owner: "AUTOMATIC1111", repo: "stable-diffusion-webui" }
+
+  hackernews:
+    enabled: true
+    fetch_top_stories: 30
+    min_score: 100
+
+  youtube:
+    enabled: false  # Phase 2
+    api_key: "${YOUTUBE_API_KEY}"
+    channels:
+      - { id: "UCbfYPyITQ-7l4upoX8nvctg", name: "Two Minute Papers" }
+      - { id: "UCWN3xxRkmTPphYit_ydnHzA", name: "Yannic Kilcher" }
+
+  bilibili:
+    enabled: false  # Phase 2 (via RSSHub)
+    rsshub_base: "http://localhost:1200"
+    users:
+      - { uid: "946974", name: "Ele实验室" }
+
+  twitter:
+    enabled: false  # Phase 2 (via RSSHub)
+    rsshub_base: "http://localhost:1200"
+    users:
+      - { id: "karpathy", name: "Andrej Karpathy" }
+      - { id: "ClementDelangue", name: "Clement Delangue" }
+
+  reddit:
+    enabled: true
+    fetch_comments: 5
+    subreddits:
+      - { name: "MachineLearning", sort: "hot", min_score: 50, fetch_limit: 15 }
+      - { name: "LocalLLaMA", sort: "hot", min_score: 30, fetch_limit: 15 }
+      - { name: "StableDiffusion", sort: "hot", min_score: 30, fetch_limit: 10 }
+
+  telegram:
+    enabled: true
+    channels:
+      - { channel: "zaihuapd", name: "在花频道", fetch_limit: 20 }
+
+llm:
+  provider: "openai"
+  model: "gpt-4o-mini"
+  api_key: "${OPENAI_API_KEY}"
+  base_url: "${OPENAI_BASE_URL}"
+  temperature: 0.3
+  score_threshold: 6.0
+
+output:
+  notion:
+    enabled: false  # Phase 4
+    api_key: "${NOTION_API_KEY}"
+    database_id: "${NOTION_DATABASE_ID}"
+  web:
+    enabled: false  # Phase 5
+    host: "0.0.0.0"
+    port: 8800
+  markdown:
+    enabled: true
+    output_dir: "./reports/markdown"
+  feishu:
+    enabled: false  # Phase 4
+    webhook_url: "${FEISHU_WEBHOOK_URL}"
+
+proxy:
+  http: "http://172.24.12.140:18888"
+  https: "http://172.24.12.140:18888"
+
+database:
+  path: "./data/news.db"

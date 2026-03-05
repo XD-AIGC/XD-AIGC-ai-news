@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  rsshub:
+    image: diygod/rsshub:latest
+    container_name: rsshub
+    restart: unless-stopped
+    ports:
+      - "1200:1200"
+    environment:
+      NODE_ENV: production
+      CACHE_TYPE: memory
+      CACHE_EXPIRE: 300
+      # Twitter cookie (required for Twitter routes)
+      # TWITTER_AUTH_TOKEN: your_auth_token_here
+      # Bilibili cookie (optional, improves reliability)
+      # BILIBILI_COOKIE: your_bilibili_cookie_here
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:1200/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
