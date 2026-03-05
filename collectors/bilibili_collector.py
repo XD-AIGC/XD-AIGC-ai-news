@@ -10,17 +10,11 @@ from collectors.base import BaseScraper, ContentItem, SourceType
 
 logger = logging.getLogger(__name__)
 
-SPACE_API = "https://api.bilibili.com/x/space/wbi/arc/search"
-NAV_API = "https://api.bilibili.com/x/web-interface/nav"
-DYNAMIC_API = "https://api.bilibili.com/x/polymer/web-dynamic/v1/feed/space"
+APP_SPACE_API = "https://app.bilibili.com/x/v2/space/archive"
 
 BILIBILI_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-    ),
+    "User-Agent": "Mozilla/5.0 BiliDroid/7.85.0 (bbcallen@gmail.com)",
     "Referer": "https://www.bilibili.com",
-    "Origin": "https://www.bilibili.com",
 }
 
 
@@ -39,7 +33,7 @@ class BilibiliCollector(BaseScraper):
                 uid = str(user["uid"])
                 name = user.get("name", uid)
                 try:
-                    user_items = await self._fetch_user_dynamic(
+                    user_items = await self._fetch_user_videos(
                         direct_client, uid, name, since
                     )
                     items.extend(user_items)
@@ -47,20 +41,20 @@ class BilibiliCollector(BaseScraper):
                     logger.warning("Bilibili [%s] error: %s", name, e)
         return items
 
-    async def _fetch_user_dynamic(
+    async def _fetch_user_videos(
         self, client: httpx.AsyncClient, uid: str, name: str, since: datetime
     ) -> list[ContentItem]:
-        """Fetch user's recent dynamics (videos, articles, etc.)."""
+        """Fetch user's recent videos via the mobile app API."""
         headers = {**BILIBILI_HEADERS}
         if self.cookie:
             headers["Cookie"] = self.cookie
 
-        params = {"host_mid": uid}
+        params = {"vmid": uid, "ps": 20, "pn": 1, "order": "pubdate"}
         items: list[ContentItem] = []
 
         try:
             resp = await client.get(
-                DYNAMIC_API,
+                APP_SPACE_API,
                 params=params,
                 headers=headers,
                 follow_redirects=True,
@@ -75,12 +69,10 @@ class BilibiliCollector(BaseScraper):
                 )
                 return items
 
-            dynamic_list = (
-                data.get("data", {}).get("items", [])
-            )
+            archives = data.get("data", {}).get("item", [])
 
-            for dyn in dynamic_list:
-                item = self._parse_dynamic(dyn, name, since)
+            for video in archives:
+                item = self._parse_video(video, name, since)
                 if item:
                     items.append(item)
 
@@ -91,81 +83,46 @@ class BilibiliCollector(BaseScraper):
 
         return items
 
-    def _parse_dynamic(
-        self, dyn: dict, author_name: str, since: datetime
+    def _parse_video(
+        self, video: dict, author_name: str, since: datetime
     ) -> ContentItem | None:
-        modules = dyn.get("modules", {})
-        author_mod = modules.get("module_author", {})
-        major_mod = modules.get("module_dynamic", {}).get("major")
-
-        pub_ts = author_mod.get("pub_ts", 0)
-        if pub_ts:
-            published_at = datetime.fromtimestamp(pub_ts, tz=timezone.utc)
+        ctime = video.get("ctime", 0) or video.get("pubdate", 0)
+        if ctime:
+            published_at = datetime.fromtimestamp(ctime, tz=timezone.utc)
             if published_at < since:
                 return None
         else:
             published_at = None
 
-        dyn_type = dyn.get("type", "")
-        title = ""
-        url = ""
-        content = ""
-
-        if dyn_type == "DYNAMIC_TYPE_AV" and major_mod:
-            archive = major_mod.get("archive", {})
-            title = archive.get("title", "")
-            bvid = archive.get("bvid", "")
-            url = f"https://www.bilibili.com/video/{bvid}" if bvid else ""
-            content = archive.get("desc", "")
-            if not content:
-                content = modules.get("module_dynamic", {}).get("desc", {}).get("text", "")
-
-        elif dyn_type == "DYNAMIC_TYPE_ARTICLE" and major_mod:
-            article = major_mod.get("article", {})
-            title = article.get("title", "")
-            article_id = article.get("id", "")
-            url = f"https://www.bilibili.com/read/cv{article_id}" if article_id else ""
-            content = ", ".join(article.get("desc", ""))
-
-        elif dyn_type == "DYNAMIC_TYPE_DRAW":
-            desc_mod = modules.get("module_dynamic", {}).get("desc", {})
-            text = desc_mod.get("text", "")
-            title = text[:80] if text else "动态图片"
-            content = text
-            dyn_id = dyn.get("id_str", "")
-            url = f"https://t.bilibili.com/{dyn_id}" if dyn_id else ""
-
-        elif dyn_type == "DYNAMIC_TYPE_WORD":
-            desc_mod = modules.get("module_dynamic", {}).get("desc", {})
-            text = desc_mod.get("text", "")
-            title = text[:80] if text else "文字动态"
-            content = text
-            dyn_id = dyn.get("id_str", "")
-            url = f"https://t.bilibili.com/{dyn_id}" if dyn_id else ""
-
+        title = video.get("title", "")
+        bvid = video.get("bvid", "")
+        if not bvid:
+            param = video.get("param", "")
+            url = f"https://www.bilibili.com/video/av{param}" if param else ""
         else:
-            desc_mod = modules.get("module_dynamic", {}).get("desc", {})
-            text = desc_mod.get("text", "")
-            title = text[:80] if text else f"动态 ({dyn_type})"
-            content = text
-            dyn_id = dyn.get("id_str", "")
-            url = f"https://t.bilibili.com/{dyn_id}" if dyn_id else ""
+            url = f"https://www.bilibili.com/video/{bvid}"
 
-        if not title and not content:
-            return None
-        if not url:
+        if not title or not url:
             return None
 
+        desc = video.get("description", "") or video.get("desc", "")
+        author = video.get("author", author_name) or author_name
         uid = md5(url.encode()).hexdigest()[:12]
-        author = author_mod.get("name", author_name)
+
+        play = video.get("play", 0) or video.get("stat", {}).get("view", 0)
+        duration = video.get("duration", "")
 
         return ContentItem(
             id=self._generate_id("bilibili", author_name.replace(" ", "_"), uid),
             source_type=SourceType.BILIBILI,
             title=title,
             url=url,
-            content=content,
+            content=desc,
             author=author,
             published_at=published_at,
-            metadata={"platform": "bilibili", "dynamic_type": dyn_type},
+            metadata={
+                "platform": "bilibili",
+                "play_count": play,
+                "duration": duration,
+            },
         )
