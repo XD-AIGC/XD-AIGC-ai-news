@@ -49,7 +49,10 @@ class BilibiliCollector(BaseScraper):
         if self.cookie:
             headers["Cookie"] = self.cookie
 
-        params = {"vmid": uid, "ps": 20, "pn": 1, "order": "pubdate"}
+        params = {
+            "vmid": uid, "ps": 20, "pn": 1, "order": "pubdate",
+            "build": "7850300", "mobi_app": "android", "platform": "android",
+        }
         items: list[ContentItem] = []
 
         try:
