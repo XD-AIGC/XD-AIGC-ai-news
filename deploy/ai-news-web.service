@@ -1,0 +1,18 @@
+[Unit]
+Description=AI News Dashboard - web UI
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/AIGC_Group/XD-AIGC-ai-news
+ExecStart=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin/python main.py --serve --port 8800
+Restart=on-failure
+RestartSec=5
+Environment="PATH=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin:/usr/local/bin:/usr/bin:/bin"
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
