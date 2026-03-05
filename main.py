@@ -13,6 +13,7 @@ import yaml
 from dotenv import load_dotenv
 
 from collectors.base import ContentItem, SourceType
+from collectors.bilibili_collector import BilibiliCollector
 from collectors.github_collector import GitHubCollector
 from collectors.hackernews_collector import HackerNewsCollector
 from collectors.reddit_collector import RedditCollector
@@ -78,18 +79,9 @@ def build_collectors(
         )
 
     if sources.get("bilibili", {}).get("enabled"):
-        rsshub_base = sources["bilibili"].get("rsshub_base", "http://localhost:1200")
-        feeds = [
-            {
-                "url": f"{rsshub_base}/bilibili/user/video/{u['uid']}",
-                "name": u.get("name", u["uid"]),
-            }
-            for u in sources["bilibili"].get("users", [])
-        ]
-        if feeds:
-            collectors.append(
-                ("Bilibili", RSSCollector(feeds, client, SourceType.BILIBILI))
-            )
+        bili_cfg = sources["bilibili"]
+        bili_cfg["cookie"] = os.getenv("BILIBILI_COOKIE", bili_cfg.get("cookie", ""))
+        collectors.append(("Bilibili", BilibiliCollector(bili_cfg, client)))
 
     if sources.get("twitter", {}).get("enabled"):
         rsshub_base = sources["twitter"].get("rsshub_base", "http://localhost:1200")

@@ -13,7 +13,6 @@ services:
       CACHE_EXPIRE: 300
       # Twitter cookie (required for Twitter routes)
       # TWITTER_AUTH_TOKEN: your_auth_token_here
-      BILIBILI_COOKIE: "SESSDATA=eb48b276%2C1777454829%2C08d37%2Aa1CjADNlpi0_Wupe2Z8UAmOKx_40yFIPG_PaAmipGa5-lhzV1tgmENx-7hCV5aQSjfr-gSVjJjWVpDOTdyU1ZKVmhjdEhZd2poZ25WbVZZNFVkaURVQ0FlZGl3Q2k1VUpDMFYxQ05ISUlTR2hjenNvVHZaSGoyM0N0TVpyQ2lTSy1yQTVaYlpRTEdRIIEC; bili_jct=dafe54953fcae0e86f916b00641123b3; buvid3=138A1792-6626-549B-A735-9BF3898158C784685infoc"
     healthcheck:
       test: ["CMD", "wget", "--spider", "-q", "http://localhost:1200/"]
       interval: 30s

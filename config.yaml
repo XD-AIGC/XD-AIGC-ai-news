@@ -49,7 +49,6 @@ sources:
 
   bilibili:
     enabled: true
-    rsshub_base: "http://localhost:1200"
     users:
       - { uid: "946974", name: "Ele实验室" }
       - { uid: "291229", name: "机器之心" }
