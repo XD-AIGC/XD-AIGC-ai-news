@@ -1,0 +1,36 @@
+# AI News Aggregator - Project Rules
+
+## Architecture
+- `main.py` is CLI entry point only - no business logic
+- `collectors/` handles data fetching from external sources
+- `processor/` handles LLM summarization, classification, dedup
+- `outputs/` handles writing to Notion, web, markdown, push notifications
+- `storage/` handles SQLite persistence
+
+## Coding Conventions
+- Python 3.10+, type hints required
+- Single file MUST NOT exceed 500 lines
+- Single function MUST NOT exceed 50 lines
+- All HTTP requests MUST use proxy from config (http://172.24.12.140:18888)
+- All API keys come from `.env` file, referenced in `config.yaml` as `${VAR_NAME}`
+- Use `httpx` for HTTP requests (async support + proxy friendly)
+- Use `logging` module, not print()
+
+## Config Pattern
+- `config.yaml`: data source definitions, output settings, LLM config
+- `.env`: secrets (API keys, tokens) - NEVER commit
+- All collectors read from `config.yaml`, secrets resolved from environment
+
+## When Adding New Data Source
+1. Create `collectors/new_source_collector.py` inheriting `BaseCollector`
+2. Add source config section in `config.yaml`
+3. Register collector in `main.py`
+
+## When Adding New Output
+1. Create `outputs/new_output.py` inheriting base output interface
+2. Add output config section in `config.yaml`
+3. Register output in `main.py`
+
+## Commit Messages
+- Use English for all commit messages
+- Short imperative style: "Add YouTube collector", "Fix dedup logic"

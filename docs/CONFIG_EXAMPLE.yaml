@@ -1,0 +1,82 @@
+# AI News Aggregator 配置文件示例
+# 复制为 config.yaml 并修改
+
+focus_areas:
+  - name: "开源模型"
+    keywords: ["open source", "开源", "weights release", "model release", "Stable Diffusion", "Flux", "HunyuanVideo", "CogView", "Wan", "LoRA", "Hugging Face"]
+  - name: "ComfyUI"
+    keywords: ["ComfyUI", "custom node", "workflow", "comfy", "ComfyUI-Manager"]
+  - name: "商用产品"
+    keywords: ["Lovart", "Gemini", "GPT", "OpenAI", "Claude", "Anthropic", "Midjourney", "DALL-E", "Sora", "Runway"]
+  - name: "Agent & Skills"
+    keywords: ["agent", "MCP", "tool use", "function calling", "autonomous", "agentic", "cursor", "copilot"]
+  - name: "训练与部署"
+    keywords: ["fine-tune", "training", "LoRA", "RLHF", "inference", "quantization", "deployment", "distillation"]
+
+sources:
+  youtube:
+    enabled: true
+    api_key: "${YOUTUBE_API_KEY}"
+    channels:
+      - { id: "UCbfYPyITQ-7l4upoX8nvctg", name: "Two Minute Papers" }
+      - { id: "UCWN3xxRkmTPphYit_ydnHzA", name: "Yannic Kilcher" }
+      # 添加更多你关注的 YouTube 频道
+
+  bilibili:
+    enabled: true
+    rsshub_base: "http://localhost:1200"
+    users:
+      - { uid: "946974", name: "Ele实验室" }
+      # 添加更多你关注的 Bilibili UP 主
+
+  github:
+    enabled: true
+    languages: ["python", "typescript", ""]
+    since: "daily"
+    watch_repos:
+      - "comfyanonymous/ComfyUI"
+      - "black-forest-labs/flux"
+      - "AUTOMATIC1111/stable-diffusion-webui"
+
+  rss:
+    enabled: true
+    feeds:
+      - { url: "https://openai.com/blog/rss.xml", name: "OpenAI Blog" }
+      - { url: "https://www.anthropic.com/research/rss.xml", name: "Anthropic" }
+      - { url: "https://blog.google/technology/ai/rss/", name: "Google AI" }
+      - { url: "https://huggingface.co/blog/feed.xml", name: "Hugging Face" }
+      - { url: "https://stability.ai/news/feed", name: "Stability AI" }
+
+  twitter:
+    enabled: true
+    rsshub_base: "http://localhost:1200"
+    users:
+      - { id: "karpathy", name: "Andrej Karpathy" }
+      - { id: "ClementDelangue", name: "Clement Delangue" }
+      - { id: "DrJimFan", name: "Jim Fan" }
+
+llm:
+  provider: "openai"
+  model: "gpt-4o-mini"
+  api_key: "${OPENAI_API_KEY}"
+  base_url: "${OPENAI_BASE_URL}"
+
+output:
+  notion:
+    enabled: true
+    api_key: "${NOTION_API_KEY}"
+    database_id: "${NOTION_DATABASE_ID}"
+  web:
+    enabled: true
+    output_dir: "./reports/web"
+  markdown:
+    enabled: true
+    output_dir: "./reports/markdown"
+  wechat_push:
+    enabled: true
+    provider: "server_chan"
+    key: "${SERVERCHAN_KEY}"
+
+proxy:
+  http: "http://172.24.12.140:18888"
+  https: "http://172.24.12.140:18888"
