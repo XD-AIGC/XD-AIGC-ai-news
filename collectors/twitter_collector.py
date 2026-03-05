@@ -1,62 +1,36 @@
-"""Twitter/X collector using the web API with auth_token cookie."""
+"""Twitter/X collector via Nitter RSS feeds."""
 
+import calendar
 import logging
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from hashlib import md5
 
+import feedparser
 import httpx
 
 from collectors.base import BaseScraper, ContentItem, SourceType
 
 logger = logging.getLogger(__name__)
 
-BEARER_TOKEN = (
-    "AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs"
-    "=1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA"
-)
-
-USER_TIMELINE_API = "https://api.twitter.com/1.1/statuses/user_timeline.json"
-
-TWITTER_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-    ),
-    "Authorization": f"Bearer {BEARER_TOKEN}",
-    "Accept": "application/json",
-    "Accept-Language": "en-US,en;q=0.9",
-}
-
-
-def _get_csrf_token(auth_token: str) -> str:
-    return md5(auth_token.encode()).hexdigest()[:32]
+NITTER_INSTANCES = [
+    "https://nitter.net",
+]
 
 
 class TwitterCollector(BaseScraper):
-    """Collect tweets from X/Twitter users via web API."""
+    """Collect tweets from X/Twitter users via Nitter RSS feeds."""
 
     def __init__(self, config: dict, http_client: httpx.AsyncClient):
         super().__init__(config, http_client)
-        self.auth_token = config.get("auth_token", "")
         self.users = config.get("users", [])
         self.proxy = config.get("proxy", "")
 
     async def fetch(self, since: datetime) -> list[ContentItem]:
-        if not self.auth_token:
-            logger.warning("Twitter: no auth_token configured, skipping")
-            return []
-
         items: list[ContentItem] = []
-        csrf = _get_csrf_token(self.auth_token)
-        headers = {
-            **TWITTER_HEADERS,
-            "Cookie": f"auth_token={self.auth_token}; ct0={csrf}",
-            "X-Csrf-Token": csrf,
-        }
-
         client_kwargs: dict = {
-            "timeout": httpx.Timeout(30.0),
-            "headers": headers,
+            "timeout": httpx.Timeout(20.0),
+            "follow_redirects": True,
         }
         if self.proxy:
             client_kwargs["proxy"] = self.proxy
@@ -66,7 +40,7 @@ class TwitterCollector(BaseScraper):
                 screen_name = user_cfg["id"]
                 name = user_cfg.get("name", screen_name)
                 try:
-                    user_items = await self._fetch_user_timeline(
+                    user_items = await self._fetch_nitter_rss(
                         client, screen_name, name, since
                     )
                     items.extend(user_items)
@@ -75,82 +49,67 @@ class TwitterCollector(BaseScraper):
 
         return items
 
-    async def _fetch_user_timeline(
+    async def _fetch_nitter_rss(
         self,
         client: httpx.AsyncClient,
         screen_name: str,
         name: str,
         since: datetime,
     ) -> list[ContentItem]:
-        """Fetch user's recent tweets via v1.1 REST API."""
-        params = {
-            "screen_name": screen_name,
-            "count": 20,
-            "exclude_replies": "false",
-            "include_rts": "false",
-            "tweet_mode": "extended",
-        }
-
+        """Fetch user tweets via Nitter RSS feed."""
         items: list[ContentItem] = []
-        try:
-            resp = await client.get(
-                USER_TIMELINE_API,
-                params=params,
-                follow_redirects=True,
-            )
-            resp.raise_for_status()
-            tweets = resp.json()
 
-            if not isinstance(tweets, list):
-                logger.warning(
-                    "Twitter [%s] unexpected response: %s",
-                    name, str(tweets)[:200],
+        for base_url in NITTER_INSTANCES:
+            rss_url = f"{base_url}/{screen_name}/rss"
+            try:
+                resp = await client.get(
+                    rss_url,
+                    headers={"User-Agent": "Mozilla/5.0 AI-News-Bot/1.0"},
                 )
+                resp.raise_for_status()
+                feed = feedparser.parse(resp.text)
+
+                if not feed.entries:
+                    continue
+
+                for entry in feed.entries:
+                    item = self._parse_entry(entry, screen_name, name, since)
+                    if item:
+                        items.append(item)
+
+                logger.info("Twitter [%s]: fetched %d items", name, len(items))
                 return items
 
-            for tweet in tweets:
-                item = self._parse_tweet(tweet, screen_name, name, since)
-                if item:
-                    items.append(item)
+            except httpx.HTTPError as e:
+                logger.debug("Nitter [%s] %s failed: %s", name, base_url, e)
+                continue
 
-            logger.info("Twitter [%s]: fetched %d items", name, len(items))
-
-        except httpx.HTTPError as e:
-            logger.warning("Twitter [%s] HTTP error: %s", name, e)
-
+        logger.warning("Twitter [%s]: all Nitter instances failed", name)
         return items
 
-    def _parse_tweet(
+    def _parse_entry(
         self,
-        tweet: dict,
+        entry: dict,
         screen_name: str,
         name: str,
         since: datetime,
     ) -> ContentItem | None:
-        created_str = tweet.get("created_at", "")
-        if created_str:
-            try:
-                published_at = datetime.strptime(
-                    created_str, "%a %b %d %H:%M:%S %z %Y"
-                )
-                if published_at < since:
-                    return None
-            except ValueError:
-                published_at = None
-        else:
-            published_at = None
-
-        full_text = tweet.get("full_text", "") or tweet.get("text", "")
-        tweet_id = tweet.get("id_str", "")
-        user_sn = tweet.get("user", {}).get("screen_name", screen_name)
-        url = f"https://x.com/{user_sn}/status/{tweet_id}" if tweet_id else ""
-
-        if not full_text or not url:
+        published_at = self._parse_date(entry)
+        if published_at and published_at < since:
             return None
 
-        title = full_text[:120].replace("\n", " ")
-        if len(full_text) > 120:
+        title_raw = entry.get("title", "")
+        content = entry.get("description", "") or entry.get("summary", "")
+
+        title = title_raw[:120].replace("\n", " ")
+        if len(title_raw) > 120:
             title += "..."
+
+        link = entry.get("link", "")
+        url = link.replace("nitter.net", "x.com") if link else ""
+
+        if not title or not url:
+            return None
 
         uid = md5(url.encode()).hexdigest()[:12]
 
@@ -159,12 +118,24 @@ class TwitterCollector(BaseScraper):
             source_type=SourceType.TWITTER,
             title=title,
             url=url,
-            content=full_text,
+            content=content,
             author=name,
             published_at=published_at,
-            metadata={
-                "platform": "twitter",
-                "retweet_count": tweet.get("retweet_count", 0),
-                "favorite_count": tweet.get("favorite_count", 0),
-            },
+            metadata={"platform": "twitter"},
         )
+
+    @staticmethod
+    def _parse_date(entry: dict) -> datetime | None:
+        for field in ("published", "updated"):
+            if field not in entry:
+                continue
+            try:
+                parsed_key = f"{field}_parsed"
+                if parsed_key in entry and entry[parsed_key]:
+                    return datetime.fromtimestamp(
+                        calendar.timegm(entry[parsed_key]), tz=timezone.utc
+                    )
+                return parsedate_to_datetime(entry[field])
+            except Exception:
+                continue
+        return None
