@@ -87,6 +87,7 @@ def build_collectors(
     if sources.get("twitter", {}).get("enabled"):
         tw_cfg = sources["twitter"]
         tw_cfg["auth_token"] = os.getenv("TWITTER_AUTH_TOKEN", tw_cfg.get("auth_token", ""))
+        tw_cfg["proxy"] = config.get("proxy", {}).get("http", "")
         collectors.append(("Twitter", TwitterCollector(tw_cfg, client)))
 
     if sources.get("reddit", {}).get("enabled"):

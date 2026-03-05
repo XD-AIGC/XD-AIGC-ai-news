@@ -86,6 +86,7 @@ class TwitterCollector(BaseScraper):
         super().__init__(config, http_client)
         self.auth_token = config.get("auth_token", "")
         self.users = config.get("users", [])
+        self.proxy = config.get("proxy", "")
 
     async def fetch(self, since: datetime) -> list[ContentItem]:
         if not self.auth_token:
@@ -100,11 +101,14 @@ class TwitterCollector(BaseScraper):
             "X-Csrf-Token": csrf,
         }
 
-        async with httpx.AsyncClient(
-            timeout=httpx.Timeout(30.0),
-            headers=headers,
-            proxy=self.client._transport.__dict__.get("_proxy_url"),
-        ) as client:
+        client_kwargs: dict = {
+            "timeout": httpx.Timeout(30.0),
+            "headers": headers,
+        }
+        if self.proxy:
+            client_kwargs["proxy"] = self.proxy
+
+        async with httpx.AsyncClient(**client_kwargs) as client:
             for user_cfg in self.users:
                 screen_name = user_cfg["id"]
                 name = user_cfg.get("name", screen_name)
