@@ -37,11 +37,15 @@ sources:
     min_score: 100
 
   youtube:
-    enabled: false  # Phase 2
+    enabled: true
     api_key: "${YOUTUBE_API_KEY}"
     channels:
       - { id: "UCbfYPyITQ-7l4upoX8nvctg", name: "Two Minute Papers" }
       - { id: "UCWN3xxRkmTPphYit_ydnHzA", name: "Yannic Kilcher" }
+      - { id: "UCZHmQk67mSJgfCCTn7xBfew", name: "Bycloud" }
+      - { id: "UCMDQxm7cUx3yXkfeHa5zJIQ", name: "Olivio Sarikas" }
+      - { id: "UCKNYEEEVgMcBUBhGQjglYpA", name: "Fireship" }
+      - { id: "UCLkTlEeB0IGFA40peNRFbcQ", name: "Matt Wolfe" }
 
   bilibili:
     enabled: false  # Phase 2 (via RSSHub)
