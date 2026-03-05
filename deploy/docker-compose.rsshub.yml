@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   rsshub:
-    image: diygod/rsshub:latest
+    image: diygod/rsshub:chromium-bundled
     container_name: rsshub
     restart: unless-stopped
     ports:
