@@ -70,7 +70,7 @@ sources:
 
 llm:
   provider: "openai"
-  model: "gemini-2.0-flash"
+  model: "gemini-3.1-flash-lite-preview"
   api_key: "${OPENAI_API_KEY}"
   base_url: "${OPENAI_BASE_URL}"
   temperature: 0.3
