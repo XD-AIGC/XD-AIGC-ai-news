@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-PROJECT_DIR="/AIGC/XD-AIGC-ai-news"
+PROJECT_DIR="/AIGC_Group/XD-AIGC-ai-news"
 CONDA_ENV="/AIGC_Group/miniconda3/envs/xd-aigc-ainews"
 SYSTEMD_DIR="/etc/systemd/system"
 
