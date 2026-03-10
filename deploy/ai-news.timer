@@ -1,8 +1,8 @@
 [Unit]
-Description=AI News Aggregator - run daily at 08:00 CST
+Description=AI News Aggregator - run daily at 10:30 CST
 
 [Timer]
-OnCalendar=*-*-* 08:00:00
+OnCalendar=*-*-* 10:30:00
 Persistent=true
 RandomizedDelaySec=300
 
