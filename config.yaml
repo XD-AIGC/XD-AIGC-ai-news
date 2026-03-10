@@ -22,6 +22,10 @@ sources:
       - { url: "https://huggingface.co/blog/feed.xml", name: "Hugging Face" }
       - { url: "https://blog.google/products/gemini/rss/", name: "Gemini Blog" }
       - { url: "https://www.marktechpost.com/feed/", name: "MarkTechPost AI" }
+      # AI + 游戏
+      - { url: "https://inworld.ai/blog/rss.xml", name: "Inworld AI Blog" }
+      - { url: "https://developer.nvidia.com/blog/feed/", name: "NVIDIA Developer Blog" }
+      - { url: "https://blogs.unity3d.com/feed/", name: "Unity Blog" }
 
   github:
     enabled: true
@@ -58,10 +62,20 @@ sources:
         - "topic:quantization"
         - "topic:vllm"
         - "distributed training deepspeed AI"
+        # AI 3D 生成
+        - "topic:text-to-3d"
+        - "topic:3d-generation"
+        - "AI 3D model generation game-ready mesh"
+        # AI 游戏工具
+        - "AI NPC dialogue game engine"
+        - "AI procedural generation game level"
+        - "AI motion capture animation"
     watch_repos:
       - { owner: "comfyanonymous", repo: "ComfyUI" }
       - { owner: "black-forest-labs", repo: "flux" }
       - { owner: "AUTOMATIC1111", repo: "stable-diffusion-webui" }
+      - { owner: "Unity-Technologies", repo: "ml-agents" }
+      - { owner: "inworld-ai", repo: "inworld-unity-full" }
 
   hackernews:
     enabled: true
@@ -121,9 +135,13 @@ sources:
         - "LLM open source new model"
         - "Stable Diffusion ComfyUI workflow"
         - "AI agent MCP"
-        - "AI game NPC"
+        - "AI game NPC intelligent"
         - "AI film VFX short drama"
         - "fine-tune LoRA training"
+        - "AI 3D model generation game"
+        - "AI motion capture animation game"
+        - "NVIDIA ACE game AI NPC"
+        - "Inworld AI game character"
 
   bilibili:
     enabled: true
@@ -195,6 +213,23 @@ sources:
       - { id: "cocktailpeanut", name: "cocktailpeanut" }       # Pinokio, AI 工具达人
       - { id: "levelsio", name: "Pieter Levels" }              # AI 独立开发者
       - { id: "toyxyz3", name: "ToyXYZ" }                      # ComfyUI 工作流分享
+      # --- AI + 游戏 ---
+      - { id: "inworld_ai", name: "Inworld AI" }               # AI NPC 对话引擎
+      - { id: "NVIDIAGeForce", name: "NVIDIA GeForce" }        # NVIDIA ACE / DLSS 游戏 AI
+      - { id: "modl_ai", name: "Modl.ai" }                     # AI 游戏自动测试
+      - { id: "aicharisma", name: "Charisma.ai" }              # AI 交互叙事引擎
+      - { id: "PrometheanAI", name: "Promethean AI" }          # AI 场景/关卡布置
+      - { id: "Scenario_gg", name: "Scenario" }                # AI 游戏美术资产生成
+      # --- AI 3D 生成 ---
+      - { id: "MeshyAI", name: "Meshy AI" }                    # AI 3D 模型生成
+      - { id: "LumaLabsAI", name: "Luma AI" }                  # AI 3D/视频生成
+      - { id: "tripoai", name: "Tripo AI" }                     # AI 文字/图片转 3D
+      # --- AI 动捕/动画 ---
+      - { id: "MoveAI_", name: "Move AI" }                     # AI 无标记动作捕捉
+      - { id: "deepmotioninc", name: "DeepMotion" }            # AI 动捕 + 身体追踪
+      # --- AI 音频 ---
+      - { id: "elevenlabsio", name: "ElevenLabs" }             # AI 语音合成/配音
+      - { id: "sunomusic", name: "Suno" }                      # AI 音乐生成
 
   twitter_trending:
     enabled: false            # Nitter 搜索不可用，待接入 Twitter API v2 或其他方案
