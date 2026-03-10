@@ -94,6 +94,8 @@ def build_collectors(
     if sources.get("twitter_trending", {}).get("enabled"):
         tt_cfg = sources["twitter_trending"]
         tt_cfg["proxy"] = config.get("proxy", {}).get("http", "")
+        tt_cfg["auth_token"] = os.getenv("TWITTER_AUTH_TOKEN", tt_cfg.get("auth_token", ""))
+        tt_cfg["ct0"] = os.getenv("TWITTER_CT0", tt_cfg.get("ct0", ""))
         collectors.append(
             ("TwitterTrending", TwitterTrendingCollector(tt_cfg, client))
         )

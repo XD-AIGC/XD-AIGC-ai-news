@@ -21,5 +21,8 @@ google-api-python-client>=2.0
 fastapi>=0.110
 uvicorn>=0.29
 
+# Twitter
+twikit>=2.3
+
 # Utilities
 loguru>=0.7

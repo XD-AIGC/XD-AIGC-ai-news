@@ -1,4 +1,4 @@
-"""Twitter trending AI content collector via Nitter search.
+"""Twitter trending AI content collector via twikit (free, no API key).
 
 Searches for AI-related tweets across all of Twitter, ranked by
 engagement (likes), and returns the top N results — not tied to
@@ -6,62 +6,99 @@ any fixed set of accounts.
 """
 
 import logging
-import re
+import os
 from datetime import datetime, timezone
 from hashlib import md5
-from urllib.parse import quote_plus
+from pathlib import Path
 
 import httpx
-from bs4 import BeautifulSoup
 
 from collectors.base import BaseScraper, ContentItem, SourceType
 
 logger = logging.getLogger(__name__)
 
-NITTER_INSTANCES = [
-    "https://nitter.poast.org",
-    "https://xcancel.com",
-    "https://nitter.privacyredirect.com",
-    "https://nitter.net",
-]
-
-# Default search queries covering the project's focus areas
-DEFAULT_QUERIES = [
-    "AI breakthrough",
-    "LLM open source",
-    "Stable Diffusion OR Flux OR ComfyUI",
-    "GPT OR Claude OR Gemini AI",
-    "AI agent framework",
-]
+COOKIES_PATH = Path("data/twitter_cookies.json")
 
 
 class TwitterTrendingCollector(BaseScraper):
-    """Collect top-liked AI tweets from Twitter search results."""
+    """Collect top-liked AI tweets via twikit search."""
 
     def __init__(self, config: dict, http_client: httpx.AsyncClient):
         super().__init__(config, http_client)
-        self.queries = config.get("search_queries", DEFAULT_QUERIES)
+        self.queries = config.get("search_queries", [])
         self.min_likes = config.get("min_likes", 500)
         self.top_n = config.get("top_n", 10)
         self.proxy = config.get("proxy", "")
+        self.auth_token = config.get("auth_token", "") or os.getenv(
+            "TWITTER_AUTH_TOKEN", ""
+        )
 
     async def fetch(self, since: datetime) -> list[ContentItem]:
+        if not self.auth_token and not COOKIES_PATH.exists():
+            logger.warning(
+                "TwitterTrending: no auth_token or cookies file, skipping"
+            )
+            return []
+
+        try:
+            from twikit import Client
+        except ImportError:
+            logger.error(
+                "TwitterTrending: twikit not installed (pip install twikit)"
+            )
+            return []
+
+        client = Client("en-US")
+
+        # Set up proxy if configured
+        if self.proxy:
+            client._client = httpx.AsyncClient(
+                proxy=self.proxy, timeout=httpx.Timeout(30.0)
+            )
+
+        # Authenticate: try saved cookies first, fallback to auth_token
+        authenticated = False
+        if COOKIES_PATH.exists():
+            try:
+                client.load_cookies(str(COOKIES_PATH))
+                logger.debug("TwitterTrending: loaded saved cookies")
+                authenticated = True
+            except Exception as e:
+                logger.warning("TwitterTrending: failed to load cookies: %s", e)
+
+        if not authenticated and self.auth_token:
+            ct0 = await self._fetch_ct0()
+            if ct0:
+                client.set_cookies({
+                    "auth_token": self.auth_token,
+                    "ct0": ct0,
+                })
+                # Save for next run
+                COOKIES_PATH.parent.mkdir(parents=True, exist_ok=True)
+                try:
+                    client.save_cookies(str(COOKIES_PATH))
+                except Exception:
+                    pass
+                logger.info("TwitterTrending: authenticated with auth_token + ct0")
+                authenticated = True
+            else:
+                logger.error("TwitterTrending: failed to get ct0 token")
+                return []
+
+        if not authenticated:
+            logger.error("TwitterTrending: no valid authentication")
+            return []
+
         all_items: list[ContentItem] = []
 
-        client_kwargs: dict = {
-            "timeout": httpx.Timeout(25.0),
-            "follow_redirects": True,
-        }
-        if self.proxy:
-            client_kwargs["proxy"] = self.proxy
-
-        async with httpx.AsyncClient(**client_kwargs) as client:
-            for query in self.queries:
-                try:
-                    items = await self._search_nitter(client, query, since)
-                    all_items.extend(items)
-                except Exception as e:
-                    logger.warning("Twitter trending search [%s] error: %s", query, e)
+        for query in self.queries:
+            try:
+                items = await self._search_query(client, query, since)
+                all_items.extend(items)
+            except Exception as e:
+                logger.warning(
+                    "TwitterTrending search [%s] error: %s", query, e
+                )
 
         # Deduplicate by URL
         seen_urls: set[str] = set()
@@ -78,145 +115,119 @@ class TwitterTrendingCollector(BaseScraper):
         top = unique[: self.top_n]
 
         logger.info(
-            "Twitter trending: %d total -> %d unique -> top %d (min likes: %d)",
-            len(all_items), len(unique), len(top), self.min_likes,
+            "TwitterTrending: %d total -> %d unique -> top %d (min likes: %d)",
+            len(all_items),
+            len(unique),
+            len(top),
+            self.min_likes,
         )
+
+        # Update saved cookies
+        try:
+            client.save_cookies(str(COOKIES_PATH))
+        except Exception:
+            pass
+
         return top
 
-    async def _search_nitter(
-        self, client: httpx.AsyncClient, query: str, since: datetime
-    ) -> list[ContentItem]:
-        """Search Nitter for tweets matching query, parse engagement metrics."""
-        items: list[ContentItem] = []
+    async def _fetch_ct0(self) -> str:
+        """Fetch ct0 CSRF token from Twitter using auth_token cookie."""
+        try:
+            client_kwargs: dict = {"timeout": httpx.Timeout(15.0)}
+            if self.proxy:
+                client_kwargs["proxy"] = self.proxy
 
-        for base_url in NITTER_INSTANCES:
-            search_url = f"{base_url}/search?f=tweets&q={quote_plus(query)}"
-            try:
-                resp = await client.get(
-                    search_url,
+            async with httpx.AsyncClient(**client_kwargs) as hc:
+                resp = await hc.get(
+                    "https://x.com",
+                    cookies={"auth_token": self.auth_token},
                     headers={
-                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                        "AppleWebKit/537.36 (KHTML, like Gecko) "
-                        "Chrome/120.0.0.0 Safari/537.36",
-                        "Accept": "text/html,application/xhtml+xml",
-                        "Accept-Language": "en-US,en;q=0.9",
+                        "User-Agent": (
+                            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                            "AppleWebKit/537.36 (KHTML, like Gecko) "
+                            "Chrome/131.0.0.0 Safari/537.36"
+                        ),
                     },
+                    follow_redirects=True,
                 )
-                resp.raise_for_status()
+                ct0 = resp.cookies.get("ct0", "")
+                if ct0:
+                    logger.debug("TwitterTrending: fetched ct0 token")
+                    return ct0
 
-                parsed = self._parse_search_html(resp.text, base_url, since)
-                if parsed:
-                    items.extend(parsed)
-                    logger.debug(
-                        "Twitter trending [%s] via %s: %d items",
-                        query, base_url, len(parsed),
-                    )
-                    return items
+                # Try from Set-Cookie header
+                for cookie in resp.headers.get_list("set-cookie"):
+                    if "ct0=" in cookie:
+                        ct0 = cookie.split("ct0=")[1].split(";")[0]
+                        if ct0:
+                            return ct0
 
-            except httpx.HTTPError as e:
-                logger.debug("Nitter search [%s] %s failed: %s", query, base_url, e)
-                continue
+        except Exception as e:
+            logger.warning("TwitterTrending: ct0 fetch error: %s", e)
 
-        logger.warning("Twitter trending [%s]: all Nitter instances failed", query)
-        return items
+        return ""
 
-    def _parse_search_html(
-        self, html: str, base_url: str, since: datetime
+    async def _search_query(
+        self, client, query: str, since: datetime
     ) -> list[ContentItem]:
-        """Parse Nitter search result HTML to extract tweets with metrics."""
-        soup = BeautifulSoup(html, "html.parser")
+        """Search Twitter for a query, return items with min_likes filter."""
         items: list[ContentItem] = []
 
-        # Nitter wraps each tweet in a .timeline-item div
-        tweet_cards = soup.select(".timeline-item")
-        if not tweet_cards:
-            # Try alternative selector
-            tweet_cards = soup.select(".tweet-body")
+        # Use min_faves in query for server-side filtering
+        search_q = f"{query} min_faves:{self.min_likes}"
 
-        for card in tweet_cards:
-            try:
-                item = self._parse_tweet_card(card, base_url, since)
+        try:
+            tweets = await client.search_tweet(search_q, "Top", count=20)
+
+            for tweet in tweets:
+                item = self._parse_tweet(tweet, since)
                 if item:
                     items.append(item)
-            except Exception as e:
-                logger.debug("Failed to parse tweet card: %s", e)
-                continue
+
+            logger.info(
+                "TwitterTrending [%s]: fetched %d items", query, len(items)
+            )
+
+        except Exception as e:
+            logger.warning("TwitterTrending [%s] search error: %s", query, e)
 
         return items
 
-    def _parse_tweet_card(
-        self, card, base_url: str, since: datetime
-    ) -> ContentItem | None:
-        """Parse a single tweet card from Nitter HTML."""
-        # Extract author
-        author_el = card.select_one(".username")
-        author = author_el.get_text(strip=True) if author_el else ""
-        fullname_el = card.select_one(".fullname")
-        fullname = fullname_el.get_text(strip=True) if fullname_el else author
-
-        # Extract tweet link
-        link_el = card.select_one(".tweet-link")
-        if not link_el:
-            link_el = card.select_one("a.tweet-link")
-        if not link_el:
-            # Try finding any link that looks like a tweet permalink
-            for a in card.select("a"):
-                href = a.get("href", "")
-                if "/status/" in href:
-                    link_el = a
-                    break
-
-        if not link_el:
-            return None
-
-        href = link_el.get("href", "")
-        # Convert Nitter URL to x.com URL
-        if href.startswith("/"):
-            tweet_url = f"https://x.com{href}"
-        else:
-            tweet_url = href
-            for instance in NITTER_INSTANCES:
-                domain = instance.replace("https://", "").replace("http://", "")
-                tweet_url = tweet_url.replace(domain, "x.com")
-
-        tweet_url = tweet_url.split("#")[0]  # Remove fragment
-
-        # Extract tweet content
-        content_el = card.select_one(".tweet-content, .media-body")
-        content = content_el.get_text(strip=True) if content_el else ""
-
-        # Extract timestamp
-        time_el = card.select_one("time")
+    def _parse_tweet(self, tweet, since: datetime) -> ContentItem | None:
+        """Parse a twikit Tweet object into ContentItem."""
+        # Check date
         published_at = None
-        if time_el:
-            dt_str = time_el.get("datetime", "")
-            if dt_str:
-                try:
-                    published_at = datetime.fromisoformat(
-                        dt_str.replace("Z", "+00:00")
-                    )
-                except ValueError:
-                    pass
+        if tweet.created_at_datetime:
+            published_at = tweet.created_at_datetime
+            if published_at.tzinfo is None:
+                published_at = published_at.replace(tzinfo=timezone.utc)
+            if published_at < since:
+                return None
 
-        if published_at and published_at < since:
-            return None
+        likes = tweet.favorite_count or 0
+        retweets = tweet.retweet_count or 0
+        replies = tweet.reply_count or 0
+        views = tweet.view_count or 0
 
-        # Extract engagement metrics
-        likes = self._extract_stat(card, "icon-heart", "like")
-        retweets = self._extract_stat(card, "icon-retweet", "retweet")
-        replies = self._extract_stat(card, "icon-comment", "reply")
-
-        # Filter by minimum likes
         if likes < self.min_likes:
             return None
 
-        title = content[:120].replace("\n", " ")
-        if len(content) > 120:
+        # Build content
+        text = tweet.full_text or tweet.text or ""
+        author_name = ""
+        author_handle = ""
+        if tweet.user:
+            author_name = tweet.user.name or ""
+            author_handle = tweet.user.screen_name or ""
+
+        title = text[:120].replace("\n", " ")
+        if len(text) > 120:
             title += "..."
 
         if not title:
             return None
 
+        tweet_url = f"https://x.com/{author_handle}/status/{tweet.id}"
         uid = md5(tweet_url.encode()).hexdigest()[:12]
 
         return ContentItem(
@@ -224,8 +235,12 @@ class TwitterTrendingCollector(BaseScraper):
             source_type=SourceType.TWITTER,
             title=title,
             url=tweet_url,
-            content=content,
-            author=f"{fullname} ({author})" if author else fullname,
+            content=text,
+            author=(
+                f"{author_name} (@{author_handle})"
+                if author_handle
+                else author_name
+            ),
             published_at=published_at,
             metadata={
                 "platform": "twitter",
@@ -233,54 +248,6 @@ class TwitterTrendingCollector(BaseScraper):
                 "likes": likes,
                 "retweets": retweets,
                 "replies": replies,
+                "views": views,
             },
         )
-
-    @staticmethod
-    def _extract_stat(card, icon_class: str, stat_name: str) -> int:
-        """Extract a numeric stat (likes, retweets, replies) from a tweet card."""
-        # Method 1: look for icon class + sibling text
-        icon = card.select_one(f".{icon_class}")
-        if icon:
-            parent = icon.parent
-            if parent:
-                text = parent.get_text(strip=True)
-                return _parse_count(text)
-
-        # Method 2: look for .tweet-stat elements
-        for stat_el in card.select(".tweet-stat"):
-            text = stat_el.get_text(strip=True).lower()
-            if stat_name in text or icon_class.replace("icon-", "") in text:
-                return _parse_count(text)
-
-        # Method 3: data attribute
-        for attr_name in (f"data-{stat_name}s", f"data-{stat_name}-count"):
-            el = card.select_one(f"[{attr_name}]")
-            if el:
-                try:
-                    return int(el[attr_name])
-                except (ValueError, KeyError):
-                    pass
-
-        return 0
-
-
-def _parse_count(text: str) -> int:
-    """Parse human-readable count like '1.2K' or '15,432' to int."""
-    text = re.sub(r"[^\d.kKmM]", "", text)
-    if not text:
-        return 0
-
-    text = text.strip()
-    multiplier = 1
-    if text[-1] in ("k", "K"):
-        multiplier = 1000
-        text = text[:-1]
-    elif text[-1] in ("m", "M"):
-        multiplier = 1_000_000
-        text = text[:-1]
-
-    try:
-        return int(float(text) * multiplier)
-    except ValueError:
-        return 0

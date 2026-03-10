@@ -232,7 +232,7 @@ sources:
       - { id: "sunomusic", name: "Suno" }                      # AI 音乐生成
 
   twitter_trending:
-    enabled: false            # Nitter 搜索不可用，待接入 Twitter API v2 或其他方案
+    enabled: true             # 使用 twikit 库 (免费, 无需 Twitter API key)
     top_n: 10             # 只保留点赞最高的 10 条
     min_likes: 500        # 最低点赞数过滤
     search_queries:
