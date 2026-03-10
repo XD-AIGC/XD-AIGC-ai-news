@@ -25,7 +25,39 @@ sources:
 
   github:
     enabled: true
-    trending_rss: "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml"
+    explosive:
+      enabled: true
+      lookback_days: 15          # 检测过去 N 天内的爆发式增长
+      min_stars: 100             # 最低星数门槛
+      top_n: 15                  # 取增长率最高的 N 个
+      search_queries:
+        # AI 通用
+        - "topic:ai"
+        - "topic:machine-learning"
+        - "topic:llm"
+        - "topic:deep-learning"
+        - "topic:generative-ai"
+        # AI + 图像/视频生成
+        - "topic:stable-diffusion"
+        - "topic:comfyui"
+        - "topic:image-generation"
+        - "topic:video-generation"
+        - "topic:text-to-video"
+        # AI + 游戏
+        - "topic:game-ai"
+        - "game AI NPC"
+        - "AI game development unity unreal godot"
+        # AI + 短剧/影视
+        - "AI film VFX video-production"
+        - "AI animation visual-effects"
+        - "AI storytelling short-drama"
+        # AI 模型训练
+        - "topic:fine-tuning"
+        - "topic:lora"
+        - "topic:rlhf"
+        - "topic:quantization"
+        - "topic:vllm"
+        - "distributed training deepspeed AI"
     watch_repos:
       - { owner: "comfyanonymous", repo: "ComfyUI" }
       - { owner: "black-forest-labs", repo: "flux" }
@@ -40,12 +72,58 @@ sources:
     enabled: true
     api_key: "${YOUTUBE_API_KEY}"
     channels:
+      # --- AI 新闻/评论 (高频更新) ---
       - { id: "UCbfYPyITQ-7l4upoX8nvctg", name: "Two Minute Papers" }
+      - { id: "UCawZsQWqfGSbCI5yjkdVkTA", name: "Matthew Berman" }
+      - { id: "UCbY9xX3_jW5c2fjlZVBI4cg", name: "TheAIGRID" }
+      - { id: "UCNJ1Ymd5yFuUPtn21xtRbbw", name: "AI Explained" }
+      - { id: "UCqcbQf6yw5KzRoDDcZ_wBSw", name: "Wes Roth" }
+      - { id: "UCLkTlEeB0IGFA40peNRFbcQ", name: "Matt Wolfe" }
+      - { id: "UC2WmuBuFq6gL08QYG-JjXKw", name: "WorldofAI" }
+      - { id: "UCPGrgwfbkjTIgPoOh2q1BAg", name: "David Ondrej" }
+      # --- AI 专家/学者 ---
+      - { id: "UCep6Rpvw3PtOMJWAFpKl8Yw", name: "Andrew Ng" }               # 吴恩达，Coursera/DeepLearning.AI 创始人
+      - { id: "UCXUPKJO5MZQN11PqgIvyuvQ", name: "Andrej Karpathy" }         # 前 OpenAI/Tesla AI 总监
+      - { id: "UCMU7l2bIv6MXlgJR3-E33Dw", name: "Yann LeCun" }              # Meta 首席 AI 科学家
+      - { id: "UCSHZKyawb77ixDdsGog4iWA", name: "Lex Fridman" }              # AI 播客，深度访谈
+      - { id: "UCd69J1M9vlPJnPJK41xxNOw", name: "Kai-Fu Lee" }               # 李开复，创新工场/01.AI
+      - { id: "UC_CzsS7UTjcxJ-xXp1ftxtA", name: "Sebastian Raschka" }        # LLM 研究者
+      - { id: "UCX7Y2qWriXpqocG97SFW2OQ", name: "Jeremy Howard" }            # fast.ai 创始人
+      # --- AI 教程/实战 ---
       - { id: "UCWN3xxRkmTPphYit_ydnHzA", name: "Yannic Kilcher" }
+      - { id: "UCKNYEEEVgMcBUBhGQjglYpA", name: "Fireship" }
+      - { id: "UCHhYXsLBEVVnbvsq57n1MTQ", name: "The AI Advantage" }
+      - { id: "UCrXSVX9a1mj8l0CMLwKgMVw", name: "AI Jason" }
+      - { id: "UC55ODQSvARtgSyc8ThfiepQ", name: "Sam Witteveen" }
+      - { id: "UCcIXc5mJsHVYTZR1maL5l9w", name: "DeepLearningAI" }           # 吴恩达创办
+      - { id: "UCDq7SjbgRKty5TgGafW8Clg", name: "Prompt Engineering" }
+      - { id: "UCR9j1jqqB5Rse69wjUnbYwA", name: "All About AI" }
+      - { id: "UCBPRJjIWfyNG4X-CRbnv78A", name: "Abhishek Thakur" }          # Kaggle Grandmaster
+      - { id: "UCfzlCWGWYyIQ0aLC5w48gBQ", name: "sentdex" }                  # Python + ML 实战
+      - { id: "UCNU_lfiiWBdtULKOw6X0Dig", name: "Krish Naik" }               # ML/DL 完整教程
+      - { id: "UCobqgqE4i5Kf7wrxRxhToQA", name: "AI Coffee Break with Letitia" }  # ML 论文解读
+      - { id: "UCj8shE7aIn4Yawwbo2FceCQ", name: "Aleksa Gordić - The AI Epiphany" }  # 前 Google DeepMind
+      - { id: "UCyna_OxOWL7IEuOwb7WhmxQ", name: "Elvis Saravia" }            # 论文/教程精讲
+      # --- 顶级学府公开课 ---
+      - { id: "UCBa5G_ESCn8Yd4vw5U-gIcg", name: "Stanford Online" }          # 斯坦福 CS229/CS231n 等
+      - { id: "UCEBb1b_L6zDS3xTUrIALZOw", name: "MIT OpenCourseWare" }       # MIT AI/ML 公开课
+      - { id: "UCtYLUTtgS3k1Fg4y5tAhLbw", name: "StatQuest with Josh Starmer" }  # 统计/ML 可视化讲解
+      - { id: "UCYO_jab_esuFRV4b17AJtAw", name: "3Blue1Brown" }              # 数学/神经网络可视化
+      # --- AIGC / 图像视频 ---
       - { id: "UCZHmQk67mSJgfCCTn7xBfew", name: "Bycloud" }
       - { id: "UCMDQxm7cUx3yXkfeHa5zJIQ", name: "Olivio Sarikas" }
-      - { id: "UCKNYEEEVgMcBUBhGQjglYpA", name: "Fireship" }
-      - { id: "UCLkTlEeB0IGFA40peNRFbcQ", name: "Matt Wolfe" }
+    # 搜索热门 AI 视频 (不限频道，按播放量排序)
+    search:
+      enabled: true
+      top_n: 10
+      queries:
+        - "AI breakthrough"
+        - "LLM open source new model"
+        - "Stable Diffusion ComfyUI workflow"
+        - "AI agent MCP"
+        - "AI game NPC"
+        - "AI film VFX short drama"
+        - "fine-tune LoRA training"
 
   bilibili:
     enabled: true
@@ -57,11 +135,92 @@ sources:
   twitter:
     enabled: true
     users:
-      - { id: "karpathy", name: "Andrej Karpathy" }
-      - { id: "ClementDelangue", name: "Clement Delangue" }
-      - { id: "StabilityAI", name: "Stability AI" }
+      # --- AI 行业大佬 ---
+      - { id: "karpathy", name: "Andrej Karpathy" }           # 前 OpenAI/Tesla AI 总监, 1.4M followers
+      - { id: "ylecun", name: "Yann LeCun" }                  # Meta 首席 AI 科学家
+      - { id: "sama", name: "Sam Altman" }                     # OpenAI CEO, 4.2M followers
+      - { id: "DarioAmodei", name: "Dario Amodei" }            # Anthropic CEO
+      - { id: "demishassabis", name: "Demis Hassabis" }        # Google DeepMind CEO
+      - { id: "JeffDean", name: "Jeff Dean" }                  # Google 首席科学家
+      - { id: "EMostaque", name: "Emad Mostaque" }             # Stability AI 创始人
+      - { id: "DrJimFan", name: "Jim Fan" }                    # NVIDIA 高级研究科学家
+      - { id: "elonmusk", name: "Elon Musk" }                  # xAI / Tesla
+      - { id: "satyanadella", name: "Satya Nadella" }            # Microsoft CEO
+      - { id: "ID_AA_Carmack", name: "John Carmack" }          # Keen Technologies AGI 研究, 1.1M followers
+      - { id: "kaifulee", name: "Kai-Fu Lee" }                 # 创新工场 CEO, 01.AI, 1.4M followers
+      # --- AI 研究者 & 意见领袖 ---
+      - { id: "ClementDelangue", name: "Clement Delangue" }    # Hugging Face CEO
+      - { id: "AndrewYNg", name: "Andrew Ng" }                 # Coursera 联创, 前 Google Brain/百度 AI
+      - { id: "lexfridman", name: "Lex Fridman" }              # AI 播客主持人, 4.2M followers
+      - { id: "fchollet", name: "François Chollet" }           # Keras 创始人
+      - { id: "_jasonwei", name: "Jason Wei" }                 # OpenAI 研究员
+      - { id: "rasbt", name: "Sebastian Raschka" }             # LLM 研究/教育
+      - { id: "swyx", name: "Swyx" }                           # AI 工程化布道者, Latent Space
+      - { id: "bindureddy", name: "Bindu Reddy" }              # Abacus.AI CEO
+      - { id: "AravSrinivas", name: "Aravind Srinivas" }       # Perplexity CEO
+      - { id: "reach_vb", name: "Vaibhav Srivastav" }          # Hugging Face
+      - { id: "hardmaru", name: "David Ha" }                   # Sakana AI CEO
+      - { id: "goodfellow_ian", name: "Ian Goodfellow" }       # GAN 之父
+      - { id: "simonw", name: "Simon Willison" }               # LLM 工具/应用专家
+      - { id: "mmitchell_ai", name: "Margaret Mitchell" }      # Hugging Face 首席伦理科学家
+      - { id: "KirkDBorne", name: "Kirk Borne" }               # 数据科学/AI 意见领袖
+      - { id: "minchoi", name: "Min Choi" }                    # AI 产品/趋势, 高赞内容
+      - { id: "jeremyphoward", name: "Jeremy Howard" }          # fast.ai 创始人
+      - { id: "Sentdex", name: "sentdex" }                      # Python + ML 实战
+      - { id: "abhi1thakur", name: "Abhishek Thakur" }          # Kaggle Grandmaster
+      - { id: "Krishnaik06", name: "Krish Naik" }               # ML/DL 教程
+      - { id: "omarsar0", name: "Elvis Saravia" }               # 论文/教程精讲
+      - { id: "gordic_aleksa", name: "Aleksa Gordić" }          # 前 Google DeepMind
+      - { id: "AICoffeeBreak", name: "AI Coffee Break" }        # ML 论文解读
+      # --- AI 资讯 & 高赞聚合号 ---
+      - { id: "TheRundownAI", name: "The Rundown AI" }         # AI 日报, 2M+ 读者
+      - { id: "DailyAITechNews", name: "AI News" }             # AI 新闻聚合
+      - { id: "ai_for_success", name: "AI for Success" }       # AI 工具/技巧, 高转发
+      - { id: "rohanpaul_ai", name: "Rohan Paul" }             # AI 论文/工具精选
+      # --- AI 公司官方 ---
       - { id: "OpenAI", name: "OpenAI" }
       - { id: "AnthropicAI", name: "Anthropic" }
+      - { id: "StabilityAI", name: "Stability AI" }
+      - { id: "GoogleDeepMind", name: "Google DeepMind" }
+      - { id: "GoogleAI", name: "Google AI" }
+      - { id: "MetaAI", name: "Meta AI" }
+      - { id: "MistralAI", name: "Mistral AI" }
+      - { id: "xai", name: "xAI" }
+      - { id: "huggingface", name: "Hugging Face" }
+      - { id: "RunwayML", name: "Runway" }
+      - { id: "NVIDIAAIDev", name: "NVIDIA AI" }
+      - { id: "midjourney", name: "Midjourney" }
+      - { id: "perplexity_ai", name: "Perplexity AI" }          # AI 搜索引擎
+      # --- AIGC / ComfyUI / 图像生成 ---
+      - { id: "cocktailpeanut", name: "cocktailpeanut" }       # Pinokio, AI 工具达人
+      - { id: "levelsio", name: "Pieter Levels" }              # AI 独立开发者
+      - { id: "toyxyz3", name: "ToyXYZ" }                      # ComfyUI 工作流分享
+
+  twitter_trending:
+    enabled: false            # Nitter 搜索不可用，待接入 Twitter API v2 或其他方案
+    top_n: 10             # 只保留点赞最高的 10 条
+    min_likes: 500        # 最低点赞数过滤
+    search_queries:
+      # AI 通用
+      - "AI breakthrough OR AI release OR AI launch"
+      - "LLM open source OR open weights"
+      - "Stable Diffusion OR Flux OR ComfyUI OR AI art"
+      - "GPT OR Claude OR Gemini new"
+      - "AI agent OR MCP OR function calling"
+      - "fine-tune OR LoRA OR quantization AI"
+      - "Midjourney OR DALL-E OR Sora OR Runway"
+      - "Hugging Face OR transformers release"
+      # AI + 游戏
+      - "AI game OR AI NPC OR game AI agent"
+      - "AI Unity OR AI Unreal OR AI game dev"
+      # AI + 短剧/影视
+      - "AI film OR AI movie OR AI VFX"
+      - "AI short drama OR AI video production OR AI animation"
+      - "AI visual effects OR AI post-production OR Sora film"
+      # AI 模型训练
+      - "fine-tune OR LoRA training OR RLHF new"
+      - "distributed training OR DeepSpeed OR vLLM"
+      - "quantization GGUF OR model distillation OR inference optimization"
 
   reddit:
     enabled: true

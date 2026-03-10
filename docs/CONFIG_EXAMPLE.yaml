@@ -14,69 +14,128 @@ focus_areas:
     keywords: ["fine-tune", "training", "LoRA", "RLHF", "inference", "quantization", "deployment", "distillation"]
 
 sources:
+  rss:
+    enabled: true
+    feeds:
+      - { url: "https://openai.com/blog/rss.xml", name: "OpenAI Blog" }
+      - { url: "https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic.xml", name: "Anthropic" }
+      - { url: "https://blog.google/technology/ai/rss/", name: "Google AI" }
+      - { url: "https://huggingface.co/blog/feed.xml", name: "Hugging Face" }
+      - { url: "https://blog.google/products/gemini/rss/", name: "Gemini Blog" }
+      - { url: "https://www.marktechpost.com/feed/", name: "MarkTechPost AI" }
+      # 添加更多 RSS 源
+
+  github:
+    enabled: true
+    trending_rss: "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml"
+    watch_repos:
+      - { owner: "comfyanonymous", repo: "ComfyUI" }
+      - { owner: "black-forest-labs", repo: "flux" }
+      - { owner: "AUTOMATIC1111", repo: "stable-diffusion-webui" }
+      # 添加更多监控仓库
+
+  hackernews:
+    enabled: true
+    fetch_top_stories: 30      # 抓取 Top N 条
+    min_score: 100             # 最低分数过滤
+
   youtube:
     enabled: true
     api_key: "${YOUTUBE_API_KEY}"
     channels:
       - { id: "UCbfYPyITQ-7l4upoX8nvctg", name: "Two Minute Papers" }
       - { id: "UCWN3xxRkmTPphYit_ydnHzA", name: "Yannic Kilcher" }
-      # 添加更多你关注的 YouTube 频道
+      - { id: "UCZHmQk67mSJgfCCTn7xBfew", name: "Bycloud" }
+      - { id: "UCMDQxm7cUx3yXkfeHa5zJIQ", name: "Olivio Sarikas" }
+      - { id: "UCKNYEEEVgMcBUBhGQjglYpA", name: "Fireship" }
+      - { id: "UCLkTlEeB0IGFA40peNRFbcQ", name: "Matt Wolfe" }
+      # 频道 ID: 打开 YouTube 频道页面，URL 中 /channel/ 后面的字符串
 
   bilibili:
     enabled: true
-    rsshub_base: "http://localhost:1200"
     users:
       - { uid: "946974", name: "Ele实验室" }
-      # 添加更多你关注的 Bilibili UP 主
-
-  github:
-    enabled: true
-    languages: ["python", "typescript", ""]
-    since: "daily"
-    watch_repos:
-      - "comfyanonymous/ComfyUI"
-      - "black-forest-labs/flux"
-      - "AUTOMATIC1111/stable-diffusion-webui"
-
-  rss:
-    enabled: true
-    feeds:
-      - { url: "https://openai.com/blog/rss.xml", name: "OpenAI Blog" }
-      - { url: "https://www.anthropic.com/research/rss.xml", name: "Anthropic" }
-      - { url: "https://blog.google/technology/ai/rss/", name: "Google AI" }
-      - { url: "https://huggingface.co/blog/feed.xml", name: "Hugging Face" }
-      - { url: "https://stability.ai/news/feed", name: "Stability AI" }
+      - { uid: "291229", name: "机器之心" }
+      - { uid: "517327498", name: "ComfyUI官方" }
+      # 添加更多 Bilibili UP 主
 
   twitter:
     enabled: true
-    rsshub_base: "http://localhost:1200"
     users:
+      # AI 行业大佬
       - { id: "karpathy", name: "Andrej Karpathy" }
+      - { id: "ylecun", name: "Yann LeCun" }
+      - { id: "sama", name: "Sam Altman" }
+      - { id: "DarioAmodei", name: "Dario Amodei" }
+      - { id: "demishassabis", name: "Demis Hassabis" }
+      # AI 研究者 & 意见领袖
       - { id: "ClementDelangue", name: "Clement Delangue" }
-      - { id: "DrJimFan", name: "Jim Fan" }
+      - { id: "AndrewYNg", name: "Andrew Ng" }
+      - { id: "fchollet", name: "François Chollet" }
+      # AI 资讯聚合号
+      - { id: "TheRundownAI", name: "The Rundown AI" }
+      # AI 公司官方
+      - { id: "OpenAI", name: "OpenAI" }
+      - { id: "AnthropicAI", name: "Anthropic" }
+      - { id: "GoogleDeepMind", name: "Google DeepMind" }
+      # 完整列表见 config.yaml
+
+  twitter_trending:
+    enabled: true
+    top_n: 10                  # 只保留点赞最高的 N 条
+    min_likes: 500             # 最低点赞数过滤
+    search_queries:
+      - "AI breakthrough OR AI release OR AI launch"
+      - "LLM open source OR open weights"
+      - "Stable Diffusion OR Flux OR ComfyUI OR AI art"
+      - "GPT OR Claude OR Gemini new"
+      - "AI agent OR MCP OR function calling"
+      - "fine-tune OR LoRA OR quantization AI"
+      - "Midjourney OR DALL-E OR Sora OR Runway"
+      - "Hugging Face OR transformers release"
+      # 自定义搜索词，支持 OR 语法
+
+  reddit:
+    enabled: true
+    fetch_comments: 5          # 每帖抓取评论数
+    subreddits:
+      - { name: "MachineLearning", sort: "hot", min_score: 50, fetch_limit: 15 }
+      - { name: "LocalLLaMA", sort: "hot", min_score: 30, fetch_limit: 15 }
+      - { name: "StableDiffusion", sort: "hot", min_score: 30, fetch_limit: 10 }
+
+  telegram:
+    enabled: true
+    channels:
+      - { channel: "zaihuapd", name: "在花频道", fetch_limit: 20 }
+      # 添加更多 Telegram 频道
 
 llm:
   provider: "openai"
-  model: "gpt-4o-mini"
+  model: "gpt-4o-mini"                   # 或 gemini-3.1-flash-lite-preview 等兼容模型
   api_key: "${OPENAI_API_KEY}"
-  base_url: "${OPENAI_BASE_URL}"
+  base_url: "${OPENAI_BASE_URL}"         # 默认 https://api.openai.com/v1
+  temperature: 0.3
+  score_threshold: 6.0                   # 低于此分数标记为低优先级
 
 output:
   notion:
-    enabled: true
+    enabled: false
     api_key: "${NOTION_API_KEY}"
     database_id: "${NOTION_DATABASE_ID}"
   web:
-    enabled: true
-    output_dir: "./reports/web"
+    enabled: false
+    host: "0.0.0.0"
+    port: 8800
   markdown:
     enabled: true
     output_dir: "./reports/markdown"
-  wechat_push:
-    enabled: true
-    provider: "server_chan"
-    key: "${SERVERCHAN_KEY}"
+  feishu:
+    enabled: false
+    webhook_url: "${FEISHU_WEBHOOK_URL}"
 
 proxy:
   http: "http://172.24.12.140:18888"
   https: "http://172.24.12.140:18888"
+
+database:
+  path: "./data/news.db"

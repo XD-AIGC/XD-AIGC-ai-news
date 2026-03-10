@@ -57,6 +57,18 @@ class MarkdownWriter:
                     )
                 if item.ai_score is not None:
                     lines.append(f"- **AI 评分**: {item.ai_score}/10")
+                if item.metadata.get("trending"):
+                    likes = item.metadata.get("likes", 0)
+                    retweets = item.metadata.get("retweets", 0)
+                    lines.append(f"- **热度**: {likes} likes / {retweets} retweets")
+                if item.metadata.get("view_count"):
+                    vc = item.metadata["view_count"]
+                    lines.append(f"- **播放量**: {vc:,}")
+                if item.metadata.get("subtype") == "explosive":
+                    stars = item.metadata.get("stars", 0)
+                    spd = item.metadata.get("stars_per_day", 0)
+                    age = item.metadata.get("age_days", 0)
+                    lines.append(f"- **增长**: {stars:,} stars / {age}天 (+{spd:.0f}/天)")
                 if item.ai_summary:
                     lines.append(f"\n{item.ai_summary}")
                 elif item.content:

@@ -1,11 +1,10 @@
-"""GitHub scraper: Trending via RSS + repo releases via REST API."""
+"""GitHub scraper: explosive-growth repos via Search API + watched repo releases."""
 
 import logging
 import os
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from hashlib import md5
 
-import feedparser
 import httpx
 
 from collectors.base import BaseScraper, ContentItem, SourceType
@@ -14,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class GitHubCollector(BaseScraper):
-    """Scraper for GitHub Trending (RSS) and watched repo releases (API)."""
+    """Detect repos with explosive star growth + watched repo releases."""
 
     def __init__(self, config: dict, http_client: httpx.AsyncClient):
         super().__init__(config, http_client)
@@ -24,10 +23,12 @@ class GitHubCollector(BaseScraper):
     async def fetch(self, since: datetime) -> list[ContentItem]:
         items: list[ContentItem] = []
 
-        trending_url = self.config.get("trending_rss")
-        if trending_url:
-            items.extend(await self._fetch_trending(trending_url, since))
+        # 1. Explosive-growth repos via Search API
+        explosive_cfg = self.config.get("explosive", {})
+        if explosive_cfg.get("enabled", True):
+            items.extend(await self._fetch_explosive(explosive_cfg))
 
+        # 2. Watched repo releases (keep existing logic)
         for repo_cfg in self.config.get("watch_repos", []):
             items.extend(
                 await self._fetch_releases(
@@ -37,44 +38,140 @@ class GitHubCollector(BaseScraper):
 
         return items
 
-    async def _fetch_trending(
-        self, rss_url: str, since: datetime
-    ) -> list[ContentItem]:
-        items: list[ContentItem] = []
-        try:
-            response = await self.client.get(
-                rss_url, follow_redirects=True, timeout=30.0
-            )
-            response.raise_for_status()
-            feed = feedparser.parse(response.text)
+    async def _fetch_explosive(self, cfg: dict) -> list[ContentItem]:
+        """Find repos with explosive star growth in the last N days.
 
-            for entry in feed.entries:
-                link = entry.get("link", "")
-                uid = md5(link.encode()).hexdigest()[:12]
+        Strategy: Search GitHub for repos created/pushed recently with
+        high star counts. Calculate stars_per_day as growth rate.
+        A repo created 10 days ago with 5K stars = 500 stars/day (explosive).
+        """
+        lookback_days = cfg.get("lookback_days", 15)
+        min_stars = cfg.get("min_stars", 100)
+        top_n = cfg.get("top_n", 15)
+        queries = cfg.get("search_queries", [])
 
-                repo_name = link.replace("https://github.com/", "")
-                description = entry.get("summary", entry.get("description", ""))
+        if not queries:
+            queries = [
+                "topic:ai",
+                "topic:machine-learning",
+                "topic:llm",
+            ]
 
-                item = ContentItem(
-                    id=self._generate_id("github", "trending", uid),
-                    source_type=SourceType.GITHUB,
-                    title=f"[Trending] {repo_name}",
-                    url=link,
-                    content=description,
-                    author=repo_name.split("/")[0] if "/" in repo_name else "",
-                    published_at=datetime.now(timezone.utc),
-                    metadata={"subtype": "trending", "repo": repo_name},
+        cutoff = datetime.now(timezone.utc) - timedelta(days=lookback_days)
+        cutoff_str = cutoff.strftime("%Y-%m-%d")
+
+        all_repos: list[dict] = []
+        seen_ids: set[int] = set()
+
+        for query in queries:
+            try:
+                repos = await self._search_repos(
+                    query, cutoff_str, min_stars
                 )
-                items.append(item)
+                for repo in repos:
+                    if repo["id"] not in seen_ids:
+                        seen_ids.add(repo["id"])
+                        all_repos.append(repo)
+            except Exception as e:
+                logger.warning("GitHub Search [%s] error: %s", query, e)
 
-            logger.info("GitHub Trending: fetched %d repos", len(items))
+        # Calculate growth rate and sort
+        for repo in all_repos:
+            created = datetime.fromisoformat(
+                repo["created_at"].replace("Z", "+00:00")
+            )
+            age_days = max((datetime.now(timezone.utc) - created).days, 1)
+            repo["_stars_per_day"] = repo["stargazers_count"] / age_days
+            repo["_age_days"] = age_days
 
-        except httpx.HTTPError as e:
-            logger.warning("GitHub Trending RSS error: %s", e)
-        except Exception as e:
-            logger.warning("GitHub Trending parse error: %s", e)
+        all_repos.sort(key=lambda r: r["_stars_per_day"], reverse=True)
+        top_repos = all_repos[:top_n]
 
+        items: list[ContentItem] = []
+        for repo in top_repos:
+            stars = repo["stargazers_count"]
+            spd = repo["_stars_per_day"]
+            age = repo["_age_days"]
+            full_name = repo["full_name"]
+
+            title = (
+                f"[{stars:,} stars in {age}d, +{spd:.0f}/day] "
+                f"{full_name}"
+            )
+
+            description = repo.get("description") or ""
+            topics = repo.get("topics", [])
+            language = repo.get("language") or ""
+
+            content_parts = [description]
+            if topics:
+                content_parts.append(f"Topics: {', '.join(topics)}")
+            if language:
+                content_parts.append(f"Language: {language}")
+            content_parts.append(
+                f"Stars: {stars:,} | Forks: {repo.get('forks_count', 0):,} | "
+                f"Growth: +{spd:.0f} stars/day"
+            )
+
+            uid = md5(repo["html_url"].encode()).hexdigest()[:12]
+
+            items.append(ContentItem(
+                id=self._generate_id("github", "explosive", uid),
+                source_type=SourceType.GITHUB,
+                title=title,
+                url=repo["html_url"],
+                content="\n".join(content_parts),
+                author=repo["owner"]["login"],
+                published_at=datetime.fromisoformat(
+                    repo["created_at"].replace("Z", "+00:00")
+                ),
+                metadata={
+                    "subtype": "explosive",
+                    "repo": full_name,
+                    "stars": stars,
+                    "stars_per_day": round(spd, 1),
+                    "age_days": age,
+                    "forks": repo.get("forks_count", 0),
+                    "language": language,
+                    "topics": topics,
+                },
+            ))
+
+        logger.info(
+            "GitHub Explosive: %d candidates -> top %d "
+            "(lookback %dd, min_stars %d)",
+            len(all_repos), len(items), lookback_days, min_stars,
+        )
         return items
+
+    async def _search_repos(
+        self, query: str, created_since: str, min_stars: int
+    ) -> list[dict]:
+        """Call GitHub Search API for repos matching query."""
+        q = f"{query} created:>{created_since} stars:>={min_stars}"
+        url = f"{self.api_base}/search/repositories"
+
+        headers = self._get_headers()
+        response = await self.client.get(
+            url,
+            headers=headers,
+            params={
+                "q": q,
+                "sort": "stars",
+                "order": "desc",
+                "per_page": 30,
+            },
+            follow_redirects=True,
+            timeout=30.0,
+        )
+        response.raise_for_status()
+        data = response.json()
+
+        logger.debug(
+            "GitHub Search [%s]: %d results (total: %d)",
+            query, len(data.get("items", [])), data.get("total_count", 0),
+        )
+        return data.get("items", [])
 
     async def _fetch_releases(
         self, owner: str, repo: str, since: datetime

@@ -20,6 +20,7 @@ from collectors.reddit_collector import RedditCollector
 from collectors.rss_collector import RSSCollector
 from collectors.telegram_collector import TelegramCollector
 from collectors.twitter_collector import TwitterCollector
+from collectors.twitter_trending_collector import TwitterTrendingCollector
 from collectors.youtube_collector import YouTubeCollector
 from outputs.feishu_bot import FeishuBot
 from outputs.markdown_writer import MarkdownWriter
@@ -89,6 +90,13 @@ def build_collectors(
         tw_cfg["auth_token"] = os.getenv("TWITTER_AUTH_TOKEN", tw_cfg.get("auth_token", ""))
         tw_cfg["proxy"] = config.get("proxy", {}).get("http", "")
         collectors.append(("Twitter", TwitterCollector(tw_cfg, client)))
+
+    if sources.get("twitter_trending", {}).get("enabled"):
+        tt_cfg = sources["twitter_trending"]
+        tt_cfg["proxy"] = config.get("proxy", {}).get("http", "")
+        collectors.append(
+            ("TwitterTrending", TwitterTrendingCollector(tt_cfg, client))
+        )
 
     if sources.get("reddit", {}).get("enabled"):
         collectors.append(

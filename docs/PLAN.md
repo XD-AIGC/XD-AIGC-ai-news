@@ -61,37 +61,42 @@ GitHub Trending 抓取 ──────────┤
 
 ## 分阶段实施
 
-### Phase 1: 基础骨架（2-3 天）
-- [ ] `collectors/base.py`: NewsItem dataclass + BaseCollector 抽象类
-- [ ] `storage/models.py` + `storage/database.py`: SQLite 建表 + CRUD
-- [ ] `collectors/rss_collector.py`: feedparser 通用 RSS 采集
-- [ ] `collectors/github_collector.py`: GitHub Trending 页面解析
-- [ ] `outputs/markdown_writer.py`: 本地 Markdown 日报输出
-- [ ] `main.py`: CLI 入口，串联 采集 -> 存储 -> 输出 流程
-- [ ] `config.yaml`: 基础配置文件
-- [ ] `requirements.txt`: 依赖管理
-- [ ] 端到端验证：运行一次，输出 Markdown 日报
+### Phase 1: 基础骨架（2-3 天） — 已完成
+- [x] `collectors/base.py`: ContentItem dataclass + BaseScraper 抽象类
+- [x] `storage/models.py` + `storage/database.py`: SQLite 建表 + CRUD
+- [x] `collectors/rss_collector.py`: feedparser 通用 RSS 采集
+- [x] `collectors/github_collector.py`: GitHub Trending 页面解析
+- [x] `outputs/markdown_writer.py`: 本地 Markdown 日报输出
+- [x] `main.py`: CLI 入口，串联 采集 -> 存储 -> 输出 流程
+- [x] `config.yaml`: 基础配置文件
+- [x] `requirements.txt`: 依赖管理
+- [x] 端到端验证：运行一次，输出 Markdown 日报
 
-### Phase 2: 扩展数据源 + LLM（2-3 天）
-- [ ] `deploy/docker-compose.rsshub.yml`: 部署 RSSHub Docker
-- [ ] `collectors/youtube_collector.py`: YouTube Data API v3
-- [ ] 通过 RSSHub 接入 Bilibili、Twitter
-- [ ] `processor/summarizer.py`: LLM 摘要生成 (gpt-4o-mini)
-- [ ] `processor/classifier.py`: 按 focus_areas 分类 + 重要度评分
-- [ ] `processor/dedup.py`: URL + 标题相似度去重
+### Phase 2: 扩展数据源 + LLM（2-3 天） — 已完成
+- [x] `deploy/docker-compose.rsshub.yml`: 部署 RSSHub Docker
+- [x] `collectors/youtube_collector.py`: YouTube Data API v3
+- [x] `collectors/bilibili_collector.py`: Bilibili 采集
+- [x] `collectors/twitter_collector.py`: Twitter/X 采集（改用 Nitter RSS，不依赖 RSSHub）
+- [x] `processor/scorer.py`: LLM 摘要 + 分类 + 评分（合并了原计划的 summarizer）
+- [x] `processor/classifier.py`: 按 focus_areas 关键词预分类
+- [x] `processor/dedup.py`: URL + 标题相似度去重
+- [x] `collectors/hackernews_collector.py`: HackerNews Top Stories（超额）
+- [x] `collectors/reddit_collector.py`: Reddit 子版采集（超额）
+- [x] `collectors/telegram_collector.py`: Telegram 频道采集（超额）
+- [x] `collectors/twitter_trending_collector.py`: Twitter 全站 AI 高赞搜索 Top 10（超额）
 
-### Phase 3: 输出集成（2 天）
-- [ ] `outputs/notion_writer.py`: Notion SDK 数据库写入
-- [ ] `outputs/web_generator.py`: Jinja2 静态 HTML 日报
-- [ ] `outputs/push_notifier.py`: Server酱微信推送
-- [ ] `templates/daily_report.html`: 日报 HTML 模板
+### Phase 3: 输出集成（2 天） — 已完成
+- [x] `outputs/notion_writer.py`: Notion SDK 数据库写入（代码完成，enabled: false）
+- [x] `web/app.py`: FastAPI Web Dashboard（替代原计划的 Jinja2 静态页，功能更强）
+- [x] `outputs/feishu_bot.py`: 飞书机器人推送（替代原计划的 Server酱微信推送）
+- ~~`templates/daily_report.html`~~: 不再需要（Web Dashboard 改用 FastAPI JSON API + 前端内嵌）
 
-### Phase 4: 部署与完善（1-2 天）
-- [ ] `deploy/ai-news.service` + `ai-news.timer`: systemd 定时任务
-- [ ] 在服务器上部署：git clone + symlink service 文件
-- [ ] 错误处理、重试、日志
-- [ ] Cursor Skill: `.cursor/skills/ai-news/SKILL.md`
-- [ ] README 使用文档
+### Phase 4: 部署与完善（1-2 天） — 已完成
+- [x] `deploy/ai-news.service` + `ai-news.timer`: systemd 定时任务
+- [x] 在服务器上部署：L20_1 (10.102.80.15)，路径 /AIGC_Group/XD-AIGC-ai-news
+- [x] 错误处理、重试、日志
+- [x] `CLAUDE.md`: Claude Code 项目规则（替代原计划的 Cursor Skill）
+- [x] README 使用文档 + `docs/OPERATIONS.md` 运维手册
 
 ## 技术选型
 
