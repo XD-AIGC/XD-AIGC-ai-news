@@ -48,13 +48,7 @@ class TwitterTrendingCollector(BaseScraper):
             )
             return []
 
-        client = Client("en-US")
-
-        # Set up proxy if configured
-        if self.proxy:
-            client._client = httpx.AsyncClient(
-                proxy=self.proxy, timeout=httpx.Timeout(30.0)
-            )
+        client = Client("en-US", proxy=self.proxy if self.proxy else None)
 
         # Authenticate: try saved cookies first, fallback to auth_token
         authenticated = False
