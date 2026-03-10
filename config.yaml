@@ -23,7 +23,7 @@ sources:
       - { url: "https://blog.google/products/gemini/rss/", name: "Gemini Blog" }
       - { url: "https://www.marktechpost.com/feed/", name: "MarkTechPost AI" }
       # AI + 游戏
-      - { url: "https://inworld.ai/blog/rss.xml", name: "Inworld AI Blog" }
+      # - { url: "https://inworld.ai/blog/rss.xml", name: "Inworld AI Blog" }  # 无 RSS feed
       - { url: "https://developer.nvidia.com/blog/feed/", name: "NVIDIA Developer Blog" }
       - { url: "https://blogs.unity3d.com/feed/", name: "Unity Blog" }
 
@@ -75,7 +75,7 @@ sources:
       - { owner: "black-forest-labs", repo: "flux" }
       - { owner: "AUTOMATIC1111", repo: "stable-diffusion-webui" }
       - { owner: "Unity-Technologies", repo: "ml-agents" }
-      - { owner: "inworld-ai", repo: "inworld-unity-full" }
+      - { owner: "inworld-ai", repo: "tts" }                    # Inworld TTS 模型
 
   hackernews:
     enabled: true
