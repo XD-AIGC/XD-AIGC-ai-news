@@ -27,7 +27,7 @@ from outputs.github_pages_writer import GitHubPagesWriter
 from outputs.markdown_writer import MarkdownWriter
 from outputs.notion_writer import NotionWriter
 from processor.classifier import KeywordClassifier
-from processor.dedup import deduplicate
+from processor.dedup import deduplicate, deduplicate_semantic
 from processor.scorer import AIScorer
 from storage.database import NewsDatabase
 
@@ -213,6 +213,10 @@ async def run(args: argparse.Namespace) -> None:
         output_cfg = config.get("output", {})
         today = datetime.now().strftime("%Y-%m-%d")
         all_today = db.get_items_by_date(today)
+
+        # Cross-source semantic dedup (after AI scoring)
+        all_today = deduplicate_semantic(all_today)
+        logger.info("After semantic dedup: %d items", len(all_today))
 
         if output_cfg.get("markdown", {}).get("enabled"):
             md_dir = output_cfg["markdown"].get("output_dir", "./reports/markdown")

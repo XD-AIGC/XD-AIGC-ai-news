@@ -1,4 +1,4 @@
-"""Deduplication: URL exact match + title similarity."""
+"""Deduplication: URL exact match + title similarity + semantic dedup."""
 
 import logging
 import re
@@ -67,3 +67,74 @@ def deduplicate(
         logger.info("Dedup: removed %d duplicates, kept %d", removed, len(result))
 
     return result
+
+
+def _normalize_tag(tag: str) -> str:
+    """Normalize a tag for comparison."""
+    return tag.lower().strip()
+
+
+def _tags_overlap(tags_a: list[str], tags_b: list[str]) -> int:
+    """Count matching tags between two items."""
+    set_a = {_normalize_tag(t) for t in tags_a}
+    set_b = {_normalize_tag(t) for t in tags_b}
+    return len(set_a & set_b)
+
+
+def deduplicate_semantic(
+    items: list[ContentItem], min_shared_tags: int = 2
+) -> list[ContentItem]:
+    """Cross-source dedup using AI tag overlap.
+
+    Two items are considered duplicates if they share >= min_shared_tags.
+    Keeps the item with the highest AI score from each group.
+
+    Args:
+        items: Items with AI results populated (ai_tags required).
+        min_shared_tags: Minimum shared tags to consider as duplicate.
+
+    Returns:
+        Deduplicated list, highest-scored item kept per group.
+    """
+    if not items:
+        return items
+
+    # Sort by score descending so highest-scored items are kept first
+    scored = sorted(
+        items,
+        key=lambda x: (x.ai_score or -1),
+        reverse=True,
+    )
+
+    kept: list[ContentItem] = []
+    removed = 0
+
+    for item in scored:
+        if not item.ai_tags:
+            kept.append(item)
+            continue
+
+        is_dup = False
+        for kept_item in kept:
+            if not kept_item.ai_tags:
+                continue
+            overlap = _tags_overlap(item.ai_tags, kept_item.ai_tags)
+            if overlap >= min_shared_tags:
+                is_dup = True
+                removed += 1
+                logger.debug(
+                    "Semantic dedup: [%s] ≈ [%s] (shared %d tags)",
+                    item.title[:40], kept_item.title[:40], overlap,
+                )
+                break
+
+        if not is_dup:
+            kept.append(item)
+
+    if removed > 0:
+        logger.info(
+            "Semantic dedup: removed %d similar items, kept %d",
+            removed, len(kept),
+        )
+
+    return kept
