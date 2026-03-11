@@ -297,6 +297,13 @@ output:
     enabled: false  # Phase 4
     webhook_url: "${FEISHU_WEBHOOK_URL}"
 
+weekly:
+  enabled: true
+  image_model: "nano-banana-pro-preview"
+  story_count: 3
+  panels_per_story: 4
+  max_concurrent_images: 3
+
 proxy:
   http: "http://172.24.12.140:18888"
   https: "http://172.24.12.140:18888"

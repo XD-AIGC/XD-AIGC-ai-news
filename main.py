@@ -27,8 +27,10 @@ from outputs.github_pages_writer import GitHubPagesWriter
 from outputs.markdown_writer import MarkdownWriter
 from outputs.notion_writer import NotionWriter
 from processor.classifier import KeywordClassifier
+from processor.comic_generator import ComicGenerator
 from processor.dedup import deduplicate, deduplicate_semantic
 from processor.scorer import AIScorer
+from processor.weekly_digest import generate_weekly_digest
 from storage.database import NewsDatabase
 
 logger = logging.getLogger(__name__)
@@ -283,6 +285,43 @@ async def backfill_notion(args: argparse.Namespace) -> None:
         db.close()
 
 
+async def run_weekly(args: argparse.Namespace) -> None:
+    """Generate weekly comic digest."""
+    load_dotenv()
+    config = load_config(args.config)
+
+    proxy_cfg = config.get("proxy", {})
+    proxy_url = proxy_cfg.get("http")
+
+    db = NewsDatabase(config.get("database", {}).get("path", "./data/news.db"))
+    db.connect()
+
+    try:
+        llm_cfg = config.get("llm", {})
+        weekly_cfg = config.get("weekly", {})
+        ghpages_cfg = config.get("output", {}).get("github_pages", {})
+        output_dir = ghpages_cfg.get("output_dir", "./docs")
+
+        comic_config = {
+            "llm_model": llm_cfg.get("model", "gemini-2.5-flash"),
+            "image_model": weekly_cfg.get("image_model", "nano-banana-pro-preview"),
+            "api_key": llm_cfg.get("api_key", ""),
+            "base_url": llm_cfg.get("base_url", ""),
+            "proxy": proxy_url if not args.no_proxy else None,
+            "max_concurrent_images": weekly_cfg.get("max_concurrent_images", 3),
+        }
+
+        comic_gen = ComicGenerator(comic_config)
+        digest = await generate_weekly_digest(db, comic_gen, output_dir)
+
+        if digest:
+            logger.info("Weekly digest generated: %s", digest["week"])
+        else:
+            logger.warning("Weekly digest skipped (no data)")
+    finally:
+        db.close()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="AI News Aggregator")
     parser.add_argument(
@@ -323,6 +362,11 @@ def main() -> None:
         help="Start web dashboard server instead of collecting",
     )
     parser.add_argument(
+        "--weekly",
+        action="store_true",
+        help="Generate weekly comic digest",
+    )
+    parser.add_argument(
         "--port",
         type=int,
         default=8800,
@@ -343,6 +387,8 @@ def main() -> None:
         port = args.port or web_cfg.get("port", 8800)
         logger.info("Starting web dashboard at http://%s:%d", host, port)
         uvicorn.run("web.app:app", host=host, port=port, reload=False)
+    elif args.weekly:
+        asyncio.run(run_weekly(args))
     elif args.backfill_notion:
         asyncio.run(backfill_notion(args))
     else:
