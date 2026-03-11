@@ -1,0 +1,18 @@
+[Unit]
+Description=AI News Weekly Comic Digest
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/AIGC_Group/XD-AIGC-ai-news
+ExecStart=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin/python main.py --weekly
+ExecStartPost=/bin/bash -c 'cd /AIGC_Group/XD-AIGC-ai-news && git add docs/data/weekly/ && git diff --cached --quiet || git commit -m "chore: update weekly digest" && git push'
+TimeoutStartSec=600
+Environment="PATH=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin:/usr/local/bin:/usr/bin:/bin"
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
