@@ -103,6 +103,23 @@ class NewsDatabase:
         cursor.execute(query, params)
         return [self._row_to_item(row) for row in cursor.fetchall()]
 
+    def get_items_by_date_range(
+        self, start_date: str, end_date: str, min_score: float | None = None
+    ) -> list[ContentItem]:
+        """Get items collected between start_date and end_date (inclusive, YYYY-MM-DD)."""
+        query = "SELECT * FROM news WHERE collected_at >= ? AND collected_at < ?"
+        params: list = [f"{start_date}T00:00:00", f"{end_date}T23:59:59"]
+
+        if min_score is not None:
+            query += " AND ai_score >= ?"
+            params.append(min_score)
+
+        query += " ORDER BY ai_score DESC NULLS LAST, collected_at DESC"
+
+        cursor = self._conn.cursor()
+        cursor.execute(query, params)
+        return [self._row_to_item(row) for row in cursor.fetchall()]
+
     def update_ai_results(self, items: list[ContentItem]) -> int:
         """Update AI analysis results for existing items."""
         updated = 0
