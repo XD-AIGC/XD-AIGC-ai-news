@@ -1,16 +1,62 @@
-# AI News Aggregator
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Overview
 
 全自动每日 AI 资讯聚合系统。多源采集 + LLM 摘要 + 多渠道输出。
 
+## Commands
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run daily collection (collect + AI score + output)
+python main.py
+
+# Collect last N days
+python main.py --days 3
+
+# Collect only (skip AI scoring)
+python main.py --skip-ai
+
+# Local dev without proxy
+python main.py --no-proxy --skip-ai
+
+# Start web dashboard
+python main.py --serve --port 8800
+
+# Verbose/debug logging
+python main.py -v
+```
+
+No test suite exists. Verify changes by running `python main.py --skip-ai --no-proxy -v` and checking logs.
+
 ## Architecture
 
-- `main.py` is CLI entry point only - no business logic
-- `collectors/` handles data fetching from external sources
-- `processor/` handles LLM summarization, classification, dedup
-- `outputs/` handles writing to Notion, web, markdown, push notifications
-- `storage/` handles SQLite persistence
-- `web/` FastAPI dashboard (started with `--serve`)
-- `config.yaml` for all configuration, `.env` for secrets (NEVER commit)
+- `main.py` — CLI entry point only, no business logic
+- `collectors/` — data fetching from external sources
+- `processor/` — LLM summarization, classification, dedup
+- `outputs/` — writing to Notion, web, markdown, push notifications
+- `storage/` — SQLite persistence
+- `web/` — FastAPI dashboard (started with `--serve`)
+- `config.yaml` — all configuration; `.env` — secrets (NEVER commit)
+
+## Pipeline Flow
+
+`main.py run()` executes this sequence:
+
+1. **Collect** — all enabled collectors run concurrently via `asyncio.gather`, each returns `list[ContentItem]`
+2. **Dedup** — URL exact match + Jaccard title similarity (threshold 0.7)
+3. **Classify** — keyword-based pre-classification from `focus_areas` in config
+4. **Save** — insert to SQLite, skip URL duplicates
+5. **AI Score** — LLM scores/summarizes/categorizes unscored items (OpenAI-compatible API via raw `httpx`)
+6. **Output** — markdown report, Notion, Feishu bot (each independently enabled)
+
+## Core Data Model
+
+`ContentItem` (pydantic, defined in `collectors/base.py`) is the universal data object passed through the entire pipeline. All collectors produce it, all outputs consume it.
 
 ## Focus Areas
 
@@ -34,14 +80,22 @@
 ## When Adding New Data Source
 
 1. Create `collectors/new_source_collector.py` inheriting `BaseScraper` from `collectors/base.py`
-2. Add source config section in `config.yaml` under `sources:`
-3. Register collector in `main.py` `build_collectors()`
+2. Implement `async fetch(self, since: datetime) -> list[ContentItem]`
+3. Add source config section in `config.yaml` under `sources:`
+4. Register collector in `main.py` `build_collectors()`
 
 ## When Adding New Output
 
 1. Create `outputs/new_output.py`
 2. Add output config section in `config.yaml` under `output:`
 3. Register output in `main.py` `run()`
+
+## Notable Implementation Details
+
+- `AIScorer` uses raw `httpx` POST to OpenAI-compatible `/chat/completions` (not the openai SDK)
+- Twitter collectors: `twitter_collector.py` scrapes user timelines; `twitter_trending_collector.py` uses `twikit` library (free, no API key needed)
+- Config env var resolution: `${VAR_NAME}` in `config.yaml` is replaced by `os.getenv()` at load time
+- Database dedup is URL-based (`url_exists()`); in-memory dedup also uses title similarity
 
 ## Deployment
 
@@ -56,4 +110,4 @@
 
 ## Key Dependencies
 
-feedparser, httpx, beautifulsoup4, pydantic, pyyaml, python-dotenv, openai, notion-client, google-api-python-client, fastapi, uvicorn
+feedparser, httpx, beautifulsoup4, pydantic, pyyaml, python-dotenv, openai, notion-client, google-api-python-client, fastapi, uvicorn, twikit

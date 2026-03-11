@@ -5,6 +5,7 @@
 # Runtime data
 data/
 reports/
+!docs/data/
 
 # Python
 __pycache__/

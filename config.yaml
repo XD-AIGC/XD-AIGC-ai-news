@@ -280,7 +280,7 @@ llm:
 
 output:
   notion:
-    enabled: false  # Phase 4
+    enabled: true
     api_key: "${NOTION_API_KEY}"
     database_id: "${NOTION_DATABASE_ID}"
   web:
@@ -290,6 +290,9 @@ output:
   markdown:
     enabled: true
     output_dir: "./reports/markdown"
+  github_pages:
+    enabled: true
+    output_dir: "./docs"
   feishu:
     enabled: false  # Phase 4
     webhook_url: "${FEISHU_WEBHOOK_URL}"

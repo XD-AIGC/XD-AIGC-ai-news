@@ -8,7 +8,8 @@ Type=oneshot
 User=ubuntu
 WorkingDirectory=/AIGC_Group/XD-AIGC-ai-news
 ExecStart=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin/python main.py --days 1
-TimeoutStartSec=600
+ExecStartPost=/bin/bash -c 'cd /AIGC_Group/XD-AIGC-ai-news && git add docs/data/ && git diff --cached --quiet || git commit -m "chore: update daily news data" && git push'
+TimeoutStartSec=900
 Environment="PATH=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin:/usr/local/bin:/usr/bin:/bin"
 StandardOutput=journal
 StandardError=journal

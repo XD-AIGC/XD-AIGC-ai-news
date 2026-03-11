@@ -23,6 +23,7 @@ from collectors.twitter_collector import TwitterCollector
 from collectors.twitter_trending_collector import TwitterTrendingCollector
 from collectors.youtube_collector import YouTubeCollector
 from outputs.feishu_bot import FeishuBot
+from outputs.github_pages_writer import GitHubPagesWriter
 from outputs.markdown_writer import MarkdownWriter
 from outputs.notion_writer import NotionWriter
 from processor.classifier import KeywordClassifier
@@ -219,10 +220,20 @@ async def run(args: argparse.Namespace) -> None:
             filepath = writer.write(all_today, today)
             logger.info("Markdown report: %s (%d items)", filepath, len(all_today))
 
+        # GitHub Pages static output
+        ghpages_cfg = output_cfg.get("github_pages", {})
+        if ghpages_cfg.get("enabled"):
+            gh_dir = ghpages_cfg.get("output_dir", "./docs")
+            gh_writer = GitHubPagesWriter(gh_dir)
+            gh_writer.write(all_today, today)
+
         # Notion output
         notion_cfg = output_cfg.get("notion", {})
         if notion_cfg.get("enabled") and notion_cfg.get("api_key"):
-            notion = NotionWriter(notion_cfg["api_key"], notion_cfg["database_id"])
+            notion_proxy = proxy_url if (proxy_url and not args.no_proxy) else None
+            notion = NotionWriter(
+                notion_cfg["api_key"], notion_cfg["database_id"], proxy=notion_proxy
+            )
             await notion.write_items(all_today)
 
         # Feishu bot output
@@ -232,6 +243,38 @@ async def run(args: argparse.Namespace) -> None:
             bot = FeishuBot(feishu_cfg["webhook_url"], proxy=feishu_proxy)
             await bot.send_daily_digest(all_today, today)
 
+    finally:
+        db.close()
+
+
+async def backfill_notion(args: argparse.Namespace) -> None:
+    """Backfill AI results to existing Notion pages that are missing them."""
+    load_dotenv()
+    config = load_config(args.config)
+
+    proxy_cfg = config.get("proxy", {})
+    proxy_url = proxy_cfg.get("http")
+
+    db = NewsDatabase(config.get("database", {}).get("path", "./data/news.db"))
+    db.connect()
+
+    try:
+        notion_cfg = config.get("output", {}).get("notion", {})
+        if not notion_cfg.get("api_key"):
+            logger.error("Notion API key not configured")
+            return
+
+        notion_proxy = proxy_url if (proxy_url and not args.no_proxy) else None
+        notion = NotionWriter(
+            notion_cfg["api_key"], notion_cfg["database_id"], proxy=notion_proxy
+        )
+
+        # Get all items with AI scores from database
+        all_items = db.get_recent_items(limit=10000, min_score=0.0)
+        logger.info("Found %d items with AI scores in database", len(all_items))
+
+        updated = await notion.backfill_ai_results(all_items)
+        logger.info("Backfill complete: %d pages updated", updated)
     finally:
         db.close()
 
@@ -266,6 +309,11 @@ def main() -> None:
         help="Skip AI scoring (collect only)",
     )
     parser.add_argument(
+        "--backfill-notion",
+        action="store_true",
+        help="Backfill AI scores/summaries to existing Notion pages",
+    )
+    parser.add_argument(
         "--serve",
         action="store_true",
         help="Start web dashboard server instead of collecting",
@@ -291,6 +339,8 @@ def main() -> None:
         port = args.port or web_cfg.get("port", 8800)
         logger.info("Starting web dashboard at http://%s:%d", host, port)
         uvicorn.run("web.app:app", host=host, port=port, reload=False)
+    elif args.backfill_notion:
+        asyncio.run(backfill_notion(args))
     else:
         asyncio.run(run(args))
 
