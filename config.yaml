@@ -9,6 +9,8 @@ focus_areas:
     keywords: ["Lovart", "Gemini", "GPT", "OpenAI", "Claude", "Anthropic", "Midjourney", "DALL-E", "Sora", "Runway"]
   - name: "Agent & Skills"
     keywords: ["agent", "MCP", "tool use", "function calling", "autonomous", "agentic", "cursor", "copilot"]
+  - name: "3D生成与重建"
+    keywords: ["gaussian splatting", "3DGS", "4DGS", "NeRF", "neural rendering", "3D reconstruction", "3D generation", "text-to-3d", "point cloud", "mesh generation", "radiance field"]
   - name: "训练与部署"
     keywords: ["fine-tune", "training", "LoRA", "RLHF", "inference", "quantization", "deployment", "distillation"]
 
@@ -26,6 +28,12 @@ sources:
       # - { url: "https://inworld.ai/blog/rss.xml", name: "Inworld AI Blog" }  # 无 RSS feed
       - { url: "https://developer.nvidia.com/blog/feed/", name: "NVIDIA Developer Blog" }
       - { url: "https://blogs.unity3d.com/feed/", name: "Unity Blog" }
+      # AI 论文
+      - { url: "http://export.arxiv.org/rss/cs.CV", name: "arXiv CS.CV" }
+      - { url: "http://export.arxiv.org/rss/cs.AI", name: "arXiv CS.AI" }
+      - { url: "http://export.arxiv.org/rss/cs.LG", name: "arXiv CS.LG" }
+      - { url: "http://export.arxiv.org/rss/cs.CL", name: "arXiv CS.CL" }
+      - { url: "https://huggingface.co/papers/rss", name: "HF Daily Papers" }
 
   github:
     enabled: true
@@ -62,9 +70,14 @@ sources:
         - "topic:quantization"
         - "topic:vllm"
         - "distributed training deepspeed AI"
-        # AI 3D 生成
+        # AI 3D 生成 / Neural Rendering
         - "topic:text-to-3d"
         - "topic:3d-generation"
+        - "topic:gaussian-splatting"
+        - "topic:3dgs"
+        - "topic:neural-rendering"
+        - "topic:nerf"
+        - "topic:3d-reconstruction"
         - "AI 3D model generation game-ready mesh"
         # AI 游戏工具
         - "AI NPC dialogue game engine"
