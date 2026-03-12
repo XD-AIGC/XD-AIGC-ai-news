@@ -1,0 +1,278 @@
+{
+  "week": "2026-W11",
+  "date_range": "2026-03-10 — 2026-03-12",
+  "generated_at": "2026-03-12T04:12:51.968830+00:00",
+  "total_news": 563,
+  "total_sources": 8,
+  "week_title": "AI界迎来“世界模型”大地震",
+  "editor_note": "本周Yann LeCun带着10亿美元融资重塑AI范式，同时ComfyUI与Karpathy等开源力量也在推动技术民主化。AI正在从‘只会说话的鹦鹉’进化为‘能理解物理世界的科学家’。",
+  "stories": [
+    {
+      "title": "LeCun的十亿赌注",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "AI教父Yann LeCun创立的AMI Labs豪取10亿美元融资，旨在挑战LLM局限，构建能理解物理世界的‘世界模型’。大雄对此感到震惊，哆啦A梦则解释这是AI进化的关键转折点。",
+      "highlights": [
+        "AMI Labs融资10.3亿美元",
+        "世界模型(World Models)概念",
+        "挑战现有LLM范式"
+      ],
+      "community_quotes": [
+        {
+          "text": "AMI Labs拥有最强的团队，将彻底改变AI对物理世界的理解。",
+          "author": "Yann LeCun"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Yann LeCun 创立 AMI Labs 融资 10.3 亿美元",
+          "score": 9.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "大雄在房间里对着手机大叫，哆啦A梦正在吃铜锣烧。",
+          "dialogue_cn": "大雄：哆啦A梦！不好了！Yann LeCun拿了10亿美元去研究什么‘世界模型’！",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "哆啦A梦放下铜锣烧，推了推眼镜，表情严肃。",
+          "dialogue_cn": "哆啦A梦：那可是AI的未来！现在的AI只会吹牛，AMI是要教AI真正‘看懂’物理世界的规律。",
+          "sfx": "キリッ"
+        },
+        {
+          "scene": "大雄挠挠头，一脸困惑。",
+          "dialogue_cn": "大雄：能看懂物理规律？那它能帮我搞定物理考试吗？",
+          "sfx": "ハテナ"
+        },
+        {
+          "scene": "哆啦A梦生气地掏出道具。",
+          "dialogue_cn": "哆啦A梦：你以为那是用来作弊的吗！那是为了拯救人类文明的智能！",
+          "sfx": "怒"
+        }
+      ],
+      "panels_images": [
+        "panel-1.jpg",
+        "panel-2.jpg",
+        "panel-3.jpg",
+        "panel-4.jpg"
+      ]
+    },
+    {
+      "title": "从硬核极客到全民生产力",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "ComfyUI推出App Mode简化界面，Andrej Karpathy开源自动化科研项目。哆啦A梦对比了以前复杂的代码操作与现在的一键化，展现了AI工具民主化的趋势。",
+      "highlights": [
+        "ComfyUI App Mode发布",
+        "Karpathy自动化科研项目",
+        "技术门槛大幅降低"
+      ],
+      "community_quotes": [
+        {
+          "text": "ComfyUI终于从极客玩具变成了生产力工具。",
+          "author": "开发者社区"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "ComfyUI 推出 App Mode 和 ComfyHub",
+          "score": 9.5
+        },
+        {
+          "title": "Karpathy 开源自动化 AI 研究项目",
+          "score": 9.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "大雄看着密密麻麻的ComfyUI节点图，头晕目眩。",
+          "dialogue_cn": "大雄：这玩意儿像蜘蛛网一样，谁看得懂啊！",
+          "sfx": "クラクラ"
+        },
+        {
+          "scene": "哆啦A梦点击屏幕，界面瞬间变成了简洁的App模式。",
+          "dialogue_cn": "哆啦A梦：那是以前！现在有了App Mode，就像玩积木一样简单了。",
+          "sfx": "ポチッ"
+        },
+        {
+          "scene": "大雄看着Karpathy的自动化项目，一脸兴奋。",
+          "dialogue_cn": "大雄：那连研究都能自动化了？我是不是可以躺平了？",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "哆啦A梦冷笑。",
+          "dialogue_cn": "哆啦A梦：AI负责科研，你负责什么？负责‘吃睡循环’吗？",
+          "sfx": "ニヤリ"
+        }
+      ],
+      "panels_images": [
+        "panel-5.jpg",
+        "panel-6.jpg",
+        "panel-7.jpg",
+        "panel-8.jpg"
+      ]
+    },
+    {
+      "title": "AI Agent的终极悖论",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "Meta收购Moltbook布局AI Agent，大雄幻想用AI Agent代替自己生活，结果被哆啦A梦拆穿他的懒惰本质。",
+      "highlights": [
+        "Meta收购Moltbook",
+        "AI Agent社交化",
+        "懒人的终极梦想"
+      ],
+      "community_quotes": [
+        {
+          "text": "Agent最终会成为我们的社交替身吗？",
+          "author": "科技观察家"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Meta 收购 AI Agent 公司 Moltbook",
+          "score": 9.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "大雄幻想着自己躺着，一个AI分身在写作业、被老师骂、去上学。",
+          "dialogue_cn": "大雄：如果Meta的AI Agent能帮我社交，我就能永远不去学校了！",
+          "sfx": "ウフフ"
+        },
+        {
+          "scene": "哆啦A梦斜眼看他，手里拿着一个监控显示器。",
+          "dialogue_cn": "哆啦A梦：你知道吗？AI Agent最擅长的就是‘模拟’，如果它模拟得比你还勤奋，你觉得老师会留谁？",
+          "sfx": "ジロリ"
+        },
+        {
+          "scene": "大雄愣住了。",
+          "dialogue_cn": "大雄：啊……那AI岂不是会把我的人生彻底抢走？",
+          "sfx": "ドキッ"
+        },
+        {
+          "scene": "哆啦A梦把一台扫地机器人推给大雄。",
+          "dialogue_cn": "哆啦A梦：别担心，就你这懒劲，AI Agent连你的‘懒惰’都模拟不出来，它会因为无聊而罢工的！",
+          "sfx": "ドーン"
+        }
+      ],
+      "doraemon_quote": "与其追求AI替身去生活，不如自己多动动，不然你的AI Agent会因为模仿你的懒惰而先被Meta解雇的。",
+      "panels_images": [
+        "panel-9.jpg",
+        "panel-10.jpg",
+        "panel-11.jpg",
+        "panel-12.jpg"
+      ]
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "Yann LeCun (@ylecun ) earlier said Sillion Valley is \"completely LLM-pilled\"   And today, his startup, AMI Labs, raised ...",
+      "score": 9.5,
+      "categories": [
+        "商用产品",
+        "其他"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "RT by @toyxyz3: Two massive updates for the ComfyUI ecosystem today:  1️⃣ App Mode: The power of the node graph, now beh...",
+      "score": 9.5,
+      "categories": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Meta acquires Moltbook",
+      "score": 9.5,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Yann LeCun raises $1B to build AI that understands the physical world",
+      "score": 9.5,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "ComfyUI launches App Mode and ComfyHub",
+      "score": 9.5,
+      "categories": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "RT by @ylecun: I am happy to share that I have joined forces with @ylecun and fellow founders as Co-Founder and Chief Re...",
+      "score": 9.5,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "RT by @ylecun: Of course, I’m super  bullish on AMI labs 🔥  They have both Saining, Yann, and Mike on the same team. The...",
+      "score": 9.5,
+      "categories": [
+        "开源模型",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "RT by @ylecun: Bpifrance est fière d’accompagner AMI au capital.   Fierté de voir qu’une société capable de révolutionne...",
+      "score": 9.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "[17,863 stars in 3d, +5954/day] karpathy/autoresearch",
+      "score": 9.5,
+      "categories": [
+        "Agent & Skills",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "RT by @NVIDIAAIDev: He’s back. The leather jacket, the vision, and the unmatched energy that only our CEO Jensen Huang b...",
+      "score": 9.5,
+      "categories": [
+        "商用产品",
+        "训练与部署"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "商用产品": 182,
+      "其他": 260,
+      "ComfyUI": 11,
+      "Agent & Skills": 175,
+      "开源模型": 57,
+      "训练与部署": 70
+    },
+    "by_source": {
+      "hackernews": 28,
+      "github": 27,
+      "reddit": 41,
+      "telegram": 40,
+      "youtube": 32,
+      "bilibili": 1,
+      "twitter": 376,
+      "rss": 18
+    }
+  }
+}
