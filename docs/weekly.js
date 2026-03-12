@@ -73,8 +73,8 @@
   }
 
   function updateNavButtons() {
-    dom.prevWeek.disabled = currentIdx <= 0;
-    dom.nextWeek.disabled = currentIdx >= weekIndex.length - 1;
+    dom.prevWeek.disabled = currentIdx >= weekIndex.length - 1;
+    dom.nextWeek.disabled = currentIdx <= 0;
     if (currentIdx >= 0 && currentIdx < weekIndex.length) {
       dom.weekLabel.textContent = shortWeek(weekIndex[currentIdx].week);
     }
@@ -293,12 +293,13 @@
 
   // ── Events ──
 
+  // index.json is sorted newest-first, so prev (←) = older = higher index
   dom.prevWeek.addEventListener("click", function () {
-    if (currentIdx > 0) loadWeek(currentIdx - 1);
+    if (currentIdx < weekIndex.length - 1) loadWeek(currentIdx + 1);
   });
 
   dom.nextWeek.addEventListener("click", function () {
-    if (currentIdx < weekIndex.length - 1) loadWeek(currentIdx + 1);
+    if (currentIdx > 0) loadWeek(currentIdx - 1);
   });
 
   window.addEventListener("hashchange", function () {
@@ -324,8 +325,8 @@
       var startIdx = -1;
       if (hash) startIdx = findWeekIdx(hash);
 
-      // Default to latest (last element)
-      if (startIdx < 0) startIdx = weekIndex.length - 1;
+      // Default to latest (first element — index.json is sorted newest-first)
+      if (startIdx < 0) startIdx = 0;
 
       loadWeek(startIdx);
     })
