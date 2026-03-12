@@ -107,7 +107,7 @@ class NewsDatabase:
         self, start_date: str, end_date: str, min_score: float | None = None
     ) -> list[ContentItem]:
         """Get items collected between start_date and end_date (inclusive, YYYY-MM-DD)."""
-        query = "SELECT * FROM news WHERE collected_at >= ? AND collected_at < ?"
+        query = "SELECT * FROM news WHERE collected_at >= ? AND collected_at <= ?"
         params: list = [f"{start_date}T00:00:00", f"{end_date}T23:59:59"]
 
         if min_score is not None:
