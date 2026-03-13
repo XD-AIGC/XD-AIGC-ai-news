@@ -18,6 +18,7 @@ class SourceType(str, Enum):
     HACKERNEWS = "hackernews"
     REDDIT = "reddit"
     TELEGRAM = "telegram"
+    HF_PAPERS = "hf_papers"
     MANUAL = "manual"
 
 

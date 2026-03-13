@@ -28,12 +28,6 @@ sources:
       # - { url: "https://inworld.ai/blog/rss.xml", name: "Inworld AI Blog" }  # 无 RSS feed
       - { url: "https://developer.nvidia.com/blog/feed/", name: "NVIDIA Developer Blog" }
       - { url: "https://blogs.unity3d.com/feed/", name: "Unity Blog" }
-      # AI 论文
-      - { url: "http://export.arxiv.org/rss/cs.CV", name: "arXiv CS.CV" }
-      - { url: "http://export.arxiv.org/rss/cs.AI", name: "arXiv CS.AI" }
-      - { url: "http://export.arxiv.org/rss/cs.LG", name: "arXiv CS.LG" }
-      - { url: "http://export.arxiv.org/rss/cs.CL", name: "arXiv CS.CL" }
-      - { url: "https://huggingface.co/papers/rss", name: "HF Daily Papers" }
 
   github:
     enabled: true
@@ -282,6 +276,11 @@ sources:
     enabled: true
     channels:
       - { channel: "zaihuapd", name: "在花频道", fetch_limit: 20 }
+
+  hf_papers:
+    enabled: true
+    limit: 50              # API 返回条数上限
+    min_upvotes: 3         # 只要社区投票 >=3 的论文
 
 llm:
   provider: "openai"

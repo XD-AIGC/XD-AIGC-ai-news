@@ -16,6 +16,7 @@ from collectors.base import ContentItem, SourceType
 from collectors.bilibili_collector import BilibiliCollector
 from collectors.github_collector import GitHubCollector
 from collectors.hackernews_collector import HackerNewsCollector
+from collectors.hf_papers_collector import HFPapersCollector
 from collectors.reddit_collector import RedditCollector
 from collectors.rss_collector import RSSCollector
 from collectors.telegram_collector import TelegramCollector
@@ -113,6 +114,11 @@ def build_collectors(
             ("Telegram", TelegramCollector(sources["telegram"], client))
         )
 
+    if sources.get("hf_papers", {}).get("enabled"):
+        collectors.append(
+            ("HFPapers", HFPapersCollector(sources["hf_papers"], client))
+        )
+
     return collectors
 
 
@@ -204,6 +210,16 @@ async def run(args: argparse.Namespace) -> None:
                 item for item in db.get_items_by_date(today)
                 if item.ai_score is None
             ]
+
+            # Pre-filter: only score items matching focus areas
+            if unscored and focus_areas:
+                pre_filter = KeywordClassifier(focus_areas)
+                before = len(unscored)
+                unscored = pre_filter.filter_relevant(unscored)
+                logger.info(
+                    "Pre-filter for AI scoring: %d -> %d items",
+                    before, len(unscored),
+                )
 
             if unscored:
                 logger.info("AI scoring %d unscored items...", len(unscored))
