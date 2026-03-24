@@ -109,9 +109,36 @@ def _item_to_resp(item) -> NewsItemResponse:
     )
 
 
+DOCS_DIR = Path(__file__).parent.parent / "docs"
+
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+# Serve weekly digest data (images, JSON) from docs/data/weekly/
+weekly_data_dir = DOCS_DIR / "data" / "weekly"
+if weekly_data_dir.exists():
+    app.mount(
+        "/data/weekly",
+        StaticFiles(directory=str(weekly_data_dir)),
+        name="weekly-data",
+    )
 
 
 @app.get("/")
 def index():
     return FileResponse(STATIC_DIR / "index.html")
+
+
+@app.get("/weekly")
+def weekly():
+    weekly_html = DOCS_DIR / "weekly.html"
+    if weekly_html.exists():
+        return FileResponse(weekly_html)
+    return {"error": "Weekly page not found"}
+
+
+@app.get("/weekly.js")
+def weekly_js():
+    weekly_js_file = DOCS_DIR / "weekly.js"
+    if weekly_js_file.exists():
+        return FileResponse(weekly_js_file, media_type="application/javascript")
+    return {"error": "weekly.js not found"}
