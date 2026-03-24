@@ -124,6 +124,7 @@ if weekly_data_dir.exists():
 
 
 @app.get("/")
+@app.get("/index.html")
 def index():
     return FileResponse(STATIC_DIR / "index.html")
 
