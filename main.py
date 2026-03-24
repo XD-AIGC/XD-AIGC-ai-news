@@ -36,6 +36,35 @@ from storage.database import NewsDatabase
 
 logger = logging.getLogger(__name__)
 
+TEST_URL = "https://huggingface.co"
+
+
+def select_proxy(proxy_cfg: dict) -> str | None:
+    """Try each proxy URL in order, return the first reachable one."""
+    urls = proxy_cfg.get("urls", [])
+    if not urls:
+        # Fallback to legacy single proxy
+        return proxy_cfg.get("http") or None
+
+    import socket
+    from urllib.parse import urlparse
+
+    for url in urls:
+        parsed = urlparse(url)
+        host = parsed.hostname
+        port = parsed.port or 18888
+        try:
+            sock = socket.create_connection((host, port), timeout=3)
+            sock.close()
+            logger.info("Proxy reachable: %s", url)
+            return url
+        except (OSError, socket.timeout):
+            logger.warning("Proxy unreachable: %s", url)
+            continue
+
+    logger.warning("All proxies unreachable, falling back to direct connection")
+    return None
+
 
 def setup_logging(verbose: bool = False) -> None:
     level = logging.DEBUG if verbose else logging.INFO
@@ -60,7 +89,7 @@ def load_config(config_path: str = "config.yaml") -> dict:
 
 
 def build_collectors(
-    config: dict, client: httpx.AsyncClient
+    config: dict, client: httpx.AsyncClient, proxy_url: str | None = None
 ) -> list[tuple[str, object]]:
     """Create collector instances based on config."""
     collectors = []
@@ -92,12 +121,12 @@ def build_collectors(
     if sources.get("twitter", {}).get("enabled"):
         tw_cfg = sources["twitter"]
         tw_cfg["auth_token"] = os.getenv("TWITTER_AUTH_TOKEN", tw_cfg.get("auth_token", ""))
-        tw_cfg["proxy"] = config.get("proxy", {}).get("http", "")
+        tw_cfg["proxy"] = proxy_url or ""
         collectors.append(("Twitter", TwitterCollector(tw_cfg, client)))
 
     if sources.get("twitter_trending", {}).get("enabled"):
         tt_cfg = sources["twitter_trending"]
-        tt_cfg["proxy"] = config.get("proxy", {}).get("http", "")
+        tt_cfg["proxy"] = proxy_url or ""
         tt_cfg["auth_token"] = os.getenv("TWITTER_AUTH_TOKEN", tt_cfg.get("auth_token", ""))
         tt_cfg["ct0"] = os.getenv("TWITTER_CT0", tt_cfg.get("ct0", ""))
         collectors.append(
@@ -148,7 +177,7 @@ async def run(args: argparse.Namespace) -> None:
     config = load_config(args.config)
 
     proxy_cfg = config.get("proxy", {})
-    proxy_url = proxy_cfg.get("http")
+    proxy_url = select_proxy(proxy_cfg) if not args.no_proxy else None
 
     db = NewsDatabase(config.get("database", {}).get("path", "./data/news.db"))
     db.connect()
@@ -160,14 +189,14 @@ async def run(args: argparse.Namespace) -> None:
             "timeout": httpx.Timeout(30.0),
             "follow_redirects": True,
         }
-        if proxy_url and not args.no_proxy:
+        if proxy_url:
             client_kwargs["proxy"] = proxy_url
             logger.info("Using proxy: %s", proxy_url)
         else:
             logger.info("Direct connection (no proxy)")
 
         async with httpx.AsyncClient(**client_kwargs) as client:
-            collectors = build_collectors(config, client)
+            collectors = build_collectors(config, client, proxy_url)
 
             if not collectors:
                 logger.warning("No collectors enabled in config")
@@ -201,7 +230,7 @@ async def run(args: argparse.Namespace) -> None:
         llm_cfg = config.get("llm", {})
         if llm_cfg.get("api_key") and not args.skip_ai:
             scorer_cfg = {**llm_cfg}
-            if proxy_url and not args.no_proxy:
+            if proxy_url:
                 scorer_cfg["proxy"] = proxy_url
             scorer = AIScorer(scorer_cfg)
 
@@ -252,7 +281,7 @@ async def run(args: argparse.Namespace) -> None:
         # Notion output
         notion_cfg = output_cfg.get("notion", {})
         if notion_cfg.get("enabled") and notion_cfg.get("api_key"):
-            notion_proxy = proxy_url if (proxy_url and not args.no_proxy) else None
+            notion_proxy = proxy_url if (proxy_url) else None
             notion = NotionWriter(
                 notion_cfg["api_key"], notion_cfg["database_id"], proxy=notion_proxy
             )
@@ -261,7 +290,7 @@ async def run(args: argparse.Namespace) -> None:
         # Feishu bot output
         feishu_cfg = output_cfg.get("feishu", {})
         if feishu_cfg.get("enabled") and feishu_cfg.get("webhook_url"):
-            feishu_proxy = proxy_url if (proxy_url and not args.no_proxy) else None
+            feishu_proxy = proxy_url if (proxy_url) else None
             bot = FeishuBot(feishu_cfg["webhook_url"], proxy=feishu_proxy)
             await bot.send_daily_digest(all_today, today)
 
@@ -275,7 +304,7 @@ async def backfill_notion(args: argparse.Namespace) -> None:
     config = load_config(args.config)
 
     proxy_cfg = config.get("proxy", {})
-    proxy_url = proxy_cfg.get("http")
+    proxy_url = select_proxy(proxy_cfg) if not args.no_proxy else None
 
     db = NewsDatabase(config.get("database", {}).get("path", "./data/news.db"))
     db.connect()
@@ -286,7 +315,7 @@ async def backfill_notion(args: argparse.Namespace) -> None:
             logger.error("Notion API key not configured")
             return
 
-        notion_proxy = proxy_url if (proxy_url and not args.no_proxy) else None
+        notion_proxy = proxy_url if (proxy_url) else None
         notion = NotionWriter(
             notion_cfg["api_key"], notion_cfg["database_id"], proxy=notion_proxy
         )
@@ -307,7 +336,7 @@ async def run_weekly(args: argparse.Namespace) -> None:
     config = load_config(args.config)
 
     proxy_cfg = config.get("proxy", {})
-    proxy_url = proxy_cfg.get("http")
+    proxy_url = select_proxy(proxy_cfg) if not args.no_proxy else None
 
     db = NewsDatabase(config.get("database", {}).get("path", "./data/news.db"))
     db.connect()
@@ -323,7 +352,7 @@ async def run_weekly(args: argparse.Namespace) -> None:
             "image_model": weekly_cfg.get("image_model", "nano-banana-pro-preview"),
             "api_key": llm_cfg.get("api_key", ""),
             "base_url": llm_cfg.get("base_url", ""),
-            "proxy": proxy_url if not args.no_proxy else None,
+            "proxy": proxy_url,
             "max_concurrent_images": weekly_cfg.get("max_concurrent_images", 3),
         }
 
