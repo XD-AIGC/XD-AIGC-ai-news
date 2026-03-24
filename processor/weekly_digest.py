@@ -84,6 +84,9 @@ async def generate_weekly_digest(
         if si < len(panel_paths):
             story["panels_images"] = panel_paths[si]
 
+    # Step 3b: Attach URLs to related_news via title matching
+    _attach_related_urls(script, scored)
+
     # Step 4: Build digest JSON
     # Category stats
     cat_counts: dict[str, int] = {}
@@ -101,8 +104,8 @@ async def generate_weekly_digest(
         "editor_note": script.get("editor_note", ""),
         "stories": script.get("stories", []),
         "top10": [
-            {"rank": i + 1, "title": item.title, "score": item.ai_score,
-             "categories": item.ai_categories}
+            {"rank": i + 1, "title": item.title, "url": item.url,
+             "score": item.ai_score, "categories": item.ai_categories}
             for i, item in enumerate(top10)
         ],
         "stats": {
@@ -125,6 +128,34 @@ async def generate_weekly_digest(
                 sum(len(s.get("panels_images", [])) for s in digest["stories"]))
 
     return digest
+
+
+def _attach_related_urls(
+    script: dict, scored: list[ContentItem],
+) -> None:
+    """Best-effort: match related_news titles to DB items and attach URLs."""
+    # Build a lookup: lowercase title -> url (prefer highest score)
+    title_to_url: dict[str, str] = {}
+    for item in scored:
+        key = item.title.lower().strip()
+        if key not in title_to_url:
+            title_to_url[key] = item.url
+
+    for story in script.get("stories", []):
+        for rn in story.get("related_news", []):
+            title = (rn.get("title") or "").lower().strip()
+            # Exact match
+            if title in title_to_url:
+                rn["url"] = title_to_url[title]
+                continue
+            # Substring match: find best overlap
+            best_url, best_len = "", 0
+            for db_title, url in title_to_url.items():
+                if title in db_title or db_title in title:
+                    if len(db_title) > best_len:
+                        best_url, best_len = url, len(db_title)
+            if best_url:
+                rn["url"] = best_url
 
 
 def _update_weekly_index(weekly_dir: Path, week_label: str, digest: dict) -> None:

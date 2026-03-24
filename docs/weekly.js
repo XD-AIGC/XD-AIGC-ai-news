@@ -155,7 +155,17 @@
       (story.related_news || []).forEach(function (r) {
         var row = el("div", "related-item");
         row.appendChild(el("span", "related-score", String(r.score)));
-        row.appendChild(el("span", "related-link", r.title));
+        if (r.url) {
+          var link = document.createElement("a");
+          link.href = r.url;
+          link.target = "_blank";
+          link.rel = "noopener";
+          link.className = "related-link";
+          link.textContent = r.title;
+          row.appendChild(link);
+        } else {
+          row.appendChild(el("span", "related-link", r.title));
+        }
         relatedEl.appendChild(row);
       });
     }
@@ -201,7 +211,17 @@
       li.appendChild(rank);
 
       li.appendChild(el("span", "top10-score", String(item.score)));
-      li.appendChild(el("span", "top10-title", item.title));
+      if (item.url) {
+        var link = document.createElement("a");
+        link.href = item.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.className = "top10-title";
+        link.textContent = item.title;
+        li.appendChild(link);
+      } else {
+        li.appendChild(el("span", "top10-title", item.title));
+      }
       dom.top10List.appendChild(li);
     });
   }
