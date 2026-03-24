@@ -317,8 +317,13 @@ weekly:
   max_concurrent_images: 3
 
 proxy:
-  http: "http://172.24.12.140:18888"
-  https: "http://172.24.12.140:18888"
+  # List of proxy URLs to try in order; first reachable one wins
+  urls:
+    - "http://10.236.255.12:18888"
+    - "http://10.236.0.65:18888"
+  # Legacy single proxy (ignored when 'urls' is set)
+  http: ""
+  https: ""
 
 database:
   path: "./data/news.db"
