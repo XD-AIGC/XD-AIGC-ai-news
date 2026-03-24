@@ -1,25 +1,25 @@
 {
   "week": "2026-W12",
   "date_range": "2026-03-16 — 2026-03-22",
-  "generated_at": "2026-03-24T08:24:21.423110+00:00",
+  "generated_at": "2026-03-24T08:33:58.947044+00:00",
   "total_news": 1657,
   "total_sources": 9,
-  "week_title": "AI界算力与开源的双重狂欢：FLUX.2 降临与算力军备竞赛",
-  "editor_note": "本周AI领域从图形生成到核心算力架构均迎来了里程碑式爆发。开源界的FLUX.2与商用界的顶级算力POD架构，共同昭示着AI正在迈向高效率、低门槛的新时代。",
+  "week_title": "算力与开源的双重狂欢：AI 进化进入‘秒级’时代",
+  "editor_note": "本周AI领域从顶尖模型到硬件架构全面爆发，FLUX.2 的开源崛起与 NVIDIA 的超级算力布局标志着AI正向高效、低延迟的实用化迈进。技术迭代速度已让行业进入了‘日新月异’的快车道。",
   "stories": [
     {
-      "title": "秒级画质革命：FLUX.2 Klein 降临",
+      "title": "画质与速度的巅峰：FLUX.2 降临！",
       "theme": "headline",
       "label": "本周头条",
-      "summary": "Black Forest Labs 发布了革命性的开源模型 FLUX.2-klein-9B。它不仅刷新了图像生成的质量上限，更实现了震撼的亚秒级生成速度，是开源社区的一场狂欢。",
+      "summary": "Black Forest Labs 发布了旗舰级开源模型 FLUX.2-klein-9B，实现了亚秒级的图像生成效率。该模型在保持行业顶级画质的同时，极大降低了对硬件的要求，成为开源界的一座新丰碑。",
       "highlights": [
-        "FLUX.2-klein-9B 发布",
         "亚秒级生成速度",
-        "消费级 GPU 友好"
+        "9B参数高效架构",
+        "消费级显卡友好"
       ],
       "community_quotes": [
         {
-          "text": "Sub-second image generation and editing is now a reality.",
+          "text": "Sub-second image generation and editing.",
           "author": "Black Forest Labs"
         }
       ],
@@ -31,24 +31,24 @@
       ],
       "panels": [
         {
-          "scene": "Doraemon is holding a tablet showing a stunning AI-generated image. Nobita looks amazed.",
-          "dialogue_cn": "大雄！快看！FLUX.2 Klein 出来了，画质简直是艺术品！",
-          "sfx": "ジャーン！"
-        },
-        {
-          "scene": "Nobita asks if it takes a long time to generate like his homework.",
-          "dialogue_cn": "这么精细的画，是不是要像我写作业一样磨蹭半天？",
-          "sfx": "ドキドキ"
-        },
-        {
-          "scene": "Doraemon laughs and points at the screen showing '0.8s'.",
-          "dialogue_cn": "错！它是亚秒级生成，眨眼间就画完了！",
-          "sfx": "ピコーン！"
-        },
-        {
-          "scene": "Nobita tries to grab the tablet to ask it to draw a comic for him.",
-          "dialogue_cn": "太棒了！哆啦A梦，快让它帮我画剩下的漫画作业！",
+          "scene": "Doraemon and Nobita are looking at a screen showing a stunningly beautiful, ultra-realistic AI painting.",
+          "dialogue_cn": "大雄：哇！这张图好漂亮，竟然是瞬间生成的？哆啦A梦，这是什么魔法？",
           "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon pulls out a tablet showing the FLUX.2-klein-9B model card.",
+          "dialogue_cn": "哆啦A梦：这可不是魔法，是Black Forest Labs刚发布的FLUX.2模型，开源界的顶级战力！",
+          "sfx": "ジャーン"
+        },
+        {
+          "scene": "Doraemon explains while gesturing, Nobita looks amazed.",
+          "dialogue_cn": "哆啦A梦：它不仅画质吊打同行，还能在普通显卡上实现亚秒级生成，简直是效率怪兽！",
+          "sfx": "ペラペラ"
+        },
+        {
+          "scene": "Nobita excitedly grabs the mouse.",
+          "dialogue_cn": "大雄：那我也能用它帮静香画出完美的肖像画了！",
+          "sfx": "ドタバタ"
         }
       ],
       "panels_images": [
@@ -59,51 +59,51 @@
       ]
     },
     {
-      "title": "AI 界的拼图大战：逻辑与算力的比拼",
+      "title": "当 AI 编码碰上国产模型",
       "theme": "trends",
       "label": "开源&工具",
-      "summary": "本周 AI 领域动态纷呈，从 DeepMind 的 IMO 银牌推理能力，到 Cursor Composer 引入 Kimi K2.5 模型，展示了 AI 在逻辑推理与开发工具集成上的深厚造诣。",
+      "summary": "Cursor Composer 2 被曝底层采用 Kimi K2.5 模型，引发了关于 AI 工具底座透明度的广泛讨论。同时，OpenAI 的轻量化模型 GPT-5.4 mini/nano 也同步推出，工具链的竞争进入了‘模型溯源’与‘推理效率’的新阶段。",
       "highlights": [
-        "AlphaProof 斩获 IMO 银牌",
-        "Cursor 引入 Kimi 模型",
-        "OpenAI 模型轻量化"
+        "Cursor底座溯源争议",
+        "国产模型能力认可",
+        "轻量化模型趋势"
       ],
       "community_quotes": [
         {
-          "text": "AI is bridging the gap between natural language and formal logic.",
-          "author": "Google DeepMind"
+          "text": "揭示了顶级编码工具对国产模型能力的认可。",
+          "author": "AI行业评论员"
         }
       ],
       "related_news": [
         {
-          "title": "AlphaProof 荣获 IMO 银牌",
+          "title": "Cursor Composer 2 确认使用 Kimi K2.5",
           "score": 9.5
         },
         {
-          "title": "Cursor Composer 2 采用 Kimi K2.5",
+          "title": "OpenAI 发布 GPT-5.4 mini/nano",
           "score": 9.5
         }
       ],
       "panels": [
         {
-          "scene": "Doraemon showing a chart with different AI capabilities.",
-          "dialogue_cn": "大雄，现在的 AI 分工很明确哦，有的负责写代码，有的负责奥数题。",
-          "sfx": "ペラペラ"
+          "scene": "Nobita is looking at his computer screen, looking puzzled.",
+          "dialogue_cn": "大雄：哆啦A梦，为什么大家都盯着 Cursor 到底用了谁的模型在吵架？",
+          "sfx": "ジロジロ"
         },
         {
-          "scene": "Nobita is confused by the list of models.",
-          "dialogue_cn": "这么多模型，到底谁才是最强的？",
-          "sfx": "ハテナ？"
+          "scene": "Doraemon is drinking tea, looking relaxed.",
+          "dialogue_cn": "哆啦A梦：因为 Cursor 承认用了国产的 Kimi 模型，大家都在讨论透明度和合规性呢。",
+          "sfx": "フウ"
         },
         {
-          "scene": "Doraemon pointing at a list: DeepMind 做推理，Kimi 在写代码，OpenAI 在做轻量化。",
-          "dialogue_cn": "就像不同的工具，DeepMind 的 AI 甚至能去拿奥数银牌了！",
-          "sfx": "ポン！"
+          "scene": "Doraemon points to a graph comparing different AI tools.",
+          "dialogue_cn": "哆啦A梦：现在 OpenAI 也在推 mini 版模型，大家都在拼谁的代码写得更快、更省算力。",
+          "sfx": "トントン"
         },
         {
-          "scene": "Nobita imagines a super AI doing all his chores.",
-          "dialogue_cn": "如果把它们拼在一起，是不是能做出一个专门帮我写检讨的 AI？",
-          "sfx": "ニヤニヤ"
+          "scene": "Nobita sighs and leans back in his chair.",
+          "dialogue_cn": "大雄：不管是哪家的模型，只要能帮我写完暑假作业就行啦！",
+          "sfx": "ゴロゴロ"
         }
       ],
       "panels_images": [
@@ -114,50 +114,50 @@
       ]
     },
     {
-      "title": "懒人的 AI 迷梦",
+      "title": "大雄的‘算力’困境",
       "theme": "comedy",
       "label": "轻松一刻",
-      "summary": "大雄试图通过 AI 来逃避生活琐事，却被哆啦A梦无情揭穿了 AI 目前的局限性与他本人的懒惰本质。",
+      "summary": "针对 NVIDIA 发布万亿参数算力平台和 OpenAI 接入 AWS 的新闻，大雄试图用这些高科技来‘优化’自己的懒惰生活，却被哆啦A梦狠狠吐槽。",
       "highlights": [
-        "AI 商业化的透明度争议",
-        "大雄的异想天开",
-        "哆啦A梦的吐槽"
+        "万亿参数桌面端",
+        "算力溢价",
+        "大雄的偷懒逻辑"
       ],
       "community_quotes": [
         {
-          "text": "Transparency is key in the age of AI agents.",
-          "author": "Tech Analyst"
+          "text": "NVIDIA 预测 2027 年 AI 芯片收入将达到 1 万亿美元。",
+          "author": "NVIDIA"
         }
       ],
       "related_news": [
         {
-          "title": "Cursor Composer 透明度争议",
+          "title": "NVIDIA DGX Station 搭载 GB300",
           "score": 9.5
         }
       ],
       "panels": [
         {
-          "scene": "Nobita lying on the floor, holding a phone.",
-          "dialogue_cn": "哆啦A梦，既然 AI 这么厉害，能不能帮我把还没做的暑假作业自动写完？",
-          "sfx": "ゴロゴロ"
+          "scene": "Nobita is reading news about NVIDIA's new supercomputer.",
+          "dialogue_cn": "大雄：哆啦A梦，NVIDIA 出了一台能运行万亿参数模型的超级电脑，我买一个是不是就能自动考满分？",
+          "sfx": "ワクワク"
         },
         {
-          "scene": "Doraemon is cleaning the room with a gadget, looking annoyed.",
-          "dialogue_cn": "现在的 AI 是为了辅助思考，不是为了让你退化成草履虫的！",
-          "sfx": "イライラ"
+          "scene": "Doraemon looks at Nobita with a deadpan expression.",
+          "dialogue_cn": "哆啦A梦：那是给科学家处理海量逻辑推理用的，不是让你拿来玩弹珠游戏的！",
+          "sfx": "ジト目"
         },
         {
-          "scene": "Nobita argues that Cursor uses Kimi to write code, so it's the same logic.",
-          "dialogue_cn": "可连 Cursor 都在用 Kimi 帮人写代码啊，这就是‘模型溯源’嘛！",
-          "sfx": "ドヤ顔"
+          "scene": "Nobita tries to justify his laziness.",
+          "dialogue_cn": "大雄：可是新闻说它能降低延迟啊，如果我用它来思考，是不是就能瞬间想出不写作业的借口？",
+          "sfx": "ピコーン"
         },
         {
-          "scene": "Doraemon stares at Nobita with a deadpan expression.",
-          "dialogue_cn": "人家用的是模型，你用的是‘借口’，这能一样吗？",
-          "sfx": "ガーン"
+          "scene": "Doraemon hits Nobita on the head with a rolled-up magazine.",
+          "dialogue_cn": "哆啦A梦：你的大脑连一颗过时的晶体管都不如，给你万亿参数也是浪费电！",
+          "sfx": "バシッ"
         }
       ],
-      "doraemon_quote": "AI 可以帮你加速生产力，但无法帮你加速大脑的进化，大雄。",
+      "doraemon_quote": "与其追求万亿参数的算力，不如先提升一下你那零参数的执行力吧！",
       "panels_images": [
         "panel-9.jpg",
         "panel-10.jpg",
@@ -170,6 +170,7 @@
     {
       "rank": 1,
       "title": "R to @minchoi: HuggingFace Model Card: https://huggingface.co/black-forest-labs/FLUX.2-klein-9B  GitHub repo: https://gi...",
+      "url": "https://x.com/minchoi/status/2033560117375807981#m",
       "score": 10.0,
       "categories": [
         "开源模型"
@@ -178,6 +179,7 @@
     {
       "rank": 2,
       "title": "Cursor Composer 2 发布，后承认 Kimi K2.5 为底座模型",
+      "url": "https://x.com/elonmusk/status/2034941631871455262?s=20",
       "score": 9.5,
       "categories": [
         "商用产品",
@@ -187,6 +189,7 @@
     {
       "rank": 3,
       "title": "RT by @demishassabis: Our AlphaProof paper is in this week’s issue of @Nature!  In 2024, @GoogleDeepMind's proof agents ...",
+      "url": "https://x.com/pushmeet/status/2034995752963809700#m",
       "score": 9.5,
       "categories": [
         "Agent & Skills"
@@ -195,6 +198,7 @@
     {
       "rank": 4,
       "title": "R to @midjourney: A much longer followup V8 post from our blog:  Hi everyone! Today we’re letting the community test an ...",
+      "url": "https://x.com/midjourney/status/2034015674046288171#m",
       "score": 9.5,
       "categories": [
         "商用产品"
@@ -203,6 +207,7 @@
     {
       "rank": 5,
       "title": "Introducing GPT-5.4 mini and nano",
+      "url": "https://openai.com/index/introducing-gpt-5-4-mini-and-nano",
       "score": 9.5,
       "categories": [
         "商用产品",
@@ -212,6 +217,7 @@
     {
       "rank": 6,
       "title": "NVIDIA DGX Station is now available to order from select OEMs🔥  Powered by the GB300 Grace Blackwell Ultra Desktop Super...",
+      "url": "https://x.com/NVIDIAAIDev/status/2033650764837450125#m",
       "score": 9.5,
       "categories": [
         "商用产品",
@@ -222,6 +228,7 @@
     {
       "rank": 7,
       "title": "AWS is going to be busier than ever.  \"We're going to bring OpenAI to AWS. And so it's going to drive enormous consumpti...",
+      "url": "https://x.com/rohanpaul_ai/status/2033666868448538789#m",
       "score": 9.5,
       "categories": [
         "商用产品",
@@ -231,6 +238,7 @@
     {
       "rank": 8,
       "title": "Black Forest Labs just dropped FLUX.2 klein  > Sub-second image generation and editing > State-of-the-art quality > Runs...",
+      "url": "https://x.com/minchoi/status/2033560114519519483#m",
       "score": 9.5,
       "categories": [
         "开源模型",
@@ -240,6 +248,7 @@
     {
       "rank": 9,
       "title": "NVIDIA Vera Rubin POD: Seven Chips, Five Rack-Scale Systems, One AI Supercomputer",
+      "url": "https://developer.nvidia.com/blog/nvidia-vera-rubin-pod-seven-chips-five-rack-scale-systems-one-ai-supercomputer/",
       "score": 9.5,
       "categories": [
         "训练与部署",
@@ -249,6 +258,7 @@
     {
       "rank": 10,
       "title": "Inside NVIDIA Groq 3 LPX: The Low-Latency Inference Accelerator for the NVIDIA Vera Rubin Platform",
+      "url": "https://developer.nvidia.com/blog/inside-nvidia-groq-3-lpx-the-low-latency-inference-accelerator-for-the-nvidia-vera-rubin-platform/",
       "score": 9.5,
       "categories": [
         "训练与部署",
@@ -267,15 +277,15 @@
       "3D生成与重建": 1
     },
     "by_source": {
-      "hf_papers": 11,
-      "youtube": 120,
+      "rss": 43,
+      "github": 14,
       "telegram": 115,
       "hackernews": 90,
-      "rss": 43,
-      "bilibili": 5,
+      "youtube": 120,
+      "twitter": 1142,
       "reddit": 117,
-      "github": 14,
-      "twitter": 1142
+      "hf_papers": 11,
+      "bilibili": 5
     }
   }
 }
