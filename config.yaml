@@ -153,9 +153,13 @@ sources:
   bilibili:
     enabled: true
     users:
-      - { uid: "946974", name: "Ele实验室" }
       - { uid: "291229", name: "机器之心" }
       - { uid: "517327498", name: "ComfyUI官方" }
+      - { uid: "259768893", name: "通往AGI之路" }
+      - { uid: "1303099255", name: "月下Hugo" }
+      - { uid: "33956397", name: "惫懒の欧阳川" }
+      - { uid: "219572544", name: "啦啦啦的小黄瓜" }
+      - { uid: "385670211", name: "秋芝2046" }
 
   twitter:
     enabled: true
