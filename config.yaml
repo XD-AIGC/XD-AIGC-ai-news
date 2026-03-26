@@ -310,7 +310,7 @@ output:
     enabled: true
     output_dir: "./docs"
   feishu:
-    enabled: false  # Phase 4
+    enabled: true
     webhook_url: "${FEISHU_WEBHOOK_URL}"
 
 weekly:
