@@ -41,10 +41,14 @@ TEST_URL = "https://huggingface.co"
 
 def select_proxy(proxy_cfg: dict) -> str | None:
     """Try each proxy URL in order, return the first reachable one."""
-    urls = proxy_cfg.get("urls", [])
+    raw = proxy_cfg.get("urls", [])
+    # Support comma-separated string from env var or list from yaml
+    if isinstance(raw, str):
+        urls = [u.strip() for u in raw.split(",") if u.strip()]
+    else:
+        urls = raw
     if not urls:
-        # Fallback to legacy single proxy
-        return proxy_cfg.get("http") or None
+        return None
 
     import socket
     from urllib.parse import urlparse
