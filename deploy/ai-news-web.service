@@ -7,9 +7,13 @@ Wants=network-online.target
 Type=simple
 User=ubuntu
 WorkingDirectory=/AIGC_Group/XD-AIGC-ai-news
+ExecStartPre=/bin/bash -c 'fuser -k 8800/tcp 2>/dev/null || true'
 ExecStart=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin/python main.py --serve --port 8800
-Restart=on-failure
+KillMode=mixed
+Restart=always
 RestartSec=5
+StartLimitIntervalSec=300
+StartLimitBurst=5
 Environment="PATH=/AIGC_Group/miniconda3/envs/xd-aigc-ainews/bin:/usr/local/bin:/usr/bin:/bin"
 StandardOutput=journal
 StandardError=journal
