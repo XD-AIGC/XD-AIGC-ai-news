@@ -156,3 +156,7 @@ def weekly_js():
 def explore():
     from fastapi.responses import RedirectResponse
     return RedirectResponse(url="/", status_code=301)
+
+
+from web.ai_chat import register_ai_routes
+register_ai_routes(app)
