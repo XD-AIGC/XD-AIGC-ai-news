@@ -43,12 +43,40 @@ SUMMARIZE_SYSTEM_PROMPT = """你是 AI News 的智能助手。用户给你一组
 CHAT_SYSTEM_PROMPT = """你是 AI News 的智能助手。以下是用户当前查看的 AI 领域新闻数据，请基于这些数据回答用户的问题。回答要自然亲切，像一个懂行的朋友。如果问题超出数据范围，坦诚说明。"""
 
 
-def _load_llm_config() -> dict:
+def _load_config() -> dict:
     with open("config.yaml") as f:
         raw = f.read()
     raw = re.sub(r"\$\{(\w+)\}", lambda m: os.getenv(m.group(1), ""), raw)
-    cfg = yaml.safe_load(raw)
-    return cfg.get("llm", {})
+    return yaml.safe_load(raw)
+
+
+def _load_llm_config() -> dict:
+    return _load_config().get("llm", {})
+
+
+def _get_proxy() -> str | None:
+    """Resolve proxy from config, same logic as main.py select_proxy."""
+    cfg = _load_config().get("proxy", {})
+    raw = cfg.get("urls", [])
+    if isinstance(raw, str):
+        urls = [u.strip() for u in raw.split(",") if u.strip()]
+    else:
+        urls = raw
+    if not urls:
+        return None
+    import socket
+    from urllib.parse import urlparse
+    for url in urls:
+        parsed = urlparse(url)
+        host = parsed.hostname
+        port = parsed.port or 18888
+        try:
+            sock = socket.create_connection((host, port), timeout=3)
+            sock.close()
+            return url
+        except (OSError, socket.timeout):
+            pass
+    return None
 
 
 def _get_db() -> NewsDatabase:
@@ -106,7 +134,7 @@ async def _call_llm(messages: list[dict], max_tokens: int) -> str:
     api_key = cfg.get("api_key", "")
     base_url = cfg.get("base_url", "https://api.openai.com/v1").rstrip("/")
     temperature = cfg.get("temperature", 0.3)
-    proxy = os.getenv("HTTP_PROXY", "") or None
+    proxy = _get_proxy()
 
     client_kwargs: dict = {"timeout": httpx.Timeout(60.0)}
     if proxy:
@@ -164,7 +192,7 @@ def register_ai_routes(app: FastAPI) -> None:
         try:
             summary = await _call_llm(messages, max_tokens=1024)
         except Exception as e:
-            logger.warning("Summarize LLM call failed: %s", e)
+            logger.warning("Summarize LLM call failed: %s: %s", type(e).__name__, e)
             return {"summary": "抱歉，AI 摘要生成失败，请稍后重试。"}
 
         _set_cache(key, summary)
@@ -183,7 +211,7 @@ def register_ai_routes(app: FastAPI) -> None:
         try:
             reply = await _call_llm(messages, max_tokens=800)
         except Exception as e:
-            logger.warning("Chat LLM call failed: %s", e)
+            logger.warning("Chat LLM call failed: %s: %s", type(e).__name__, e)
             return {"reply": "抱歉，AI 助手暂时无法响应，请稍后重试。"}
 
         return {"reply": reply}
