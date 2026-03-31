@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore Page - Layout Comparison</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, 'Inter', sans-serif; background: #0f1117; color: #e0e0e0; padding: 24px; }
+  h1 { text-align: center; margin-bottom: 32px; color: #fff; font-size: 20px; }
+  .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 1400px; margin: 0 auto; }
+  .option { border: 1px solid #2a2d35; border-radius: 12px; overflow: hidden; }
+  .option-header { background: #1a1d25; padding: 16px 20px; border-bottom: 1px solid #2a2d35; }
+  .option-header h2 { font-size: 15px; color: #60a5fa; margin-bottom: 4px; }
+  .option-header p { font-size: 12px; color: #888; }
+  .option-body { padding: 20px; min-height: 500px; }
+
+  /* ── Shared: filter bar mockup ── */
+  .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #1e2028; }
+  .mock-chip { padding: 4px 12px; border-radius: 6px; font-size: 11px; background: #1e2028; color: #9ca3af; border: 1px solid #2a2d35; }
+  .mock-chip.active { background: rgba(96,165,250,0.15); border-color: #3b82f6; color: #60a5fa; }
+
+  /* ── Option A: Card Grid ── */
+  .card-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .mock-card { background: #1a1d25; border: 1px solid #2a2d35; border-radius: 8px; padding: 14px; display: flex; gap: 12px; align-items: flex-start; }
+  .mock-score { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  .mock-score.high { background: rgba(34,197,94,0.15); color: #22c55e; }
+  .mock-score.mid { background: rgba(234,179,8,0.15); color: #eab308; }
+  .mock-card-body { flex: 1; }
+  .mock-card-title { font-size: 13px; font-weight: 600; color: #e0e0e0; margin-bottom: 4px; line-height: 1.4; }
+  .mock-card-meta { font-size: 11px; color: #666; display: flex; gap: 8px; }
+  .mock-badge { padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 600; }
+  .mock-badge.gh { background: rgba(96,165,250,0.15); color: #60a5fa; }
+  .mock-badge.hn { background: rgba(251,146,60,0.15); color: #fb923c; }
+  .mock-badge.rss { background: rgba(168,85,247,0.15); color: #a855f7; }
+
+  /* ── Option B: Timeline ── */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: #2a2d35; }
+  .tl-day { margin-bottom: 24px; }
+  .tl-date { position: relative; font-size: 12px; font-weight: 700; color: #60a5fa; margin-bottom: 10px; padding: 2px 0; }
+  .tl-date::before { content: ''; position: absolute; left: -20px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: #3b82f6; border: 2px solid #0f1117; }
+  .tl-items { display: flex; flex-direction: column; gap: 6px; }
+  .tl-item { background: #1a1d25; border: 1px solid #2a2d35; border-radius: 6px; padding: 10px 12px; display: flex; gap: 10px; align-items: center; }
+  .tl-item-score { font-size: 12px; font-weight: 700; width: 28px; text-align: center; }
+  .tl-item-score.high { color: #22c55e; }
+  .tl-item-score.mid { color: #eab308; }
+  .tl-item-title { font-size: 12px; color: #e0e0e0; flex: 1; line-height: 1.4; }
+  .tl-item-badges { display: flex; gap: 4px; flex-shrink: 0; }
+  .tl-count { font-size: 11px; color: #555; margin-left: auto; }
+
+  /* ── Nav mockup ── */
+  .nav-mockup { max-width: 1400px; margin: 0 auto 24px; background: #1a1d25; border-radius: 8px; padding: 10px 20px; display: flex; align-items: center; gap: 16px; border: 1px solid #2a2d35; }
+  .nav-logo { font-size: 16px; font-weight: 700; color: #fff; }
+  .nav-logo span { color: #666; font-weight: 400; font-size: 12px; margin-left: 6px; }
+  .nav-tabs { display: flex; gap: 4px; margin-left: 16px; }
+  .nav-tab { padding: 6px 14px; border-radius: 6px; font-size: 12px; color: #888; background: transparent; cursor: pointer; text-decoration: none; }
+  .nav-tab:hover { color: #e0e0e0; background: rgba(255,255,255,0.05); }
+  .nav-tab.active { color: #60a5fa; background: rgba(96,165,250,0.1); }
+  .nav-hint { font-size: 11px; color: #444; margin-top: 4px; text-align: center; }
+
+  @media (max-width: 900px) { .comparison { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<h1>Explore Page — 导航入口 + 两种布局对比</h1>
+
+<!-- Nav mockup -->
+<div class="nav-mockup">
+  <div class="nav-logo">AI News <span>Dashboard</span></div>
+  <div class="nav-tabs">
+    <a class="nav-tab" href="#">Daily</a>
+    <a class="nav-tab active" href="#">Explore</a>
+    <a class="nav-tab" href="#">Weekly</a>
+  </div>
+</div>
+<p class="nav-hint">建议：在顶栏加 "Explore" tab，和现有 Daily / Weekly 并列</p>
+
+<div class="comparison">
+
+  <!-- Option A: Card List -->
+  <div class="option">
+    <div class="option-header">
+      <h2>方案 A：卡片列表（和现有 Daily 类似）</h2>
+      <p>按分数排序，平铺展示。适合快速扫一遍、按分数筛高质量内容</p>
+    </div>
+    <div class="option-body">
+      <div class="filter-bar">
+        <span class="mock-chip">3 days</span>
+        <span class="mock-chip active">7 days</span>
+        <span class="mock-chip">14 days</span>
+        <span class="mock-chip">Custom</span>
+        <span style="width:1px;background:#2a2d35;margin:0 4px"></span>
+        <span class="mock-chip active">GitHub</span>
+        <span class="mock-chip">HN</span>
+        <span class="mock-chip">RSS</span>
+      </div>
+      <div class="card-grid">
+        <div class="mock-card">
+          <div class="mock-score high">9.2</div>
+          <div class="mock-card-body">
+            <div class="mock-card-title">[58,152 stars in 20d] garrytan/gstack — Garry Tan's Claude Code setup</div>
+            <div class="mock-card-meta"><span class="mock-badge gh">GitHub</span><span>Agent & Skills</span><span>3/28</span></div>
+          </div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-score high">8.7</div>
+          <div class="mock-card-body">
+            <div class="mock-card-title">[126,073 stars] obra/superpowers — agentic skills framework</div>
+            <div class="mock-card-meta"><span class="mock-badge gh">GitHub</span><span>Agent & Skills</span><span>3/27</span></div>
+          </div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-score high">8.1</div>
+          <div class="mock-card-body">
+            <div class="mock-card-title">[49,575 stars] ComposioHQ/awesome-claude-skills</div>
+            <div class="mock-card-meta"><span class="mock-badge gh">GitHub</span><span>Agent & Skills</span><span>3/26</span></div>
+          </div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-score mid">6.5</div>
+          <div class="mock-card-body">
+            <div class="mock-card-title">OpenAI announces new reasoning model improvements</div>
+            <div class="mock-card-meta"><span class="mock-badge hn">HN</span><span>商用产品</span><span>3/25</span></div>
+          </div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-score mid">5.8</div>
+          <div class="mock-card-body">
+            <div class="mock-card-title">Claude Code 1.0.20 released with hook improvements</div>
+            <div class="mock-card-meta"><span class="mock-badge rss">RSS</span><span>Agent & Skills</span><span>3/24</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option B: Timeline -->
+  <div class="option">
+    <div class="option-header">
+      <h2>方案 B：时间线（按天分组）</h2>
+      <p>按日期分组，每天的内容收在一起。适合回顾"哪天发生了什么"</p>
+    </div>
+    <div class="option-body">
+      <div class="filter-bar">
+        <span class="mock-chip">3 days</span>
+        <span class="mock-chip active">7 days</span>
+        <span class="mock-chip">14 days</span>
+        <span class="mock-chip">Custom</span>
+        <span style="width:1px;background:#2a2d35;margin:0 4px"></span>
+        <span class="mock-chip active">GitHub</span>
+        <span class="mock-chip">HN</span>
+        <span class="mock-chip">RSS</span>
+      </div>
+      <div class="timeline">
+        <div class="tl-day">
+          <div class="tl-date">3月28日 周五 <span class="tl-count">12 items</span></div>
+          <div class="tl-items">
+            <div class="tl-item">
+              <div class="tl-item-score high">9.2</div>
+              <div class="tl-item-title">[58,152 stars in 20d] garrytan/gstack — Garry Tan's Claude Code setup</div>
+              <div class="tl-item-badges"><span class="mock-badge gh">GitHub</span></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-item-score mid">6.8</div>
+              <div class="tl-item-title">New ComfyUI workflow node for video-to-video</div>
+              <div class="tl-item-badges"><span class="mock-badge gh">GitHub</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-day">
+          <div class="tl-date">3月27日 周四 <span class="tl-count">18 items</span></div>
+          <div class="tl-items">
+            <div class="tl-item">
+              <div class="tl-item-score high">8.7</div>
+              <div class="tl-item-title">[126,073 stars] obra/superpowers — agentic skills framework</div>
+              <div class="tl-item-badges"><span class="mock-badge gh">GitHub</span></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-item-score high">8.1</div>
+              <div class="tl-item-title">[49,575 stars] ComposioHQ/awesome-claude-skills</div>
+              <div class="tl-item-badges"><span class="mock-badge gh">GitHub</span></div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-item-score mid">5.3</div>
+              <div class="tl-item-title">Hugging Face releases new vision model trainer</div>
+              <div class="tl-item-badges"><span class="mock-badge rss">RSS</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="tl-day">
+          <div class="tl-date">3月26日 周三 <span class="tl-count">9 items</span></div>
+          <div class="tl-items">
+            <div class="tl-item">
+              <div class="tl-item-score mid">6.5</div>
+              <div class="tl-item-title">OpenAI announces new reasoning model improvements</div>
+              <div class="tl-item-badges"><span class="mock-badge hn">HN</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

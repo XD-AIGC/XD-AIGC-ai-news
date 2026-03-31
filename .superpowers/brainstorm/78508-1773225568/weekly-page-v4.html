@@ -1,0 +1,178 @@
+<h2>周报页面 · 紧凑卡片版</h2>
+<p class="subtitle">参考 Agent Skills 指南的布局风格</p>
+
+<div class="mockup">
+  <div class="mockup-header" style="display:flex;justify-content:space-between;align-items:center;">
+    <span>📰 AI 周报（哆啦A梦 × 大雄）</span>
+    <span style="background:#6366f1;color:#fff;font-size:10px;padding:3px 10px;border-radius:4px;">故事 1 / 3</span>
+  </div>
+  <div class="mockup-body" style="background:#eee8f5;padding:16px;">
+
+    <!-- Week nav -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-bottom:14px;">
+      <div style="background:#fff;padding:4px 12px;border-radius:6px;font-size:10px;color:#666;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,0.06);">← W10</div>
+      <div style="background:#6366f1;padding:4px 14px;border-radius:6px;font-size:10px;color:#fff;font-weight:700;box-shadow:0 1px 3px rgba(99,102,241,0.3);">W11 · 3.3-3.9</div>
+      <div style="background:#fff;padding:4px 12px;border-radius:6px;font-size:10px;color:#ccc;box-shadow:0 1px 2px rgba(0,0,0,0.06);">W12 →</div>
+    </div>
+
+    <!-- Main content: left cards + right comic -->
+    <div style="display:flex;gap:12px;align-items:flex-start;">
+
+      <!-- Left: stacked cards -->
+      <div style="flex:1;display:flex;flex-direction:column;gap:10px;">
+
+        <!-- Card 1: Story title + summary -->
+        <div style="background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+            <div style="background:#ff4757;color:#fff;font-size:8px;font-weight:700;padding:2px 7px;border-radius:8px;">头条</div>
+            <div style="font-size:8px;color:#999;">2026.3.5 · 商用产品</div>
+          </div>
+          <div style="font-size:14px;font-weight:800;color:#1a1a1a;line-height:1.3;margin-bottom:6px;">GPT-5 来了！AI 进入新纪元</div>
+          <div style="font-size:10px;color:#555;line-height:1.7;">
+            OpenAI 本周发布 GPT-5，代码生成准确率提升 47%，数学推理首超博士水平，视觉理解支持实时视频。发布当天 API 调用量破 1 亿次。
+          </div>
+        </div>
+
+        <!-- Card 2: Key highlights -->
+        <div style="background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+          <div style="font-size:9px;color:#d97706;font-weight:600;margin-bottom:6px;">💡 核心亮点</div>
+          <div style="font-size:9px;color:#555;line-height:1.8;">
+            • 代码生成准确率 +47%，支持全栈开发<br>
+            • 视觉理解支持实时视频流分析<br>
+            • 推理成本降低 60%<br>
+            • 原生 Agent 模式，可自主调用工具
+          </div>
+        </div>
+
+        <!-- Card 3: Community -->
+        <div style="background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+          <div style="font-size:9px;color:#0284c7;font-weight:600;margin-bottom:6px;">🗣️ 社区热议</div>
+          <div style="font-size:9px;color:#555;line-height:1.8;font-style:italic;">
+            "这不是渐进升级，这是代际飞跃" — @karpathy<br>
+            "终于可以不用 Stack Overflow 了" — Reddit 热评<br>
+            "GPT-5 写的代码比我的整洁多了" — HN 评论
+          </div>
+        </div>
+
+        <!-- Card 4: Related news -->
+        <div style="background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+          <div style="font-size:9px;color:#6366f1;font-weight:600;margin-bottom:6px;">📎 相关新闻</div>
+          <div style="font-size:9px;color:#333;line-height:2;">
+            <a href="#" style="color:#333;text-decoration:none;">→ GPT-5 正式发布：多模态推理重大升级</a> <span style="color:#f59e0b;font-weight:600;">9.8</span><br>
+            <a href="#" style="color:#333;text-decoration:none;">→ Sam Altman 专访：GPT-5 背后的故事</a> <span style="color:#f59e0b;font-weight:600;">8.5</span><br>
+            <a href="#" style="color:#333;text-decoration:none;">→ GPT-5 vs Claude 4 vs Gemini 2 横评</a> <span style="color:#f59e0b;font-weight:600;">8.2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Comic panel -->
+      <div style="flex:1;position:relative;">
+        <div style="background:#fff;border-radius:10px;padding:10px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+          <!-- Comic grid -->
+          <div style="border:2px solid #1a1a1a;border-radius:6px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:#1a1a1a;">
+            <div style="background:#e8e8e8;aspect-ratio:1;display:flex;align-items:center;justify-content:center;">
+              <div style="font-size:9px;color:#999;text-align:center;">🖼️ 面板 1<br><span style="font-size:7px;">大雄看手机震惊</span></div>
+            </div>
+            <div style="background:#e8e8e8;aspect-ratio:1;display:flex;align-items:center;justify-content:center;">
+              <div style="font-size:9px;color:#999;text-align:center;">🖼️ 面板 2<br><span style="font-size:7px;">哆啦A梦掏道具</span></div>
+            </div>
+            <div style="background:#e8e8e8;aspect-ratio:1;display:flex;align-items:center;justify-content:center;">
+              <div style="font-size:9px;color:#999;text-align:center;">🖼️ 面板 3<br><span style="font-size:7px;">全息屏看新闻</span></div>
+            </div>
+            <div style="background:#e8e8e8;aspect-ratio:1;display:flex;align-items:center;justify-content:center;">
+              <div style="font-size:9px;color:#999;text-align:center;">🖼️ 面板 4<br><span style="font-size:7px;">两人感叹</span></div>
+            </div>
+          </div>
+          <!-- Caption -->
+          <div style="text-align:center;margin-top:6px;font-size:8px;color:#aaa;">Nano Banana 2 自动生成 · 点击放大</div>
+        </div>
+
+        <!-- Navigation arrows (outside comic card) -->
+        <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-top:10px;">
+          <div style="width:30px;height:30px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.1);font-size:14px;color:#999;">‹</div>
+          <div style="display:flex;gap:6px;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#ff4757;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+            <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+          </div>
+          <div style="width:30px;height:30px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.1);font-size:14px;color:#999;">›</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: Top 10 + Stats in compact cards -->
+    <div style="display:flex;gap:10px;margin-top:14px;">
+      <!-- Top 10 card -->
+      <div style="flex:1;background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+        <div style="font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">🏆 本周 Top 10</div>
+        <div style="font-size:9px;line-height:2;color:#333;">
+          <span style="color:#6366f1;font-weight:700;">1.</span> GPT-5 正式发布 <span style="color:#f59e0b;">9.8</span><br>
+          <span style="color:#6366f1;font-weight:700;">2.</span> Llama 4 全家桶开源 <span style="color:#f59e0b;">9.5</span><br>
+          <span style="color:#6366f1;font-weight:700;">3.</span> ComfyUI 2.0 重构 <span style="color:#f59e0b;">9.2</span><br>
+          <span style="color:#6366f1;font-weight:700;">4.</span> Gemini 2.0 Flash API <span style="color:#f59e0b;">8.9</span><br>
+          <span style="color:#6366f1;font-weight:700;">5.</span> Claude 200K 上下文 <span style="color:#f59e0b;">8.7</span><br>
+          <span style="color:#999;">6-10. 查看更多 →</span>
+        </div>
+      </div>
+
+      <!-- Stats card -->
+      <div style="flex:0.8;background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+        <div style="font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">📊 本周数据</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;">
+          <div style="background:#f5f3ff;border-radius:6px;padding:6px;text-align:center;">
+            <div style="font-size:16px;font-weight:800;color:#6366f1;">1,247</div>
+            <div style="font-size:7px;color:#71717a;">条新闻</div>
+          </div>
+          <div style="background:#fdf2f8;border-radius:6px;padding:6px;text-align:center;">
+            <div style="font-size:16px;font-weight:800;color:#ec4899;">12</div>
+            <div style="font-size:7px;color:#71717a;">个来源</div>
+          </div>
+        </div>
+        <div style="font-size:8px;color:#999;margin-bottom:4px;">vs 上周</div>
+        <div style="font-size:9px;color:#333;line-height:1.8;">
+          新闻量 <span style="color:#10b981;font-weight:600;">↑ 23%</span><br>
+          平均分 <span style="color:#10b981;font-weight:600;">↑ 0.3</span><br>
+          开源占比 <span style="color:#10b981;font-weight:600;">↑ 5%</span>
+        </div>
+      </div>
+
+      <!-- Editor card -->
+      <div style="flex:0.8;background:#fff;border-radius:10px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,0.08);">
+        <div style="font-size:11px;font-weight:700;color:#1a1a1a;margin-bottom:8px;">✍️ 编辑寄语</div>
+        <div style="font-size:9px;color:#555;line-height:1.7;">
+          本周是 2026 年 AI 行业最疯狂的一周。GPT-5、Llama 4、ComfyUI 2.0 三大事件同时爆发，整个社区都在加班。如果你只能看一条新闻，请看 Top 1。
+        </div>
+        <div style="margin-top:8px;display:flex;gap:4px;flex-wrap:wrap;">
+          <span style="background:#f5f3ff;font-size:7px;padding:2px 6px;border-radius:6px;color:#6366f1;">#GPT-5</span>
+          <span style="background:#f5f3ff;font-size:7px;padding:2px 6px;border-radius:6px;color:#6366f1;">#Llama4</span>
+          <span style="background:#f5f3ff;font-size:7px;padding:2px 6px;border-radius:6px;color:#6366f1;">#ComfyUI</span>
+          <span style="background:#f5f3ff;font-size:7px;padding:2px 6px;border-radius:6px;color:#6366f1;">#开源</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer nav dots -->
+    <div style="display:flex;justify-content:center;gap:8px;margin-top:14px;">
+      <div style="width:8px;height:8px;border-radius:50%;background:#6366f1;"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+      <div style="width:8px;height:8px;border-radius:50%;background:#d4d4d8;"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section" style="margin-top:20px;">
+  <h3>交互逻辑</h3>
+  <div style="font-size:13px;color:var(--text-secondary);line-height:1.8;">
+    <strong>左右翻页</strong>：切换 3 个故事，左侧卡片和右侧漫画同步切换<br>
+    <strong>底部圆点</strong>：对应故事数量，可点击跳转<br>
+    <strong>点击漫画</strong>：放大查看单格大图<br>
+    <strong>手机适配</strong>：小屏幕自动变为上下布局，漫画在上卡片在下
+  </div>
+</div>

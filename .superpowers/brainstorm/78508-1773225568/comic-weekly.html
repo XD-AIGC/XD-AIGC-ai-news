@@ -1,0 +1,155 @@
+<h2>漫画周报 · 概念设计</h2>
+<p class="subtitle">用 Nano Banana 2 生成漫画风格的 AI 新闻周报</p>
+
+<!-- Mockup: The full weekly page layout -->
+<div class="mockup">
+  <div class="mockup-header">📱 AI 周报 · 第11周 (3.3 - 3.9)</div>
+  <div class="mockup-body" style="background:#fafafa;padding:0;">
+
+    <!-- Hero: Main comic strip -->
+    <div style="background:#fff;padding:16px;">
+      <div style="text-align:center;margin-bottom:12px;">
+        <span style="background:#ff4757;color:#fff;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px;">本周故事</span>
+      </div>
+
+      <!-- 4-panel comic mockup -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;border:2px solid #1a1a1a;border-radius:4px;overflow:hidden;">
+        <!-- Panel 1 -->
+        <div style="background:#f0f0f0;padding:8px;min-height:120px;border-right:2px solid #1a1a1a;border-bottom:2px solid #1a1a1a;position:relative;">
+          <div style="position:absolute;top:4px;left:4px;background:#fff;border:1.5px solid #1a1a1a;border-radius:10px;padding:2px 6px;font-size:8px;font-weight:700;">1</div>
+          <!-- Mock comic content -->
+          <div style="text-align:center;margin-top:16px;">
+            <div style="font-size:28px;">🤖💬</div>
+            <div style="background:#fff;border:1.5px solid #333;border-radius:12px 12px 12px 2px;padding:6px 8px;font-size:9px;font-weight:600;margin-top:6px;display:inline-block;">
+              "听说了吗？GPT-5 终于来了！"
+            </div>
+          </div>
+          <div style="position:absolute;bottom:2px;right:4px;font-size:7px;color:#999;font-style:italic;">Nano Banana 2 生成</div>
+        </div>
+
+        <!-- Panel 2 -->
+        <div style="background:#f0f0f0;padding:8px;min-height:120px;border-bottom:2px solid #1a1a1a;position:relative;">
+          <div style="position:absolute;top:4px;left:4px;background:#fff;border:1.5px solid #1a1a1a;border-radius:10px;padding:2px 6px;font-size:8px;font-weight:700;">2</div>
+          <div style="text-align:center;margin-top:16px;">
+            <div style="font-size:28px;">🦙✨</div>
+            <div style="background:#fff;border:1.5px solid #333;border-radius:12px 12px 2px 12px;padding:6px 8px;font-size:9px;font-weight:600;margin-top:6px;display:inline-block;">
+              "Meta 也不甘示弱，Llama 4 直接开源！"
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3 -->
+        <div style="background:#f0f0f0;padding:8px;min-height:120px;border-right:2px solid #1a1a1a;position:relative;">
+          <div style="position:absolute;top:4px;left:4px;background:#fff;border:1.5px solid #1a1a1a;border-radius:10px;padding:2px 6px;font-size:8px;font-weight:700;">3</div>
+          <div style="text-align:center;margin-top:16px;">
+            <div style="font-size:28px;">🎨🔧</div>
+            <div style="background:#fff;border:1.5px solid #333;border-radius:12px 12px 12px 2px;padding:6px 8px;font-size:9px;font-weight:600;margin-top:6px;display:inline-block;">
+              "ComfyUI 2.0 大更新，节点党要起飞了"
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 4 -->
+        <div style="background:#f0f0f0;padding:8px;min-height:120px;position:relative;">
+          <div style="position:absolute;top:4px;left:4px;background:#fff;border:1.5px solid #1a1a1a;border-radius:10px;padding:2px 6px;font-size:8px;font-weight:700;">4</div>
+          <div style="text-align:center;margin-top:16px;">
+            <div style="font-size:28px;">🌍🚀</div>
+            <div style="background:#fff;border:1.5px solid #333;border-radius:2px 12px 12px 12px;padding:6px 8px;font-size:9px;font-weight:600;margin-top:6px;display:inline-block;">
+              "这周真是 AI 界的超级碗啊！"
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;font-size:9px;color:#aaa;margin-top:6px;">☝️ 以上漫画由 Nano Banana 2 根据本周新闻自动生成</div>
+    </div>
+
+    <!-- Divider -->
+    <div style="height:8px;background:#f0f0f0;"></div>
+
+    <!-- Story cards: each top story expanded -->
+    <div style="background:#fff;padding:16px;">
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:12px;">📖 本周 Top 10 详情</div>
+
+      <!-- Story 1 -->
+      <div style="display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #f0f0f0;">
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-weight:800;">1</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#1a1a1a;">GPT-5 正式发布：多模态推理重大升级</div>
+          <div style="font-size:10px;color:#71717a;margin-top:3px;line-height:1.5;">OpenAI 本周发布 GPT-5，在代码生成、数学推理和视觉理解方面全面超越 GPT-4...</div>
+          <div style="display:flex;gap:4px;margin-top:4px;">
+            <span style="font-size:8px;background:#ede9fe;color:#6366f1;padding:2px 6px;border-radius:8px;">商用产品</span>
+            <span style="font-size:8px;background:#fef3c7;color:#d97706;padding:2px 6px;border-radius:8px;">⭐ 9.8</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 2 -->
+      <div style="display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #f0f0f0;">
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,#ec4899,#f43f5e);border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-weight:800;">2</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#1a1a1a;">Meta Llama 4 全家桶开源</div>
+          <div style="font-size:10px;color:#71717a;margin-top:3px;line-height:1.5;">Meta 延续开源策略，发布 Llama 4 系列，包含 8B/70B/405B 三个规模...</div>
+          <div style="display:flex;gap:4px;margin-top:4px;">
+            <span style="font-size:8px;background:#dcfce7;color:#16a34a;padding:2px 6px;border-radius:8px;">开源模型</span>
+            <span style="font-size:8px;background:#fef3c7;color:#d97706;padding:2px 6px;border-radius:8px;">⭐ 9.5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 3 -->
+      <div style="display:flex;gap:10px;padding:12px 0;">
+        <div style="width:48px;height:48px;background:linear-gradient(135deg,#10b981,#14b8a6);border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-weight:800;">3</div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:#1a1a1a;">ComfyUI 2.0 节点系统重构</div>
+          <div style="font-size:10px;color:#71717a;margin-top:3px;line-height:1.5;">ComfyUI 发布重大版本更新，全新节点管理系统大幅提升自定义节点开发效率...</div>
+          <div style="display:flex;gap:4px;margin-top:4px;">
+            <span style="font-size:8px;background:#fce7f3;color:#db2777;padding:2px 6px;border-radius:8px;">ComfyUI</span>
+            <span style="font-size:8px;background:#fef3c7;color:#d97706;padding:2px 6px;border-radius:8px;">⭐ 9.2</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;font-size:11px;color:#6366f1;font-weight:600;padding:8px;cursor:pointer;">查看全部 Top 10 →</div>
+    </div>
+
+    <!-- Divider -->
+    <div style="height:8px;background:#f0f0f0;"></div>
+
+    <!-- Weekly stats summary (lightweight) -->
+    <div style="background:#fff;padding:16px;">
+      <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:10px;">📊 本周数据</div>
+      <div style="display:flex;gap:8px;text-align:center;">
+        <div style="flex:1;background:#f5f3ff;border-radius:10px;padding:10px;">
+          <div style="font-size:22px;font-weight:800;color:#6366f1;">247</div>
+          <div style="font-size:9px;color:#71717a;">条新闻</div>
+        </div>
+        <div style="flex:1;background:#fdf2f8;border-radius:10px;padding:10px;">
+          <div style="font-size:22px;font-weight:800;color:#ec4899;">12</div>
+          <div style="font-size:9px;color:#71717a;">个来源</div>
+        </div>
+        <div style="flex:1;background:#ecfdf5;border-radius:10px;padding:10px;">
+          <div style="font-size:22px;font-weight:800;color:#10b981;">5</div>
+          <div style="font-size:9px;color:#71717a;">个领域</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:24px;">
+  <h3>🎯 方案拆解</h3>
+  <div style="display:grid;gap:12px;margin-top:12px;">
+    <div style="padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border-left:3px solid #6366f1;">
+      <strong>漫画生成</strong>
+      <p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">LLM 先把本周 Top 事件编成一个 4-6 格漫画脚本（对话+场景描述），然后调 Nano Banana 2 逐格生成漫画图片</p>
+    </div>
+    <div style="padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border-left:3px solid #ec4899;">
+      <strong>叙事结构</strong>
+      <p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">可以用固定角色（AI 小助手/程序员/科学家）作为叙述者，每周以他们的视角来讲述本周发生了什么</p>
+    </div>
+    <div style="padding:12px;background:rgba(255,255,255,0.05);border-radius:8px;border-left:3px solid #10b981;">
+      <strong>页面结构</strong>
+      <p style="font-size:13px;color:var(--text-secondary);margin-top:4px;">顶部 = 漫画故事（抓眼球），中部 = Top 10 详情列表（深度），底部 = 数据统计（全貌）</p>
+    </div>
+  </div>
+</div>

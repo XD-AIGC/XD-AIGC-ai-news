@@ -154,8 +154,5 @@ def weekly_js():
 
 @app.get("/explore")
 def explore():
-    return FileResponse(STATIC_DIR / "explore.html")
-
-@app.get("/explore.js")
-def explore_js():
-    return FileResponse(STATIC_DIR / "explore.js", media_type="application/javascript")
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/", status_code=301)
