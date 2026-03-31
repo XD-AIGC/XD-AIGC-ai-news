@@ -237,6 +237,11 @@ const NewsApp = (function () {
         $sidebar.classList.toggle('open');
       });
     }
+
+    const aiBtn = document.getElementById('aiToggle');
+    if (aiBtn && typeof AIPanel !== 'undefined') {
+      aiBtn.addEventListener('click', () => AIPanel.toggle());
+    }
   }
 
   // ─── Utilities ───
@@ -308,6 +313,7 @@ const NewsApp = (function () {
         </div>`;
     }
     rightHTML += `<button id="themeToggle" class="icon-btn" title="Toggle theme">${sunIcon}${moonIcon}</button>`;
+    rightHTML += `<button id="aiToggle" class="icon-btn ai-toggle-btn" title="AI 助手"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/><path d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767A2 2 0 0011 16h2l3 3v-3h1a2 2 0 002-2V9a2 2 0 00-2-2h-2z"/></svg></button>`;
 
     const el = document.getElementById('topbar');
     el.innerHTML = `
