@@ -527,29 +527,8 @@
   </style>
 </head>
 <body>
-  <!-- Top nav bar -->
-  <nav class="topbar">
-    <div class="topbar-left">
-      <h1 class="logo">AI News</h1>
-    </div>
-    <div class="topbar-center">
-      <div class="topbar-tabs">
-        <a href="/" class="topbar-tab">News</a>
-        <a href="/weekly" class="topbar-tab active">周报</a>
-      </div>
-    </div>
-    <div class="topbar-right">
-      <div class="week-selector">
-        <button id="prevWeek" title="上一周">&#8592;</button>
-        <span id="weekLabel" class="week-label">—</span>
-        <button id="nextWeek" title="下一周">&#8594;</button>
-      </div>
-      <button id="themeToggle" class="icon-btn" title="Toggle theme">
-        <svg class="icon-sun" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/></svg>
-        <svg class="icon-moon" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
-      </button>
-    </div>
-  </nav>
+  <!-- Top nav bar (rendered by shared.js) -->
+  <nav class="topbar" id="topbar"></nav>
 
   <div class="container">
     <!-- Loading state -->
@@ -656,6 +635,7 @@
     </div>
   </div>
 
+  <script src="/static/shared.js"></script>
   <script src="weekly.js"></script>
 </body>
 </html>
