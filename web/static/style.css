@@ -31,24 +31,24 @@
 }
 
 [data-theme="light"] {
-  --bg-base: #f6f8fa;
-  --bg-surface: #ffffff;
-  --bg-surface-hover: #f3f4f6;
-  --bg-elevated: #ffffff;
-  --border: #d0d7de;
-  --border-light: #e5e7eb;
-  --text-primary: #1f2328;
-  --text-secondary: #656d76;
-  --text-tertiary: #8b949e;
-  --accent: #0969da;
-  --accent-dim: #0550ae;
-  --score-high: #1a7f37;
-  --score-mid: #9a6700;
-  --score-low: #cf222e;
-  --chip-bg: rgba(9, 105, 218, 0.08);
-  --chip-text: #0969da;
-  --shadow: 0 1px 3px rgba(0,0,0,.08);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,.12);
+  --bg-base: #e8e0d8;
+  --bg-surface: #f5f0eb;
+  --bg-surface-hover: #ede6de;
+  --bg-elevated: #f5f0eb;
+  --border: #d5cdc3;
+  --border-light: #ddd5cb;
+  --text-primary: #4a4039;
+  --text-secondary: #6b5f54;
+  --text-tertiary: #8a7f73;
+  --accent: #a3907a;
+  --accent-dim: #8a7a66;
+  --score-high: #8a9e8b;
+  --score-mid: #c4a882;
+  --score-low: #c47a6a;
+  --chip-bg: rgba(163, 144, 122, 0.12);
+  --chip-text: #a3907a;
+  --shadow: 0 1px 3px rgba(0,0,0,.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,.08);
 }
 
 /* ========== Reset ========== */
@@ -96,11 +96,6 @@ a:hover { text-decoration: underline; }
   letter-spacing: -0.5px;
 }
 
-.logo-sub {
-  font-size: 12px;
-  color: var(--text-tertiary);
-  font-weight: 500;
-}
 
 .topbar-center { flex: 1; max-width: 480px; }
 
@@ -168,6 +163,37 @@ a:hover { text-decoration: underline; }
 }
 
 .icon-btn svg { width: 16px; height: 16px; }
+
+/* Nav Tabs */
+.topbar-tabs {
+  display: flex;
+  gap: 2px;
+  margin-left: 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+}
+
+.topbar-tab {
+  padding: 4px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all var(--transition);
+}
+
+.topbar-tab:hover {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.topbar-tab.active {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
 
 [data-theme="dark"] .icon-sun { display: none; }
 [data-theme="dark"] .icon-moon { display: block; }
@@ -580,5 +606,4 @@ a:hover { text-decoration: underline; }
   .news-grid { grid-template-columns: 1fr; }
   .topbar { padding: 0 12px; }
   .main-content { padding: 12px; }
-  .logo-sub { display: none; }
 }
