@@ -171,13 +171,22 @@ class NewsDatabase:
         )
         return [{"date": row["date"], "count": row["count"]} for row in cursor.fetchall()]
 
-    def get_stats(self, date: str | None = None) -> dict:
+    def get_stats(
+        self,
+        date: str | None = None,
+        date_from: str | None = None,
+        date_to: str | None = None,
+    ) -> dict:
         """Return aggregate stats: source/category breakdowns."""
-        where = ""
+        conditions: list[str] = []
         params: list = []
         if date:
-            where = "WHERE collected_at LIKE ?"
+            conditions.append("collected_at LIKE ?")
             params.append(f"{date}%")
+        elif date_from and date_to:
+            conditions.append("collected_at >= ? AND collected_at <= ?")
+            params.extend([f"{date_from}T00:00:00", f"{date_to}T23:59:59"])
+        where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
 
         cursor = self._conn.cursor()
 
@@ -206,6 +215,8 @@ class NewsDatabase:
     def search_items(
         self,
         date: str | None = None,
+        date_from: str | None = None,
+        date_to: str | None = None,
         source: str | None = None,
         category: str | None = None,
         q: str | None = None,
@@ -220,6 +231,15 @@ class NewsDatabase:
         if date:
             conditions.append("collected_at LIKE ?")
             params.append(f"{date}%")
+        elif date_from and date_to:
+            conditions.append("collected_at >= ? AND collected_at <= ?")
+            params.extend([f"{date_from}T00:00:00", f"{date_to}T23:59:59"])
+        elif date_from:
+            conditions.append("collected_at >= ?")
+            params.append(f"{date_from}T00:00:00")
+        elif date_to:
+            conditions.append("collected_at <= ?")
+            params.append(f"{date_to}T23:59:59")
         if source:
             conditions.append("source_type = ?")
             params.append(source)

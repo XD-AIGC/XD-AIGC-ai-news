@@ -52,6 +52,8 @@ def _get_db() -> NewsDatabase:
 @app.get("/api/news", response_model=PaginatedNews)
 def list_news(
     date: Optional[str] = Query(None, description="YYYY-MM-DD"),
+    date_from: Optional[str] = Query(None, description="YYYY-MM-DD range start"),
+    date_to: Optional[str] = Query(None, description="YYYY-MM-DD range end"),
     source: Optional[str] = Query(None),
     category: Optional[str] = Query(None),
     q: Optional[str] = Query(None, description="Search query"),
@@ -62,7 +64,8 @@ def list_news(
     db = _get_db()
     try:
         items, total = db.search_items(
-            date=date, source=source, category=category,
+            date=date, date_from=date_from, date_to=date_to,
+            source=source, category=category,
             q=q, min_score=min_score, page=page, page_size=page_size,
         )
         pages = (total + page_size - 1) // page_size if total else 0
@@ -84,10 +87,14 @@ def available_dates():
 
 
 @app.get("/api/stats")
-def stats(date: Optional[str] = Query(None)):
+def stats(
+    date: Optional[str] = Query(None),
+    date_from: Optional[str] = Query(None, description="YYYY-MM-DD range start"),
+    date_to: Optional[str] = Query(None, description="YYYY-MM-DD range end"),
+):
     db = _get_db()
     try:
-        return db.get_stats(date)
+        return db.get_stats(date=date, date_from=date_from, date_to=date_to)
     finally:
         db.close()
 
@@ -143,3 +150,12 @@ def weekly_js():
     if weekly_js_file.exists():
         return FileResponse(weekly_js_file, media_type="application/javascript")
     return {"error": "weekly.js not found"}
+
+
+@app.get("/explore")
+def explore():
+    return FileResponse(STATIC_DIR / "explore.html")
+
+@app.get("/explore.js")
+def explore_js():
+    return FileResponse(STATIC_DIR / "explore.js", media_type="application/javascript")
