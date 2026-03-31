@@ -8,7 +8,7 @@ focus_areas:
   - name: "商用产品"
     keywords: ["Lovart", "Gemini", "GPT", "OpenAI", "Claude", "Anthropic", "Midjourney", "DALL-E", "Sora", "Runway"]
   - name: "Agent & Skills"
-    keywords: ["agent", "MCP", "tool use", "function calling", "autonomous", "agentic", "cursor", "copilot"]
+    keywords: ["agent", "MCP", "mcp-server", "model context protocol", "tool use", "function calling", "autonomous", "agentic", "cursor", "copilot", "claude code", "claude-code", "skills", "coding agent", "vibe-coding", "ai coding"]
   - name: "3D生成与重建"
     keywords: ["gaussian splatting", "3DGS", "4DGS", "NeRF", "neural rendering", "3D reconstruction", "3D generation", "text-to-3d", "point cloud", "mesh generation", "radiance field"]
   - name: "训练与部署"
@@ -77,12 +77,34 @@ sources:
         - "AI NPC dialogue game engine"
         - "AI procedural generation game level"
         - "AI motion capture animation"
+        # AI Coding Agent / Claude Code 生态
+        - "topic:claude-code"
+        - "topic:ai-agent"
+        - "topic:ai-agents"
+        - "topic:ai-coding"
+        - "topic:mcp"
+        - "topic:mcp-server"
+        - "topic:model-context-protocol"
+        - "topic:skill"
+        - "topic:agentic"
+        - "topic:cursor"
+        - "topic:copilot"
+        - "topic:coding-agent"
+        - "\"claude code\" skills OR agent OR plugin"
+        - "\"agentic coding\" OR \"AI coding assistant\""
+        - "\"claude code\" setup OR workflow OR tools"
+        - "awesome claude skills OR mcp-servers"
+        - "AI code agent vibe-coding"
     watch_repos:
       - { owner: "comfyanonymous", repo: "ComfyUI" }
       - { owner: "black-forest-labs", repo: "flux" }
       - { owner: "AUTOMATIC1111", repo: "stable-diffusion-webui" }
       - { owner: "Unity-Technologies", repo: "ml-agents" }
       - { owner: "inworld-ai", repo: "tts" }                    # Inworld TTS 模型
+      # Claude Code 生态
+      - { owner: "anthropics", repo: "claude-code" }
+      - { owner: "obra", repo: "superpowers" }
+      - { owner: "ComposioHQ", repo: "awesome-claude-skills" }
 
   hackernews:
     enabled: true

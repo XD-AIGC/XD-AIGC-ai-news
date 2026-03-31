@@ -13,16 +13,23 @@ logger = logging.getLogger(__name__)
 
 
 def get_week_range(ref_date: datetime | None = None) -> tuple[str, str, str]:
-    """Get the ISO week number and date range for the previous week.
+    """Get the ISO week number and date range for the most recent complete week.
+
+    A week is Mon-Sun. If called on Sunday, returns the current (just-ended) week.
+    Otherwise returns the previous Mon-Sun week.
 
     Returns: (week_label like '2026-W11', start_date, end_date) as YYYY-MM-DD.
     """
     if ref_date is None:
         ref_date = datetime.now(timezone.utc)
 
-    # Go back to last Monday
     days_since_monday = ref_date.weekday()
-    last_monday = ref_date - timedelta(days=days_since_monday + 7)
+    if days_since_monday == 6:
+        # Sunday: the week Mon-Sun that just ended is "this" week
+        last_monday = ref_date - timedelta(days=6)
+    else:
+        # Mon-Sat: go back to previous week's Monday
+        last_monday = ref_date - timedelta(days=days_since_monday + 7)
     last_sunday = last_monday + timedelta(days=6)
 
     iso_year, iso_week, _ = last_monday.isocalendar()
