@@ -77,14 +77,14 @@ a:hover { text-decoration: underline; }
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 20px;
   z-index: 100;
-  gap: 16px;
 }
 
 .topbar-left {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
   flex-shrink: 0;
 }
@@ -96,12 +96,17 @@ a:hover { text-decoration: underline; }
   letter-spacing: -0.5px;
 }
 
+.topbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
-.topbar-center { flex: 1; max-width: 480px; }
+.topbar-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
 .search-box {
   position: relative;
-  width: 100%;
+  width: 220px;
 }
 
 .search-icon {
@@ -136,13 +141,6 @@ a:hover { text-decoration: underline; }
   color: var(--text-tertiary);
 }
 
-.topbar-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
 .icon-btn {
   display: flex;
   align-items: center;
@@ -168,7 +166,6 @@ a:hover { text-decoration: underline; }
 .topbar-tabs {
   display: flex;
   gap: 2px;
-  margin-left: 12px;
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
