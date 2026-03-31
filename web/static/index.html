@@ -33,12 +33,17 @@
   <div class="layout">
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
-      <!-- Date Picker -->
+      <!-- Date Range -->
       <section class="sidebar-section">
         <h3 class="sidebar-title">Date</h3>
-        <select id="dateSelect" class="select-input">
-          <option value="">All dates</option>
-        </select>
+        <div id="dateRangeChips" class="filter-chips date-range-chips">
+          <button class="chip active" data-range="1">Today</button>
+          <button class="chip" data-range="3">3 days</button>
+          <button class="chip" data-range="7">7 days</button>
+          <button class="chip" data-range="14">14 days</button>
+          <button class="chip" data-range="30">30 days</button>
+          <button class="chip" data-range="0">All</button>
+        </div>
       </section>
 
       <!-- Source Filter -->
