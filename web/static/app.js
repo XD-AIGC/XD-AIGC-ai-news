@@ -9,9 +9,7 @@ const API = {
 };
 
 const state = {
-  dateRange: 1,   // days back: 1=today, 3, 7, 14, 30, 0=all
-  dateFrom: '',
-  dateTo: '',
+  date: '',
   source: '',
   category: '',
   q: '',
@@ -25,7 +23,7 @@ const $grid        = document.getElementById('newsGrid');
 const $pagination  = document.getElementById('pagination');
 const $resultInfo  = document.getElementById('resultInfo');
 const $loading     = document.getElementById('loadingOverlay');
-const $dateChips   = document.getElementById('dateRangeChips');
+const $dateSelect  = document.getElementById('dateSelect');
 const $searchInput = document.getElementById('searchInput');
 const $scoreSlider = document.getElementById('scoreSlider');
 const $scoreValue  = document.getElementById('scoreValue');
@@ -50,36 +48,29 @@ function buildQuery(params) {
   return qs.toString();
 }
 
-// ─── Date range ───
-function fmtDate(d) {
-  return d.toISOString().slice(0, 10);
-}
-
-function applyDateRange(days) {
-  state.dateRange = days;
-  if (days === 0) {
-    state.dateFrom = '';
-    state.dateTo = '';
-  } else {
-    const to = new Date();
-    const from = new Date();
-    from.setDate(from.getDate() - (days - 1));
-    state.dateFrom = fmtDate(from);
-    state.dateTo = fmtDate(to);
-  }
-  // Update chip active state
-  $dateChips.querySelectorAll('.chip').forEach(c => {
-    c.classList.toggle('active', parseInt(c.dataset.range) === days);
-  });
-}
-
 // ─── Data loading ───
+async function loadDates() {
+  try {
+    const dates = await fetchJSON(API.dates);
+    $dateSelect.innerHTML = '<option value="">All dates</option>';
+    dates.forEach(d => {
+      const opt = document.createElement('option');
+      opt.value = d.date;
+      opt.textContent = `${d.date} (${d.count})`;
+      $dateSelect.appendChild(opt);
+    });
+    if (dates.length > 0 && !state.date) {
+      state.date = dates[0].date;
+      $dateSelect.value = state.date;
+    }
+  } catch (e) {
+    console.error('Failed to load dates:', e);
+  }
+}
 
 async function loadStats() {
   try {
-    const statsQ = new URLSearchParams();
-    if (state.dateFrom) { statsQ.set('date_from', state.dateFrom); statsQ.set('date_to', state.dateTo); }
-    const params = statsQ.toString() ? `?${statsQ}` : '';
+    const params = state.date ? `?date=${state.date}` : '';
     const data = await fetchJSON(API.stats + params);
 
     // Source chips
@@ -120,8 +111,7 @@ async function loadNews() {
   showLoading(true);
   try {
     const qs = buildQuery({
-      date_from: state.dateFrom || undefined,
-      date_to: state.dateTo || undefined,
+      date: state.date,
       source: state.source,
       category: state.category,
       q: state.q,
@@ -228,10 +218,8 @@ $searchInput.addEventListener('input', () => {
   }, 400);
 });
 
-$dateChips.addEventListener('click', (e) => {
-  const chip = e.target.closest('.chip');
-  if (!chip) return;
-  applyDateRange(parseInt(chip.dataset.range));
+$dateSelect.addEventListener('change', () => {
+  state.date = $dateSelect.value;
   state.page = 1;
   refresh();
 });
@@ -309,6 +297,6 @@ async function refresh() {
   const saved = localStorage.getItem('theme');
   if (saved) document.documentElement.dataset.theme = saved;
 
-  applyDateRange(1); // default: today
+  await loadDates();
   await refresh();
 })();
