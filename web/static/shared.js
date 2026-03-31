@@ -354,6 +354,11 @@ const NewsApp = (function () {
         localStorage.setItem('theme', next);
       });
     }
+    // Bind AI toggle
+    const aiBtn = document.getElementById('aiToggle');
+    if (aiBtn && typeof AIPanel !== 'undefined') {
+      aiBtn.addEventListener('click', function () { AIPanel.toggle(); });
+    }
   }
 
   return { state, init, initTopbarOnly, refresh, loadNews, fetchJSON, API };
