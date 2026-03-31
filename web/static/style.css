@@ -293,6 +293,29 @@ a:hover { text-decoration: underline; }
   font-family: var(--font-mono);
 }
 
+.date-inputs {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.date-inputs input[type="date"] {
+  flex: 1;
+  height: 32px;
+  padding: 0 6px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-family: var(--font-body);
+  outline: none;
+}
+
+.date-inputs input[type="date"]:focus {
+  border-color: var(--accent);
+}
+
 /* Score Slider */
 .score-slider {
   display: flex;
