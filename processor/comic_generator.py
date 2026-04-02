@@ -69,11 +69,10 @@ class ComicGenerator:
     """Generate Doraemon manga comics from news data."""
 
     def __init__(self, config: dict):
-        self.llm_model = config.get("llm_model", "gemini-2.5-flash")
-        self.image_model = config.get("image_model", "nano-banana-pro-preview")
+        self.llm_model = config.get("llm_model", "claude-sonnet-4-6")
+        self.image_model = config.get("image_model", "gemini-3.1-flash-image-preview")
         self.api_key = config.get("api_key", "")
-        self.base_url = config.get("base_url", "https://generativelanguage.googleapis.com/v1beta/openai")
-        self.gemini_api_base = "https://generativelanguage.googleapis.com/v1beta"
+        self.base_url = config.get("base_url", "https://llm-proxy.tapsvc.com/v1")
         self.proxy = config.get("proxy")
         self.max_concurrent = config.get("max_concurrent_images", 3)
 
@@ -124,7 +123,7 @@ class ComicGenerator:
     async def generate_panel_image(
         self, panel: dict, story_index: int, panel_index: int
     ) -> bytes:
-        """Generate a single manga panel image using Nano Banana Pro."""
+        """Generate a single manga panel image via OpenAI-compatible API."""
         prompt = (
             f"A single manga panel in the style of Doraemon by Fujiko F. Fujio. "
             f"Black and white manga style with clean lines. "
@@ -134,16 +133,14 @@ class ComicGenerator:
             f"Characters: Doraemon (blue robot cat) and Nobita (boy with glasses)."
         )
 
-        url = (
-            f"{self.gemini_api_base}/models/{self.image_model}"
-            f":generateContent?key={self.api_key}"
-        )
+        url = f"{self.base_url}/images/generations"
 
         payload = {
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {
-                "responseModalities": ["TEXT", "IMAGE"],
-            },
+            "model": self.image_model,
+            "prompt": prompt,
+            "n": 1,
+            "size": "1024x1024",
+            "response_format": "b64_json",
         }
 
         client_kwargs: dict = {"timeout": httpx.Timeout(120.0)}
@@ -153,16 +150,19 @@ class ComicGenerator:
         for attempt in range(3):
             try:
                 async with httpx.AsyncClient(**client_kwargs) as client:
-                    resp = await client.post(url, json=payload)
+                    resp = await client.post(
+                        url,
+                        headers={
+                            "Authorization": f"Bearer {self.api_key}",
+                            "Content-Type": "application/json",
+                        },
+                        json=payload,
+                    )
                     resp.raise_for_status()
                     data = resp.json()
 
-                for candidate in data.get("candidates", []):
-                    for part in candidate.get("content", {}).get("parts", []):
-                        if "inlineData" in part:
-                            return base64.b64decode(part["inlineData"]["data"])
-
-                raise ValueError("No image data in response")
+                b64_data = data["data"][0]["b64_json"]
+                return base64.b64decode(b64_data)
 
             except Exception as e:
                 logger.warning(

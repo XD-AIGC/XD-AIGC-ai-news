@@ -310,7 +310,7 @@ sources:
 
 llm:
   provider: "openai"
-  model: "gemini-3.1-flash-lite-preview"
+  model: "claude-sonnet-4-6"
   api_key: "${OPENAI_API_KEY}"
   base_url: "${OPENAI_BASE_URL}"
   temperature: 0.3
@@ -337,7 +337,7 @@ output:
 
 weekly:
   enabled: true
-  image_model: "nano-banana-pro-preview"
+  image_model: "gemini-3.1-flash-image-preview"
   story_count: 3
   panels_per_story: 4
   max_concurrent_images: 3
