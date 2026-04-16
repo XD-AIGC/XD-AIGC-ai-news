@@ -44,9 +44,10 @@ async def generate_weekly_digest(
     db: NewsDatabase,
     comic_gen: ComicGenerator,
     output_dir: str = "./docs",
+    ref_date: datetime | None = None,
 ) -> dict | None:
     """Main weekly pipeline: query DB, generate comics, write output."""
-    week_label, start_date, end_date = get_week_range()
+    week_label, start_date, end_date = get_week_range(ref_date)
     logger.info(
         "Weekly digest: %s (%s to %s)", week_label, start_date, end_date
     )

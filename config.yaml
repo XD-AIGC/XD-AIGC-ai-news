@@ -318,7 +318,7 @@ llm:
 
 output:
   notion:
-    enabled: true
+    enabled: false
     api_key: "${NOTION_API_KEY}"
     database_id: "${NOTION_DATABASE_ID}"
   web:

@@ -1,0 +1,321 @@
+{
+  "week": "2026-W14",
+  "date_range": "2026-03-30 — 2026-04-05",
+  "generated_at": "2026-04-16T14:59:36.827032+00:00",
+  "total_news": 368,
+  "total_sources": 6,
+  "week_title": "8520亿！AI烧钱大赛正式开幕",
+  "editor_note": "本周最劲爆的消息不是某个模型有多聪明，而是OpenAI估值直接冲到8520亿美元——快赶上一个中等国家的GDP了。与此同时，Claude Code被开发者们里里外外扒了个精光，Qwen也端出了全模态大餐。这周的AI圈，钱比代码更热闹。",
+  "stories": [
+    {
+      "title": "8520亿！哆啦A梦的口袋装不下这笔钱",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "OpenAI本周完成新一轮融资，估值高达8520亿美元，融资额达1220亿美元。这个数字已经超过大多数国家的科技公司总市值，AI军备竞赛的资本烈度彻底进入新维度。钱从哪来？烧向哪里？大雄表示完全听不懂，但哆啦A梦说这很正常。",
+      "highlights": [
+        "估值8520亿美元，逼近万亿俱乐部",
+        "单轮融资1220亿美元，刷新科技史记录",
+        "资金将用于算力扩张与AGI研发"
+      ],
+      "community_quotes": [
+        {
+          "text": "这已经不是在投资一家公司，这是在投资一个文明的走向。",
+          "author": "硅谷投资人 @VC_Watcher"
+        },
+        {
+          "text": "8520亿……我的房贷还没还完，OpenAI已经快值一个德国了。",
+          "author": "网友 @打工人小李"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "OpenAI closes funding round at an $852B valuation",
+          "score": 10.0,
+          "url": "https://www.cnbc.com/2026/03/31/openai-funding-round-ipo.html"
+        },
+        {
+          "title": "Accelerating the next phase of AI",
+          "score": 9.5,
+          "url": "https://openai.com/index/accelerating-the-next-phase-ai"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita runs into the room waving a newspaper, eyes wide with shock. Doraemon sits calmly drinking tea.",
+          "dialogue_cn": "大雄：「哆啦A梦！你看！OpenAI估值8520亿美元！这是什么概念！！」\n哆啦A梦：「嗯，我在喝茶。」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Doraemon pulls out a giant calculator from his pocket, the screen shows an astronomically large number with many zeros.",
+          "dialogue_cn": "大雄：「8520亿……这到底有多少钱？」\n哆啦A梦：「大概是……你考100分所需时间乘以无穷大，换算成日元的金额。」",
+          "sfx": "ピコピコ"
+        },
+        {
+          "scene": "Nobita imagines himself swimming in a pool of gold coins like Scrooge McDuck, stars in his eyes.",
+          "dialogue_cn": "大雄：「如果我也投资了OpenAI，现在是不是就财务自由了？」\n哆啦A梦：「你连零花钱都要跟妈妈借，投什么资？」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Doraemon looks seriously at the camera while Nobita slumps in the corner. A thought bubble shows rockets launching into space labeled 'AGI'.",
+          "dialogue_cn": "哆啦A梦：「这笔钱会用来建超级算力、训练更强的AI……人类正在用有史以来最贵的方式，赌自己的未来。」\n大雄（小声）：「那……我能蹭个ChatGPT会员吗……」",
+          "sfx": "シーン"
+        }
+      ],
+      "panels_images": [
+        "panel-1.jpg",
+        "panel-2.jpg",
+        "panel-3.jpg",
+        "panel-4.jpg"
+      ]
+    },
+    {
+      "title": "这周开源圈：工具、模型、还有人把Claude扒光了",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周开源社区异常热闹：Hugging Face发布生产级后训练框架TRL v1.0；阿里Qwen端出原生多模态大模型Qwen3.5-Omni；Liquid AI用3.5亿参数挑战大模型定律；更有三个GitHub项目专门解剖Claude Code内部架构，单日斩获数百至千余星。",
+      "highlights": [
+        "TRL v1.0：后训练流程终于有了统一标准",
+        "Qwen3.5-Omni：文字音频视频一把抓的原生多模态",
+        "Claude Code被三个项目同时逆向，开发者集体「开膛手术」"
+      ],
+      "community_quotes": [
+        {
+          "text": "TRL v1.0发布那天，我的GRPO实验终于跑通了，感动到想哭。",
+          "author": "ML研究员 @gradient_descent_life"
+        },
+        {
+          "text": "Qwen3.5-Omni看起来很猛，但我更想知道它能不能帮我剪视频。",
+          "author": "UP主 @懒人剪辑工坊"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Hugging Face Releases TRL v1.0",
+          "score": 9.5,
+          "url": "https://www.marktechpost.com/2026/04/01/hugging-face-releases-trl-v1-0-a-unified-post-training-stack-for-sft-reward-modeling-dpo-and-grpo-workflows/"
+        },
+        {
+          "title": "Alibaba Qwen Team Releases Qwen3.5 Omni",
+          "score": 9.5,
+          "url": "https://www.marktechpost.com/2026/03/30/alibaba-qwen-team-releases-qwen3-5-omni-a-native-multimodal-model-for-text-audio-video-and-realtime-interaction/"
+        },
+        {
+          "title": "how-claude-code-works — 969 stars in 1d",
+          "score": 8.5
+        },
+        {
+          "title": "Liquid AI Released LFM2.5-350M",
+          "score": 8.5,
+          "url": "https://www.marktechpost.com/2026/03/31/liquid-ai-released-lfm2-5-350m-a-compact-350m-parameter-model-trained-on-28t-tokens-with-scaled-reinforcement-learning/"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Doraemon spreads out a colorful map on the floor showing different AI tools and models. Nobita sits cross-legged looking confused.",
+          "dialogue_cn": "大雄：「哆啦A梦，这周开源圈发生了什么？感觉好多东西同时爆了。」\n哆啦A梦：「对，我给你从头说——先说Hugging Face的TRL v1.0。」",
+          "sfx": "ワクワク"
+        },
+        {
+          "scene": "Doraemon holds up a toolbox labeled 'TRL v1.0' with neat compartments. Nobita looks at a second box labeled 'Qwen3.5-Omni' that has eyes, ears, and a film reel on it.",
+          "dialogue_cn": "哆啦A梦：「TRL v1.0是训练AI的统一工具箱，以前流程乱得像你的书桌。Qwen3.5-Omni则是阿里的新模型，能同时听、看、读、说。」\n大雄：「我的书桌哪里乱了！」",
+          "sfx": "ムキー"
+        },
+        {
+          "scene": "Three developers with magnifying glasses surround a robot labeled 'Claude Code', taking it apart and writing notes furiously. Stars rain down from the sky.",
+          "dialogue_cn": "大雄：「这三个GitHub项目是在干嘛？怎么都在研究Claude Code？」\n哆啦A梦：「逆向工程。通俗说就是——把人家的AI助手拆开来，看看里面装了什么馅儿。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon holds up a tiny but glowing robot labeled '350M'. Nobita is amazed. Behind them, a massive robot labeled '70B' looks embarrassed.",
+          "dialogue_cn": "哆啦A梦：「还有Liquid AI用3.5亿参数、28万亿token训练出的小模型，性能吊打很多大块头。」\n大雄：「所以……小也可以很厉害？」\n哆啦A梦：「对。这句话希望你也能用在学习上。」",
+          "sfx": "ズキュン"
+        }
+      ],
+      "panels_images": [
+        "panel-5.jpg",
+        "panel-6.jpg",
+        "panel-7.jpg",
+        "panel-8.jpg"
+      ]
+    },
+    {
+      "title": "用Rust重写Claude Code：快了2.5倍，但我还是不会用",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "有人用Rust把Claude Code重写了一遍，启动速度快2.5倍，体积缩小97%。又有人用1300行TypeScript从零复刻了一个。大雄听完热血沸腾，准备大干一场——直到哆啦A梦问了一个致命问题。",
+      "highlights": [
+        "Rust重写Claude Code：体积缩小97%，速度快2.5倍",
+        "1300行TypeScript从零实现AI编程Agent",
+        "大雄的理想与现实之间，隔着一道「你会写代码吗」"
+      ],
+      "community_quotes": [
+        {
+          "text": "用Rust重写一切是程序员的浪漫，就像用钢笔抄圆珠笔写的购物清单。",
+          "author": "程序员 @Rustacean_Forever"
+        },
+        {
+          "text": "1300行就能实现Claude Code？我的Hello World写了1300行注释。",
+          "author": "网友 @初学者の泪"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "claude-code-rust — 2.5x faster, 97% smaller",
+          "score": 8.5
+        },
+        {
+          "title": "claude-code-from-scratch — 1300 lines TypeScript",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita reads a tech article with sparkling eyes. The headline reads 'Claude Code rewritten in Rust — 2.5x faster!'",
+          "dialogue_cn": "大雄：「哆啦A梦！有人用Rust把Claude Code重写了！启动快2.5倍，体积小97%！」\n哆啦A梦：「嗯，我看到了，很厉害。」",
+          "sfx": "キラーン"
+        },
+        {
+          "scene": "Nobita rolls up his sleeves dramatically, striking a hero pose in front of a computer.",
+          "dialogue_cn": "大雄：「还有人用1300行代码从零写了一个AI编程助手！我也要写！我也要开源！我也要GitHub星星！」\n哆啦A梦：（沉默两秒）「你会写代码吗？」",
+          "sfx": "シーン"
+        },
+        {
+          "scene": "Nobita freezes mid-pose, a cold sweat drop appears on his forehead. The computer screen shows a blank file.",
+          "dialogue_cn": "大雄：「……我会Hello World。」\n哆啦A梦：「TypeScript、Rust、Agent架构、工具调用……」\n大雄：「……我会Hello World。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Nobita lies face-down on the floor dramatically. Doraemon pats his head with a smug smile, holding a sign that says 'Step 1: Learn to code'.",
+          "dialogue_cn": "哆啦A梦：「没关系，那些项目的README你至少能看懂标题。」\n大雄：「你就不能安慰我一下吗！」\n哆啦A梦：「这已经是安慰了。」",
+          "sfx": "ズーン"
+        }
+      ],
+      "doraemon_quote": "「开源的意义不是让每个人都去重写，而是让每个人都能看懂别人怎么重写的——当然，前提是你得先学会写。」",
+      "panels_images": [
+        "panel-9.jpg",
+        "panel-10.jpg",
+        "panel-11.jpg",
+        "panel-12.jpg"
+      ]
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "OpenAI closes funding round at an $852B valuation",
+      "url": "https://www.cnbc.com/2026/03/31/openai-funding-round-ipo.html",
+      "score": 10.0,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "Hugging Face Releases TRL v1.0: A Unified Post-Training Stack for SFT, Reward Modeling, DPO, and GRPO Workflows",
+      "url": "https://www.marktechpost.com/2026/04/01/hugging-face-releases-trl-v1-0-a-unified-post-training-stack-for-sft-reward-modeling-dpo-and-grpo-workflows/",
+      "score": 9.5,
+      "categories": [
+        "开源模型",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Alibaba Qwen Team Releases Qwen3.5 Omni: A Native Multimodal Model for Text, Audio, Video, and Realtime Interaction",
+      "url": "https://www.marktechpost.com/2026/03/30/alibaba-qwen-team-releases-qwen3-5-omni-a-native-multimodal-model-for-text-audio-video-and-realtime-interaction/",
+      "score": 9.5,
+      "categories": [
+        "开源模型",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Accelerating the next phase of AI",
+      "url": "https://openai.com/index/accelerating-the-next-phase-ai",
+      "score": 9.5,
+      "categories": [
+        "商用产品",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "[337 stars in 1d, +337/day] lorryjovens-hub/claude-code-rust",
+      "url": "https://github.com/lorryjovens-hub/claude-code-rust",
+      "score": 8.5,
+      "categories": [
+        "Agent & Skills",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "[545 stars in 1d, +545/day] Windy3f3f3f3f/claude-code-from-scratch",
+      "url": "https://github.com/Windy3f3f3f3f/claude-code-from-scratch",
+      "score": 8.5,
+      "categories": [
+        "Agent & Skills",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "[969 stars in 1d, +969/day] Windy3f3f3f3f/how-claude-code-works",
+      "url": "https://github.com/Windy3f3f3f3f/how-claude-code-works",
+      "score": 8.5,
+      "categories": [
+        "Agent & Skills",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "[1,015 stars in 1d, +1015/day] openedclaude/claude-reviews-claude",
+      "url": "https://github.com/openedclaude/claude-reviews-claude",
+      "score": 8.5,
+      "categories": [
+        "Agent & Skills",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "Liquid AI Released LFM2.5-350M: A Compact 350M Parameter Model Trained on 28T Tokens with Scaled Reinforcement Learning",
+      "url": "https://www.marktechpost.com/2026/03/31/liquid-ai-released-lfm2-5-350m-a-compact-350m-parameter-model-trained-on-28t-tokens-with-scaled-reinforcement-learning/",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "Z.ai Launches GLM-5V-Turbo: A Native Multimodal Vision Coding Model Optimized for OpenClaw and High-Capacity Agentic Engineering Workflows Everywhere",
+      "url": "https://www.marktechpost.com/2026/04/01/z-ai-launches-glm-5v-turbo-a-native-multimodal-vision-coding-model-optimized-for-openclaw-and-high-capacity-agentic-engineering-workflows-everywhere/",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "Agent & Skills"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "商用产品": 81,
+      "开源模型": 19,
+      "训练与部署": 22,
+      "Agent & Skills": 107,
+      "ComfyUI": 3,
+      "其他": 232
+    },
+    "by_source": {
+      "rss": 41,
+      "hackernews": 82,
+      "telegram": 98,
+      "youtube": 121,
+      "github": 24,
+      "bilibili": 2
+    }
+  }
+}

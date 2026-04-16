@@ -373,7 +373,16 @@ async def run_weekly(args: argparse.Namespace) -> None:
         }
 
         comic_gen = ComicGenerator(comic_config)
-        digest = await generate_weekly_digest(db, comic_gen, output_dir)
+
+        ref_date = None
+        if args.week_date:
+            ref_date = datetime.strptime(args.week_date, "%Y-%m-%d").replace(
+                tzinfo=timezone.utc
+            )
+
+        digest = await generate_weekly_digest(
+            db, comic_gen, output_dir, ref_date=ref_date
+        )
 
         if digest:
             logger.info("Weekly digest generated: %s", digest["week"])
@@ -426,6 +435,12 @@ def main() -> None:
         "--weekly",
         action="store_true",
         help="Generate weekly comic digest",
+    )
+    parser.add_argument(
+        "--week-date",
+        type=str,
+        default=None,
+        help="Reference date for weekly digest (YYYY-MM-DD), generates the week containing this date",
     )
     parser.add_argument(
         "--port",
