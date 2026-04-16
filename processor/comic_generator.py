@@ -4,6 +4,7 @@ import asyncio
 import base64
 import json
 import logging
+import re
 from pathlib import Path
 
 import httpx
@@ -97,28 +98,37 @@ class ComicGenerator:
         if self.proxy:
             client_kwargs["proxy"] = self.proxy
 
-        async with httpx.AsyncClient(**client_kwargs) as client:
-            resp = await client.post(
-                f"{self.base_url}/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": self.llm_model,
-                    "messages": [
-                        {"role": "system", "content": SCRIPT_SYSTEM_PROMPT},
-                        {"role": "user", "content": user_prompt},
-                    ],
-                    "temperature": 0.8,
-                    "max_tokens": 4096,
-                },
-            )
-            resp.raise_for_status()
-            data = resp.json()
+        for attempt in range(3):
+            async with httpx.AsyncClient(**client_kwargs) as client:
+                resp = await client.post(
+                    f"{self.base_url}/chat/completions",
+                    headers={
+                        "Authorization": f"Bearer {self.api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json={
+                        "model": self.llm_model,
+                        "messages": [
+                            {"role": "system", "content": SCRIPT_SYSTEM_PROMPT},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                        "temperature": 0.7 + attempt * 0.1,
+                        "max_tokens": 8192,
+                    },
+                )
+                resp.raise_for_status()
+                data = resp.json()
 
-        content = data["choices"][0]["message"]["content"].strip()
-        return self._parse_json(content)
+            content = data["choices"][0]["message"]["content"].strip()
+            try:
+                return self._parse_json(content)
+            except json.JSONDecodeError as e:
+                logger.warning(
+                    "Script JSON parse failed (attempt %d/3): %s",
+                    attempt + 1, e,
+                )
+                if attempt == 2:
+                    raise
 
     async def generate_panel_image(
         self, panel: dict, story_index: int, panel_index: int
@@ -213,17 +223,34 @@ class ComicGenerator:
     @staticmethod
     def _parse_json(text: str) -> dict:
         text = text.strip()
-        if text.startswith("```"):
-            lines = text.split("\n")
-            json_lines = []
-            in_block = False
-            for line in lines:
-                if line.strip().startswith("```") and not in_block:
-                    in_block = True
-                    continue
-                elif line.strip() == "```":
-                    break
-                elif in_block:
-                    json_lines.append(line)
-            text = "\n".join(json_lines)
+
+        # Strip markdown code fences
+        if "```" in text:
+            match = re.search(r"```(?:json)?\s*\n(.*?)```", text, re.DOTALL)
+            if match:
+                text = match.group(1).strip()
+
+        # Extract outermost JSON object if surrounded by extra text
+        brace_start = text.find("{")
+        if brace_start > 0:
+            text = text[brace_start:]
+        if brace_start >= 0:
+            depth, end = 0, 0
+            for i, ch in enumerate(text):
+                if ch == "{":
+                    depth += 1
+                elif ch == "}":
+                    depth -= 1
+                    if depth == 0:
+                        end = i + 1
+                        break
+            if end > 0:
+                text = text[:end]
+
+        # Fix common LLM JSON issues
+        # Remove trailing commas before } or ]
+        text = re.sub(r",\s*([}\]])", r"\1", text)
+        # Remove single-line // comments
+        text = re.sub(r"//[^\n]*", "", text)
+
         return json.loads(text)

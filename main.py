@@ -270,33 +270,45 @@ async def run(args: argparse.Namespace) -> None:
         logger.info("After semantic dedup: %d items", len(all_today))
 
         if output_cfg.get("markdown", {}).get("enabled"):
-            md_dir = output_cfg["markdown"].get("output_dir", "./reports/markdown")
-            writer = MarkdownWriter(md_dir)
-            filepath = writer.write(all_today, today)
-            logger.info("Markdown report: %s (%d items)", filepath, len(all_today))
+            try:
+                md_dir = output_cfg["markdown"].get("output_dir", "./reports/markdown")
+                writer = MarkdownWriter(md_dir)
+                filepath = writer.write(all_today, today)
+                logger.info("Markdown report: %s (%d items)", filepath, len(all_today))
+            except Exception as e:
+                logger.error("Markdown output failed: %s", e)
 
         # GitHub Pages static output
         ghpages_cfg = output_cfg.get("github_pages", {})
         if ghpages_cfg.get("enabled"):
-            gh_dir = ghpages_cfg.get("output_dir", "./docs")
-            gh_writer = GitHubPagesWriter(gh_dir)
-            gh_writer.write(all_today, today)
+            try:
+                gh_dir = ghpages_cfg.get("output_dir", "./docs")
+                gh_writer = GitHubPagesWriter(gh_dir)
+                gh_writer.write(all_today, today)
+            except Exception as e:
+                logger.error("GitHub Pages output failed: %s", e)
 
         # Notion output
         notion_cfg = output_cfg.get("notion", {})
         if notion_cfg.get("enabled") and notion_cfg.get("api_key"):
-            notion_proxy = proxy_url if (proxy_url) else None
-            notion = NotionWriter(
-                notion_cfg["api_key"], notion_cfg["database_id"], proxy=notion_proxy
-            )
-            await notion.write_items(all_today)
+            try:
+                notion_proxy = proxy_url if (proxy_url) else None
+                notion = NotionWriter(
+                    notion_cfg["api_key"], notion_cfg["database_id"], proxy=notion_proxy
+                )
+                await notion.write_items(all_today)
+            except Exception as e:
+                logger.error("Notion output failed: %s", e)
 
         # Feishu bot output
         feishu_cfg = output_cfg.get("feishu", {})
         if feishu_cfg.get("enabled") and feishu_cfg.get("webhook_url"):
-            feishu_proxy = proxy_url if (proxy_url) else None
-            bot = FeishuBot(feishu_cfg["webhook_url"], proxy=feishu_proxy)
-            await bot.send_daily_digest(all_today, today)
+            try:
+                feishu_proxy = proxy_url if (proxy_url) else None
+                bot = FeishuBot(feishu_cfg["webhook_url"], proxy=feishu_proxy)
+                await bot.send_daily_digest(all_today, today)
+            except Exception as e:
+                logger.error("Feishu output failed: %s", e)
 
     finally:
         db.close()
