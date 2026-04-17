@@ -1,30 +1,30 @@
 {
   "week": "2026-W14",
   "date_range": "2026-03-30 — 2026-04-05",
-  "generated_at": "2026-04-16T14:59:36.827032+00:00",
+  "generated_at": "2026-04-17T03:53:15.213551+00:00",
   "total_news": 368,
   "total_sources": 6,
-  "week_title": "8520亿！AI烧钱大赛正式开幕",
-  "editor_note": "本周最劲爆的消息不是某个模型有多聪明，而是OpenAI估值直接冲到8520亿美元——快赶上一个中等国家的GDP了。与此同时，Claude Code被开发者们里里外外扒了个精光，Qwen也端出了全模态大餐。这周的AI圈，钱比代码更热闹。",
+  "week_title": "8520亿美元！AI烧钱大赛正式开幕",
+  "editor_note": "本周AI圈最大的新闻不是模型，而是钱——OpenAI估值突破8520亿美元，融资1220亿，堪称人类历史上最贵的科技豪赌。与此同时，Claude Code被开发者们里里外外扒了个精光，阿里多模态大模型也来凑热闹。这周的AI世界，钱比算法更性感。",
   "stories": [
     {
-      "title": "8520亿！哆啦A梦的口袋装不下这笔钱",
+      "title": "8520亿！OpenAI印钞机开动了",
       "theme": "headline",
       "label": "本周头条",
-      "summary": "OpenAI本周完成新一轮融资，估值高达8520亿美元，融资额达1220亿美元。这个数字已经超过大多数国家的科技公司总市值，AI军备竞赛的资本烈度彻底进入新维度。钱从哪来？烧向哪里？大雄表示完全听不懂，但哆啦A梦说这很正常。",
+      "summary": "OpenAI本周完成史诗级融资，估值达到8520亿美元，单轮融资额高达1220亿美元。这个数字已经超过绝大多数国家的GDP，AI行业的资本游戏彻底进入无人区。钱将用于算力扩张、模型研发和全球ChatGPT服务的狂飙猛进。",
       "highlights": [
-        "估值8520亿美元，逼近万亿俱乐部",
-        "单轮融资1220亿美元，刷新科技史记录",
-        "资金将用于算力扩张与AGI研发"
+        "估值8520亿美元，超越绝大多数国家GDP",
+        "单轮融资1220亿美元，创科技史记录",
+        "资金将用于算力基建与AGI研发加速"
       ],
       "community_quotes": [
         {
-          "text": "这已经不是在投资一家公司，这是在投资一个文明的走向。",
-          "author": "硅谷投资人 @VC_Watcher"
+          "text": "这已经不是'AI独角兽'了，这是一头AI蓝鲸。",
+          "author": "科技观察者 @VC_Watch"
         },
         {
-          "text": "8520亿……我的房贷还没还完，OpenAI已经快值一个德国了。",
-          "author": "网友 @打工人小李"
+          "text": "Sam Altman每天早上醒来，账上又多了几个亿，这日子我过不了。",
+          "author": "普通程序员 @debug_life"
         }
       ],
       "related_news": [
@@ -41,24 +41,24 @@
       ],
       "panels": [
         {
-          "scene": "Nobita runs into the room waving a newspaper, eyes wide with shock. Doraemon sits calmly drinking tea.",
-          "dialogue_cn": "大雄：「哆啦A梦！你看！OpenAI估值8520亿美元！这是什么概念！！」\n哆啦A梦：「嗯，我在喝茶。」",
-          "sfx": "ドキドキ"
-        },
-        {
-          "scene": "Doraemon pulls out a giant calculator from his pocket, the screen shows an astronomically large number with many zeros.",
-          "dialogue_cn": "大雄：「8520亿……这到底有多少钱？」\n哆啦A梦：「大概是……你考100分所需时间乘以无穷大，换算成日元的金额。」",
-          "sfx": "ピコピコ"
-        },
-        {
-          "scene": "Nobita imagines himself swimming in a pool of gold coins like Scrooge McDuck, stars in his eyes.",
-          "dialogue_cn": "大雄：「如果我也投资了OpenAI，现在是不是就财务自由了？」\n哆啦A梦：「你连零花钱都要跟妈妈借，投什么资？」",
+          "scene": "Nobita rushes into the room waving a newspaper, eyes wide with shock. Doraemon is sitting calmly eating a dorayaki.",
+          "dialogue_cn": "大雄：「哆啦A梦！OpenAI估值8520亿美元！！这是什么概念？！」\n哆啦A梦：「嗯，比日本GDP的一半还多。」",
           "sfx": "ガーン"
         },
         {
-          "scene": "Doraemon looks seriously at the camera while Nobita slumps in the corner. A thought bubble shows rockets launching into space labeled 'AGI'.",
-          "dialogue_cn": "哆啦A梦：「这笔钱会用来建超级算力、训练更强的AI……人类正在用有史以来最贵的方式，赌自己的未来。」\n大雄（小声）：「那……我能蹭个ChatGPT会员吗……」",
-          "sfx": "シーン"
+          "scene": "Doraemon pulls out a giant calculator from his pocket, showing astronomical numbers on the screen. Nobita's jaw drops to the floor.",
+          "dialogue_cn": "大雄：「那……他们要用这些钱干什么？」\n哆啦A梦：「造更大的AI、买更多的GPU、然后继续融更多的钱。」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Nobita imagines a giant money printing machine with the OpenAI logo, spitting out bills while robots dance around it.",
+          "dialogue_cn": "大雄：「这听起来像一个……无限循环？」\n哆啦A梦：「聪明！你终于理解硅谷商业模式了。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Nobita slumps in his chair looking defeated. Doraemon pats him on the head with a sympathetic but slightly smug expression.",
+          "dialogue_cn": "大雄：「那我的零花钱……500日元……」\n哆啦A梦：「放心，你和OpenAI之间的差距，只有8519999999999500日元而已。」",
+          "sfx": "シュン"
         }
       ],
       "panels_images": [
@@ -69,66 +69,68 @@
       ]
     },
     {
-      "title": "这周开源圈：工具、模型、还有人把Claude扒光了",
+      "title": "Claude Code被扒光了，开源界这周很热闹",
       "theme": "trends",
       "label": "开源&工具",
-      "summary": "本周开源社区异常热闹：Hugging Face发布生产级后训练框架TRL v1.0；阿里Qwen端出原生多模态大模型Qwen3.5-Omni；Liquid AI用3.5亿参数挑战大模型定律；更有三个GitHub项目专门解剖Claude Code内部架构，单日斩获数百至千余星。",
+      "summary": "本周开源社区掀起一股'Claude Code解剖热'：有人写了17章双语文档逆向其架构，有人用1300行TypeScript从零复刻，还有人用Rust重写实现2.5倍加速+97%体积缩减。与此同时，阿里Qwen3.5-Omni原生多模态登场，Hugging Face TRL v1.0正式统一后训练工作流，小模型LFM2.5-350M也用350M参数挑战了大家对'小'的定义。",
       "highlights": [
-        "TRL v1.0：后训练流程终于有了统一标准",
-        "Qwen3.5-Omni：文字音频视频一把抓的原生多模态",
-        "Claude Code被三个项目同时逆向，开发者集体「开膛手术」"
+        "Claude Code遭开发者社区全方位逆向工程，多个项目单日破千星",
+        "Hugging Face TRL v1.0发布，后训练流程终于有了统一标准",
+        "阿里Qwen3.5-Omni：文字、音频、视频，一个模型全搞定"
       ],
       "community_quotes": [
         {
-          "text": "TRL v1.0发布那天，我的GRPO实验终于跑通了，感动到想哭。",
-          "author": "ML研究员 @gradient_descent_life"
+          "text": "Claude Code的系统提示词一旦被看透，感觉像是拆开了魔术师的箱子。",
+          "author": "开发者 @prompt_hacker"
         },
         {
-          "text": "Qwen3.5-Omni看起来很猛，但我更想知道它能不能帮我剪视频。",
-          "author": "UP主 @懒人剪辑工坊"
+          "text": "LFM2.5用350M参数打出这种成绩，'大力出奇迹'要被'精准出奇迹'取代了？",
+          "author": "ML研究员 @scaling_laws"
         }
       ],
       "related_news": [
+        {
+          "title": "how-claude-code-works — 969 stars in 1d",
+          "score": 8.5
+        },
+        {
+          "title": "claude-reviews-claude — 1015 stars in 1d",
+          "score": 8.5
+        },
         {
           "title": "Hugging Face Releases TRL v1.0",
           "score": 9.5,
           "url": "https://www.marktechpost.com/2026/04/01/hugging-face-releases-trl-v1-0-a-unified-post-training-stack-for-sft-reward-modeling-dpo-and-grpo-workflows/"
         },
         {
-          "title": "Alibaba Qwen Team Releases Qwen3.5 Omni",
-          "score": 9.5,
-          "url": "https://www.marktechpost.com/2026/03/30/alibaba-qwen-team-releases-qwen3-5-omni-a-native-multimodal-model-for-text-audio-video-and-realtime-interaction/"
+          "title": "Alibaba Qwen3.5 Omni Released",
+          "score": 9.5
         },
         {
-          "title": "how-claude-code-works — 969 stars in 1d",
+          "title": "Liquid AI LFM2.5-350M",
           "score": 8.5
-        },
-        {
-          "title": "Liquid AI Released LFM2.5-350M",
-          "score": 8.5,
-          "url": "https://www.marktechpost.com/2026/03/31/liquid-ai-released-lfm2-5-350m-a-compact-350m-parameter-model-trained-on-28t-tokens-with-scaled-reinforcement-learning/"
         }
       ],
       "panels": [
         {
-          "scene": "Doraemon spreads out a colorful map on the floor showing different AI tools and models. Nobita sits cross-legged looking confused.",
-          "dialogue_cn": "大雄：「哆啦A梦，这周开源圈发生了什么？感觉好多东西同时爆了。」\n哆啦A梦：「对，我给你从头说——先说Hugging Face的TRL v1.0。」",
-          "sfx": "ワクワク"
+          "scene": "Doraemon is standing in front of a blackboard covered with diagrams of AI model architectures. Nobita sits at a desk looking confused.",
+          "dialogue_cn": "大雄：「这周开源圈发生什么了？感觉GitHub都要爆了。」\n哆啦A梦：「简单说：大家把Claude Code从里到外扒了个精光，还写了17章说明书。」",
+          "sfx": "ポカン"
         },
         {
-          "scene": "Doraemon holds up a toolbox labeled 'TRL v1.0' with neat compartments. Nobita looks at a second box labeled 'Qwen3.5-Omni' that has eyes, ears, and a film reel on it.",
-          "dialogue_cn": "哆啦A梦：「TRL v1.0是训练AI的统一工具箱，以前流程乱得像你的书桌。Qwen3.5-Omni则是阿里的新模型，能同时听、看、读、说。」\n大雄：「我的书桌哪里乱了！」",
-          "sfx": "ムキー"
-        },
-        {
-          "scene": "Three developers with magnifying glasses surround a robot labeled 'Claude Code', taking it apart and writing notes furiously. Stars rain down from the sky.",
-          "dialogue_cn": "大雄：「这三个GitHub项目是在干嘛？怎么都在研究Claude Code？」\n哆啦A梦：「逆向工程。通俗说就是——把人家的AI助手拆开来，看看里面装了什么馅儿。」",
+          "scene": "Doraemon holds up three floating screens showing: Rust code, TypeScript code, and a Chinese-English document. Each screen has star count badges.",
+          "dialogue_cn": "哆啦A梦：「有人用Rust重写，速度快2.5倍；有人1300行TypeScript从零复刻；还有人写了双语逆向分析文档。」\n大雄：「这……Anthropic看到会不会哭？」",
           "sfx": "キラキラ"
         },
         {
-          "scene": "Doraemon holds up a tiny but glowing robot labeled '350M'. Nobita is amazed. Behind them, a massive robot labeled '70B' looks embarrassed.",
-          "dialogue_cn": "哆啦A梦：「还有Liquid AI用3.5亿参数、28万亿token训练出的小模型，性能吊打很多大块头。」\n大雄：「所以……小也可以很厉害？」\n哆啦A梦：「对。这句话希望你也能用在学习上。」",
-          "sfx": "ズキュン"
+          "scene": "Doraemon switches to showing Qwen3.5-Omni logo alongside TRL v1.0 badge, with multimodal icons (text, audio, video) floating around.",
+          "dialogue_cn": "哆啦A梦：「另外，阿里的Qwen3.5-Omni来了，文字音频视频一锅炖，原生多模态，直接对标Gemini。」\n大雄：「国产AI越来越厉害了！」",
+          "sfx": "ドーン"
+        },
+        {
+          "scene": "Doraemon looks proudly at a tiny robot (representing LFM2.5-350M) lifting weights much heavier than itself. Nobita watches in amazement.",
+          "dialogue_cn": "大雄：「那个350M的小模型也很厉害？」\n哆啦A梦：「对，28万亿token喂出来的，参数少但不简单——就像你考试抄了满分，但只带了一张纸。」",
+          "sfx": "ムキムキ"
         }
       ],
       "panels_images": [
@@ -139,58 +141,59 @@
       ]
     },
     {
-      "title": "用Rust重写Claude Code：快了2.5倍，但我还是不会用",
+      "title": "大雄想用AI偷懒，结果AI比他更懒",
       "theme": "comedy",
       "label": "轻松一刻",
-      "summary": "有人用Rust把Claude Code重写了一遍，启动速度快2.5倍，体积缩小97%。又有人用1300行TypeScript从零复刻了一个。大雄听完热血沸腾，准备大干一场——直到哆啦A梦问了一个致命问题。",
+      "summary": "OpenAI拿了1220亿美元，大雄觉得AI应该什么都能帮他做了。但现实是：越来越多的AI产品在发布会上无所不能，在实际使用中一言难尽。这一期，我们用大雄的惨痛经历，聊聊AI行业'PPT战神、落地青铜'的永恒主题。",
       "highlights": [
-        "Rust重写Claude Code：体积缩小97%，速度快2.5倍",
-        "1300行TypeScript从零实现AI编程Agent",
-        "大雄的理想与现实之间，隔着一道「你会写代码吗」"
+        "AI估值越高，用户期望越高，失望也越高",
+        "多模态模型：发布会能看能听能说，实测能……凑合",
+        "开发者花一周逆向Claude Code，不如花五分钟读官方文档"
       ],
       "community_quotes": [
         {
-          "text": "用Rust重写一切是程序员的浪漫，就像用钢笔抄圆珠笔写的购物清单。",
-          "author": "程序员 @Rustacean_Forever"
+          "text": "每次看到'革命性突破'四个字，我就开始默默备份旧版本。",
+          "author": "资深打工人 @been_there"
         },
         {
-          "text": "1300行就能实现Claude Code？我的Hello World写了1300行注释。",
-          "author": "网友 @初学者の泪"
+          "text": "AI公司估值8000亿，我的bug还是没人修。",
+          "author": "前端难民 @css_is_hard"
         }
       ],
       "related_news": [
         {
-          "title": "claude-code-rust — 2.5x faster, 97% smaller",
-          "score": 8.5
+          "title": "OpenAI closes funding round at an $852B valuation",
+          "score": 10.0,
+          "url": "https://www.cnbc.com/2026/03/31/openai-funding-round-ipo.html"
         },
         {
-          "title": "claude-code-from-scratch — 1300 lines TypeScript",
-          "score": 8.5
+          "title": "Alibaba Qwen3.5 Omni Released",
+          "score": 9.5
         }
       ],
       "panels": [
         {
-          "scene": "Nobita reads a tech article with sparkling eyes. The headline reads 'Claude Code rewritten in Rust — 2.5x faster!'",
-          "dialogue_cn": "大雄：「哆啦A梦！有人用Rust把Claude Code重写了！启动快2.5倍，体积小97%！」\n哆啦A梦：「嗯，我看到了，很厉害。」",
-          "sfx": "キラーン"
+          "scene": "Nobita lying lazily on the floor, pointing at his homework pile. Doraemon stands with arms crossed looking unimpressed.",
+          "dialogue_cn": "大雄：「哆啦A梦！OpenAI拿了1220亿美元，AI这么厉害，帮我写作业吧！」\n哆啦A梦：「……你知道那1220亿不是给你的吧？」",
+          "sfx": "ダラダラ"
         },
         {
-          "scene": "Nobita rolls up his sleeves dramatically, striking a hero pose in front of a computer.",
-          "dialogue_cn": "大雄：「还有人用1300行代码从零写了一个AI编程助手！我也要写！我也要开源！我也要GitHub星星！」\n哆啦A梦：（沉默两秒）「你会写代码吗？」",
-          "sfx": "シーン"
+          "scene": "Doraemon pulls out a futuristic AI tablet. Nobita excitedly types his homework question. The screen shows a confident loading animation.",
+          "dialogue_cn": "大雄：「我让AI帮我写读后感，题目是《我的理想》！」\n哆啦A梦：「好，让我们看看8000亿估值的产物……」",
+          "sfx": "ワクワク"
         },
         {
-          "scene": "Nobita freezes mid-pose, a cold sweat drop appears on his forehead. The computer screen shows a blank file.",
-          "dialogue_cn": "大雄：「……我会Hello World。」\n哆啦A梦：「TypeScript、Rust、Agent架构、工具调用……」\n大雄：「……我会Hello World。」",
-          "sfx": "ガーン"
+          "scene": "The screen displays a very generic, overly formal essay. Nobita's face falls. The AI response is titled 'As an AI language model, I cannot...'",
+          "dialogue_cn": "AI回复：「作为一个AI语言模型，我的理想是服务人类、促进社会和谐……」\n大雄：「这……老师一眼就看出来了！」",
+          "sfx": "ズッコケ"
         },
         {
-          "scene": "Nobita lies face-down on the floor dramatically. Doraemon pats his head with a smug smile, holding a sign that says 'Step 1: Learn to code'.",
-          "dialogue_cn": "哆啦A梦：「没关系，那些项目的README你至少能看懂标题。」\n大雄：「你就不能安慰我一下吗！」\n哆啦A梦：「这已经是安慰了。」",
-          "sfx": "ズーン"
+          "scene": "Doraemon takes the tablet back with a smug smile. Nobita is frantically writing his homework by hand, sweating profusely.",
+          "dialogue_cn": "哆啦A梦：「结论：AI估值8520亿，但写小学生作文还不如大雄自己来。」\n大雄：「那这8520亿……」\n哆啦A梦：「主要用来说服投资人AI很厉害的。」",
+          "sfx": "ガクッ"
         }
       ],
-      "doraemon_quote": "「开源的意义不是让每个人都去重写，而是让每个人都能看懂别人怎么重写的——当然，前提是你得先学会写。」",
+      "doraemon_quote": "「AI的估值和AI的实用性，是两条平行线——都在增长，但永远不会相交。」——哆啦A梦，摘自四次元口袋内部备忘录",
       "panels_images": [
         "panel-9.jpg",
         "panel-10.jpg",
@@ -310,12 +313,12 @@
       "其他": 232
     },
     "by_source": {
-      "rss": 41,
-      "hackernews": 82,
-      "telegram": 98,
-      "youtube": 121,
       "github": 24,
-      "bilibili": 2
+      "youtube": 121,
+      "telegram": 98,
+      "hackernews": 82,
+      "bilibili": 2,
+      "rss": 41
     }
   }
 }
