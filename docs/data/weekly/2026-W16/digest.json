@@ -1,0 +1,324 @@
+{
+  "week": "2026-W16",
+  "date_range": "2026-04-13 — 2026-04-19",
+  "generated_at": "2026-04-19T14:04:57.568507+00:00",
+  "total_news": 520,
+  "total_sources": 6,
+  "week_title": "Anthropic疯狂连发，3D世界要来了！",
+  "editor_note": "本周最魔幻的事：Anthropic在一周内连发Opus 4.6和4.7，速度快到让人怀疑他们的时间是不是也用AI加速了。与此同时，阿里、腾讯、NVIDIA同日发力3D世界生成，游戏圈的美术师们开始瑟瑟发抖。AI Agent从概念走向全托管，懒人时代真的来了。",
+  "stories": [
+    {
+      "title": "Anthropic一周连发两炮：Opus 4.6→4.7，你追得上吗？",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "Anthropic本周上演极速连发——先推Opus 4.6（200K上下文、自适应思考、近乎无限对话），紧接着Opus 4.7登场，专攻Agent编程、高分辨率视觉和长周期自主任务。同步发布的托管Agent Beta版，让Claude可以独立完成文件读写、代码编写、网页浏览全套操作。这波操作让整个AI圈集体问号。",
+      "highlights": [
+        "Opus 4.6：200K上下文+自适应思考，测试版支持100万token",
+        "Opus 4.7：Agent编程+高分辨率视觉，一周内接棒发布",
+        "托管Agent Beta：全托管云端，Claude自主完成复杂长任务"
+      ],
+      "community_quotes": [
+        {
+          "text": "Anthropic这周是在用Claude帮自己写发布计划吗？两个版本之间我还没看完文档……",
+          "author": "某开发者 @ X"
+        },
+        {
+          "text": "Opus 4.7的Agent跑benchmark，参数调优全程自主完成，我的实习生要失业了。",
+          "author": "Reddit r/LocalLLaMA"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Anthropic发布Claude Opus 4.6，支持200K上下文与自适应思考",
+          "score": 8.5
+        },
+        {
+          "title": "Claude Opus 4.7发布：Agent编程与高分辨率视觉重大升级",
+          "score": 8.5,
+          "url": "https://www.anthropic.com/news/claude-opus-4-7"
+        },
+        {
+          "title": "Anthropic推出Claude托管Agent Beta版，全托管自主执行长任务",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita rushes into Doraemon's room waving his phone, screen showing 'Claude Opus 4.6 Released' notification, Doraemon sitting calmly reading a newspaper",
+          "dialogue_cn": "大雄：「哆啦A梦！Anthropic发新模型了！Opus 4.6！200K上下文！快来看！」\n哆啦A梦：「哦，我知道，上午的事了。」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Doraemon pulls out a gadget that displays a holographic timeline showing Claude versions rapidly stacking up, Nobita's jaw drops",
+          "dialogue_cn": "大雄：「200K上下文是什么概念？！」\n哆啦A梦：「大概是……你三年的作业全塞进去还有剩。当然，你三年的作业加起来也没多少字就是了。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Nobita's phone buzzes again, showing 'Claude Opus 4.7 Released', Nobita stares in disbelief, Doraemon sips tea without surprise",
+          "dialogue_cn": "大雄：「等等……4.7？！刚才不是4.6吗？！这才过了多久！」\n哆啦A梦：「大概……你去倒杯水的时间。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Doraemon stands confidently explaining while a hologram shows Claude autonomously browsing web, writing code, reading files all at once, Nobita sits stunned",
+          "dialogue_cn": "哆啦A梦：「而且新版托管Agent出来了，Claude现在能自己上网、写代码、读文件，全自动完成复杂任务。」\n大雄：「那……我还有什么用？」\n哆啦A梦：「提问题。就这一个功能，你还得练练。」",
+          "sfx": "シーン"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": [
+        "panel-1.jpg",
+        "panel-2.jpg",
+        "panel-3.jpg",
+        "panel-4.jpg"
+      ]
+    },
+    {
+      "title": "3D世界大乱斗：阿里、腾讯、NVIDIA同时开炸",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周3D生成赛道突然热闹起来：腾讯混元HY-World 2.0开源发布，支持文本/图像/视频生成可导出3D场景，直接接Unity/UE；阿里Happy Oyster专攻可交互三维视频；NVIDIA Lyra 2.0则把单张图片变成可行走的完整3D世界。三家同周发力，游戏和影视行业的内容生产正式进入AI实用化阶段。",
+      "highlights": [
+        "腾讯HY-World 2.0：多模态输入→3DGS/Mesh/点云，Unity/UE直接用",
+        "阿里Happy Oyster：可交互三维视频，面向游戏与影视",
+        "NVIDIA Lyra 2.0：单图→可探索大规模3D世界，支持机器人部署"
+      ],
+      "community_quotes": [
+        {
+          "text": "腾讯和阿里同一天发3D模型，这是约好了的还是互相盯着对方的日历？",
+          "author": "微博 AI圈吃瓜群众"
+        },
+        {
+          "text": "Lyra 2.0能把一张照片变成可以行走的3D世界，我现在就想把我家小区扫进去做个游戏地图。",
+          "author": "GitHub Discussion"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "腾讯HY-World 2.0：开源多模态3D世界生成模型",
+          "score": 8.5
+        },
+        {
+          "title": "阿里腾讯同日发布3D内容生成模型，国内AI游戏内容进入实用化",
+          "score": 8.2
+        },
+        {
+          "title": "NVIDIA Lyra 2.0：单图生成可探索大规模3D世界",
+          "score": 8.2
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita and Doraemon stand in front of a huge holographic display showing three logos: Tencent, Alibaba, and NVIDIA all releasing 3D model announcements simultaneously",
+          "dialogue_cn": "大雄：「哆啦A梦，这三家都在同一周发3D生成模型？这也太巧了吧……」\n哆啦A梦：「不是巧合，是互相盯着。科技公司都有竞争对手雷达。」",
+          "sfx": "ザワザワ"
+        },
+        {
+          "scene": "Doraemon demonstrates Tencent HY-World 2.0 by typing text, showing a 3D city scene being generated that exports directly into a game engine interface",
+          "dialogue_cn": "哆啦A梦：「腾讯这个最猛——打几个字，3D场景就出来了，直接导进Unity和虚幻引擎，游戏美术师……」\n大雄：「游戏美术师怎么了？」\n哆啦A梦：「可能要开始学提示词了。」",
+          "sfx": "ドーン"
+        },
+        {
+          "scene": "Doraemon holds up a single photo of Nobita's house, then a massive explorable 3D neighborhood appears from it via NVIDIA Lyra 2.0, Nobita's eyes sparkle",
+          "dialogue_cn": "大雄：「NVIDIA这个更厉害！一张照片变成能走进去的3D世界？！」\n哆啦A梦：「对，还能让机器人在里面训练。」\n大雄：「那我可以把我房间扫进去，让机器人帮我收拾吗？」\n哆啦A梦：「……你连照片都不想拍吗。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon draws a comparison chart in the air showing the three companies' different focuses: gaming, interactive video, and robot simulation, Nobita looks thoughtful",
+          "dialogue_cn": "哆啦A梦：「三家各有侧重：腾讯做游戏资产，阿里做影视交互，NVIDIA做仿真训练。」\n大雄：「所以以后游戏世界是AI造的，演的是AI，连测试的机器人也是AI……」\n哆啦A梦：「你终于说了句有深度的话。」\n大雄：「我也觉得。」",
+          "sfx": "ポカン"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": [
+        "panel-5.jpg",
+        "panel-6.jpg",
+        "panel-7.jpg",
+        "panel-8.jpg"
+      ]
+    },
+    {
+      "title": "AI自己调参数，我的实习生呢？",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "本周有个细节亮点被低调埋在新闻里：有人用RTX 5070 Ti跑Qwen3-35B到79 t/s，整个调优过程——配置生成、服务启动、基准测试、参数迭代——全部由Claude Opus 4.7自主完成。换句话说，AI在帮人类调优……另一个AI。大雄听完陷入了深深的职业危机。",
+      "highlights": [
+        "Claude Opus 4.7自主完成Qwen3-35B全套调优，包括参数迭代",
+        "关键参数--n-cpu-moe比常见方案快54%，由AI自己发现",
+        "AI调AI，人类全程围观点赞"
+      ],
+      "community_quotes": [
+        {
+          "text": "让Claude帮我调另一个模型的参数，它比我更了解我的GPU。这很正常吗？",
+          "author": "Reddit r/LocalLLaMA"
+        },
+        {
+          "text": "以后的工作流：老板→AI→另一个AI→结果。人在哪里？人在旁边看着，假装自己很忙。",
+          "author": "X @某ML工程师"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "RTX 5070 Ti跑Qwen3-35B达79 t/s，调优全程由Claude Opus 4.7自主完成",
+          "score": 7.8,
+          "url": "https://www.anthropic.com/news/claude-opus-4-7"
+        },
+        {
+          "title": "OpenAI Agents SDK重大更新：原生沙箱执行，更安全的长任务Agent",
+          "score": 8.2
+        },
+        {
+          "title": "NVIDIA Dynamo：为Agent推理全栈优化，Stripe每周1300+ PR靠它",
+          "score": 7.8
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita excitedly shows Doraemon a news article on his tablet: 'Claude Opus 4.7 autonomously tunes another AI model, achieves 79 t/s', Doraemon reads calmly",
+          "dialogue_cn": "大雄：「哆啦A梦你看！有人让Claude去调优另一个AI模型，参数测试、配置迭代全自己来！」\n哆啦A梦：「嗯，我看到了。」\n大雄：「AI在帮人调AI！这不觉得很可怕吗！」\n哆啦A梦：「比你帮人调AI强多了。」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Nobita dramatically stands up pointing at Doraemon with existential crisis expression, background shows question marks floating around his head",
+          "dialogue_cn": "大雄：「那……那以后还要程序员干什么？！工程师干什么？！」\n哆啦A梦：「写提示词。」\n大雄：「就这？」\n哆啦A梦：「对，然后看AI干活，偶尔夸它两句。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Nobita gets a brilliant idea, eyes shining, holding up a finger with a scheming smile",
+          "dialogue_cn": "大雄：「等等……那我也可以这样！让Claude帮我写作业，我就负责夸它！」\n哆啦A梦：「……」\n大雄：「这不就是新时代的人机协作吗？！」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon pulls out a small gadget shaped like a graduation cap and places it firmly on Nobita's head with a deadpan expression, Nobita looks confused",
+          "dialogue_cn": "哆啦A梦：「这是『自知之明帽』，戴上之后会让你想起——」\n大雄：「想起什么？」\n哆啦A梦：「Claude调优的那个模型，跑完之后还能写报告。你写作业让Claude帮你，最后连夸都夸不到点上。」\n大雄：「……我能不能让Claude帮我夸Claude？」\n哆啦A梦：「行了，你确实找到自己的定位了。」",
+          "sfx": "ズコー"
+        }
+      ],
+      "doraemon_quote": "科技进步的终极形态，就是人类终于可以心安理得地什么都不做——然后发现连'什么都不做'这件事，AI也比你做得更优雅。",
+      "panels_images": [
+        "panel-9.jpg",
+        "panel-10.jpg",
+        "panel-11.jpg",
+        "panel-12.jpg"
+      ]
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "Claude Opus 4.7",
+      "url": "https://www.anthropic.com/news/claude-opus-4-7",
+      "score": 8.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "🤖 Anthropic 发布 Claude Opus 4.6，支持 200K 上下文窗口和自适应思考模式  Anthropic 发布新一代 Claude Opu...",
+      "url": "https://t.me/zaihuapd/40903",
+      "score": 8.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Tencent HY-World 2.0 appears to be dropping on April 15 — open-source multimodal 3D world generation from Tencent Hunyuan",
+      "url": "https://v.redd.it/g91l2x98w7vg1",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "其他"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Anthropic 推出 Claude 托管代理 Beta 版：提供全托管环境支持自主执行长任务",
+      "url": "https://platform.claude.com/docs/en/managed-agents/overview",
+      "score": 8.5,
+      "categories": [
+        "Agent & Skills",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "Anthropic Releases Claude Opus 4.7: A Major Upgrade for Agentic Coding, High-Resolution Vision, and Long-Horizon Autonomous Tasks",
+      "url": "https://www.marktechpost.com/2026/04/18/anthropic-releases-claude-opus-4-7-a-major-upgrade-for-agentic-coding-high-resolution-vision-and-long-horizon-autonomous-tasks/",
+      "score": 8.2,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "阿里腾讯同日发布 3D 内容生成模型",
+      "url": "https://www.bloomberg.com/news/articles/2026-04-16/alibaba-releases-new-ai-model-for-gaming-development",
+      "score": 8.2,
+      "categories": [
+        "开源模型",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "Lyra 2.0 : Explorable Generative 3D Worlds",
+      "url": "https://v.redd.it/g7rh44bgxdvg1",
+      "score": 8.2,
+      "categories": [
+        "开源模型",
+        "其他"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "The next evolution of the Agents SDK",
+      "url": "https://openai.com/index/the-next-evolution-of-the-agents-sdk",
+      "score": 8.2,
+      "categories": [
+        "Agent & Skills",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "RTX 5070 Ti + 9800X3D running Qwen3.6-35B-A3B at 79 t/s with 128K context, the --n-cpu-moe flag is the most important part.",
+      "url": "https://www.reddit.com/r/LocalLLaMA/comments/1sor55y/rtx_5070_ti_9800x3d_running_qwen3635ba3b_at_79_ts/",
+      "score": 7.8,
+      "categories": [
+        "开源模型",
+        "训练与部署",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "Full-Stack Optimizations for Agentic Inference with NVIDIA Dynamo",
+      "url": "https://developer.nvidia.com/blog/full-stack-optimizations-for-agentic-inference-with-nvidia-dynamo/",
+      "score": 7.8,
+      "categories": [
+        "Agent & Skills",
+        "训练与部署"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "商用产品": 87,
+      "开源模型": 77,
+      "其他": 339,
+      "Agent & Skills": 91,
+      "训练与部署": 46,
+      "ComfyUI": 19
+    },
+    "by_source": {
+      "github": 28,
+      "rss": 46,
+      "hackernews": 88,
+      "telegram": 103,
+      "reddit": 130,
+      "youtube": 125
+    }
+  }
+}
