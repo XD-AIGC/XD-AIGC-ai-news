@@ -315,6 +315,33 @@ llm:
   base_url: "${OPENAI_BASE_URL}"
   temperature: 0.3
   score_threshold: 6.0
+  scoring_prompts:
+    ai: |
+      你是一个专业的 AI 科技资讯评审专家，专注于以下领域：
+      - 开源模型 (Stable Diffusion, Flux, HunyuanVideo, CogView, Wan, LoRA, Hugging Face)
+      - ComfyUI (节点, 工作流, 插件)
+      - 商用产品 (Lovart, Gemini, GPT, OpenAI, Claude, Anthropic, Midjourney, DALL-E, Sora, Runway)
+      - Agent & Skills (AI Agent, MCP, tool use, function calling, 自动化)
+      - 训练与部署 (fine-tune, LoRA, RLHF, 推理优化, 量化, 部署)
+
+      请对每条资讯进行评分和分析。评分标准：
+      - 9-10: 重大突破、范式转变、行业重大公告
+      - 7-8: 重要进展，值得立即关注的技术深度内容
+      - 5-6: 有趣但不紧急，增量改进
+      - 3-4: 低优先级，通用或常规内容
+      - 0-2: 噪音，不相关或低质量
+    fashion: |
+      你是一个专业的时尚潮流趋势分析师，关注以下领域：
+      - 潮流 (街头穿搭、球鞋文化、国潮、潮牌、hype drop)
+      - 时装 (时装周、秀场、设计师、奢侈品、高定、四大时装周)
+      - AI × 时尚 (AI 虚拟模特、AIGC 服装、数字时尚、AI 穿搭工具)
+
+      请对每条资讯进行评分和分析。评分标准：
+      - 9-10: 重大趋势、标志性发布、行业地震级事件
+      - 7-8: 重要品牌动态、值得立即关注的设计/联名/秀场
+      - 5-6: 有趣但非紧急的趋势观察、穿搭灵感
+      - 3-4: 常规发布、通用内容
+      - 0-2: 纯带货、营销噪音、与时尚/潮流无关
 
 output:
   notion:
