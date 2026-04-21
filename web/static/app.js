@@ -10,13 +10,17 @@ function getActiveTheme() {
   return localStorage.getItem(THEME_STORAGE_KEY) || 'ai';
 }
 
-function applyActiveTheme(theme) {
-  localStorage.setItem(THEME_STORAGE_KEY, theme);
+function syncThemeTabUI(theme) {
   document.querySelectorAll('.theme-tab').forEach(function (btn) {
     var match = btn.dataset.theme === theme;
     btn.classList.toggle('active', match);
     btn.setAttribute('aria-selected', match ? 'true' : 'false');
   });
+}
+
+function applyActiveTheme(theme) {
+  localStorage.setItem(THEME_STORAGE_KEY, theme);
+  syncThemeTabUI(theme);
   if (window.NewsApp && window.NewsApp.state) {
     window.NewsApp.state.theme = theme;
     window.NewsApp.state.page = 1;
@@ -27,6 +31,13 @@ function applyActiveTheme(theme) {
     }
   }
 }
+
+// Event delegation on body — works regardless of when buttons are added to DOM
+document.body.addEventListener('click', function (e) {
+  var tab = e.target.closest('.theme-tab');
+  if (!tab) return;
+  applyActiveTheme(tab.dataset.theme);
+});
 
 // ─── Date state ───
 var dateMode = 'single'; // 'single' or 'range'
@@ -180,19 +191,10 @@ NewsApp.init(function () {
 });
 
 function initContentThemeTabs() {
-  // Sync NewsApp.state.theme with saved localStorage value before first refresh
+  // Sync state.theme with saved localStorage value BEFORE first refresh
   var savedTheme = getActiveTheme();
   if (window.NewsApp && window.NewsApp.state) {
     window.NewsApp.state.theme = savedTheme;
   }
-  // Update button active state to match saved theme (no refresh here — init() calls refresh itself)
-  document.querySelectorAll('.theme-tab').forEach(function (btn) {
-    var match = btn.dataset.theme === savedTheme;
-    btn.classList.toggle('active', match);
-    btn.setAttribute('aria-selected', match ? 'true' : 'false');
-
-    btn.addEventListener('click', function () {
-      applyActiveTheme(btn.dataset.theme);
-    });
-  });
+  syncThemeTabUI(savedTheme);
 }
