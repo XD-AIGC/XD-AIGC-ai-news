@@ -49,8 +49,12 @@ class NewsDatabase:
         cursor.execute("PRAGMA table_info(news)")
         cols = {row[1] for row in cursor.fetchall()}
         if "theme" not in cols:
-            cursor.execute("ALTER TABLE news ADD COLUMN theme TEXT NOT NULL DEFAULT 'ai'")
-            logger.info("Migrated: added 'theme' column to news table")
+            try:
+                cursor.execute("ALTER TABLE news ADD COLUMN theme TEXT NOT NULL DEFAULT 'ai'")
+                logger.info("Migrated: added 'theme' column to news table")
+            except sqlite3.OperationalError as e:
+                # another worker may have added the column concurrently
+                logger.debug("Skipping theme column add (likely race): %s", e)
 
         cursor.execute(CREATE_INDEX_THEME)
         cursor.execute(CREATE_USER_SOURCES_TABLE)
