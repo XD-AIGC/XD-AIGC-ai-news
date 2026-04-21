@@ -3,7 +3,9 @@
 import json
 import logging
 import os
+import socket
 from typing import Optional
+from urllib.parse import urlparse
 
 import httpx
 from dotenv import load_dotenv
@@ -39,6 +41,24 @@ def _load_config_for_analyzer() -> dict:
 
     resolved = re.sub(r"\$\{(\w+)\}", replace_env, raw)
     return yaml.safe_load(resolved)
+
+
+def _pick_proxy(proxy_cfg: dict) -> Optional[str]:
+    """Return first reachable proxy URL from config, or None."""
+    raw = proxy_cfg.get("urls", [])
+    if isinstance(raw, str):
+        urls = [u.strip() for u in raw.split(",") if u.strip()]
+    else:
+        urls = raw
+    for url in urls:
+        parsed = urlparse(url)
+        try:
+            sock = socket.create_connection((parsed.hostname, parsed.port or 18888), timeout=2)
+            sock.close()
+            return url
+        except (OSError, socket.timeout):
+            continue
+    return None
 
 
 def _get_db() -> NewsDatabase:
@@ -126,7 +146,18 @@ async def analyze(req: AnalyzeRequest):
 
         # Fresh analysis
         cfg = _load_config_for_analyzer()
-        async with httpx.AsyncClient(timeout=httpx.Timeout(30.0), follow_redirects=True) as client:
+
+        # Pick a reachable proxy if configured
+        proxy_url = _pick_proxy(cfg.get("proxy", {}))
+
+        client_kwargs = {
+            "timeout": httpx.Timeout(30.0),
+            "follow_redirects": False,  # SSRF defense (see SSRF fix)
+        }
+        if proxy_url:
+            client_kwargs["proxy"] = proxy_url
+
+        async with httpx.AsyncClient(**client_kwargs) as client:
             result = await analyze_url(url, cfg, client)
 
         # Persist as pending
