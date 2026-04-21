@@ -387,5 +387,21 @@ proxy:
   # Comma-separated proxy URLs from .env; first reachable one wins
   urls: "${PROXY_URLS}"
 
+rsshub:
+  base_url: "${RSSHUB_URL}"     # e.g., http://localhost:1200 (set in .env)
+  routes:
+    - { pattern: "xiaohongshu\\.com/user/profile/(\\w+)", template: "/xiaohongshu/user/{1}" }
+    - { pattern: "weibo\\.com/u/(\\d+)",                  template: "/weibo/user/{1}" }
+    - { pattern: "space\\.bilibili\\.com/(\\d+)",         template: "/bilibili/user/video/{1}" }
+
+subscribe_analyzer:
+  llm:
+    # Defaults to top-level llm.* if omitted; override here for cost tuning.
+    model: "claude-sonnet-4-6"
+    temperature: 0.2
+  # Optional: override the default prompt if you want a different judgment style.
+  # prompt_template: |
+  #   ...your template with {n} and {samples} placeholders...
+
 database:
   path: "./data/news.db"
