@@ -190,6 +190,8 @@ async def confirm(req: ConfirmRequest):
         # Apply overrides
         fields = {}
         if req.overrides:
+            if req.overrides.theme and req.overrides.theme not in ("ai", "fashion"):
+                raise HTTPException(status_code=400, detail="theme must be 'ai' or 'fashion'")
             if req.overrides.theme:
                 fields["theme"] = req.overrides.theme
             if req.overrides.focus_areas is not None:
@@ -282,6 +284,8 @@ def patch_subscription(source_id: int, patch: PatchSubscription):
             raise HTTPException(status_code=404, detail="Not found")
 
         fields = {}
+        if patch.theme and patch.theme not in ("ai", "fashion"):
+            raise HTTPException(status_code=400, detail="theme must be 'ai' or 'fashion'")
         if patch.theme:
             fields["theme"] = patch.theme
         if patch.focus_areas is not None:
