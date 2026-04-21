@@ -158,5 +158,8 @@ def explore():
     return RedirectResponse(url="/", status_code=301)
 
 
+from web.routers.subscribe import router as subscribe_router
+app.include_router(subscribe_router)
+
 from web.ai_chat import register_ai_routes
 register_ai_routes(app)
