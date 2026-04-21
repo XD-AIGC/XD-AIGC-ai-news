@@ -2,6 +2,7 @@
 
 import calendar
 import logging
+import re
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from hashlib import md5
@@ -65,6 +66,7 @@ class RSSCollector(BaseScraper):
                     author=entry.get("author", name),
                     published_at=published_at,
                     theme=theme,
+                    image_url=self._extract_image_url(entry),
                     metadata={
                         "feed_name": name,
                         "tags": [t.term for t in entry.get("tags", [])],
@@ -106,3 +108,46 @@ class RSSCollector(BaseScraper):
         if "content" in entry and entry.content:
             return entry.content[0].get("value", "")
         return ""
+
+    _IMG_SRC_RE = re.compile(r'<img[^>]+src=["\']([^"\']+)["\']', re.IGNORECASE)
+
+    @staticmethod
+    def _extract_image_url(entry: dict) -> str | None:
+        """Pick a representative image URL from an RSS entry, or None.
+
+        Order: enclosure (image/*) → media:thumbnail → media:content (image/*)
+        → first <img src> in summary/content.
+        """
+        for enc in entry.get("enclosures", []) or []:
+            mime = (enc.get("type") or "").lower()
+            href = enc.get("href") or enc.get("url")
+            if href and mime.startswith("image/"):
+                return href
+
+        for thumb in entry.get("media_thumbnail", []) or []:
+            url = thumb.get("url")
+            if url:
+                return url
+
+        for media in entry.get("media_content", []) or []:
+            url = media.get("url")
+            mime = (media.get("type") or "").lower()
+            if url and (not mime or mime.startswith("image/")):
+                return url
+
+        candidates: list[str] = []
+        if entry.get("summary"):
+            candidates.append(entry["summary"])
+        if entry.get("description"):
+            candidates.append(entry["description"])
+        for c in entry.get("content", []) or []:
+            value = c.get("value") if isinstance(c, dict) else None
+            if value:
+                candidates.append(value)
+
+        for html in candidates:
+            match = RSSCollector._IMG_SRC_RE.search(html)
+            if match:
+                return match.group(1)
+
+        return None

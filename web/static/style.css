@@ -1098,3 +1098,85 @@ dialog.subscribe-modal .spinner {
   color: #e74c3c;
   cursor: help;
 }
+
+/* ─────────────── Fashion masonry grid ─────────────── */
+.masonry-grid {
+  column-count: 4;
+  column-gap: 16px;
+  width: 100%;
+}
+
+@media (max-width: 1400px) { .masonry-grid { column-count: 4; } }
+@media (max-width: 1100px) { .masonry-grid { column-count: 3; } }
+@media (max-width: 760px)  { .masonry-grid { column-count: 2; } }
+@media (max-width: 480px)  { .masonry-grid { column-count: 1; } }
+
+.masonry-card {
+  display: block;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  margin: 0 0 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-card, #1a1a1a);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.06));
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.masonry-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  border-color: var(--border-hover, rgba(255, 255, 255, 0.18));
+}
+
+.masonry-img-wrap {
+  position: relative;
+  width: 100%;
+  background: #0d0d0d;
+}
+
+.masonry-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.masonry-score {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+.masonry-meta {
+  padding: 10px 12px 12px;
+}
+
+.masonry-title {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--text-primary, #f5f5f5);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.masonry-source {
+  font-size: 11px;
+  color: var(--text-muted, rgba(255, 255, 255, 0.55));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

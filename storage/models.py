@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS news (
     ai_categories TEXT DEFAULT '[]',
     ai_tags TEXT DEFAULT '[]',
     theme TEXT NOT NULL DEFAULT 'ai',
+    image_url TEXT,
     created_at TEXT DEFAULT (datetime('now'))
 );
 """

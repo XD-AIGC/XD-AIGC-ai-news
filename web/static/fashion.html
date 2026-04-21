@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时尚 · AI News Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar" id="topbar"></header>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <section class="sidebar-section">
+        <div class="date-mode-tabs">
+          <button class="date-mode-tab active" data-mode="single">单日</button>
+          <button class="date-mode-tab" data-mode="range">范围</button>
+        </div>
+        <div id="dateSingle" class="date-panel">
+          <select id="dateSelect" class="select-input">
+            <option value="">All dates</option>
+          </select>
+        </div>
+        <div id="dateRange" class="date-panel hidden">
+          <div id="dateRangeChips" class="filter-chips">
+            <button class="chip active" data-days="7">7d</button>
+            <button class="chip" data-days="14">14d</button>
+            <button class="chip" data-days="30">30d</button>
+            <button class="chip" data-days="0">All</button>
+          </div>
+          <div class="date-inputs">
+            <input type="date" id="dateFrom" class="select-input">
+            <input type="date" id="dateTo" class="select-input">
+          </div>
+        </div>
+      </section>
+
+      <section class="sidebar-section">
+        <h3 class="sidebar-title">Source</h3>
+        <div id="sourceFilters" class="filter-chips"></div>
+      </section>
+
+      <section class="sidebar-section">
+        <h3 class="sidebar-title">Category</h3>
+        <div id="categoryFilters" class="filter-chips"></div>
+      </section>
+
+      <section class="sidebar-section">
+        <h3 class="sidebar-title">Min Score</h3>
+        <div class="score-slider">
+          <input type="range" id="scoreSlider" min="0" max="10" step="0.5" value="0">
+          <span id="scoreValue" class="score-label">0</span>
+        </div>
+      </section>
+
+      <section class="sidebar-section" id="statsSection">
+        <h3 class="sidebar-title">Stats</h3>
+        <div id="statsContent" class="stats-grid"></div>
+      </section>
+    </aside>
+
+    <main class="main-content">
+      <div class="theme-tab-bar">
+        <div class="theme-tabs" role="tablist" aria-label="Content theme">
+          <a class="theme-tab" href="/" role="tab" aria-selected="false">🤖 AI</a>
+          <a class="theme-tab active" href="/fashion" role="tab" aria-selected="true">👗 时尚</a>
+        </div>
+        <div class="header-actions">
+          <a href="/subscribe.html" class="btn-secondary">订阅管理</a>
+        </div>
+      </div>
+      <div class="content-header">
+        <div id="resultInfo" class="result-info"></div>
+        <button id="sidebarToggle" class="icon-btn sidebar-toggle">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 5a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+      <div id="newsGrid" class="masonry-grid"></div>
+      <div id="pagination" class="pagination"></div>
+      <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/shared.js"></script>
+  <script src="/static/ai-panel.js"></script>
+  <script src="/static/fashion.js"></script>
+</body>
+</html>

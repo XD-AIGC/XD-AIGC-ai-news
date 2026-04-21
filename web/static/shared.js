@@ -18,6 +18,7 @@ const NewsApp = (function () {
     theme: 'ai',           // content theme (ai / fashion)
     q: '',
     minScore: 0,
+    hasImage: false,       // when true, /api/news returns only items with non-empty image_url
     page: 1,
     pageSize: 50,
   };
@@ -112,6 +113,7 @@ const NewsApp = (function () {
         theme: state.theme,
         q: state.q,
         min_score: state.minScore || undefined,
+        has_image: state.hasImage ? 'true' : undefined,
         page: state.page,
         page_size: state.pageSize,
       });
@@ -134,7 +136,8 @@ const NewsApp = (function () {
       $grid.innerHTML = emptyState('No news found for the current filters');
       return;
     }
-    $grid.innerHTML = items.map(cardHTML).join('');
+    const renderer = getPageHook().cardHTML || cardHTML;
+    $grid.innerHTML = items.map(renderer).join('');
   }
 
   function cardHTML(item) {
@@ -364,7 +367,10 @@ const NewsApp = (function () {
     }
   }
 
-  return { state, init, initTopbarOnly, refresh, loadNews, fetchJSON, API };
+  return {
+    state, init, initTopbarOnly, refresh, loadNews, fetchJSON, API,
+    esc, truncate, sourceLabel,
+  };
 })();
 
 // Expose to window so scripts loaded separately (e.g. app.js checking

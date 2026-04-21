@@ -69,27 +69,20 @@ Observed ~10% failure rate of "Expecting ',' delimiter" errors during fashion re
 
 ## Frontend / UX
 
-### 🔴 Pinterest-style masonry layout for fashion theme
-Fashion content is image-first. Current news-card layout (text summary + small source badge) wastes space and buries visual content. Users expect a Pinterest/Instagram-like waterfall grid with variable-height image cards.
+### ✅ Pinterest-style masonry layout for fashion theme (DONE 2026-04-22)
+Implemented as separate `/fashion.html` page with image-first masonry (CSS `column-count`, 1/2/3/4 cols responsive). Image source: direct RSS-extracted URL. Items without an image are filtered out at the API layer (`has_image=true` filter on `/api/news`).
 
-**Scope:**
-1. **Data model** — add `image_url: str | None` to `ContentItem` + `news` table column.
-2. **Collector** — extract images from RSS entries: `<enclosure url=... type="image/...">`, `<media:thumbnail>`, or first `<img>` in `content`/`summary`. `feedparser` exposes these under `entry.media_content`, `entry.enclosures`, etc.
-3. **Backend** — expose `image_url` in `NewsItemResponse`. Optional: proxy image fetching via `/api/proxy-image?url=...` to bypass CORS / hotlink protection.
-4. **Frontend** — route fashion-theme rendering to a masonry template (CSS `column-count` is simplest; JS libs like Masonry.js add dependency but better layout). Card template: large image + short title, no summary.
-5. **DB migration** — add `image_url TEXT` column (auto-migration).
-6. **Fallback** — if no image, render a text-first card (graceful degradation).
+**Decisions taken:**
+- Single Fashion tab route → `/fashion.html` (vs. inline template switch on `/`).
+- Direct image URL via `<img referrerpolicy="no-referrer">` (no proxy, no cache).
+- New tab opens original article (`<a target="_blank">`, no lightbox).
+- No-image fashion items completely filtered (no text fallback card).
 
-**Design questions to settle in spec:**
-- Single "Fashion" tab route, or switch card template based on theme on the current page?
-- Image hosting: original URL (risky for hotlink bans + analytics leaks) vs. proxy vs. cache-and-resize?
-- Mobile layout: 2 columns on phone, 3 on tablet, 4-5 on desktop?
-- Click behavior: open original URL (current), or lightbox with image + caption (Pinterest-like)?
-- Is this fashion-theme-only, or should AI content also get an optional "card-with-image" mode?
+**Deferred:**
+- Backfill of `image_url` for legacy fashion rows — new pipeline runs will populate naturally; old items just won't appear in masonry.
+- Image proxy / cache-and-resize — revisit if hotlink bans appear.
 
 **Source:** user request on 2026-04-21 post-deploy.
-
-**Estimated effort:** 1-2 day spec + 2-3 day implementation.
 
 ### 🟡 LEON / Safari / GQ Japan etc. — add RSSHub routes for Japanese fashion magazines
 User specifically mentioned interest in Japanese menswear (LEON, Safari). These magazines don't publish public RSS. RSSHub has some community routes that might cover them; otherwise, their 小红书 / 微博 editorial accounts (accessible via the subscription analyzer's RSSHub routes) could serve as content proxies.

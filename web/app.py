@@ -34,6 +34,7 @@ class NewsItemResponse(BaseModel):
     ai_categories: list[str]
     ai_tags: list[str]
     theme: str = "ai"
+    image_url: Optional[str] = None
 
 
 class PaginatedNews(BaseModel):
@@ -60,6 +61,7 @@ def list_news(
     theme: Optional[str] = Query(None, description="ai | fashion"),
     q: Optional[str] = Query(None, description="Search query"),
     min_score: Optional[float] = Query(None),
+    has_image: bool = Query(False, description="Only return items with a non-empty image_url"),
     page: int = Query(1, ge=1),
     page_size: int = Query(50, ge=1, le=200),
 ):
@@ -68,7 +70,8 @@ def list_news(
         items, total = db.search_items(
             date=date, date_from=date_from, date_to=date_to,
             source=source, category=category, theme=theme,
-            q=q, min_score=min_score, page=page, page_size=page_size,
+            q=q, min_score=min_score, has_image=has_image,
+            page=page, page_size=page_size,
         )
         pages = (total + page_size - 1) // page_size if total else 0
         return PaginatedNews(
@@ -117,6 +120,7 @@ def _item_to_resp(item) -> NewsItemResponse:
         ai_categories=item.ai_categories,
         ai_tags=item.ai_tags,
         theme=item.theme.value if hasattr(item.theme, "value") else str(item.theme),
+        image_url=item.image_url,
     )
 
 
@@ -159,6 +163,12 @@ def weekly_js():
 @app.get("/subscribe.html")
 def subscribe_page():
     return FileResponse(STATIC_DIR / "subscribe.html")
+
+
+@app.get("/fashion")
+@app.get("/fashion.html")
+def fashion_page():
+    return FileResponse(STATIC_DIR / "fashion.html")
 
 
 @app.get("/explore")

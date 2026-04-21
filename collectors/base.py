@@ -40,6 +40,7 @@ class ContentItem(BaseModel):
     collected_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     metadata: dict = Field(default_factory=dict)
     theme: Theme = Theme.AI
+    image_url: Optional[str] = None
 
     # AI processing results (filled in Phase 3)
     ai_score: Optional[float] = None

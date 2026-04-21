@@ -45,7 +45,7 @@ class NewsDatabase:
         cursor.execute(CREATE_INDEX_SOURCE)
         cursor.execute(CREATE_INDEX_SCORE)
 
-        # Migration: add theme column if it doesn't exist (idempotent)
+        # Migration: add columns that may be missing on legacy DBs (idempotent)
         cursor.execute("PRAGMA table_info(news)")
         cols = {row[1] for row in cursor.fetchall()}
         if "theme" not in cols:
@@ -53,8 +53,13 @@ class NewsDatabase:
                 cursor.execute("ALTER TABLE news ADD COLUMN theme TEXT NOT NULL DEFAULT 'ai'")
                 logger.info("Migrated: added 'theme' column to news table")
             except sqlite3.OperationalError as e:
-                # another worker may have added the column concurrently
                 logger.debug("Skipping theme column add (likely race): %s", e)
+        if "image_url" not in cols:
+            try:
+                cursor.execute("ALTER TABLE news ADD COLUMN image_url TEXT")
+                logger.info("Migrated: added 'image_url' column to news table")
+            except sqlite3.OperationalError as e:
+                logger.debug("Skipping image_url column add (likely race): %s", e)
 
         cursor.execute(CREATE_INDEX_THEME)
         cursor.execute(CREATE_USER_SOURCES_TABLE)
@@ -79,8 +84,9 @@ class NewsDatabase:
                     """INSERT INTO news
                     (id, source_type, title, url, content, author,
                      published_at, collected_at, metadata_json,
-                     ai_score, ai_summary, ai_categories, ai_tags, theme)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                     ai_score, ai_summary, ai_categories, ai_tags, theme,
+                     image_url)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                     (
                         item.id,
                         item.source_type.value,
@@ -96,6 +102,7 @@ class NewsDatabase:
                         json.dumps(item.ai_categories, ensure_ascii=False),
                         json.dumps(item.ai_tags, ensure_ascii=False),
                         item.theme.value,
+                        item.image_url,
                     ),
                 )
                 new_count += 1
@@ -245,6 +252,7 @@ class NewsDatabase:
         theme: str | None = None,
         q: str | None = None,
         min_score: float | None = None,
+        has_image: bool = False,
         page: int = 1,
         page_size: int = 50,
     ) -> tuple[list[ContentItem], int]:
@@ -280,6 +288,8 @@ class NewsDatabase:
         if min_score is not None:
             conditions.append("ai_score >= ?")
             params.append(min_score)
+        if has_image:
+            conditions.append("image_url IS NOT NULL AND image_url != ''")
 
         where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
 
@@ -306,6 +316,10 @@ class NewsDatabase:
             theme_value = row["theme"] or "ai"
         except (KeyError, IndexError):
             theme_value = "ai"
+        try:
+            image_url = row["image_url"]
+        except (KeyError, IndexError):
+            image_url = None
 
         return ContentItem(
             id=row["id"],
@@ -324,4 +338,5 @@ class NewsDatabase:
             ai_categories=json.loads(row["ai_categories"] or "[]"),
             ai_tags=json.loads(row["ai_tags"] or "[]"),
             theme=Theme(theme_value),
+            image_url=image_url,
         )
