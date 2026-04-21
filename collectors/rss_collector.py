@@ -9,7 +9,7 @@ from hashlib import md5
 import feedparser
 import httpx
 
-from collectors.base import BaseScraper, ContentItem, SourceType
+from collectors.base import BaseScraper, ContentItem, SourceType, Theme
 
 logger = logging.getLogger(__name__)
 
@@ -38,6 +38,7 @@ class RSSCollector(BaseScraper):
     ) -> list[ContentItem]:
         url = feed_cfg["url"]
         name = feed_cfg.get("name", url)
+        theme = Theme(feed_cfg.get("theme", "ai"))
         items: list[ContentItem] = []
 
         try:
@@ -63,6 +64,7 @@ class RSSCollector(BaseScraper):
                     content=self._extract_content(entry),
                     author=entry.get("author", name),
                     published_at=published_at,
+                    theme=theme,
                     metadata={
                         "feed_name": name,
                         "tags": [t.term for t in entry.get("tags", [])],
