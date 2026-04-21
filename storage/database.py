@@ -11,6 +11,7 @@ from storage.models import (
     CREATE_INDEX_DATE,
     CREATE_INDEX_SCORE,
     CREATE_INDEX_SOURCE,
+    CREATE_INDEX_THEME,
     CREATE_INDEX_URL,
     CREATE_NEWS_TABLE,
 )
@@ -41,6 +42,15 @@ class NewsDatabase:
         cursor.execute(CREATE_INDEX_DATE)
         cursor.execute(CREATE_INDEX_SOURCE)
         cursor.execute(CREATE_INDEX_SCORE)
+
+        # Migration: add theme column if it doesn't exist (idempotent)
+        cursor.execute("PRAGMA table_info(news)")
+        cols = {row[1] for row in cursor.fetchall()}
+        if "theme" not in cols:
+            cursor.execute("ALTER TABLE news ADD COLUMN theme TEXT NOT NULL DEFAULT 'ai'")
+            logger.info("Migrated: added 'theme' column to news table")
+
+        cursor.execute(CREATE_INDEX_THEME)
         self._conn.commit()
 
     def url_exists(self, url: str) -> bool:
@@ -61,8 +71,8 @@ class NewsDatabase:
                     """INSERT INTO news
                     (id, source_type, title, url, content, author,
                      published_at, collected_at, metadata_json,
-                     ai_score, ai_summary, ai_categories, ai_tags)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                     ai_score, ai_summary, ai_categories, ai_tags, theme)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                     (
                         item.id,
                         item.source_type.value,
@@ -77,6 +87,7 @@ class NewsDatabase:
                         item.ai_summary,
                         json.dumps(item.ai_categories, ensure_ascii=False),
                         json.dumps(item.ai_tags, ensure_ascii=False),
+                        item.theme.value,
                     ),
                 )
                 new_count += 1
@@ -273,6 +284,13 @@ class NewsDatabase:
         return items, total
 
     def _row_to_item(self, row: sqlite3.Row) -> ContentItem:
+        from collectors.base import Theme
+        # Row may lack theme column in pre-migration dev DBs; default to ai
+        try:
+            theme_value = row["theme"] or "ai"
+        except (KeyError, IndexError):
+            theme_value = "ai"
+
         return ContentItem(
             id=row["id"],
             source_type=row["source_type"],
@@ -289,4 +307,5 @@ class NewsDatabase:
             ai_summary=row["ai_summary"],
             ai_categories=json.loads(row["ai_categories"] or "[]"),
             ai_tags=json.loads(row["ai_tags"] or "[]"),
+            theme=Theme(theme_value),
         )
