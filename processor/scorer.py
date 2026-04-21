@@ -35,10 +35,21 @@ USER_PROMPT_TEMPLATE = """分析以下资讯，返回 JSON：
 {{
   "score": <0-10的浮点数>,
   "summary": "<2-3句中文摘要>",
-  "categories": [<从以下选择: "开源模型", "ComfyUI", "商用产品", "Agent & Skills", "训练与部署", "其他">],
+  "categories": [<从以下选择: {allowed_categories}>],
   "tags": ["<3-5个相关标签>"],
   "reason": "<评分理由，一句话>"
 }}"""
+
+# Allowed categories per theme — used to inject the correct picklist
+# into the user prompt so LLM doesn't fall back to "其他" for fashion items
+# just because it was only shown AI category options.
+FOCUS_AREAS_BY_THEME: dict[str, list[str]] = {
+    "ai": [
+        "开源模型", "ComfyUI", "商用产品", "Agent & Skills",
+        "3D生成与重建", "训练与部署", "其他",
+    ],
+    "fashion": ["潮流", "时装", "AI × 时尚", "其他"],
+}
 
 
 class AIScorer:
@@ -67,6 +78,13 @@ class AIScorer:
             )
             return self.scoring_prompts["ai"]
         return SYSTEM_PROMPT
+
+    @staticmethod
+    def _allowed_categories_for(item: ContentItem) -> str:
+        """Comma-separated quoted category list for the user prompt, scoped to item.theme."""
+        theme_key = item.theme.value if hasattr(item.theme, "value") else str(item.theme)
+        cats = FOCUS_AREAS_BY_THEME.get(theme_key) or FOCUS_AREAS_BY_THEME["ai"]
+        return ", ".join(f'"{c}"' for c in cats)
 
     async def process_items(
         self, items: list[ContentItem], skip_scored: bool = True
@@ -123,6 +141,7 @@ class AIScorer:
             author=item.author or "Unknown",
             url=item.url,
             content=content_preview,
+            allowed_categories=self._allowed_categories_for(item),
         )
 
         client_kwargs: dict = {"timeout": httpx.Timeout(60.0)}
