@@ -101,3 +101,61 @@ def test_detect_x_com_is_not_confused_by_status_url():
     # followed by extra path. Accept this as twitter with handle=karpathy (approximation OK).
     # If strict mode wanted later, detector can be tightened.
     assert r.type in ("twitter", "unknown")
+
+
+from unittest.mock import AsyncMock, MagicMock
+
+
+@pytest.mark.asyncio
+async def test_probe_rss_direct_xml_response():
+    from processor.subscribe_analyzer import probe_rss_feed
+
+    client = AsyncMock()
+    response = MagicMock()
+    response.headers = {"content-type": "application/rss+xml; charset=utf-8"}
+    response.text = "<rss></rss>"
+    response.status_code = 200
+    response.raise_for_status = MagicMock()
+    client.get.return_value = response
+
+    r = await probe_rss_feed("https://example.com/feed", client)
+    assert r.type == "rss"
+    assert r.config["feed_url"] == "https://example.com/feed"
+
+
+@pytest.mark.asyncio
+async def test_probe_rss_html_autodiscovery():
+    from processor.subscribe_analyzer import probe_rss_feed
+
+    html = """
+    <html><head>
+      <link rel="alternate" type="application/rss+xml" href="/feed.xml">
+    </head><body>...</body></html>
+    """
+    client = AsyncMock()
+    response = MagicMock()
+    response.headers = {"content-type": "text/html"}
+    response.text = html
+    response.status_code = 200
+    response.raise_for_status = MagicMock()
+    client.get.return_value = response
+
+    r = await probe_rss_feed("https://example.com/", client)
+    assert r.type == "rss"
+    assert r.config["feed_url"] == "https://example.com/feed.xml"
+
+
+@pytest.mark.asyncio
+async def test_probe_rss_returns_unknown_on_plain_html():
+    from processor.subscribe_analyzer import probe_rss_feed
+
+    client = AsyncMock()
+    response = MagicMock()
+    response.headers = {"content-type": "text/html"}
+    response.text = "<html><body>No feed here</body></html>"
+    response.status_code = 200
+    response.raise_for_status = MagicMock()
+    client.get.return_value = response
+
+    r = await probe_rss_feed("https://example.com/", client)
+    assert r.type == "unknown"

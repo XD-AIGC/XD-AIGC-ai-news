@@ -4,7 +4,9 @@ import logging
 import re
 from dataclasses import dataclass, field
 from typing import Any, Optional
-from urllib.parse import urlparse
+from urllib.parse import urljoin, urlparse
+
+import httpx
 
 logger = logging.getLogger(__name__)
 
@@ -97,3 +99,45 @@ def _fill_template(template: str, match: re.Match) -> str:
     for i, group in enumerate(match.groups(), start=1):
         result = result.replace(f"{{{i}}}", group)
     return result
+
+
+async def probe_rss_feed(url: str, client: httpx.AsyncClient) -> DetectionResult:
+    """HTTP-dependent fallback probe for RSS: try direct fetch + HTML autodiscovery."""
+    try:
+        response = await client.get(url, follow_redirects=True, timeout=10.0)
+        response.raise_for_status()
+    except httpx.HTTPError as e:
+        return DetectionResult("unknown", error=f"HTTP error: {e}")
+    except Exception as e:
+        return DetectionResult("unknown", error=f"Fetch failed: {e}")
+
+    ctype = (response.headers.get("content-type") or "").lower()
+    body = response.text
+
+    # Direct RSS: content-type indicates feed
+    if any(t in ctype for t in ("application/rss", "application/atom", "text/xml", "application/xml")):
+        return DetectionResult("rss", {"feed_url": url, "name": url})
+
+    # Body starts with <rss or <feed — another direct hint
+    stripped = body.lstrip()[:200].lower()
+    if stripped.startswith(("<?xml", "<rss", "<feed")):
+        return DetectionResult("rss", {"feed_url": url, "name": url})
+
+    # HTML autodiscovery: look for <link rel="alternate" type="application/rss+xml" href="...">
+    m = re.search(
+        r'<link[^>]+rel=["\']alternate["\'][^>]+type=["\']application/(?:rss|atom)\+xml["\'][^>]*>',
+        body, flags=re.IGNORECASE,
+    )
+    if not m:
+        m = re.search(
+            r'<link[^>]+type=["\']application/(?:rss|atom)\+xml["\'][^>]+rel=["\']alternate["\'][^>]*>',
+            body, flags=re.IGNORECASE,
+        )
+    if m:
+        link_tag = m.group(0)
+        href_m = re.search(r'href=["\']([^"\']+)["\']', link_tag, flags=re.IGNORECASE)
+        if href_m:
+            feed_url = urljoin(url, href_m.group(1))
+            return DetectionResult("rss", {"feed_url": feed_url, "name": url})
+
+    return DetectionResult("unknown", error="No feed detected in page")
