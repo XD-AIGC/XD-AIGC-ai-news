@@ -396,7 +396,10 @@ rsshub:
 
 subscribe_analyzer:
   llm:
-    # Defaults to top-level llm.* if omitted; override here for cost tuning.
+    # Explicit api_key / base_url because analyze_url reads llm_cfg directly
+    # (does not merge with top-level llm.*). Keep in sync with top-level llm.
+    api_key: "${OPENAI_API_KEY}"
+    base_url: "${OPENAI_BASE_URL}"
     model: "claude-sonnet-4-6"
     temperature: 0.2
   # Optional: override the default prompt if you want a different judgment style.
