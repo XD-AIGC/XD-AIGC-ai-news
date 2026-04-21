@@ -366,3 +366,8 @@ const NewsApp = (function () {
 
   return { state, init, initTopbarOnly, refresh, loadNews, fetchJSON, API };
 })();
+
+// Expose to window so scripts loaded separately (e.g. app.js checking
+// `window.NewsApp`) can reach the module. Top-level `const` in a classic
+// <script> tag does NOT attach to window automatically.
+window.NewsApp = NewsApp;
