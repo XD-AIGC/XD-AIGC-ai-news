@@ -70,6 +70,21 @@
 
     <!-- Main Content -->
     <main class="main-content">
+      <!-- Content theme switcher (AI / Fashion) + header actions -->
+      <div class="theme-tab-bar">
+        <div class="theme-tabs" role="tablist" aria-label="Content theme">
+          <button class="theme-tab active" data-theme="ai" role="tab" aria-selected="true">
+            🤖 AI
+          </button>
+          <button class="theme-tab" data-theme="fashion" role="tab" aria-selected="false">
+            👗 时尚
+          </button>
+        </div>
+        <div class="header-actions">
+          <button id="btn-add-subscribe" class="btn-primary" type="button">+ 添加订阅</button>
+          <a href="/subscribe.html" class="btn-secondary">订阅管理</a>
+        </div>
+      </div>
       <div class="content-header">
         <div id="resultInfo" class="result-info"></div>
         <button id="sidebarToggle" class="icon-btn sidebar-toggle">

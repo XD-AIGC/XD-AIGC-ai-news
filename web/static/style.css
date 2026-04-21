@@ -805,3 +805,76 @@ a:hover { text-decoration: underline; }
   .topbar { padding: 0 12px; }
   .main-content { padding: 12px; }
 }
+
+/* ============================================================
+   Content theme tabs (AI / Fashion) — NOT to be confused with
+   dark/light UI theme attribute on <html data-theme="...">.
+   ============================================================ */
+
+.theme-tab-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.theme-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--border, #333);
+}
+
+.theme-tab {
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-muted, #888);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.theme-tab:hover {
+  color: var(--text, #eee);
+}
+
+.theme-tab.active {
+  color: var(--text, #eee);
+  border-bottom-color: var(--accent, #4a9eff);
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 8px 16px;
+  border: 1px solid var(--accent, #4a9eff);
+  border-radius: 4px;
+  background: var(--accent, #4a9eff);
+  color: white;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent, #4a9eff);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-secondary:hover {
+  background: rgba(74, 158, 255, 0.08);
+}
