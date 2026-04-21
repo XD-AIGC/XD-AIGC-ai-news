@@ -32,6 +32,7 @@ from processor.comic_generator import ComicGenerator
 from processor.dedup import deduplicate, deduplicate_semantic
 from processor.scorer import AIScorer
 from processor.weekly_digest import generate_weekly_digest
+from storage.config_loader import load_themes
 from storage.database import NewsDatabase
 
 logger = logging.getLogger(__name__)
@@ -220,9 +221,9 @@ async def run(args: argparse.Namespace) -> None:
             logger.info("After dedup: %d items", len(items))
 
             # Keyword pre-classification
-            focus_areas = config.get("focus_areas", [])
-            if focus_areas:
-                classifier = KeywordClassifier(focus_areas)
+            themes = load_themes(config)
+            if any(themes.values()):
+                classifier = KeywordClassifier(themes)
                 items = classifier.classify_items(items)
 
             # Save to database
@@ -245,8 +246,8 @@ async def run(args: argparse.Namespace) -> None:
             ]
 
             # Pre-filter: only score items matching focus areas
-            if unscored and focus_areas:
-                pre_filter = KeywordClassifier(focus_areas)
+            if unscored and any(themes.values()):
+                pre_filter = KeywordClassifier(themes)
                 before = len(unscored)
                 unscored = pre_filter.filter_relevant(unscored)
                 logger.info(
