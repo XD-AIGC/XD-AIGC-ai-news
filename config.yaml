@@ -36,12 +36,21 @@ sources:
       # - { url: "https://inworld.ai/blog/rss.xml", name: "Inworld AI Blog" }  # 无 RSS feed
       - { url: "https://developer.nvidia.com/blog/feed/", name: "NVIDIA Developer Blog" }
       - { url: "https://blogs.unity3d.com/feed/", name: "Unity Blog" }
-      # Fashion feeds
+      # Fashion feeds — streetwear / industry / design
       - { url: "https://hypebeast.com/feed", name: "Hypebeast", theme: "fashion" }
-      - { url: "https://www.businessoffashion.com/feed", name: "Business of Fashion", theme: "fashion" }
       - { url: "https://www.highsnobiety.com/feed", name: "Highsnobiety", theme: "fashion" }
-      - { url: "https://www.vogue.com/feed/rss", name: "Vogue", theme: "fashion" }
+      - { url: "https://www.businessoffashion.com/feed", name: "Business of Fashion", theme: "fashion" }
+      - { url: "https://wwd.com/feed/", name: "WWD", theme: "fashion" }
       - { url: "https://www.dezeen.com/feed/", name: "Dezeen", theme: "fashion" }
+      # Menswear magazines
+      - { url: "https://www.gq.com/feed/rss", name: "GQ", theme: "fashion" }
+      - { url: "https://www.esquire.com/rss/all.xml/", name: "Esquire", theme: "fashion" }
+      # Womenswear magazines
+      - { url: "https://www.vogue.com/feed/rss", name: "Vogue", theme: "fashion" }
+      - { url: "https://www.elle.com/rss/all.xml/", name: "ELLE", theme: "fashion" }
+      - { url: "https://www.harpersbazaar.com/rss/all.xml/", name: "Harper's Bazaar", theme: "fashion" }
+      # Youth / counterculture / independent
+      - { url: "https://i-d.co/feed/", name: "i-D", theme: "fashion" }
 
   github:
     enabled: true
