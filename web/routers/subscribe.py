@@ -203,3 +203,100 @@ async def confirm(req: ConfirmRequest):
         return ConfirmResponse(status="active", source_id=req.analysis_id)
     finally:
         db.close()
+
+
+class SubscriptionSummary(BaseModel):
+    id: int
+    url: str
+    name: str
+    source_type: str
+    theme: str
+    focus_areas: list[str]
+    status: str
+    created_at: Optional[str]
+    activated_at: Optional[str]
+    last_fetch_at: Optional[str]
+    last_fetch_status: Optional[str]
+    consecutive_failures: int
+
+
+def _to_summary(src: UserSource) -> SubscriptionSummary:
+    try:
+        focus = json.loads(src.focus_areas or "[]")
+    except json.JSONDecodeError:
+        focus = []
+    return SubscriptionSummary(
+        id=src.id,
+        url=src.url,
+        name=src.name,
+        source_type=src.source_type,
+        theme=src.theme,
+        focus_areas=focus,
+        status=src.status,
+        created_at=src.created_at,
+        activated_at=src.activated_at,
+        last_fetch_at=src.last_fetch_at,
+        last_fetch_status=src.last_fetch_status,
+        consecutive_failures=src.consecutive_failures,
+    )
+
+
+@router.get("/list", response_model=list[SubscriptionSummary])
+def list_subscriptions(status: Optional[str] = Query(None)):
+    db = _get_db()
+    try:
+        if status:
+            return [_to_summary(s) for s in list_by_status(db, status)]
+        return [_to_summary(s) for s in list_all(db)]
+    finally:
+        db.close()
+
+
+@router.delete("/{source_id}")
+def delete_subscription(source_id: int):
+    """Soft-delete: mark as rejected. Preserves history / prevents re-analysis."""
+    db = _get_db()
+    try:
+        src = get_by_id(db, source_id)
+        if not src:
+            raise HTTPException(status_code=404, detail="Not found")
+        update_status(db, source_id, "rejected")
+        return {"status": "rejected", "source_id": source_id}
+    finally:
+        db.close()
+
+
+class PatchSubscription(BaseModel):
+    status: Optional[str] = None            # 'active' | 'disabled' | 'rejected'
+    theme: Optional[str] = None
+    focus_areas: Optional[list[str]] = None
+    name: Optional[str] = None
+
+
+@router.patch("/{source_id}", response_model=SubscriptionSummary)
+def patch_subscription(source_id: int, patch: PatchSubscription):
+    db = _get_db()
+    try:
+        src = get_by_id(db, source_id)
+        if not src:
+            raise HTTPException(status_code=404, detail="Not found")
+
+        fields = {}
+        if patch.theme:
+            fields["theme"] = patch.theme
+        if patch.focus_areas is not None:
+            fields["focus_areas"] = json.dumps(patch.focus_areas)
+        if patch.name is not None:
+            fields["name"] = patch.name
+        if fields:
+            update_fields(db, source_id, fields)
+
+        if patch.status:
+            if patch.status not in ("pending", "active", "rejected", "disabled"):
+                raise HTTPException(status_code=400, detail="Invalid status")
+            update_status(db, source_id, patch.status)
+
+        updated = get_by_id(db, source_id)
+        return _to_summary(updated)
+    finally:
+        db.close()
