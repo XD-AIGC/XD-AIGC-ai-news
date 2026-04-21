@@ -1,5 +1,6 @@
 """AI-powered scoring, classification, and summarization using LLM."""
 
+import asyncio
 import json
 import logging
 
@@ -63,6 +64,7 @@ class AIScorer:
         self.threshold = config.get("score_threshold", 6.0)
         self.proxy = config.get("proxy")
         self.scoring_prompts: dict[str, str] = config.get("scoring_prompts", {})
+        self.max_concurrent = int(config.get("max_concurrent", 5))
 
     def _system_prompt_for(self, item: ContentItem) -> str:
         """Pick the theme-specific prompt, falling back to ai prompt, then legacy SYSTEM_PROMPT."""
@@ -86,32 +88,51 @@ class AIScorer:
         cats = FOCUS_AREAS_BY_THEME.get(theme_key) or FOCUS_AREAS_BY_THEME["ai"]
         return ", ".join(f'"{c}"' for c in cats)
 
+    def _build_client(self) -> httpx.AsyncClient:
+        """Factory for the shared AsyncClient. Override in tests via monkeypatch."""
+        kwargs: dict = {"timeout": httpx.Timeout(60.0)}
+        if self.proxy:
+            kwargs["proxy"] = self.proxy
+        return httpx.AsyncClient(**kwargs)
+
     async def process_items(
         self, items: list[ContentItem], skip_scored: bool = True
     ) -> list[ContentItem]:
-        """Score all items. Modifies items in-place and returns them."""
+        """Score all items concurrently. Modifies items in-place and returns them."""
         if not self.api_key:
             logger.warning("AI Scorer: no API key, skipping AI processing")
             return items
 
-        processed = 0
-        errors = 0
+        pending = [
+            item for item in items
+            if not (skip_scored and item.ai_score is not None)
+        ]
+        if not pending:
+            return items
 
-        for item in items:
-            if skip_scored and item.ai_score is not None:
-                continue
-            try:
-                await self._score_item(item)
-                processed += 1
-            except Exception as e:
-                logger.warning("AI scoring failed for [%s]: %s", item.title[:50], e)
-                item.ai_score = 0.0
-                item.ai_summary = item.title
-                item.ai_categories = ["其他"]
-                errors += 1
+        sem = asyncio.Semaphore(self.max_concurrent)
+        counters = {"processed": 0, "errors": 0}
+
+        async with self._build_client() as client:
+            async def _bounded(item: ContentItem) -> None:
+                async with sem:
+                    try:
+                        await self._score_item(item, client)
+                        counters["processed"] += 1
+                    except Exception as e:
+                        logger.warning(
+                            "AI scoring failed for [%s]: %s", item.title[:50], e,
+                        )
+                        item.ai_score = 0.0
+                        item.ai_summary = item.title
+                        item.ai_categories = ["其他"]
+                        counters["errors"] += 1
+
+            await asyncio.gather(*(_bounded(item) for item in pending))
 
         logger.info(
-            "AI Scorer: processed %d items (%d errors)", processed, errors
+            "AI Scorer: processed %d items (%d errors, concurrency=%d)",
+            counters["processed"], counters["errors"], self.max_concurrent,
         )
         return items
 
@@ -128,7 +149,9 @@ class AIScorer:
         )
         return filtered
 
-    async def _score_item(self, item: ContentItem) -> None:
+    async def _score_item(
+        self, item: ContentItem, client: httpx.AsyncClient
+    ) -> None:
         content_preview = item.content[:1000] if item.content else ""
         if "--- Top Comments ---" in content_preview:
             main_text, _ = content_preview.split("--- Top Comments ---", 1)
@@ -144,29 +167,24 @@ class AIScorer:
             allowed_categories=self._allowed_categories_for(item),
         )
 
-        client_kwargs: dict = {"timeout": httpx.Timeout(60.0)}
-        if self.proxy:
-            client_kwargs["proxy"] = self.proxy
-
-        async with httpx.AsyncClient(**client_kwargs) as client:
-            resp = await client.post(
-                f"{self.base_url}/chat/completions",
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "model": self.model,
-                    "messages": [
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt},
-                    ],
-                    "temperature": self.temperature,
-                    "max_tokens": 512,
-                },
-            )
-            resp.raise_for_status()
-            data = resp.json()
+        resp = await client.post(
+            f"{self.base_url}/chat/completions",
+            headers={
+                "Authorization": f"Bearer {self.api_key}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": self.model,
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                "temperature": self.temperature,
+                "max_tokens": 512,
+            },
+        )
+        resp.raise_for_status()
+        data = resp.json()
 
         content_str = data["choices"][0]["message"]["content"].strip()
         result = self._parse_json(content_str)

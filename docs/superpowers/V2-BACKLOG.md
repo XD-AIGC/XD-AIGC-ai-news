@@ -50,15 +50,8 @@ Server's `.env` has CRLF line endings (Windows-edited), which breaks `source .en
 
 ## Performance
 
-### 🔴 Scorer — reuse `httpx.AsyncClient` + concurrent LLM calls
-`processor/scorer.py:_score_item` creates a **new `httpx.AsyncClient` per item**, paying TLS handshake + proxy negotiation every time (~1-2s overhead per item). `process_items` is also **fully serial** (`for item: await _score_item(item)`).
-
-Observed cost: 140-item rescore took 14+ minutes, ~6 seconds per item.
-
-**Fix:**
-1. Lift `AsyncClient` creation out of `_score_item` into `process_items` (single client, ~30% speedup).
-2. Use `asyncio.gather` + `asyncio.Semaphore(5)` for 5-way concurrency (~5x speedup).
-3. Combined: 140 items drop from 14min → ~2min.
+### ✅ Scorer — reuse `httpx.AsyncClient` + concurrent LLM calls (DONE 2026-04-21)
+`processor/scorer.py` now builds one `AsyncClient` per `process_items` call and runs items through `asyncio.gather` bounded by `asyncio.Semaphore(llm.max_concurrent)` (default 5, configurable in `config.yaml`). Failures stay isolated per item; tests in `tests/test_scorer_concurrency.py` cover client reuse, peak concurrency, and error isolation.
 
 **Source:** observed during post-deploy fashion rescore (2026-04-21).
 

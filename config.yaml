@@ -338,6 +338,9 @@ llm:
   base_url: "${OPENAI_BASE_URL}"
   temperature: 0.3
   score_threshold: 6.0
+  # Concurrent LLM calls during AI scoring. 5 is a safe default; raise if your
+  # provider has higher rate limits, lower if you hit 429s.
+  max_concurrent: 5
   scoring_prompts:
     ai: |
       你是一个专业的 AI 科技资讯评审专家，专注于以下领域：
