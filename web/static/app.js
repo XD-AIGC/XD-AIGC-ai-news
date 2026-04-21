@@ -20,8 +20,8 @@ function applyActiveTheme(theme) {
   if (window.NewsApp && window.NewsApp.state) {
     window.NewsApp.state.theme = theme;
     window.NewsApp.state.page = 1;
-    window.NewsApp.state.source = null;
-    window.NewsApp.state.category = null;
+    window.NewsApp.state.source = '';   // reset filter chips to "All" on theme switch
+    window.NewsApp.state.category = '';
     if (typeof window.NewsApp.refresh === 'function') {
       window.NewsApp.refresh();
     }
