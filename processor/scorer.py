@@ -51,6 +51,22 @@ class AIScorer:
         self.temperature = config.get("temperature", 0.3)
         self.threshold = config.get("score_threshold", 6.0)
         self.proxy = config.get("proxy")
+        self.scoring_prompts: dict[str, str] = config.get("scoring_prompts", {})
+
+    def _system_prompt_for(self, item: ContentItem) -> str:
+        """Pick the theme-specific prompt, falling back to ai prompt, then legacy SYSTEM_PROMPT."""
+        if not self.scoring_prompts:
+            return SYSTEM_PROMPT
+        theme_key = item.theme.value if hasattr(item.theme, "value") else str(item.theme)
+        if theme_key in self.scoring_prompts:
+            return self.scoring_prompts[theme_key]
+        # Fallback: use ai prompt if defined, else legacy
+        if "ai" in self.scoring_prompts:
+            logger.warning(
+                "No scoring prompt for theme '%s', falling back to 'ai'", theme_key,
+            )
+            return self.scoring_prompts["ai"]
+        return SYSTEM_PROMPT
 
     async def process_items(
         self, items: list[ContentItem], skip_scored: bool = True
@@ -100,6 +116,7 @@ class AIScorer:
             main_text, _ = content_preview.split("--- Top Comments ---", 1)
             content_preview = main_text.strip()[:800]
 
+        system_prompt = self._system_prompt_for(item)
         user_prompt = USER_PROMPT_TEMPLATE.format(
             title=item.title,
             source=item.source_type.value,
@@ -122,7 +139,7 @@ class AIScorer:
                 json={
                     "model": self.model,
                     "messages": [
-                        {"role": "system", "content": SYSTEM_PROMPT},
+                        {"role": "system", "content": system_prompt},
                         {"role": "user", "content": user_prompt},
                     ],
                     "temperature": self.temperature,

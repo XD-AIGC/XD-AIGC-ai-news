@@ -1,18 +1,26 @@
 # AI News Aggregator 配置文件
 
-focus_areas:
-  - name: "开源模型"
-    keywords: ["open source", "开源", "weights release", "model release", "Stable Diffusion", "Flux", "HunyuanVideo", "CogView", "Wan", "LoRA", "Hugging Face"]
-  - name: "ComfyUI"
-    keywords: ["ComfyUI", "custom node", "workflow", "comfy", "ComfyUI-Manager"]
-  - name: "商用产品"
-    keywords: ["Lovart", "Gemini", "GPT", "OpenAI", "Claude", "Anthropic", "Midjourney", "DALL-E", "Sora", "Runway"]
-  - name: "Agent & Skills"
-    keywords: ["agent", "MCP", "mcp-server", "model context protocol", "tool use", "function calling", "autonomous", "agentic", "cursor", "copilot", "claude code", "claude-code", "skills", "coding agent", "vibe-coding", "ai coding"]
-  - name: "3D生成与重建"
-    keywords: ["gaussian splatting", "3DGS", "4DGS", "NeRF", "neural rendering", "3D reconstruction", "3D generation", "text-to-3d", "point cloud", "mesh generation", "radiance field"]
-  - name: "训练与部署"
-    keywords: ["fine-tune", "training", "LoRA", "RLHF", "inference", "quantization", "deployment", "distillation"]
+themes:
+  ai:
+    - name: "开源模型"
+      keywords: ["open source", "开源", "weights release", "model release", "Stable Diffusion", "Flux", "HunyuanVideo", "CogView", "Wan", "LoRA", "Hugging Face"]
+    - name: "ComfyUI"
+      keywords: ["ComfyUI", "custom node", "workflow", "comfy", "ComfyUI-Manager"]
+    - name: "商用产品"
+      keywords: ["Lovart", "Gemini", "GPT", "OpenAI", "Claude", "Anthropic", "Midjourney", "DALL-E", "Sora", "Runway"]
+    - name: "Agent & Skills"
+      keywords: ["agent", "MCP", "mcp-server", "model context protocol", "tool use", "function calling", "autonomous", "agentic", "cursor", "copilot", "claude code", "claude-code", "skills", "coding agent", "vibe-coding", "ai coding"]
+    - name: "3D生成与重建"
+      keywords: ["gaussian splatting", "3DGS", "4DGS", "NeRF", "neural rendering", "3D reconstruction", "3D generation", "text-to-3d", "point cloud", "mesh generation", "radiance field"]
+    - name: "训练与部署"
+      keywords: ["fine-tune", "training", "LoRA", "RLHF", "inference", "quantization", "deployment", "distillation"]
+  fashion:
+    - name: "潮流"
+      keywords: ["streetwear", "街头", "sneakers", "球鞋", "Supreme", "Stussy", "国潮", "Hypebeast", "Highsnobiety", "hype", "drop", "fashion", "潮牌", "Nike", "adidas"]
+    - name: "时装"
+      keywords: ["runway", "时装周", "秀场", "haute couture", "Vogue", "LV", "Louis Vuitton", "Prada", "Gucci", "Chanel", "BoF", "luxury", "designer", "collection", "couture", "Dior"]
+    - name: "AI × 时尚"
+      keywords: ["AI fashion", "virtual model", "digital fashion", "AIGC 服装", "AI 穿搭", "virtual try-on", "AI runway", "generative fashion", "AI 时装"]
 
 sources:
   rss:
@@ -28,6 +36,12 @@ sources:
       # - { url: "https://inworld.ai/blog/rss.xml", name: "Inworld AI Blog" }  # 无 RSS feed
       - { url: "https://developer.nvidia.com/blog/feed/", name: "NVIDIA Developer Blog" }
       - { url: "https://blogs.unity3d.com/feed/", name: "Unity Blog" }
+      # Fashion feeds
+      - { url: "https://hypebeast.com/feed", name: "Hypebeast", theme: "fashion" }
+      - { url: "https://www.businessoffashion.com/feed", name: "Business of Fashion", theme: "fashion" }
+      - { url: "https://www.highsnobiety.com/feed", name: "Highsnobiety", theme: "fashion" }
+      - { url: "https://www.vogue.com/feed/rss", name: "Vogue", theme: "fashion" }
+      - { url: "https://www.dezeen.com/feed/", name: "Dezeen", theme: "fashion" }
 
   github:
     enabled: true
@@ -315,6 +329,33 @@ llm:
   base_url: "${OPENAI_BASE_URL}"
   temperature: 0.3
   score_threshold: 6.0
+  scoring_prompts:
+    ai: |
+      你是一个专业的 AI 科技资讯评审专家，专注于以下领域：
+      - 开源模型 (Stable Diffusion, Flux, HunyuanVideo, CogView, Wan, LoRA, Hugging Face)
+      - ComfyUI (节点, 工作流, 插件)
+      - 商用产品 (Lovart, Gemini, GPT, OpenAI, Claude, Anthropic, Midjourney, DALL-E, Sora, Runway)
+      - Agent & Skills (AI Agent, MCP, tool use, function calling, 自动化)
+      - 训练与部署 (fine-tune, LoRA, RLHF, 推理优化, 量化, 部署)
+
+      请对每条资讯进行评分和分析。评分标准：
+      - 9-10: 重大突破、范式转变、行业重大公告
+      - 7-8: 重要进展，值得立即关注的技术深度内容
+      - 5-6: 有趣但不紧急，增量改进
+      - 3-4: 低优先级，通用或常规内容
+      - 0-2: 噪音，不相关或低质量
+    fashion: |
+      你是一个专业的时尚潮流趋势分析师，关注以下领域：
+      - 潮流 (街头穿搭、球鞋文化、国潮、潮牌、hype drop)
+      - 时装 (时装周、秀场、设计师、奢侈品、高定、四大时装周)
+      - AI × 时尚 (AI 虚拟模特、AIGC 服装、数字时尚、AI 穿搭工具)
+
+      请对每条资讯进行评分和分析。评分标准：
+      - 9-10: 重大趋势、标志性发布、行业地震级事件
+      - 7-8: 重要品牌动态、值得立即关注的设计/联名/秀场
+      - 5-6: 有趣但非紧急的趋势观察、穿搭灵感
+      - 3-4: 常规发布、通用内容
+      - 0-2: 纯带货、营销噪音、与时尚/潮流无关
 
 output:
   notion:
@@ -345,6 +386,22 @@ weekly:
 proxy:
   # Comma-separated proxy URLs from .env; first reachable one wins
   urls: "${PROXY_URLS}"
+
+rsshub:
+  base_url: "${RSSHUB_URL}"     # e.g., http://localhost:1200 (set in .env)
+  routes:
+    - { pattern: "xiaohongshu\\.com/user/profile/(\\w+)", template: "/xiaohongshu/user/{1}" }
+    - { pattern: "weibo\\.com/u/(\\d+)",                  template: "/weibo/user/{1}" }
+    - { pattern: "space\\.bilibili\\.com/(\\d+)",         template: "/bilibili/user/video/{1}" }
+
+subscribe_analyzer:
+  llm:
+    # Defaults to top-level llm.* if omitted; override here for cost tuning.
+    model: "claude-sonnet-4-6"
+    temperature: 0.2
+  # Optional: override the default prompt if you want a different judgment style.
+  # prompt_template: |
+  #   ...your template with {n} and {samples} placeholders...
 
 database:
   path: "./data/news.db"

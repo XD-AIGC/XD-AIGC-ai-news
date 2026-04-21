@@ -11,8 +11,11 @@ from storage.models import (
     CREATE_INDEX_DATE,
     CREATE_INDEX_SCORE,
     CREATE_INDEX_SOURCE,
+    CREATE_INDEX_THEME,
     CREATE_INDEX_URL,
+    CREATE_INDEX_USER_SOURCES_STATUS,
     CREATE_NEWS_TABLE,
+    CREATE_USER_SOURCES_TABLE,
 )
 
 logger = logging.getLogger(__name__)
@@ -41,6 +44,21 @@ class NewsDatabase:
         cursor.execute(CREATE_INDEX_DATE)
         cursor.execute(CREATE_INDEX_SOURCE)
         cursor.execute(CREATE_INDEX_SCORE)
+
+        # Migration: add theme column if it doesn't exist (idempotent)
+        cursor.execute("PRAGMA table_info(news)")
+        cols = {row[1] for row in cursor.fetchall()}
+        if "theme" not in cols:
+            try:
+                cursor.execute("ALTER TABLE news ADD COLUMN theme TEXT NOT NULL DEFAULT 'ai'")
+                logger.info("Migrated: added 'theme' column to news table")
+            except sqlite3.OperationalError as e:
+                # another worker may have added the column concurrently
+                logger.debug("Skipping theme column add (likely race): %s", e)
+
+        cursor.execute(CREATE_INDEX_THEME)
+        cursor.execute(CREATE_USER_SOURCES_TABLE)
+        cursor.execute(CREATE_INDEX_USER_SOURCES_STATUS)
         self._conn.commit()
 
     def url_exists(self, url: str) -> bool:
@@ -61,8 +79,8 @@ class NewsDatabase:
                     """INSERT INTO news
                     (id, source_type, title, url, content, author,
                      published_at, collected_at, metadata_json,
-                     ai_score, ai_summary, ai_categories, ai_tags)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                     ai_score, ai_summary, ai_categories, ai_tags, theme)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                     (
                         item.id,
                         item.source_type.value,
@@ -77,6 +95,7 @@ class NewsDatabase:
                         item.ai_summary,
                         json.dumps(item.ai_categories, ensure_ascii=False),
                         json.dumps(item.ai_tags, ensure_ascii=False),
+                        item.theme.value,
                     ),
                 )
                 new_count += 1
@@ -176,6 +195,7 @@ class NewsDatabase:
         date: str | None = None,
         date_from: str | None = None,
         date_to: str | None = None,
+        theme: str | None = None,
     ) -> dict:
         """Return aggregate stats: source/category breakdowns."""
         conditions: list[str] = []
@@ -186,6 +206,9 @@ class NewsDatabase:
         elif date_from and date_to:
             conditions.append("collected_at >= ? AND collected_at <= ?")
             params.extend([f"{date_from}T00:00:00", f"{date_to}T23:59:59"])
+        if theme:
+            conditions.append("theme = ?")
+            params.append(theme)
         where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
 
         cursor = self._conn.cursor()
@@ -219,6 +242,7 @@ class NewsDatabase:
         date_to: str | None = None,
         source: str | None = None,
         category: str | None = None,
+        theme: str | None = None,
         q: str | None = None,
         min_score: float | None = None,
         page: int = 1,
@@ -246,6 +270,9 @@ class NewsDatabase:
         if category:
             conditions.append("ai_categories LIKE ?")
             params.append(f"%{category}%")
+        if theme:
+            conditions.append("theme = ?")
+            params.append(theme)
         if q:
             conditions.append("(title LIKE ? OR content LIKE ? OR ai_summary LIKE ?)")
             pattern = f"%{q}%"
@@ -273,6 +300,13 @@ class NewsDatabase:
         return items, total
 
     def _row_to_item(self, row: sqlite3.Row) -> ContentItem:
+        from collectors.base import Theme
+        # Row may lack theme column in pre-migration dev DBs; default to ai
+        try:
+            theme_value = row["theme"] or "ai"
+        except (KeyError, IndexError):
+            theme_value = "ai"
+
         return ContentItem(
             id=row["id"],
             source_type=row["source_type"],
@@ -289,4 +323,5 @@ class NewsDatabase:
             ai_summary=row["ai_summary"],
             ai_categories=json.loads(row["ai_categories"] or "[]"),
             ai_tags=json.loads(row["ai_tags"] or "[]"),
+            theme=Theme(theme_value),
         )

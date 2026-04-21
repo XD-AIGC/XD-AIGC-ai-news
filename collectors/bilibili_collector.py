@@ -9,7 +9,7 @@ from hashlib import md5
 
 import httpx
 
-from collectors.base import BaseScraper, ContentItem, SourceType
+from collectors.base import BaseScraper, ContentItem, SourceType, Theme
 
 logger = logging.getLogger(__name__)
 
@@ -80,9 +80,10 @@ class BilibiliCollector(BaseScraper):
             for user in self.users:
                 uid = str(user["uid"])
                 name = user.get("name", uid)
+                theme = Theme(user.get("theme", "ai"))
                 try:
                     user_items = await self._fetch_user_videos(
-                        client, uid, name, since
+                        client, uid, name, since, theme
                     )
                     items.extend(user_items)
                 except Exception as e:
@@ -104,7 +105,8 @@ class BilibiliCollector(BaseScraper):
             logger.warning("Bilibili wbi key fetch failed: %s", e)
 
     async def _fetch_user_videos(
-        self, client: httpx.AsyncClient, uid: str, name: str, since: datetime
+        self, client: httpx.AsyncClient, uid: str, name: str, since: datetime,
+        theme: Theme = Theme("ai"),
     ) -> list[ContentItem]:
         """Fetch user's recent videos via wbi-signed API."""
         params = {"mid": uid, "ps": 20, "pn": 1, "order": "pubdate"}
@@ -134,7 +136,7 @@ class BilibiliCollector(BaseScraper):
             )
 
             for video in vlist:
-                item = self._parse_video(video, name, since)
+                item = self._parse_video(video, name, since, theme)
                 if item:
                     items.append(item)
 
@@ -146,7 +148,8 @@ class BilibiliCollector(BaseScraper):
         return items
 
     def _parse_video(
-        self, video: dict, author_name: str, since: datetime
+        self, video: dict, author_name: str, since: datetime,
+        theme: Theme = Theme("ai"),
     ) -> ContentItem | None:
         created = video.get("created", 0)
         if created:
@@ -182,6 +185,7 @@ class BilibiliCollector(BaseScraper):
             content=desc,
             author=author,
             published_at=published_at,
+            theme=theme,
             metadata={
                 "platform": "bilibili",
                 "play_count": play,

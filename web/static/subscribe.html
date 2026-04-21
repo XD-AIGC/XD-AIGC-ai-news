@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>订阅管理 — AI News Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="subscribe-page">
+    <div class="subscribe-page-header">
+      <h1>订阅管理</h1>
+      <a href="/" class="btn-secondary">← 返回首页</a>
+    </div>
+
+    <div class="status-tabs">
+      <button class="status-tab active" data-status="">全部</button>
+      <button class="status-tab" data-status="active">活跃</button>
+      <button class="status-tab" data-status="pending">待处理</button>
+      <button class="status-tab" data-status="rejected">已拒绝</button>
+      <button class="status-tab" data-status="disabled">已禁用</button>
+    </div>
+
+    <table class="subscriptions-table">
+      <thead>
+        <tr>
+          <th>名称</th>
+          <th>类型</th>
+          <th>主题</th>
+          <th>focus_area</th>
+          <th>状态</th>
+          <th>最后抓取</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="subscriptions-body">
+        <tr><td colspan="7">加载中...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="/static/shared.js"></script>
+  <script src="/static/subscribe.js"></script>
+</body>
+</html>

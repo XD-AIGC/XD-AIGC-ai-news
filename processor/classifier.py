@@ -1,31 +1,40 @@
-"""Keyword-based fallback classifier (no LLM required)."""
+"""Theme-scoped keyword classifier (no LLM required)."""
 
 import logging
 
-from collectors.base import ContentItem
+from collectors.base import ContentItem, Theme
 
 logger = logging.getLogger(__name__)
 
 
 class KeywordClassifier:
-    """Classify items into focus areas based on keyword matching.
+    """Classify items into focus areas, scoped to the item's theme.
 
-    Used as a fallback when AI scoring is not available,
-    or as a pre-filter before AI processing.
+    An AI item only matches keywords from themes['ai']; a fashion item only
+    matches keywords from themes['fashion']. This prevents cross-theme mis-tagging.
     """
 
-    def __init__(self, focus_areas: list[dict]):
-        self.areas: list[tuple[str, set[str]]] = []
-        for area in focus_areas:
-            name = area["name"]
-            keywords = {kw.lower() for kw in area.get("keywords", [])}
-            self.areas.append((name, keywords))
+    def __init__(self, themes: dict[str, list[dict]]):
+        # themes is {"ai": [{name, keywords}, ...], "fashion": [...]}
+        self.themes: dict[str, list[tuple[str, set[str]]]] = {}
+        for theme_name, areas in themes.items():
+            compiled: list[tuple[str, set[str]]] = []
+            for area in areas:
+                name = area["name"]
+                keywords = {kw.lower() for kw in area.get("keywords", [])}
+                compiled.append((name, keywords))
+            self.themes[theme_name] = compiled
 
     def classify(self, item: ContentItem) -> list[str]:
-        """Return matching focus area names for an item."""
+        """Return matching focus area names, scoped to item's theme."""
+        theme_key = item.theme.value if isinstance(item.theme, Theme) else item.theme
+        areas = self.themes.get(theme_key, [])
+        if not areas:
+            return ["其他"]
+
         text = f"{item.title} {item.content[:500]}".lower()
         matches = []
-        for name, keywords in self.areas:
+        for name, keywords in areas:
             if any(kw in text for kw in keywords):
                 matches.append(name)
         return matches if matches else ["其他"]
@@ -45,14 +54,12 @@ class KeywordClassifier:
         return items
 
     def filter_relevant(self, items: list[ContentItem]) -> list[ContentItem]:
-        """Keep only items that match at least one focus area (not '其他')."""
+        """Keep only items matching at least one focus area (not '其他')."""
         relevant = []
         for item in items:
             cats = self.classify(item)
             if cats != ["其他"]:
                 relevant.append(item)
 
-        logger.info(
-            "Relevance filter: %d -> %d items", len(items), len(relevant)
-        )
+        logger.info("Relevance filter: %d -> %d items", len(items), len(relevant))
         return relevant

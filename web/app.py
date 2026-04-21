@@ -33,6 +33,7 @@ class NewsItemResponse(BaseModel):
     ai_summary: Optional[str]
     ai_categories: list[str]
     ai_tags: list[str]
+    theme: str = "ai"
 
 
 class PaginatedNews(BaseModel):
@@ -56,6 +57,7 @@ def list_news(
     date_to: Optional[str] = Query(None, description="YYYY-MM-DD range end"),
     source: Optional[str] = Query(None),
     category: Optional[str] = Query(None),
+    theme: Optional[str] = Query(None, description="ai | fashion"),
     q: Optional[str] = Query(None, description="Search query"),
     min_score: Optional[float] = Query(None),
     page: int = Query(1, ge=1),
@@ -65,7 +67,7 @@ def list_news(
     try:
         items, total = db.search_items(
             date=date, date_from=date_from, date_to=date_to,
-            source=source, category=category,
+            source=source, category=category, theme=theme,
             q=q, min_score=min_score, page=page, page_size=page_size,
         )
         pages = (total + page_size - 1) // page_size if total else 0
@@ -91,10 +93,11 @@ def stats(
     date: Optional[str] = Query(None),
     date_from: Optional[str] = Query(None, description="YYYY-MM-DD range start"),
     date_to: Optional[str] = Query(None, description="YYYY-MM-DD range end"),
+    theme: Optional[str] = Query(None, description="ai | fashion"),
 ):
     db = _get_db()
     try:
-        return db.get_stats(date=date, date_from=date_from, date_to=date_to)
+        return db.get_stats(date=date, date_from=date_from, date_to=date_to, theme=theme)
     finally:
         db.close()
 
@@ -113,6 +116,7 @@ def _item_to_resp(item) -> NewsItemResponse:
         ai_summary=item.ai_summary,
         ai_categories=item.ai_categories,
         ai_tags=item.ai_tags,
+        theme=item.theme.value if hasattr(item.theme, "value") else str(item.theme),
     )
 
 
@@ -152,11 +156,19 @@ def weekly_js():
     return {"error": "weekly.js not found"}
 
 
+@app.get("/subscribe.html")
+def subscribe_page():
+    return FileResponse(STATIC_DIR / "subscribe.html")
+
+
 @app.get("/explore")
 def explore():
     from fastapi.responses import RedirectResponse
     return RedirectResponse(url="/", status_code=301)
 
+
+from web.routers.subscribe import router as subscribe_router
+app.include_router(subscribe_router)
 
 from web.ai_chat import register_ai_routes
 register_ai_routes(app)

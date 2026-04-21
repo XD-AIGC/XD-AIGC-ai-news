@@ -805,3 +805,296 @@ a:hover { text-decoration: underline; }
   .topbar { padding: 0 12px; }
   .main-content { padding: 12px; }
 }
+
+/* ============================================================
+   Content theme tabs (AI / Fashion) — NOT to be confused with
+   dark/light UI theme attribute on <html data-theme="...">.
+   ============================================================ */
+
+.theme-tab-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.theme-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--border, #333);
+}
+
+.theme-tab {
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-muted, #888);
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.theme-tab:hover {
+  color: var(--text, #eee);
+}
+
+.theme-tab.active {
+  color: var(--text, #eee);
+  border-bottom-color: var(--accent, #4a9eff);
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 8px 16px;
+  border: 1px solid var(--accent, #4a9eff);
+  border-radius: 4px;
+  background: var(--accent, #4a9eff);
+  color: white;
+  font-size: 0.9rem;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent, #4a9eff);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-secondary:hover {
+  background: rgba(74, 158, 255, 0.08);
+}
+
+/* ============================================================
+   Subscribe Analyzer Modal
+   Uses native <dialog>. Works with existing dark/light mode via
+   CSS variables.
+   ============================================================ */
+
+dialog.subscribe-modal {
+  max-width: 640px;
+  width: 90%;
+  padding: 24px;
+  border: 1px solid var(--border, #333);
+  border-radius: 8px;
+  background: var(--bg, #1a1a1a);
+  color: var(--text, #eee);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+dialog.subscribe-modal[open] {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+dialog.subscribe-modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+dialog.subscribe-modal h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+dialog.subscribe-modal h3 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: var(--text-muted, #888);
+}
+
+.modal-state {
+  margin-top: 12px;
+}
+
+.modal-state label {
+  display: block;
+  margin: 12px 0 4px;
+  font-size: 0.9rem;
+  color: var(--text-muted, #888);
+}
+
+.modal-state input[type="url"],
+.modal-state input[type="text"],
+.modal-state select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border, #444);
+  border-radius: 4px;
+  background: var(--bg-input, #222);
+  color: var(--text, #eee);
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+.modal-state select[multiple] {
+  min-height: 96px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-tertiary {
+  padding: 8px 16px;
+  background: transparent;
+  color: var(--text-muted, #888);
+  border: 1px solid var(--border, #444);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-tertiary:hover {
+  color: var(--text, #eee);
+}
+
+dialog.subscribe-modal .spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid var(--border, #444);
+  border-top-color: var(--accent, #4a9eff);
+  border-radius: 50%;
+  animation: subscribe-spin 0.8s linear infinite;
+  margin: 16px auto;
+}
+
+@keyframes subscribe-spin {
+  to { transform: rotate(360deg); }
+}
+
+.error {
+  color: #e74c3c;
+  padding: 12px;
+  background: rgba(231, 76, 60, 0.08);
+  border-radius: 4px;
+}
+
+.warning {
+  color: #e67e22;
+}
+
+.info {
+  color: #2ecc71;
+}
+
+#r-sample {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-left: 18px;
+  margin: 0;
+  border: 1px solid var(--border, #333);
+  border-radius: 4px;
+  padding: 8px 8px 8px 24px;
+}
+
+#r-sample li {
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+#r-reasoning {
+  display: inline;
+  font-style: italic;
+}
+
+/* ============================================================
+   Subscription management page
+   ============================================================ */
+
+.subscribe-page {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+.subscribe-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.status-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.status-tab {
+  padding: 6px 14px;
+  border: 1px solid var(--border, #444);
+  background: transparent;
+  color: var(--text, #eee);
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.status-tab.active {
+  background: var(--accent, #4a9eff);
+  color: white;
+  border-color: var(--accent, #4a9eff);
+}
+
+.subscriptions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.subscriptions-table th,
+.subscriptions-table td {
+  padding: 8px;
+  border-bottom: 1px solid var(--border, #333);
+  text-align: left;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.subscriptions-table th {
+  font-weight: 600;
+  background: var(--bg-elevated, #222);
+}
+
+.subscriptions-table td button {
+  margin-right: 4px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  background: transparent;
+  color: var(--text, #eee);
+  border: 1px solid var(--border, #444);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.subscriptions-table td button:hover {
+  background: var(--bg-input, #222);
+}
+
+.error-inline {
+  color: #e74c3c;
+  cursor: help;
+}

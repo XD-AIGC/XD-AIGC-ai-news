@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 import httpx
 from bs4 import BeautifulSoup
 
-from collectors.base import BaseScraper, ContentItem, SourceType
+from collectors.base import BaseScraper, ContentItem, SourceType, Theme
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +45,7 @@ class TelegramCollector(BaseScraper):
         channel = cfg["channel"]
         name = cfg.get("name", channel)
         fetch_limit = cfg.get("fetch_limit", 20)
+        theme = Theme(cfg.get("theme", "ai"))
 
         url = f"{TELEGRAM_WEB_BASE}/{channel}"
         headers = {"User-Agent": USER_AGENT}
@@ -69,7 +70,7 @@ class TelegramCollector(BaseScraper):
             logger.warning("Telegram [%s] request failed: %s", name, e)
             return []
 
-        items = self._parse_html(resp.text, channel, name, since, fetch_limit)
+        items = self._parse_html(resp.text, channel, name, since, fetch_limit, theme)
         logger.info("Telegram [%s]: fetched %d messages", name, len(items))
         return items
 
@@ -80,13 +81,14 @@ class TelegramCollector(BaseScraper):
         name: str,
         since: datetime,
         fetch_limit: int,
+        theme: Theme = Theme("ai"),
     ) -> list[ContentItem]:
         soup = BeautifulSoup(html, "html.parser")
         messages = soup.select("div.tgme_widget_message[data-post]")
 
         items: list[ContentItem] = []
         for msg in messages[-fetch_limit:]:
-            item = self._parse_message(msg, channel, name, since)
+            item = self._parse_message(msg, channel, name, since, theme)
             if item:
                 items.append(item)
         return items
@@ -97,6 +99,7 @@ class TelegramCollector(BaseScraper):
         channel: str,
         name: str,
         since: datetime,
+        theme: Theme = Theme("ai"),
     ) -> ContentItem | None:
         data_post = msg_el.get("data-post", "")
         msg_id = data_post.split("/")[-1] if "/" in data_post else data_post
@@ -144,6 +147,7 @@ class TelegramCollector(BaseScraper):
             content=text,
             author=name,
             published_at=published_at,
+            theme=theme,
             metadata={"msg_url": msg_url, "channel": channel},
         )
 
