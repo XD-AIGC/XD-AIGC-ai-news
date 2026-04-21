@@ -191,6 +191,7 @@ class NewsDatabase:
         date: str | None = None,
         date_from: str | None = None,
         date_to: str | None = None,
+        theme: str | None = None,
     ) -> dict:
         """Return aggregate stats: source/category breakdowns."""
         conditions: list[str] = []
@@ -201,6 +202,9 @@ class NewsDatabase:
         elif date_from and date_to:
             conditions.append("collected_at >= ? AND collected_at <= ?")
             params.extend([f"{date_from}T00:00:00", f"{date_to}T23:59:59"])
+        if theme:
+            conditions.append("theme = ?")
+            params.append(theme)
         where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
 
         cursor = self._conn.cursor()
@@ -234,6 +238,7 @@ class NewsDatabase:
         date_to: str | None = None,
         source: str | None = None,
         category: str | None = None,
+        theme: str | None = None,
         q: str | None = None,
         min_score: float | None = None,
         page: int = 1,
@@ -261,6 +266,9 @@ class NewsDatabase:
         if category:
             conditions.append("ai_categories LIKE ?")
             params.append(f"%{category}%")
+        if theme:
+            conditions.append("theme = ?")
+            params.append(theme)
         if q:
             conditions.append("(title LIKE ? OR content LIKE ? OR ai_summary LIKE ?)")
             pattern = f"%{q}%"
