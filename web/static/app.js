@@ -176,16 +176,23 @@ NewsApp.init(function () {
   loadDates();
   applyDays(7); // pre-fill range inputs
   bindDateEvents();
+  initContentThemeTabs();
 });
 
-// ─── Theme tab init (restore from localStorage + wire clicks) ───
-document.addEventListener('DOMContentLoaded', function () {
+function initContentThemeTabs() {
+  // Sync NewsApp.state.theme with saved localStorage value before first refresh
   var savedTheme = getActiveTheme();
-  applyActiveTheme(savedTheme);
-
+  if (window.NewsApp && window.NewsApp.state) {
+    window.NewsApp.state.theme = savedTheme;
+  }
+  // Update button active state to match saved theme (no refresh here — init() calls refresh itself)
   document.querySelectorAll('.theme-tab').forEach(function (btn) {
+    var match = btn.dataset.theme === savedTheme;
+    btn.classList.toggle('active', match);
+    btn.setAttribute('aria-selected', match ? 'true' : 'false');
+
     btn.addEventListener('click', function () {
       applyActiveTheme(btn.dataset.theme);
     });
   });
-});
+}
