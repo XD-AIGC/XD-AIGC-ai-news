@@ -111,3 +111,15 @@ No test suite exists. Verify changes by running `python main.py --skip-ai --no-p
 ## Key Dependencies
 
 feedparser, httpx, beautifulsoup4, pydantic, pyyaml, python-dotenv, openai, notion-client, google-api-python-client, fastapi, uvicorn, twikit
+
+## v2 Migration Notes (Fashion Theme + Subscription Analyzer)
+
+On next deploy:
+
+1. Auto-migration runs on first startup — `storage/database.py._init_tables` adds the `theme` column to `news` and creates the `user_sources` table if missing. **No manual step required.**
+2. If you prefer explicit offline migration: `sqlite3 data/news.db < scripts/migrate_v2.sql`
+3. Set `RSSHUB_URL` in `.env` (e.g. `RSSHUB_URL=http://localhost:1200`) for the subscription analyzer to use RSSHub routes for 小红书 / 微博 URLs.
+4. No rollback script needed — the added column and table are additive and backward-compatible with pre-v2 code paths.
+5. Run tests after deploy: `pytest tests/ -v` → expect 44 passing.
+6. Web UI has new routes: `/subscribe.html` (management page) and `/api/subscribe/*` (analyze, confirm, list, delete, patch).
+7. `config.yaml` migrated from flat `focus_areas:` to nested `themes: {ai: [...], fashion: [...]}`. The loader shim in `storage/config_loader.py` still reads the legacy format, so a partial deploy with unchanged config.yaml continues to work.
