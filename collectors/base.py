@@ -22,6 +22,11 @@ class SourceType(str, Enum):
     MANUAL = "manual"
 
 
+class Theme(str, Enum):
+    AI = "ai"
+    FASHION = "fashion"
+
+
 class ContentItem(BaseModel):
     """Unified content item from any source."""
 
@@ -34,6 +39,7 @@ class ContentItem(BaseModel):
     published_at: Optional[datetime] = None
     collected_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     metadata: dict = Field(default_factory=dict)
+    theme: Theme = Theme.AI
 
     # AI processing results (filled in Phase 3)
     ai_score: Optional[float] = None
