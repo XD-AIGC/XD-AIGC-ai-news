@@ -1,5 +1,6 @@
 """Subscribe API: analyze URLs and manage user_sources."""
 
+import ipaddress
 import json
 import logging
 import os
@@ -41,6 +42,55 @@ def _load_config_for_analyzer() -> dict:
 
     resolved = re.sub(r"\$\{(\w+)\}", replace_env, raw)
     return yaml.safe_load(resolved)
+
+
+_BLOCKED_HOSTNAMES = {"metadata.google.internal", "metadata"}
+
+
+def _is_safe_external_url(url: str) -> tuple[bool, str]:
+    """Reject URLs that resolve to private / loopback / link-local / metadata IPs.
+
+    Returns (allowed, reason_if_blocked).
+    """
+    try:
+        parsed = urlparse(url)
+    except Exception as e:
+        return False, f"Invalid URL: {e}"
+
+    if parsed.scheme not in ("http", "https"):
+        return False, f"Unsupported scheme: {parsed.scheme!r}"
+
+    hostname = (parsed.hostname or "").lower()
+    if not hostname:
+        return False, "URL has no hostname"
+
+    # Cheap allowlist-by-denylist for well-known cloud metadata hostnames
+    if hostname in _BLOCKED_HOSTNAMES:
+        return False, f"Blocked hostname: {hostname}"
+
+    # Resolve to IPs (all addresses — v4 and v6)
+    try:
+        infos = socket.getaddrinfo(hostname, None)
+    except socket.gaierror as e:
+        return False, f"DNS resolution failed: {e}"
+
+    for info in infos:
+        ip_str = info[4][0]
+        try:
+            ip = ipaddress.ip_address(ip_str)
+        except ValueError:
+            continue
+        if (
+            ip.is_private
+            or ip.is_loopback
+            or ip.is_link_local
+            or ip.is_multicast
+            or ip.is_reserved
+            or ip.is_unspecified
+        ):
+            return False, f"Target IP {ip} is in a blocked range"
+
+    return True, ""
 
 
 def _pick_proxy(proxy_cfg: dict) -> Optional[str]:
@@ -87,6 +137,11 @@ async def analyze(req: AnalyzeRequest):
     url = req.url.strip()
     if not url.startswith(("http://", "https://")):
         raise HTTPException(status_code=400, detail="URL must start with http:// or https://")
+
+    # SSRF defense: reject private / loopback / metadata IPs
+    allowed, reason = _is_safe_external_url(url)
+    if not allowed:
+        raise HTTPException(status_code=400, detail=f"URL rejected: {reason}")
 
     url_hash = compute_url_hash(url)
     db = _get_db()
