@@ -1,5 +1,6 @@
 """Subscription analyzer: URL type detection + sample fetch + LLM judgment."""
 
+import json
 import logging
 import re
 from dataclasses import dataclass, field
@@ -192,3 +193,152 @@ async def _sample_rss(feed_url: str, client: httpx.AsyncClient, n: int) -> list[
             "snippet": snippet,
         })
     return samples
+
+
+# ---------------------------------------------------------------------------
+# LLM orchestration
+# ---------------------------------------------------------------------------
+
+DEFAULT_PROMPT_TEMPLATE = """你是订阅分析助手。判断以下源是否值得订阅到"AI + 时尚"聚合系统。
+
+可选主题与 focus_area：
+- ai: [开源模型, ComfyUI, 商用产品, Agent & Skills, 3D生成与重建, 训练与部署]
+- fashion: [潮流, 时装, AI × 时尚]
+
+样本（最近 {n} 条）：
+{samples}
+
+请以 JSON 返回（不要加 markdown 代码块）：
+{{
+  "theme": "ai" | "fashion" | "neither",
+  "suggested_focus_areas": ["..."],
+  "quality_score": 0-10,
+  "verdict": "accept" | "reject" | "manual_review",
+  "reasoning": "2-3 句说明"
+}}
+
+评分参考:
+- 更新频率高、内容深度、原创性 → 加分
+- 纯带货/营销、内容低质、与两个主题都无关 → 减分
+- verdict: >=6 accept, <4 reject, 4-5.9 manual_review
+"""
+
+
+async def analyze_url(
+    url: str,
+    config: dict,
+    client: httpx.AsyncClient,
+) -> dict:
+    """Orchestrate: detect → probe RSS if unknown → sample → LLM analyze.
+
+    Returns a dict with keys: detected_type, sample, llm, normalized_config.
+    """
+    rsshub_cfg = config.get("rsshub", {})
+    routes = rsshub_cfg.get("routes", [])
+    rsshub_base = rsshub_cfg.get("base_url", "")
+
+    detection = detect_url_type(url, rsshub_routes=routes, rsshub_base_url=rsshub_base)
+
+    # If URL didn't match any specific pattern, try HTTP probing for RSS
+    if detection.type == "unknown":
+        detection = await probe_rss_feed(url, client)
+
+    # If still unknown, return without LLM call
+    if detection.type == "unknown":
+        return {
+            "detected_type": "unknown",
+            "sample": [],
+            "llm": {
+                "theme": "neither",
+                "suggested_focus_areas": [],
+                "quality_score": 0,
+                "verdict": "reject",
+                "reasoning": detection.error or "无法识别此 URL 的订阅类型",
+            },
+            "normalized_config": {},
+        }
+
+    # Fetch sample
+    sample = await fetch_sample(detection, client, n=5)
+
+    # Build LLM prompt
+    sa_cfg = config.get("subscribe_analyzer", {})
+    llm_cfg = sa_cfg.get("llm", config.get("llm", {}))
+    prompt_template = sa_cfg.get("prompt_template", DEFAULT_PROMPT_TEMPLATE)
+    prompt = _build_prompt(prompt_template, sample)
+
+    # LLM analyze with one retry on failure
+    llm_result = None
+    for attempt in (1, 2):
+        try:
+            llm_result = await _call_llm(prompt, llm_cfg, client)
+            break
+        except Exception as e:
+            logger.warning("LLM subscription analysis attempt %d failed: %s", attempt, e)
+
+    if llm_result is None:
+        llm_result = {
+            "theme": "neither",
+            "suggested_focus_areas": [],
+            "quality_score": 0,
+            "verdict": "manual_review",
+            "reasoning": "AI 分析暂时不可用，请根据样本自行判断 (LLM failed)",
+        }
+
+    return {
+        "detected_type": detection.type,
+        "sample": sample,
+        "llm": llm_result,
+        "normalized_config": detection.config,
+    }
+
+
+def _build_prompt(template: str, samples: list[dict]) -> str:
+    """Fill prompt template using .replace() to avoid breaking on JSON { in template."""
+    if not samples:
+        sample_text = "(无法抓取样本，请仅基于 URL 本身判断)"
+    else:
+        lines = []
+        for i, s in enumerate(samples, 1):
+            lines.append(f"{i}. {s['title']}\n   {s.get('snippet', '')[:200]}")
+        sample_text = "\n".join(lines)
+    return template.replace("{n}", str(len(samples))).replace("{samples}", sample_text)
+
+
+async def _call_llm(prompt: str, llm_cfg: dict, client: httpx.AsyncClient) -> dict:
+    """POST to OpenAI-compatible /chat/completions and parse JSON response."""
+    api_key = llm_cfg.get("api_key", "")
+    base_url = llm_cfg.get("base_url", "https://api.openai.com/v1")
+    model = llm_cfg.get("model", "gpt-4o-mini")
+    temperature = llm_cfg.get("temperature", 0.2)
+
+    if not api_key:
+        raise ValueError("LLM api_key not configured for subscribe_analyzer")
+
+    resp = await client.post(
+        f"{base_url}/chat/completions",
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "model": model,
+            "messages": [
+                {"role": "system", "content": "You are a subscription analysis assistant."},
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": temperature,
+            "max_tokens": 512,
+        },
+        timeout=60.0,
+    )
+    resp.raise_for_status()
+    data = resp.json()
+    text = data["choices"][0]["message"]["content"].strip()
+
+    # Strip code fences if present
+    if text.startswith("```"):
+        lines = text.split("\n")
+        text = "\n".join(lines[1:-1]) if len(lines) >= 3 else text.strip("`")
+
+    return json.loads(text)

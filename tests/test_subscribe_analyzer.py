@@ -182,3 +182,79 @@ async def test_fetch_sample_rss_returns_up_to_n_items():
     samples = await fetch_sample(detection, client, n=2)
     assert len(samples) == 2
     assert samples[0]["title"] == "Item 1"
+
+
+@pytest.mark.asyncio
+async def test_analyze_url_happy_path(monkeypatch):
+    """End-to-end analyze: detect → probe (mocked) → sample (mocked) → LLM (mocked) → result."""
+    from processor import subscribe_analyzer
+
+    async def fake_probe(url, client):
+        return subscribe_analyzer.DetectionResult("rss", {"feed_url": url, "name": url})
+
+    async def fake_fetch_sample(detection, client, n=5):
+        return [
+            {"title": "Hypebeast drop", "url": "u1", "published_at": "", "snippet": "sneaker release"},
+            {"title": "Supreme FW26", "url": "u2", "published_at": "", "snippet": "new collection"},
+        ]
+
+    async def fake_llm(prompt, cfg, client):
+        return {
+            "theme": "fashion",
+            "suggested_focus_areas": ["潮流"],
+            "quality_score": 8,
+            "verdict": "accept",
+            "reasoning": "High-quality streetwear feed.",
+        }
+
+    monkeypatch.setattr(subscribe_analyzer, "probe_rss_feed", fake_probe)
+    monkeypatch.setattr(subscribe_analyzer, "fetch_sample", fake_fetch_sample)
+    monkeypatch.setattr(subscribe_analyzer, "_call_llm", fake_llm)
+
+    client = AsyncMock()
+    cfg = {
+        "rsshub": {"base_url": "", "routes": []},
+        "subscribe_analyzer": {
+            "prompt_template": "Analyze: {samples}",
+            "llm": {"model": "m", "api_key": "k", "base_url": "u"},
+        },
+    }
+
+    result = await subscribe_analyzer.analyze_url(
+        "https://hypebeast.com/feed", cfg, client,
+    )
+
+    assert result["detected_type"] == "rss"
+    assert result["llm"]["theme"] == "fashion"
+    assert result["llm"]["verdict"] == "accept"
+    assert len(result["sample"]) == 2
+
+
+@pytest.mark.asyncio
+async def test_analyze_url_llm_failure_returns_manual_review(monkeypatch):
+    from processor import subscribe_analyzer
+
+    async def fake_probe(url, client):
+        return subscribe_analyzer.DetectionResult("rss", {"feed_url": url, "name": url})
+
+    async def fake_fetch_sample(detection, client, n=5):
+        return [{"title": "T", "url": "u", "published_at": "", "snippet": "s"}]
+
+    async def fake_llm_fail(prompt, cfg, client):
+        raise ValueError("LLM broke")
+
+    monkeypatch.setattr(subscribe_analyzer, "probe_rss_feed", fake_probe)
+    monkeypatch.setattr(subscribe_analyzer, "fetch_sample", fake_fetch_sample)
+    monkeypatch.setattr(subscribe_analyzer, "_call_llm", fake_llm_fail)
+
+    client = AsyncMock()
+    cfg = {
+        "rsshub": {"base_url": "", "routes": []},
+        "subscribe_analyzer": {"prompt_template": "x", "llm": {}},
+    }
+
+    result = await subscribe_analyzer.analyze_url(
+        "https://hypebeast.com/feed", cfg, client,
+    )
+    assert result["llm"]["verdict"] == "manual_review"
+    assert "failed" in result["llm"]["reasoning"].lower() or "不可用" in result["llm"]["reasoning"]
