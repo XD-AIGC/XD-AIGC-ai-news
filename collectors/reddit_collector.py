@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 import httpx
 
-from collectors.base import BaseScraper, ContentItem, SourceType
+from collectors.base import BaseScraper, ContentItem, SourceType, Theme
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +45,7 @@ class RedditCollector(BaseScraper):
         min_score = cfg.get("min_score", 10)
         fetch_limit = cfg.get("fetch_limit", 25)
         fetch_comments = self.config.get("fetch_comments", 5)
+        theme = Theme(cfg.get("theme", "ai"))
 
         url = f"{REDDIT_BASE}/r/{subreddit}/{sort}.json"
         params = {"limit": min(fetch_limit, 100), "raw_json": 1}
@@ -91,7 +92,7 @@ class RedditCollector(BaseScraper):
         for post, comments in zip(valid_posts, all_comments):
             if isinstance(comments, Exception):
                 comments = []
-            item = self._parse_post(post, comments)
+            item = self._parse_post(post, comments, theme)
             if item:
                 items.append(item)
 
@@ -120,7 +121,7 @@ class RedditCollector(BaseScraper):
         return comments[:limit]
 
     def _parse_post(
-        self, post: dict, comments: list[dict]
+        self, post: dict, comments: list[dict], theme: Theme = Theme("ai")
     ) -> ContentItem | None:
         post_id = post["id"]
         title = post.get("title", "")
@@ -158,6 +159,7 @@ class RedditCollector(BaseScraper):
             content="\n\n".join(parts),
             author=post.get("author", "unknown"),
             published_at=created,
+            theme=theme,
             metadata={
                 "score": post.get("score", 0),
                 "upvote_ratio": post.get("upvote_ratio"),

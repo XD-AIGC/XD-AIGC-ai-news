@@ -9,7 +9,7 @@ from hashlib import md5
 import feedparser
 import httpx
 
-from collectors.base import BaseScraper, ContentItem, SourceType
+from collectors.base import BaseScraper, ContentItem, SourceType, Theme
 
 logger = logging.getLogger(__name__)
 
@@ -39,9 +39,10 @@ class TwitterCollector(BaseScraper):
             for user_cfg in self.users:
                 screen_name = user_cfg["id"]
                 name = user_cfg.get("name", screen_name)
+                theme = Theme(user_cfg.get("theme", "ai"))
                 try:
                     user_items = await self._fetch_nitter_rss(
-                        client, screen_name, name, since
+                        client, screen_name, name, since, theme
                     )
                     items.extend(user_items)
                 except Exception as e:
@@ -55,6 +56,7 @@ class TwitterCollector(BaseScraper):
         screen_name: str,
         name: str,
         since: datetime,
+        theme: Theme = Theme("ai"),
     ) -> list[ContentItem]:
         """Fetch user tweets via Nitter RSS feed."""
         items: list[ContentItem] = []
@@ -73,7 +75,7 @@ class TwitterCollector(BaseScraper):
                     continue
 
                 for entry in feed.entries:
-                    item = self._parse_entry(entry, screen_name, name, since)
+                    item = self._parse_entry(entry, screen_name, name, since, theme)
                     if item:
                         items.append(item)
 
@@ -93,6 +95,7 @@ class TwitterCollector(BaseScraper):
         screen_name: str,
         name: str,
         since: datetime,
+        theme: Theme = Theme("ai"),
     ) -> ContentItem | None:
         published_at = self._parse_date(entry)
         if published_at and published_at < since:
@@ -121,6 +124,7 @@ class TwitterCollector(BaseScraper):
             content=content,
             author=name,
             published_at=published_at,
+            theme=theme,
             metadata={"platform": "twitter"},
         )
 

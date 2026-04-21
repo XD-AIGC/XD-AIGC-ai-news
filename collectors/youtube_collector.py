@@ -7,7 +7,7 @@ from hashlib import md5
 
 import httpx
 
-from collectors.base import BaseScraper, ContentItem, SourceType
+from collectors.base import BaseScraper, ContentItem, SourceType, Theme
 
 logger = logging.getLogger(__name__)
 
@@ -46,6 +46,7 @@ class YouTubeCollector(BaseScraper):
     ) -> list[ContentItem]:
         channel_id = channel_cfg["id"]
         channel_name = channel_cfg.get("name", channel_id)
+        theme = Theme(channel_cfg.get("theme", "ai"))
         items: list[ContentItem] = []
 
         try:
@@ -68,7 +69,7 @@ class YouTubeCollector(BaseScraper):
             data = resp.json()
 
             for entry in data.get("items", []):
-                item = self._parse_search_item(entry, channel_name)
+                item = self._parse_search_item(entry, channel_name, theme=theme)
                 if item:
                     items.append(item)
 
@@ -194,7 +195,7 @@ class YouTubeCollector(BaseScraper):
         return items
 
     def _parse_search_item(
-        self, entry: dict, source_tag: str = ""
+        self, entry: dict, source_tag: str = "", theme: Theme = Theme("ai")
     ) -> ContentItem | None:
         """Parse a YouTube search API result item."""
         snippet = entry.get("snippet", {})
@@ -213,6 +214,7 @@ class YouTubeCollector(BaseScraper):
             content=snippet.get("description", ""),
             author=channel_name,
             published_at=published_at,
+            theme=theme,
             metadata={
                 "channel_id": snippet.get("channelId", ""),
                 "channel_name": channel_name,
