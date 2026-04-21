@@ -119,7 +119,8 @@ def _merge_user_sources_into_config(config: dict, db) -> dict:
         if src.source_type == "rss":
             rss = sources.setdefault("rss", {"enabled": True, "feeds": []})
             rss["enabled"] = True
-            feed = {**cfg, "theme": src.theme, "name": src.name or cfg.get("name", src.url)}
+            feed_url = cfg.get("feed_url") or cfg.get("url") or src.url
+            feed = {**cfg, "url": feed_url, "theme": src.theme, "name": src.name or cfg.get("name", src.url)}
             rss.setdefault("feeds", []).append(feed)
             count_added += 1
 
