@@ -159,3 +159,26 @@ async def test_probe_rss_returns_unknown_on_plain_html():
 
     r = await probe_rss_feed("https://example.com/", client)
     assert r.type == "unknown"
+
+
+@pytest.mark.asyncio
+async def test_fetch_sample_rss_returns_up_to_n_items():
+    from processor.subscribe_analyzer import fetch_sample
+
+    rss_body = """<?xml version="1.0"?>
+    <rss version="2.0"><channel>
+      <item><title>Item 1</title><link>https://example.com/1</link><pubDate>Mon, 21 Apr 2026 10:00:00 +0000</pubDate></item>
+      <item><title>Item 2</title><link>https://example.com/2</link><pubDate>Mon, 21 Apr 2026 11:00:00 +0000</pubDate></item>
+      <item><title>Item 3</title><link>https://example.com/3</link><pubDate>Mon, 21 Apr 2026 12:00:00 +0000</pubDate></item>
+    </channel></rss>"""
+
+    client = AsyncMock()
+    response = MagicMock()
+    response.text = rss_body
+    response.raise_for_status = MagicMock()
+    client.get.return_value = response
+
+    detection = DetectionResult("rss", {"feed_url": "https://example.com/feed"})
+    samples = await fetch_sample(detection, client, n=2)
+    assert len(samples) == 2
+    assert samples[0]["title"] == "Item 1"

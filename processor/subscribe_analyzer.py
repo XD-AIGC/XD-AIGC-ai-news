@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from typing import Any, Optional
 from urllib.parse import urljoin, urlparse
 
+import feedparser
 import httpx
 
 logger = logging.getLogger(__name__)
@@ -141,3 +142,53 @@ async def probe_rss_feed(url: str, client: httpx.AsyncClient) -> DetectionResult
             return DetectionResult("rss", {"feed_url": feed_url, "name": url})
 
     return DetectionResult("unknown", error="No feed detected in page")
+
+
+async def fetch_sample(
+    detection: DetectionResult,
+    client: httpx.AsyncClient,
+    n: int = 5,
+) -> list[dict]:
+    """Fetch up to N most recent items from the detected source.
+
+    Returns list of dicts: {title, url, published_at (str), snippet}.
+    Empty list if fetch fails.
+    """
+    if detection.type == "rss":
+        return await _sample_rss(detection.config["feed_url"], client, n)
+
+    # For non-RSS types, v1 doesn't implement ad-hoc samplers (user would need
+    # an RSSHub route for Western non-RSS sources, already handled upstream).
+    if detection.type in ("youtube", "bilibili", "twitter", "reddit", "telegram"):
+        logger.info(
+            "Sample fetch skipped for type %s (no ad-hoc non-RSS sampler in v1)",
+            detection.type,
+        )
+        return []
+
+    return []
+
+
+async def _sample_rss(feed_url: str, client: httpx.AsyncClient, n: int) -> list[dict]:
+    """Fetch and parse RSS feed, returning up to N items."""
+    try:
+        response = await client.get(feed_url, follow_redirects=True, timeout=10.0)
+        response.raise_for_status()
+    except Exception as e:
+        logger.warning("Sample RSS fetch failed for %s: %s", feed_url, e)
+        return []
+
+    feed = feedparser.parse(response.text)
+    samples = []
+    for entry in feed.entries[:n]:
+        published = entry.get("published") or entry.get("updated") or ""
+        snippet = entry.get("summary") or entry.get("description") or ""
+        # Strip HTML tags crudely for LLM input
+        snippet = re.sub(r"<[^>]+>", "", snippet)[:400]
+        samples.append({
+            "title": entry.get("title", "Untitled"),
+            "url": entry.get("link", ""),
+            "published_at": published,
+            "snippet": snippet,
+        })
+    return samples
