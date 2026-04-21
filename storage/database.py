@@ -13,7 +13,9 @@ from storage.models import (
     CREATE_INDEX_SOURCE,
     CREATE_INDEX_THEME,
     CREATE_INDEX_URL,
+    CREATE_INDEX_USER_SOURCES_STATUS,
     CREATE_NEWS_TABLE,
+    CREATE_USER_SOURCES_TABLE,
 )
 
 logger = logging.getLogger(__name__)
@@ -51,6 +53,8 @@ class NewsDatabase:
             logger.info("Migrated: added 'theme' column to news table")
 
         cursor.execute(CREATE_INDEX_THEME)
+        cursor.execute(CREATE_USER_SOURCES_TABLE)
+        cursor.execute(CREATE_INDEX_USER_SOURCES_STATUS)
         self._conn.commit()
 
     def url_exists(self, url: str) -> bool:

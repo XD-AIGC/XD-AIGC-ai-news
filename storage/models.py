@@ -39,3 +39,28 @@ CREATE INDEX IF NOT EXISTS idx_news_score ON news(ai_score);
 CREATE_INDEX_THEME = """
 CREATE INDEX IF NOT EXISTS idx_news_theme ON news(theme);
 """
+
+CREATE_USER_SOURCES_TABLE = """
+CREATE TABLE IF NOT EXISTS user_sources (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    url TEXT NOT NULL,
+    url_hash TEXT NOT NULL UNIQUE,
+    status TEXT NOT NULL,
+    source_type TEXT,
+    normalized_config TEXT,
+    theme TEXT,
+    focus_areas TEXT,
+    llm_reasoning TEXT,
+    sample_json TEXT,
+    created_at TEXT DEFAULT (datetime('now')),
+    activated_at TEXT,
+    last_fetch_at TEXT,
+    last_fetch_status TEXT,
+    consecutive_failures INTEGER DEFAULT 0,
+    name TEXT
+);
+"""
+
+CREATE_INDEX_USER_SOURCES_STATUS = """
+CREATE INDEX IF NOT EXISTS idx_user_sources_status ON user_sources(status);
+"""
