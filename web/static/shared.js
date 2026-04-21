@@ -15,6 +15,7 @@ const NewsApp = (function () {
   const state = {
     source: '',
     category: '',
+    theme: 'ai',           // content theme (ai / fashion)
     q: '',
     minScore: 0,
     page: 1,
@@ -63,6 +64,7 @@ const NewsApp = (function () {
     try {
       const dateParams = (getPageHook().buildDateParams || (() => ({})))();
       const qs = new URLSearchParams(dateParams);
+      if (state.theme) qs.set('theme', state.theme);
       const data = await fetchJSON(`${API.stats}?${qs}`);
 
       // Source chips
@@ -107,6 +109,7 @@ const NewsApp = (function () {
         ...dateParams,
         source: state.source,
         category: state.category,
+        theme: state.theme,
         q: state.q,
         min_score: state.minScore || undefined,
         page: state.page,

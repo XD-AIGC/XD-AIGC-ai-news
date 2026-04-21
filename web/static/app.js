@@ -3,6 +3,31 @@
  * Depends on shared.js (loaded first)
  */
 
+// ─── Content theme (ai / fashion) ───
+var THEME_STORAGE_KEY = 'aggregator.activeContentTheme';
+
+function getActiveTheme() {
+  return localStorage.getItem(THEME_STORAGE_KEY) || 'ai';
+}
+
+function applyActiveTheme(theme) {
+  localStorage.setItem(THEME_STORAGE_KEY, theme);
+  document.querySelectorAll('.theme-tab').forEach(function (btn) {
+    var match = btn.dataset.theme === theme;
+    btn.classList.toggle('active', match);
+    btn.setAttribute('aria-selected', match ? 'true' : 'false');
+  });
+  if (window.NewsApp && window.NewsApp.state) {
+    window.NewsApp.state.theme = theme;
+    window.NewsApp.state.page = 1;
+    window.NewsApp.state.source = null;
+    window.NewsApp.state.category = null;
+    if (typeof window.NewsApp.refresh === 'function') {
+      window.NewsApp.refresh();
+    }
+  }
+}
+
 // ─── Date state ───
 var dateMode = 'single'; // 'single' or 'range'
 var singleDate = '';
@@ -151,4 +176,16 @@ NewsApp.init(function () {
   loadDates();
   applyDays(7); // pre-fill range inputs
   bindDateEvents();
+});
+
+// ─── Theme tab init (restore from localStorage + wire clicks) ───
+document.addEventListener('DOMContentLoaded', function () {
+  var savedTheme = getActiveTheme();
+  applyActiveTheme(savedTheme);
+
+  document.querySelectorAll('.theme-tab').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      applyActiveTheme(btn.dataset.theme);
+    });
+  });
 });
