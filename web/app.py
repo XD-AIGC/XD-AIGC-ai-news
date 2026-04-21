@@ -156,6 +156,11 @@ def weekly_js():
     return {"error": "weekly.js not found"}
 
 
+@app.get("/subscribe.html")
+def subscribe_page():
+    return FileResponse(STATIC_DIR / "subscribe.html")
+
+
 @app.get("/explore")
 def explore():
     from fastapi.responses import RedirectResponse

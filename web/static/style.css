@@ -1009,3 +1009,82 @@ dialog.subscribe-modal .spinner {
   display: inline;
   font-style: italic;
 }
+
+/* ============================================================
+   Subscription management page
+   ============================================================ */
+
+.subscribe-page {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 0 24px;
+}
+
+.subscribe-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.status-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.status-tab {
+  padding: 6px 14px;
+  border: 1px solid var(--border, #444);
+  background: transparent;
+  color: var(--text, #eee);
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.status-tab.active {
+  background: var(--accent, #4a9eff);
+  color: white;
+  border-color: var(--accent, #4a9eff);
+}
+
+.subscriptions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.subscriptions-table th,
+.subscriptions-table td {
+  padding: 8px;
+  border-bottom: 1px solid var(--border, #333);
+  text-align: left;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.subscriptions-table th {
+  font-weight: 600;
+  background: var(--bg-elevated, #222);
+}
+
+.subscriptions-table td button {
+  margin-right: 4px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  background: transparent;
+  color: var(--text, #eee);
+  border: 1px solid var(--border, #444);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.subscriptions-table td button:hover {
+  background: var(--bg-input, #222);
+}
+
+.error-inline {
+  color: #e74c3c;
+  cursor: help;
+}
