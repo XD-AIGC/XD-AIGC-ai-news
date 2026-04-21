@@ -1,18 +1,26 @@
 # AI News Aggregator 配置文件
 
-focus_areas:
-  - name: "开源模型"
-    keywords: ["open source", "开源", "weights release", "model release", "Stable Diffusion", "Flux", "HunyuanVideo", "CogView", "Wan", "LoRA", "Hugging Face"]
-  - name: "ComfyUI"
-    keywords: ["ComfyUI", "custom node", "workflow", "comfy", "ComfyUI-Manager"]
-  - name: "商用产品"
-    keywords: ["Lovart", "Gemini", "GPT", "OpenAI", "Claude", "Anthropic", "Midjourney", "DALL-E", "Sora", "Runway"]
-  - name: "Agent & Skills"
-    keywords: ["agent", "MCP", "mcp-server", "model context protocol", "tool use", "function calling", "autonomous", "agentic", "cursor", "copilot", "claude code", "claude-code", "skills", "coding agent", "vibe-coding", "ai coding"]
-  - name: "3D生成与重建"
-    keywords: ["gaussian splatting", "3DGS", "4DGS", "NeRF", "neural rendering", "3D reconstruction", "3D generation", "text-to-3d", "point cloud", "mesh generation", "radiance field"]
-  - name: "训练与部署"
-    keywords: ["fine-tune", "training", "LoRA", "RLHF", "inference", "quantization", "deployment", "distillation"]
+themes:
+  ai:
+    - name: "开源模型"
+      keywords: ["open source", "开源", "weights release", "model release", "Stable Diffusion", "Flux", "HunyuanVideo", "CogView", "Wan", "LoRA", "Hugging Face"]
+    - name: "ComfyUI"
+      keywords: ["ComfyUI", "custom node", "workflow", "comfy", "ComfyUI-Manager"]
+    - name: "商用产品"
+      keywords: ["Lovart", "Gemini", "GPT", "OpenAI", "Claude", "Anthropic", "Midjourney", "DALL-E", "Sora", "Runway"]
+    - name: "Agent & Skills"
+      keywords: ["agent", "MCP", "mcp-server", "model context protocol", "tool use", "function calling", "autonomous", "agentic", "cursor", "copilot", "claude code", "claude-code", "skills", "coding agent", "vibe-coding", "ai coding"]
+    - name: "3D生成与重建"
+      keywords: ["gaussian splatting", "3DGS", "4DGS", "NeRF", "neural rendering", "3D reconstruction", "3D generation", "text-to-3d", "point cloud", "mesh generation", "radiance field"]
+    - name: "训练与部署"
+      keywords: ["fine-tune", "training", "LoRA", "RLHF", "inference", "quantization", "deployment", "distillation"]
+  fashion:
+    - name: "潮流"
+      keywords: ["streetwear", "街头", "sneakers", "球鞋", "Supreme", "Stussy", "国潮", "Hypebeast", "Highsnobiety", "hype", "drop", "fashion", "潮牌", "Nike", "adidas"]
+    - name: "时装"
+      keywords: ["runway", "时装周", "秀场", "haute couture", "Vogue", "LV", "Louis Vuitton", "Prada", "Gucci", "Chanel", "BoF", "luxury", "designer", "collection", "couture", "Dior"]
+    - name: "AI × 时尚"
+      keywords: ["AI fashion", "virtual model", "digital fashion", "AIGC 服装", "AI 穿搭", "virtual try-on", "AI runway", "generative fashion", "AI 时装"]
 
 sources:
   rss:
@@ -28,6 +36,12 @@ sources:
       # - { url: "https://inworld.ai/blog/rss.xml", name: "Inworld AI Blog" }  # 无 RSS feed
       - { url: "https://developer.nvidia.com/blog/feed/", name: "NVIDIA Developer Blog" }
       - { url: "https://blogs.unity3d.com/feed/", name: "Unity Blog" }
+      # Fashion feeds
+      - { url: "https://hypebeast.com/feed", name: "Hypebeast", theme: "fashion" }
+      - { url: "https://www.businessoffashion.com/feed", name: "Business of Fashion", theme: "fashion" }
+      - { url: "https://www.highsnobiety.com/feed", name: "Highsnobiety", theme: "fashion" }
+      - { url: "https://www.vogue.com/feed/rss", name: "Vogue", theme: "fashion" }
+      - { url: "https://www.dezeen.com/feed/", name: "Dezeen", theme: "fashion" }
 
   github:
     enabled: true
