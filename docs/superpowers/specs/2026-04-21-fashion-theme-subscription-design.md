@@ -60,11 +60,11 @@ class ContentItem(BaseModel):
 
 ### 3.2 Database Schema Changes
 
-**Modify `items` table:**
+**Modify `news` table:**
 
 ```sql
-ALTER TABLE items ADD COLUMN theme TEXT NOT NULL DEFAULT 'ai';
-CREATE INDEX idx_items_theme ON items(theme);
+ALTER TABLE news ADD COLUMN theme TEXT NOT NULL DEFAULT 'ai';
+CREATE INDEX idx_news_theme ON news(theme);
 ```
 
 Old rows default to `'ai'` — matches reality, no backfill needed.
@@ -396,7 +396,7 @@ Table view with tabs for status filter (全部 / 活跃 / 待处理 / 已拒绝 
 
 ### 6.5 Backend API Changes
 
-- `GET /api/items` gains `theme` query parameter for filtering.
+- `GET /api/news` (existing endpoint) gains `theme` query parameter for filtering.
 - New router `web/routers/subscribe.py` with endpoints from §5.5.
 
 ---
@@ -409,8 +409,8 @@ Table view with tabs for status filter (全部 / 活跃 / 待处理 / 已拒绝 
 
 ```sql
 -- Add theme column to items (default 'ai' keeps legacy data correct)
-ALTER TABLE items ADD COLUMN theme TEXT NOT NULL DEFAULT 'ai';
-CREATE INDEX idx_items_theme ON items(theme);
+ALTER TABLE news ADD COLUMN theme TEXT NOT NULL DEFAULT 'ai';
+CREATE INDEX idx_news_theme ON news(theme);
 
 -- Create user_sources table
 CREATE TABLE user_sources (
