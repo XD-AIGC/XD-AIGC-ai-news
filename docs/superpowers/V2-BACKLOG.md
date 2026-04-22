@@ -55,13 +55,8 @@ Server's `.env` has CRLF line endings (Windows-edited), which breaks `source .en
 
 **Source:** observed during post-deploy fashion rescore (2026-04-21).
 
-### 🟡 LLM JSON response parsing is fragile
-Observed ~10% failure rate of "Expecting ',' delimiter" errors during fashion rescore. Root cause is LLM including unescaped double-quotes inside string values in the JSON response (e.g., article titles like `"It's no surprise..."`).
-
-**Fix options:**
-- Prompt: add "use single quotes inside string values" instruction.
-- Parser: pre-process LLM response to repair common JSON-quote issues (e.g. use `json-repair` library).
-- Request structured output from the LLM API when available.
+### ✅ LLM JSON response parsing is fragile (DONE 2026-04-22)
+`AIScorer._parse_json` now tries stdlib `json.loads` first; on `JSONDecodeError` falls back to `json_repair.loads` and emits a `WARNING` log so the failure rate stays observable. Repair handles the four classes of breakage seen in production: unescaped inner double-quotes, trailing commas, missing commas, and partially-fenced markdown. Tests in `tests/test_scorer_json_parse.py` cover each path plus the unrecoverable-garbage case (still raises so the per-item exception handler in `process_items` triggers the existing fallback).
 
 **Source:** pattern observed during 2026-04-21 rescore (~14 of 140 items failed).
 

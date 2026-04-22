@@ -5,6 +5,7 @@ import json
 import logging
 
 import httpx
+import json_repair
 
 from collectors.base import ContentItem
 
@@ -211,4 +212,15 @@ class AIScorer:
                     json_lines.append(line)
             text = "\n".join(json_lines)
 
-        return json.loads(text)
+        try:
+            return json.loads(text)
+        except json.JSONDecodeError as exc:
+            repaired = json_repair.loads(text)
+            if not isinstance(repaired, dict) or not repaired:
+                raise ValueError(
+                    f"LLM response not a JSON object even after repair: {text[:200]!r}"
+                ) from exc
+            logger.warning(
+                "LLM JSON repaired (%s); preview=%s", exc.msg, text[:120],
+            )
+            return repaired

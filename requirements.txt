@@ -10,6 +10,7 @@ beautifulsoup4>=4.12
 
 # LLM
 openai>=1.0
+json-repair>=0.59
 
 # Outputs
 notion-client>=2.0
