@@ -97,6 +97,11 @@ async function loadDates() {
     if (dates.length > 0 && !singleDate) {
       singleDate = dates[0].date;
       $sel.value = singleDate;
+      // Re-fetch with today's date — initial refresh() ran before loadDates
+      // resolved and used no date filter (see app.js for the same fix).
+      if (window.NewsApp && typeof window.NewsApp.refresh === 'function') {
+        window.NewsApp.refresh();
+      }
     }
   } catch (e) {
     console.error('Failed to load dates:', e);

@@ -85,6 +85,12 @@ async function loadDates() {
     if (dates.length > 0 && !singleDate) {
       singleDate = dates[0].date;
       $sel.value = singleDate;
+      // Re-fetch news now that we know today's date — the initial refresh()
+      // ran before loadDates resolved and used no date filter, so the list
+      // showed cross-date items even though the dropdown ended up on today.
+      if (window.NewsApp && typeof window.NewsApp.refresh === 'function') {
+        window.NewsApp.refresh();
+      }
     }
   } catch (e) {
     console.error('Failed to load dates:', e);
