@@ -33,7 +33,7 @@ from processor.scorer import AIScorer
 from processor.weekly_digest import generate_weekly_digest
 from storage.config_loader import load_config, load_themes
 from storage.database import NewsDatabase
-from storage.user_sources import list_by_status
+from storage.user_sources import list_by_status, update_fetch_status
 
 logger = logging.getLogger(__name__)
 
@@ -93,6 +93,10 @@ def _merge_user_sources_into_config(config: dict, db) -> dict:
 
     sources = config.setdefault("sources", {})
     count_added = 0
+    skipped_dup = 0
+
+    # Build per-collector URL set so we don't append a feed already in static config.
+    existing_rss_urls = {f.get("url") for f in sources.get("rss", {}).get("feeds", []) if f.get("url")}
 
     for src in active:
         try:
@@ -105,6 +109,10 @@ def _merge_user_sources_into_config(config: dict, db) -> dict:
             rss = sources.setdefault("rss", {"enabled": True, "feeds": []})
             rss["enabled"] = True
             feed_url = cfg.get("feed_url") or cfg.get("url") or src.url
+            if feed_url in existing_rss_urls:
+                skipped_dup += 1
+                continue
+            existing_rss_urls.add(feed_url)
             feed = {**cfg, "url": feed_url, "theme": src.theme, "name": src.name or cfg.get("name", src.url)}
             rss.setdefault("feeds", []).append(feed)
             count_added += 1
@@ -149,8 +157,24 @@ def _merge_user_sources_into_config(config: dict, db) -> dict:
 
     if count_added:
         logger.info("Merged %d dynamic user_sources into config", count_added)
+    if skipped_dup:
+        logger.info("Skipped %d user_source(s) whose URL was already in static config", skipped_dup)
 
     return config
+
+
+def _mark_active_sources_fetched(db, status: str = "ok") -> None:
+    """After a pipeline run, stamp last_fetch_at + status on every active user_source.
+
+    This is coarse — we don't yet track per-feed success/failure inside
+    RSSCollector — but it stops the subscribe management page from showing
+    `—` for last_fetch_at forever (v2 backlog item).
+    """
+    for src in list_by_status(db, "active"):
+        try:
+            update_fetch_status(db, src.id, status)
+        except Exception as e:
+            logger.warning("Failed to update fetch_status for user_source #%d: %s", src.id, e)
 
 
 def build_collectors(
@@ -278,6 +302,11 @@ async def run(args: argparse.Namespace) -> None:
 
             items = await collect_all(collectors, since)
             logger.info("Total collected: %d items", len(items))
+
+            # Stamp last_fetch_at on every active user_source so the subscribe
+            # management page stops showing '—'. Coarse: per-feed success/fail
+            # would require collector-level reporting (deferred, see V2-BACKLOG).
+            _mark_active_sources_fetched(db, status="ok")
 
             # Dedup
             items = deduplicate(items)
