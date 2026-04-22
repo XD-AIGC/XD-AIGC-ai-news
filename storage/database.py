@@ -188,13 +188,23 @@ class NewsDatabase:
         cursor.execute(query, params)
         return [self._row_to_item(row) for row in cursor.fetchall()]
 
-    def get_available_dates(self) -> list[dict]:
-        """Return dates that have data, with item counts, newest first."""
+    def get_available_dates(self, theme: str | None = None) -> list[dict]:
+        """Return dates that have data, with item counts, newest first.
+
+        Optional `theme` filter: when set, counts only items in that theme.
+        """
         cursor = self._conn.cursor()
-        cursor.execute(
-            """SELECT substr(collected_at, 1, 10) AS date, COUNT(*) AS count
-            FROM news GROUP BY date ORDER BY date DESC"""
-        )
+        if theme:
+            cursor.execute(
+                """SELECT substr(collected_at, 1, 10) AS date, COUNT(*) AS count
+                FROM news WHERE theme = ? GROUP BY date ORDER BY date DESC""",
+                (theme,),
+            )
+        else:
+            cursor.execute(
+                """SELECT substr(collected_at, 1, 10) AS date, COUNT(*) AS count
+                FROM news GROUP BY date ORDER BY date DESC"""
+            )
         return [{"date": row["date"], "count": row["count"]} for row in cursor.fetchall()]
 
     def get_stats(

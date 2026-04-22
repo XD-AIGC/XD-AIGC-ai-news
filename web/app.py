@@ -83,10 +83,10 @@ def list_news(
 
 
 @app.get("/api/dates")
-def available_dates():
+def available_dates(theme: Optional[str] = Query(None, description="ai | fashion")):
     db = _get_db()
     try:
-        return db.get_available_dates()
+        return db.get_available_dates(theme=theme)
     finally:
         db.close()
 

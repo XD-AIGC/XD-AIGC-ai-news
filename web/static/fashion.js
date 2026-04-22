@@ -86,7 +86,7 @@ function syncChipHighlight() {
 async function loadDates() {
   var $sel = document.getElementById('dateSelect');
   try {
-    var dates = await NewsApp.fetchJSON(NewsApp.API.dates);
+    var dates = await NewsApp.fetchJSON(NewsApp.API.dates + '?theme=fashion');
     $sel.innerHTML = '<option value="">All dates</option>';
     dates.forEach(function (d) {
       var opt = document.createElement('option');
