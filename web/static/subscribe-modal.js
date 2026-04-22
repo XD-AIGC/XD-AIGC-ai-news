@@ -5,6 +5,10 @@
  *   - #btn-add-subscribe opens the modal
  *   - Pastes URL → /api/subscribe/analyze → shows result
  *   - User can edit theme/focus_areas/name, then /api/subscribe/confirm
+ *
+ * The modal markup is injected into the body on first load if it isn't
+ * already present, so any page that loads this script + has a
+ * #btn-add-subscribe button gets the full subscribe flow.
  */
 (function () {
   const FOCUS_AREAS_BY_THEME = {
@@ -12,8 +16,63 @@
     fashion: ['潮流', '时装', 'AI × 时尚'],
   };
 
-  const modal = document.getElementById('subscribe-modal');
-  if (!modal) return;   // page doesn't have modal (e.g. other pages that load this script)
+  const MODAL_HTML = '' +
+    '<dialog id="subscribe-modal" class="subscribe-modal">' +
+    '  <form method="dialog" id="subscribe-form" onsubmit="return false;">' +
+    '    <h2>添加订阅</h2>' +
+    '    <div class="modal-state" data-state="input">' +
+    '      <label for="subscribe-url">粘贴订阅链接（RSS / YouTube / Twitter / Bilibili / 小红书 / 微博）:</label>' +
+    '      <input type="url" id="subscribe-url" placeholder="https://..." required>' +
+    '      <div class="modal-actions">' +
+    '        <button type="button" id="btn-analyze" class="btn-primary">分析</button>' +
+    '        <button type="button" id="btn-cancel-input" class="btn-tertiary">取消</button>' +
+    '      </div>' +
+    '    </div>' +
+    '    <div class="modal-state" data-state="loading" hidden>' +
+    '      <div class="spinner"></div>' +
+    '      <p>正在分析中（抓取样本 + AI 判断），可能需要 5-15 秒...</p>' +
+    '    </div>' +
+    '    <div class="modal-state" data-state="result" hidden>' +
+    '      <div id="result-already-subscribed" hidden><p class="info">✓ 此源已在订阅中。</p></div>' +
+    '      <div id="result-previously-rejected" hidden>' +
+    '        <p class="warning">⚠ 你之前拒绝过此源。</p>' +
+    '        <button type="button" id="btn-reanalyze" class="btn-secondary">重新分析</button>' +
+    '      </div>' +
+    '      <div id="result-main">' +
+    '        <p><strong>已识别：</strong> <span id="r-type"></span></p>' +
+    '        <h3>样本内容</h3><ul id="r-sample"></ul>' +
+    '        <h3>AI 建议</h3>' +
+    '        <p><strong>理由：</strong> <span id="r-reasoning"></span></p>' +
+    '        <p><strong>质量分：</strong> <span id="r-score"></span> / 10</p>' +
+    '        <label>主题: <select id="r-theme">' +
+    '          <option value="ai">🤖 AI</option>' +
+    '          <option value="fashion">👗 时尚</option>' +
+    '        </select></label>' +
+    '        <label>focus_area (多选): <select id="r-focus-areas" multiple size="4"></select></label>' +
+    '        <label>源名称: <input type="text" id="r-name"></label>' +
+    '        <div class="modal-actions">' +
+    '          <button type="button" id="btn-confirm-accept" class="btn-primary">确认订阅</button>' +
+    '          <button type="button" id="btn-confirm-reject" class="btn-secondary">拒绝</button>' +
+    '          <button type="button" id="btn-cancel" class="btn-tertiary">取消</button>' +
+    '        </div>' +
+    '      </div>' +
+    '    </div>' +
+    '    <div class="modal-state" data-state="error" hidden>' +
+    '      <p class="error" id="error-message"></p>' +
+    '      <div class="modal-actions">' +
+    '        <button type="button" id="btn-retry" class="btn-primary">重试</button>' +
+    '        <button type="button" id="btn-cancel-error" class="btn-tertiary">取消</button>' +
+    '      </div>' +
+    '    </div>' +
+    '  </form>' +
+    '</dialog>';
+
+  let modal = document.getElementById('subscribe-modal');
+  if (!modal) {
+    document.body.insertAdjacentHTML('beforeend', MODAL_HTML);
+    modal = document.getElementById('subscribe-modal');
+  }
+  if (!modal) return;   // belt-and-suspenders
 
   const btnOpen = document.getElementById('btn-add-subscribe');
   const btnAnalyze = document.getElementById('btn-analyze');
