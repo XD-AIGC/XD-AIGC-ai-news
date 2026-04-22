@@ -142,6 +142,23 @@ function bindDateEvents() {
   });
 }
 
+function applyColumnCount(cols) {
+  var grid = document.getElementById('newsGrid');
+  if (grid) grid.style.setProperty('--masonry-cols', String(cols));
+  var label = document.getElementById('columnValue');
+  if (label) label.textContent = String(cols);
+  localStorage.setItem('fashion.cols', String(cols));
+}
+
+function bindColumnSlider() {
+  var slider = document.getElementById('columnSlider');
+  if (!slider) return;
+  var saved = parseInt(localStorage.getItem('fashion.cols') || '', 10);
+  if (saved >= 2 && saved <= 8) slider.value = String(saved);
+  applyColumnCount(slider.value);
+  slider.addEventListener('input', function () { applyColumnCount(slider.value); });
+}
+
 NewsApp.init(function () {
   NewsApp.state.theme = 'fashion';
   NewsApp.state.hasImage = true;
@@ -150,4 +167,5 @@ NewsApp.init(function () {
   loadDates();
   applyDays(7);
   bindDateEvents();
+  bindColumnSlider();
 });
