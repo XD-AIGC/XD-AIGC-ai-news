@@ -5,12 +5,10 @@ import asyncio
 import json
 import logging
 import os
-import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import httpx
-import yaml
 from dotenv import load_dotenv
 
 from collectors.base import ContentItem, SourceType
@@ -33,7 +31,7 @@ from processor.comic_generator import ComicGenerator
 from processor.dedup import deduplicate, deduplicate_semantic
 from processor.scorer import AIScorer
 from processor.weekly_digest import generate_weekly_digest
-from storage.config_loader import load_themes
+from storage.config_loader import load_config, load_themes
 from storage.database import NewsDatabase
 from storage.user_sources import list_by_status
 
@@ -80,19 +78,6 @@ def setup_logging(verbose: bool = False) -> None:
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
     )
-
-
-def load_config(config_path: str = "config.yaml") -> dict:
-    """Load config and resolve ${ENV_VAR} references."""
-    with open(config_path, "r", encoding="utf-8") as f:
-        raw = f.read()
-
-    def replace_env(match: re.Match) -> str:
-        var_name = match.group(1)
-        return os.getenv(var_name, match.group(0))
-
-    resolved = re.sub(r"\$\{(\w+)\}", replace_env, raw)
-    return yaml.safe_load(resolved)
 
 
 def _merge_user_sources_into_config(config: dict, db) -> dict:

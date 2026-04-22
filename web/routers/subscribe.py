@@ -14,6 +14,7 @@ from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
 from processor.subscribe_analyzer import analyze_url
+from storage.config_loader import load_config
 from storage.database import NewsDatabase
 from storage.user_sources import (
     UserSource, compute_url_hash, get_by_id, get_by_url_hash,
@@ -27,21 +28,6 @@ load_dotenv()
 router = APIRouter(prefix="/api/subscribe", tags=["subscribe"])
 
 DB_PATH = os.getenv("NEWS_DB_PATH", "./data/news.db")
-
-
-def _load_config_for_analyzer() -> dict:
-    """Load config.yaml for analyzer (re-reads each request — simple but OK for v1)."""
-    import re
-    import yaml
-
-    with open("config.yaml", "r", encoding="utf-8") as f:
-        raw = f.read()
-
-    def replace_env(match):
-        return os.getenv(match.group(1), match.group(0))
-
-    resolved = re.sub(r"\$\{(\w+)\}", replace_env, raw)
-    return yaml.safe_load(resolved)
 
 
 _BLOCKED_HOSTNAMES = {"metadata.google.internal", "metadata"}
@@ -200,7 +186,7 @@ async def analyze(req: AnalyzeRequest):
             )
 
         # Fresh analysis
-        cfg = _load_config_for_analyzer()
+        cfg = load_config()
 
         # Pick a reachable proxy if configured
         proxy_url = _pick_proxy(cfg.get("proxy", {}))

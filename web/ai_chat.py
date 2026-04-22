@@ -3,15 +3,14 @@
 import hashlib
 import logging
 import os
-import re
 import time
 
 import httpx
-import yaml
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+from storage.config_loader import load_config
 from storage.database import NewsDatabase
 
 load_dotenv()
@@ -43,20 +42,13 @@ SUMMARIZE_SYSTEM_PROMPT = """你是 AI News 的智能助手。用户给你一组
 CHAT_SYSTEM_PROMPT = """你是 AI News 的智能助手。以下是用户当前查看的 AI 领域新闻数据，请基于这些数据回答用户的问题。回答要自然亲切，像一个懂行的朋友。如果问题超出数据范围，坦诚说明。"""
 
 
-def _load_config() -> dict:
-    with open("config.yaml") as f:
-        raw = f.read()
-    raw = re.sub(r"\$\{(\w+)\}", lambda m: os.getenv(m.group(1), ""), raw)
-    return yaml.safe_load(raw)
-
-
 def _load_llm_config() -> dict:
-    return _load_config().get("llm", {})
+    return load_config().get("llm", {})
 
 
 def _get_proxy() -> str | None:
     """Resolve proxy from config, same logic as main.py select_proxy."""
-    cfg = _load_config().get("proxy", {})
+    cfg = load_config().get("proxy", {})
     raw = cfg.get("urls", [])
     if isinstance(raw, str):
         urls = [u.strip() for u in raw.split(",") if u.strip()]

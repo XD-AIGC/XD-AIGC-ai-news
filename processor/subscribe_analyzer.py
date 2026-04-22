@@ -263,7 +263,11 @@ async def analyze_url(
 
     # Build LLM prompt
     sa_cfg = config.get("subscribe_analyzer", {})
-    llm_cfg = sa_cfg.get("llm", config.get("llm", {}))
+    # Merge: top-level llm provides defaults (api_key/base_url), subscribe_analyzer.llm
+    # overrides only what it sets (e.g. model, temperature). Previously this was a
+    # straight replace, which forced us to re-duplicate api_key/base_url under
+    # subscribe_analyzer.llm and silently went stale on rotation (commit 716baeb).
+    llm_cfg = {**config.get("llm", {}), **sa_cfg.get("llm", {})}
     prompt_template = sa_cfg.get("prompt_template", DEFAULT_PROMPT_TEMPLATE)
     prompt = _build_prompt(prompt_template, sample)
 

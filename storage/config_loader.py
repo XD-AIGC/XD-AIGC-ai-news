@@ -1,8 +1,33 @@
 """Config loader shim supporting both legacy focus_areas and new themes formats."""
 
 import logging
+import os
+import re
+
+import yaml
 
 logger = logging.getLogger(__name__)
+
+
+_ENV_VAR_PATTERN = re.compile(r"\$\{(\w+)\}")
+
+
+def load_config(config_path: str = "config.yaml") -> dict:
+    """Read a YAML file and resolve ${ENV_VAR} substitutions.
+
+    Missing env vars keep their `${VAR}` literal so downstream code can
+    detect the misconfiguration loudly. Substituting silently with `""`
+    once produced `Authorization: Bearer ` headers in production.
+    """
+    with open(config_path, "r", encoding="utf-8") as f:
+        raw = f.read()
+
+    def replace(match: re.Match) -> str:
+        var_name = match.group(1)
+        return os.getenv(var_name, match.group(0))
+
+    resolved = _ENV_VAR_PATTERN.sub(replace, raw)
+    return yaml.safe_load(resolved)
 
 
 def load_themes(config: dict) -> dict[str, list[dict]]:
