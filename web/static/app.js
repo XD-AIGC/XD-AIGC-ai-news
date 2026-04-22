@@ -1,43 +1,10 @@
 /**
  * AI News Dashboard — unified page with single-day and date-range modes
  * Depends on shared.js (loaded first)
+ *
+ * Note: ai vs. fashion is now resolved by route (/ vs. /fashion). The
+ * Fashion tab in this page is a plain <a> link — no JS theme tracking.
  */
-
-// ─── Content theme (ai / fashion) ───
-var THEME_STORAGE_KEY = 'aggregator.activeContentTheme';
-
-function getActiveTheme() {
-  return localStorage.getItem(THEME_STORAGE_KEY) || 'ai';
-}
-
-function syncThemeTabUI(theme) {
-  document.querySelectorAll('.theme-tab').forEach(function (btn) {
-    var match = btn.dataset.theme === theme;
-    btn.classList.toggle('active', match);
-    btn.setAttribute('aria-selected', match ? 'true' : 'false');
-  });
-}
-
-function applyActiveTheme(theme) {
-  localStorage.setItem(THEME_STORAGE_KEY, theme);
-  syncThemeTabUI(theme);
-  if (window.NewsApp && window.NewsApp.state) {
-    window.NewsApp.state.theme = theme;
-    window.NewsApp.state.page = 1;
-    window.NewsApp.state.source = '';   // reset filter chips to "All" on theme switch
-    window.NewsApp.state.category = '';
-    if (typeof window.NewsApp.refresh === 'function') {
-      window.NewsApp.refresh();
-    }
-  }
-}
-
-// Event delegation on body — works regardless of when buttons are added to DOM
-document.body.addEventListener('click', function (e) {
-  var tab = e.target.closest('.theme-tab');
-  if (!tab) return;
-  applyActiveTheme(tab.dataset.theme);
-});
 
 // ─── Date state ───
 var dateMode = 'single'; // 'single' or 'range'
@@ -184,17 +151,11 @@ function bindDateEvents() {
 
 // ─── Init ───
 NewsApp.init(function () {
+  // This page is the AI route; pin theme accordingly so fetch_news scopes correctly.
+  if (window.NewsApp && window.NewsApp.state) {
+    window.NewsApp.state.theme = 'ai';
+  }
   loadDates();
   applyDays(7); // pre-fill range inputs
   bindDateEvents();
-  initContentThemeTabs();
 });
-
-function initContentThemeTabs() {
-  // Sync state.theme with saved localStorage value BEFORE first refresh
-  var savedTheme = getActiveTheme();
-  if (window.NewsApp && window.NewsApp.state) {
-    window.NewsApp.state.theme = savedTheme;
-  }
-  syncThemeTabUI(savedTheme);
-}
