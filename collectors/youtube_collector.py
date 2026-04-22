@@ -87,9 +87,14 @@ class YouTubeCollector(BaseScraper):
     async def _search_trending(
         self, cfg: dict, since: datetime
     ) -> list[ContentItem]:
-        """Search YouTube for trending AI videos by keyword, sorted by view count."""
+        """Search YouTube for trending videos by keyword, sorted by view count.
+
+        Honors `theme:` on the search config block so fashion keyword searches
+        get tagged 'fashion' instead of silently defaulting to 'ai'.
+        """
         queries = cfg.get("queries", [])
         top_n = cfg.get("top_n", 10)
+        theme = Theme(cfg.get("theme", "ai"))
 
         all_items: list[ContentItem] = []
         seen_ids: set[str] = set()
@@ -121,7 +126,7 @@ class YouTubeCollector(BaseScraper):
                         continue
                     seen_ids.add(video_id)
 
-                    item = self._parse_search_item(entry, source_tag="search")
+                    item = self._parse_search_item(entry, source_tag="search", theme=theme)
                     if item:
                         item.metadata["search_query"] = query
                         all_items.append(item)

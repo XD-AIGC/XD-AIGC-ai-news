@@ -16,11 +16,33 @@ themes:
       keywords: ["fine-tune", "training", "LoRA", "RLHF", "inference", "quantization", "deployment", "distillation"]
   fashion:
     - name: "潮流"
-      keywords: ["streetwear", "街头", "sneakers", "球鞋", "Supreme", "Stussy", "国潮", "Hypebeast", "Highsnobiety", "hype", "drop", "fashion", "潮牌", "Nike", "adidas"]
+      keywords: [
+        "streetwear", "街头", "sneakers", "球鞋", "Supreme", "Stussy", "国潮",
+        "Hypebeast", "Highsnobiety", "hype", "drop", "collab", "collaboration",
+        "fashion", "潮牌", "Nike", "adidas", "New Balance", "Dunk", "Jordan",
+        "Off-White", "BAPE", "KAWS", "Stone Island", "PUMA", "Yeezy",
+        "vintage", "resale", "StockX", "GOAT", "tank top", "cap", "hoodie",
+        "fragrance", "perfume", "lip", "skincare", "beauty",
+      ]
     - name: "时装"
-      keywords: ["runway", "时装周", "秀场", "haute couture", "Vogue", "LV", "Louis Vuitton", "Prada", "Gucci", "Chanel", "BoF", "luxury", "designer", "collection", "couture", "Dior"]
+      keywords: [
+        "runway", "时装周", "秀场", "haute couture", "Vogue", "LV",
+        "Louis Vuitton", "Prada", "Gucci", "Chanel", "BoF", "luxury",
+        "designer", "collection", "couture", "Dior", "Hermes", "Hermès",
+        "Saint Laurent", "Burberry", "Valentino", "Versace", "Balenciaga",
+        "Bottega Veneta", "Loewe", "Kering", "LVMH", "Met Gala", "Sarah Burton",
+        "Alessandro Michele", "Pierpaolo Piccioli", "atelier", "silhouette",
+        "tailoring", "ready-to-wear", "RTW", "SS25", "SS26", "FW25", "FW26",
+        "Paris Fashion Week", "Milan Fashion Week", "London Fashion Week",
+        "New York Fashion Week",
+      ]
     - name: "AI × 时尚"
-      keywords: ["AI fashion", "virtual model", "digital fashion", "AIGC 服装", "AI 穿搭", "virtual try-on", "AI runway", "generative fashion", "AI 时装"]
+      keywords: [
+        "AI fashion", "virtual model", "digital fashion", "AIGC 服装",
+        "AI 穿搭", "virtual try-on", "AI runway", "generative fashion",
+        "AI 时装", "AI-generated", "digital twin", "avatar fashion",
+        "synthetic models", "AI stylist", "deepfashion",
+      ]
 
 sources:
   rss:
