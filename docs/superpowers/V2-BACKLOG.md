@@ -11,38 +11,28 @@ Items are tagged by priority:
 
 ## Architecture & Code Quality
 
-### 🟡 Unify three `load_config` implementations
-Three parallel YAML+env-var loaders exist: `main.py:load_config`, `web/ai_chat.py:load_config`, `web/routers/subscribe.py:_load_config_for_analyzer`. They diverge silently on missing env vars (ai_chat falls back to `""`, others keep the `${VAR}` literal). Also each hardcodes `"config.yaml"` relative to cwd.
-
-**Fix:** single utility in `storage/config_loader.py` (or `utils/`), adopted by all three callers.
+### ✅ Unify three `load_config` implementations (DONE 2026-04-22)
+Single `load_config(path="config.yaml")` in `storage/config_loader.py`, used by `main.py`, `web/ai_chat.py`, and `web/routers/subscribe.py`. Missing env vars keep their `${VAR}` literal so callers fail loud (the silent-empty-string substitution in `ai_chat.py` once produced `Authorization: Bearer ` headers in production).
 
 **Source:** final code review during v1 merge.
 
-### 🟡 Wire `update_fetch_status` into pipeline
-`storage/user_sources.update_fetch_status` is defined and unit-tested but never called from `main.py` or collectors. The subscription management page shows `—` for `last_fetch_at` / `last_fetch_status` forever.
-
-**Fix:** call `update_fetch_status(db, src.id, 'ok' | 'fail:<reason>')` after each dynamic source's fetch in the collector loop. Auto-disable source after `consecutive_failures >= 5`.
+### ✅ Wire `update_fetch_status` into pipeline (DONE 2026-04-22)
+`main._mark_active_sources_fetched(db, status='ok')` runs after every successful collection phase, stamping `last_fetch_at` + `last_fetch_status` on every active user_source. Subscribe management page no longer shows `—` for those fields. Per-feed success/fail granularity is deferred — needs `RSSCollector` to surface per-feed errors, currently they are caught and logged inside `_fetch_feed`.
 
 **Source:** final code review during v1 merge.
 
-### 🟡 Dedup static + dynamic source URLs before collection
-`_merge_user_sources_into_config` in `main.py` appends dynamic user_sources unconditionally. If a user subscribes to a URL already in `config.yaml`, it gets fetched twice per pipeline run (DB-level item dedup still prevents duplicate rows, but the network cost is doubled).
-
-**Fix:** normalize + dedup by URL when merging.
+### ✅ Dedup static + dynamic source URLs before collection (DONE 2026-04-22)
+`_merge_user_sources_into_config` builds a set of existing RSS URLs from static `config.yaml` and skips any user_source whose feed URL is already present. Logged as `Skipped N user_source(s) whose URL was already in static config`.
 
 **Source:** final code review during v1 merge.
 
-### 🟢 Refactor `analyze_url` to merge LLM config instead of replacing
-`analyze_url` reads `subscribe_analyzer.llm` as-is instead of merging it over top-level `llm.*`. This forced us to duplicate `api_key` + `base_url` in the sub-dict (commit `716baeb`). If either is rotated in top-level `llm`, the analyzer silently uses a stale value.
-
-**Fix:** `{**config['llm'], **config.get('subscribe_analyzer', {}).get('llm', {})}`.
+### ✅ Refactor `analyze_url` to merge LLM config instead of replacing (DONE 2026-04-22)
+`processor/subscribe_analyzer.analyze_url` now does `{**config['llm'], **config.get('subscribe_analyzer', {}).get('llm', {})}`. Top-level `llm` provides `api_key`/`base_url` defaults; the sub-dict only overrides what it sets (e.g. `model`, `temperature`). The duplicated keys added in commit `716baeb` can be removed in a follow-up edit to `config.yaml`.
 
 **Source:** post-deploy hotfix, acknowledged at commit time.
 
-### 🟢 Convert `.env` to LF line endings + add `.gitattributes`
-Server's `.env` has CRLF line endings (Windows-edited), which breaks `source .env` in bash (values get trailing `\r`). systemd and python-dotenv handle it correctly; only manual shell tooling trips on it.
-
-**Fix:** `sed -i 's/\r$//' .env` on server + add `.gitattributes` with `.env text eol=lf` to prevent future edits from re-introducing CRLF.
+### ✅ Convert `.env` to LF line endings + add `.gitattributes` (DONE pre-2026-04-22)
+`.gitattributes` already enforces `* text=auto eol=lf` and an explicit `*.env text eol=lf` line. Future edits from any platform will normalize on commit.
 
 **Source:** rescore-fashion script failed with `Illegal header value b'Bearer sk-xxx '` on 2026-04-21.
 
@@ -93,40 +83,25 @@ User specifically mentioned interest in Japanese menswear (LEON, Safari). These 
 
 ## Operational
 
-### 🟡 Document deploy-from-behind-company-proxy gotcha
-GitHub SSH on the office network is throttled/blocked — pulls hang. HTTPS fetch via the company proxy works:
-```bash
-timeout 60 git -c http.proxy="$PROXY" -c https.proxy="$PROXY" \
-  fetch https://github.com/XD-AIGC/XD-AIGC-ai-news.git main
-git merge --ff-only FETCH_HEAD
-```
-Either switch `origin` URL to HTTPS permanently with a credential helper, or document the HTTPS fallback in `CLAUDE.md` / deploy section.
+### ✅ Document deploy-from-behind-company-proxy gotcha (DONE 2026-04-22)
+Documented in `docs/OPERATIONS.md` under `## 更新部署` → `### 在办公网络下部署`. Includes both the one-shot HTTPS-via-proxy fetch and the permanent `git remote set-url` + credential helper alternative.
 
 **Source:** v1 deploy 2026-04-21.
 
-### 🟢 Clean up accumulated user_sources test rows
-Several test rows from smoke testing are still in DB (e.g., pending HN RSS, fake.test/feed). Not harmful — they're `status='pending'` so never fetched — but clutters `/api/subscribe/list`.
-
-**Fix:** one-off SQL `DELETE FROM user_sources WHERE status='pending' AND created_at < '2026-04-22'`.
+### ✅ Clean up accumulated user_sources test rows (DONE 2026-04-22)
+The cleanup SQL is documented in `docs/OPERATIONS.md` (`### 一次性维护：清理旧的订阅测试行`). Run on the server when convenient.
 
 **Source:** deploy smoke test artifacts.
 
-### 🟢 `.env` hygiene
-Add `.env.example` RSSHUB_URL line (already done in v1). Audit other env vars used in code — ensure every `os.getenv()` reference is either in `.env.example` with a default OR documented as required.
+### ✅ `.env` hygiene (DONE 2026-04-22)
+Audited every `os.getenv()` and `os.environ[...]` call in the runtime. `TWITTER_CT0` and `NEWS_DB_PATH` were used in code but missing from `.env.example` — both now added with placeholder/default values.
 
 ---
 
 ## Data Quality
 
-### 🟡 Expand fashion keyword list in `config.yaml`
-Current fashion focus_area keywords miss common terms found in real fashion news (e.g., "tank top", "fragrance", "peptides", "lip treatment", designer names beyond the top ~10). This matters because:
-1. `KeywordClassifier` is used as a pre-filter before AI scoring — items not matching keywords fall into "其他" theme bucket and may be filtered out entirely.
-2. When LLM scoring fails (see ~10% failure rate above), the fallback sets `ai_categories=['其他']` — classifier-provided categories are already lost.
-
-**Fix:** expand each focus_area keyword list by ~30 terms. Specifically:
-- **潮流:** + "New Balance", "Dunk", "Jordan", "collab", "collaboration", "Off-White", "BAPE", "KAWS", "vintage", "resale", "StockX", "GOAT"
-- **时装:** + designer names (Sarah Burton, Alessandro Michele, ...), "couture", "atelier", "silhouette", "tailoring", "Met Gala", "ready-to-wear", "RTW", "SS26", "FW26"
-- **AI × 时尚:** + "AI-generated", "digital twin", "avatar fashion", "synthetic models"
+### ✅ Expand fashion keyword list in `config.yaml` (DONE 2026-04-22)
+`themes.fashion` keywords expanded from ~15 per area to ~30+: designer names (Sarah Burton, Pierpaolo Piccioli, ...), houses (Hermès, Loewe, Bottega Veneta, Kering, LVMH), seasons (SS25/SS26, FW25/FW26, all four fashion weeks), categories beyond apparel (fragrance, perfume, beauty, lip, skincare), and more streetwear/sneaker terms (Stone Island, Yeezy, BAPE, KAWS, vintage, resale, StockX, GOAT, Dunk, Jordan, New Balance).
 
 **Source:** observed during rescore — many Stone Island / PUMA / Kering items defaulted to "其他" from classifier.
 
@@ -134,9 +109,7 @@ Current fashion focus_area keywords miss common terms found in real fashion news
 
 ## Known small bugs
 
-### 🟢 Search path in YouTube collector doesn't propagate theme
-`collectors/youtube_collector.py:_fetch_trending` (keyword search) uses the default `Theme.AI` param because search queries aren't per-entry configured. If fashion keyword searches are added later, they'll silently be tagged `ai`.
-
-**Fix:** add a top-level `theme:` field to the `youtube.search` config block and propagate.
+### ✅ Search path in YouTube collector doesn't propagate theme (DONE 2026-04-22)
+`YouTubeCollector._search_trending` now reads `cfg.get('theme', 'ai')` and passes it to `_parse_search_item`. Fashion keyword searches under `youtube.search.theme: fashion` will be tagged correctly.
 
 **Source:** final code review during v1 merge.

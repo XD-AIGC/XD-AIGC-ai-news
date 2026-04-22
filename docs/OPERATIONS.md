@@ -132,6 +132,33 @@ pip install -r requirements.txt
 sudo systemctl restart ai-news-web
 ```
 
+### 在办公网络下部署（GitHub SSH 被限速 / 阻断）
+
+服务器在办公网络里通过 SSH 拉取 GitHub 经常会卡住。HTTPS 走公司代理是稳定的备选方案：
+
+```bash
+# $PROXY 替换为公司 HTTP 代理地址，例如 http://127.0.0.1:7890
+timeout 60 git -c http.proxy="$PROXY" -c https.proxy="$PROXY" \
+  fetch https://github.com/XD-AIGC/XD-AIGC-ai-news.git main
+git merge --ff-only FETCH_HEAD
+```
+
+如果想永久切换，把 `origin` 改成 HTTPS 并配置 credential helper：
+
+```bash
+git remote set-url origin https://github.com/XD-AIGC/XD-AIGC-ai-news.git
+git config --global credential.helper store
+```
+
+### 一次性维护：清理旧的订阅测试行
+
+部署初期烟雾测试残留了若干 `status='pending'` 的 user_sources（从未抓取，只是杂在 `/api/subscribe/list` 里）。可一次性清掉：
+
+```bash
+sqlite3 data/news.db \
+  "DELETE FROM user_sources WHERE status='pending' AND created_at < '2026-04-22'"
+```
+
 ## 配置文件
 
 | 文件 | 用途 | 是否提交 Git |
