@@ -1,0 +1,323 @@
+{
+  "week": "2026-W17",
+  "date_range": "2026-04-20 — 2026-04-26",
+  "generated_at": "2026-04-26T14:03:53.948355+00:00",
+  "total_news": 1742,
+  "total_sources": 7,
+  "week_title": "开源核弹周：DeepSeek又来了，这次带着百万上下文",
+  "editor_note": "本周AI圈被两件大事轰炸：DeepSeek悄悄在周四晚9点丢出V4，直接让全球开发者熬了个通宵；与此同时OpenAI的GPT-5.5也没闲着，微软生态全面接入。开源vs闭源的战争从未如此激烈，而谷歌豪掷400亿给Anthropic，更让这场军备竞赛烧钱速度突破天际。",
+  "stories": [
+    {
+      "title": "DeepSeek V4：周四夜间突袭，百万Token震惊全球",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "DeepSeek在北京时间周五凌晨悄悄发布V4系列，1.6T参数的Pro版本仅用V3.2的27% FLOPs，KV缓存压缩至原来的2%，数学满分120/120，编程首次追平闭源模型。这波偷袭让全球AI研究员的周末计划彻底泡汤。",
+      "highlights": [
+        "1.6T总参数，激活仅49B，效率逆天",
+        "百万token上下文，KV缓存缩小10倍",
+        "数学120/120满分，编程追平闭源顶级模型"
+      ],
+      "community_quotes": [
+        {
+          "text": "and there's me thinking that sending it out at 9pm Pacific Time on a Thursday evening was safe, surely...",
+          "author": "Simon Willison，通讯刚发完就被打脸"
+        },
+        {
+          "text": "DeepSeek V4 is the new SoTA — in the one-million-token context setting it only needs 27% FLOPs of V3.2",
+          "author": "cocktailpeanut on X"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "DeepSeek-V4正式发布，V4-Pro 1.6T参数开源",
+          "score": 9.2
+        },
+        {
+          "title": "DeepSeek V4百万上下文仅需27% FLOPs，数学满分",
+          "score": 9.0
+        },
+        {
+          "title": "首个开源长上下文+Agent后训练结合模型",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita sleeping peacefully at his desk on a Thursday night, Doraemon watching news on a holographic screen, the clock shows 9PM",
+          "dialogue_cn": "大雄：「哆啦A梦，今晚没什么大事吧？我要早点睡了~」\n哆啦A梦：「嗯，今晚应该挺平静的……」",
+          "sfx": "zzz…"
+        },
+        {
+          "scene": "Doraemon's eyes go wide, screen explodes with notifications, showing 'DeepSeek V4 Released' with massive parameter numbers",
+          "dialogue_cn": "哆啦A梦：「！！DeepSeek V4发布了！！1.6T参数！百万token上下文！！」\n大雄（迷糊睁眼）：「什么声音……」",
+          "sfx": "ドドドド！！"
+        },
+        {
+          "scene": "Doraemon frantically reading benchmarks, Nobita rubbing eyes confused, screen shows '120/120 math score', 'KV cache 2%'",
+          "dialogue_cn": "大雄：「等等，数学满分120分？那不就是……」\n哆啦A梦：「对，比你强。比你强太多了。」",
+          "sfx": "ガーン…"
+        },
+        {
+          "scene": "Morning light, Doraemon has dark circles, Nobita is asleep on the desk, screen shows global developers all awake and tweeting",
+          "dialogue_cn": "哆啦A梦（顶着黑眼圈）：「全球开发者的周末……就这样没了。」\n大雄（趴桌睡着）：「呼——呼——」\n哆啦A梦：「就你睡得最香。」",
+          "sfx": "ハァ…"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": [
+        "panel-1.jpg",
+        "panel-2.jpg",
+        "panel-3.jpg",
+        "panel-4.jpg"
+      ]
+    },
+    {
+      "title": "大战周：GPT-5.5、谷歌400亿、ComfyUI五亿估值，钱都哪来的？",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周不止DeepSeek炸场——OpenAI发布GPT-5.5并全面接入微软生态，谷歌宣布向Anthropic追加400亿美元投资，开源工具ComfyUI也以5亿美元估值完成3000万融资。AI军备竞赛从技术战全面升级为资本战。",
+      "highlights": [
+        "GPT-5.5正式上线API并接入GitHub Copilot全家桶",
+        "谷歌400亿押注Anthropic，单笔AI投资历史新高",
+        "ComfyUI 400万用户、5亿估值，开源工具也能值钱"
+      ],
+      "community_quotes": [
+        {
+          "text": "Super excited GPT-5.5 is rolling out to GitHub Copilot, M365 Copilot, Copilot Studio, and Foundry today.",
+          "author": "Satya Nadella，微软CEO"
+        },
+        {
+          "text": "one of the few truly contrarian products in AI — community-first, open-source, no hype.",
+          "author": "Craft Ventures 关于ComfyUI的投资评语"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "GPT-5.5和GPT-5.5 Pro正式开放API",
+          "score": 9.0
+        },
+        {
+          "title": "谷歌计划向Anthropic追加400亿美元投资",
+          "score": 8.5
+        },
+        {
+          "title": "ComfyUI完成3000万融资，估值5亿美元",
+          "score": 9.2
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita looking at a giant scoreboard showing 'This Week in AI', multiple logos: OpenAI, Google, Anthropic, ComfyUI",
+          "dialogue_cn": "大雄：「哆啦A梦，这周除了DeepSeek，还发生啥了？」\n哆啦A梦：「你坐好，我慢慢说——这周钱花得比烟花还猛。」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Split screen: left shows Sam Altman announcing GPT-5.5, right shows Satya Nadella with Microsoft/GitHub logos celebrating",
+          "dialogue_cn": "哆啦A梦：「OpenAI发了GPT-5.5，微软立刻塞进Copilot全家桶，GitHub、Office、Azure一锅端。」\n大雄：「感觉微软比OpenAI还兴奋？」\n哆啦A梦：「因为微软花了钱，当然要用。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Google logo raining money onto Anthropic building, a sign shows '$40 Billion', Doraemon holds a calculator looking shocked",
+          "dialogue_cn": "大雄：「谷歌给Anthropic投了多少？」\n哆啦A梦：「400亿美元。」\n大雄：「400……亿……」\n哆啦A梦：「对，你的零花钱大概还差399,999,999,999元。」",
+          "sfx": "ガーン！"
+        },
+        {
+          "scene": "Small cozy ComfyUI node graph interface on screen, surrounded by 4 million tiny user icons, Nobita looks surprised",
+          "dialogue_cn": "大雄：「那个画图用的ComfyUI也融资了？」\n哆啦A梦：「400万用户、6万个社区插件、估值5亿——靠社区，没靠大厂爸爸。」\n大雄：「所以……做工具也能发财？」\n哆啦A梦：「前提是你得先做出来。」",
+          "sfx": "ポーン"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": [
+        "panel-5.jpg",
+        "panel-6.jpg",
+        "panel-7.jpg",
+        "panel-8.jpg"
+      ]
+    },
+    {
+      "title": "大雄求AI帮他写作业，结果模型上下文太长把他作业历史全记住了",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "DeepSeek V4支持百万token上下文，理论上能记住一整本《哈利波特》全集的对话。大雄听说之后兴奋地想用来作弊，结果聪明的AI把他三年来所有烂作业都记住了，当场社死。",
+      "highlights": [
+        "百万token上下文=记住你所有黑历史",
+        "AI越聪明，摸鱼越难",
+        "哆啦A梦毒舌新高度"
+      ],
+      "community_quotes": [
+        {
+          "text": "First open model where the context window and Agent post-training are combined — it remembers everything.",
+          "author": "HuggingFace on X"
+        },
+        {
+          "text": "在百万token上下文场景中，并发请求量从4个提升至约40个",
+          "author": "DeepSeek技术报告"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "DeepSeek V4支持100万token上下文，KV缓存缩小10倍",
+          "score": 8.5
+        },
+        {
+          "title": "首个结合超长上下文与Agent后训练的开源模型",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita's eyes sparkling, looking at headline '1 Million Token Context Window!', imagining himself relaxing while AI does homework",
+          "dialogue_cn": "大雄：「哆啦A梦！DeepSeek V4支持100万token上下文！这是什么概念？！」\n哆啦A梦：「就是它能记住大约75本《哈利波特》的内容不忘。」\n大雄：「那……它能帮我记住所有作业答案吗？！」",
+          "sfx": "キラーン！"
+        },
+        {
+          "scene": "Nobita typing excitedly, inputting all his old homework into the AI chat, screen filling up with text",
+          "dialogue_cn": "大雄（疯狂输入）：「来来来，把我三年的作业都喂给你，以后帮我直接生成！」\n哆啦A梦（冷眼旁观）：「你确定要这么做？」\n大雄：「废话，当然！」",
+          "sfx": "カタカタカタ…"
+        },
+        {
+          "scene": "AI screen lights up red, displaying analysis: 'Detected: 312 incomplete assignments, 47 copied from Suneo, math average 23/100, most common excuse: dog ate homework (but you have no dog)'",
+          "dialogue_cn": "AI（屏幕爆红）：「分析完成——检测到312份未完成作业，47份疑似抄袭小夫，数学均分23分，最常用借口：『被狗吃了』，但您家没有狗。」\n大雄：「……」",
+          "sfx": "ガーーーン！！！"
+        },
+        {
+          "scene": "Nobita face-planted on desk in despair, Doraemon sipping tea calmly, AI screen shows 'Generating full report for teacher'",
+          "dialogue_cn": "哆啦A梦（端着茶杯）：「AI越聪明，摸鱼越难。这就叫——技术进步的代价。」\n大雄（趴桌痛哭）：「我只是想少写点作业啊啊啊——！」\n哆啦A梦：「放心，它已经帮你生成了一份完整报告，准备发给老师了。」",
+          "sfx": "オワタ…"
+        }
+      ],
+      "doraemon_quote": "「上下文越长，黑历史越难藏——这才是百万token最可怕的地方。」",
+      "panels_images": [
+        "panel-9.jpg",
+        "panel-10.jpg",
+        "panel-11.jpg",
+        "panel-12.jpg"
+      ]
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "one of the few truly contrarian products in AI.",
+      "url": "https://x.com/cocktailpeanut/status/2047850022662795538#m",
+      "score": 9.2,
+      "categories": [
+        "ComfyUI",
+        "开源模型"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "R to @simonw: ... and there's me thinking that sending it out at 9pm Pacific Time on a Thursday evening was safe, surely...",
+      "url": "https://x.com/simonw/status/2047529388091359669#m",
+      "score": 9.2,
+      "categories": [
+        "开源模型",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "RT by @cocktailpeanut: DeepSeek V4 is the new SoTA because:  - In the one-million-token context setting, DeepSeekV4-Pro ...",
+      "url": "https://x.com/Xianbao_QIAN/status/2047520639364501596#m",
+      "score": 9.0,
+      "categories": [
+        "开源模型",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "GPT-5.5 and GPT-5.5 Pro are now available in the API!",
+      "url": "https://x.com/sama/status/2047787124846653895#m",
+      "score": 9.0,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "RT by @huggingface: DeepSeek-V4 dropped. 1M context. 10x smaller KV cache. First open model where the context window and...",
+      "url": "https://x.com/ben_burtenshaw/status/2047646980139016560#m",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "RT by @huggingface: if you were in a cave, DeepSeek v4 is out, and it's groundbreaking, here's why:  it's the first open...",
+      "url": "https://x.com/mervenoyann/status/2047595052164063441#m",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "Agent & Skills",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "Reuters: Google, already a close Anthropic partner, is set to invest as much as $ 40B in additional funding.  That inclu...",
+      "url": "https://x.com/rohanpaul_ai/status/2047783213192585425#m",
+      "score": 8.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "DeepSeek AI Releases DeepSeek-V4: Compressed Sparse Attention and Heavily Compressed Attention Enable One-Million-Token Contexts",
+      "url": "https://www.marktechpost.com/2026/04/24/deepseek-ai-releases-deepseek-v4-compressed-sparse-attention-and-heavily-compressed-attention-enable-one-million-token-contexts/",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "Super excited GPT-5.5 is rolling out to GitHub Copilot, M365 Copilot, Copilot Studio, and Foundry today.  With deeper re...",
+      "url": "https://x.com/satyanadella/status/2047743651053556126#m",
+      "score": 8.5,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "RT by @satyanadella: gpt-5.5 is now in GitHub Copilot!",
+      "url": "https://x.com/gdb/status/2047752627728060585#m",
+      "score": 8.5,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "ComfyUI": 19,
+      "开源模型": 108,
+      "商用产品": 176,
+      "训练与部署": 81,
+      "Agent & Skills": 150,
+      "潮流": 256,
+      "时装": 210,
+      "AI × 时尚": 15,
+      "其他": 1035,
+      "3D生成与重建": 3
+    },
+    "by_source": {
+      "hackernews": 97,
+      "twitter": 203,
+      "youtube": 115,
+      "github": 20,
+      "reddit": 128,
+      "telegram": 105,
+      "rss": 1074
+    }
+  }
+}
