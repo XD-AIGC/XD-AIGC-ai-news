@@ -1,0 +1,305 @@
+{
+  "week": "2026-W18",
+  "date_range": "2026-04-27 — 2026-05-03",
+  "generated_at": "2026-05-03T14:04:45.029124+00:00",
+  "total_news": 1891,
+  "total_sources": 7,
+  "week_title": "DeepSeek又来抢饭碗了！",
+  "editor_note": "本周AI圈最大炸弹非DeepSeek-V4莫属——开源、便宜、还特别能打Agent，直接把顶级商用模型逼到墙角。与此同时，OpenAI抱紧AWS大腿，Claude也悄悄在消费级硬件上复现了AlphaZero。总之，这周不缺热闹。",
+  "stories": [
+    {
+      "title": "又便宜又能打？DeepSeek-V4震撼来袭！",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "DeepSeek-V4预览版正式上线并开源，Pro版在数学、STEM、代码竞赛上超越所有开源模型，直逼GPT/Claude/Gemini三巨头。Flash版则以极低价格提供高速API，两款均强化了Agent能力。开源界再次被中国团队搅动，价格屠夫又来了。",
+      "highlights": [
+        "Pro版数学&代码评测超越全部已知开源模型",
+        "Flash版性价比极高，小参数跑出大模型水准",
+        "Agent能力大幅强化，开发者直呼惊喜"
+      ],
+      "community_quotes": [
+        {
+          "text": "DeepSeek每次发布都像是给硅谷发了一封'你们的定价策略有问题'的挂号信。",
+          "author": "X用户 @AIwatcher_007"
+        },
+        {
+          "text": "又开源又便宜，还打得过GPT-4o？我现在只想问DeepSeek到底在哪里省的钱。",
+          "author": "Reddit r/MachineLearning 热评"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "DeepSeek-V4预览版正式上线并同步开源，极其便宜大碗且适配Agent",
+          "score": 9.0
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita sitting at his desk looking bored, Doraemon reading a glowing tablet with wide eyes, dramatic light effect in the room",
+          "dialogue_cn": "大雄：「哆啦A梦，今天AI界有什么大新闻吗？」\n哆啦A梦：「……DeepSeek-V4发布了，开源，还便宜得离谱。」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Nobita jumps up from chair in shock, Doraemon showing benchmark charts on tablet, charts showing DeepSeek surpassing all open-source models",
+          "dialogue_cn": "大雄：「便宜多少？」\n哆啦A梦：「Pro版追平GPT和Claude，Flash版……更便宜。数学、代码、STEM，全部开源第一。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Nobita imagining dollar bills flying away from OpenAI logo, Doraemon with arms crossed looking smug",
+          "dialogue_cn": "大雄：「那OpenAI他们不慌吗？！」\n哆啦A梦：「人家还开源了。硅谷那边现在大概正在开紧急会议。」",
+          "sfx": "ザワザワ"
+        },
+        {
+          "scene": "Nobita trying to download DeepSeek on his computer excitedly, Doraemon watching with a knowing smile",
+          "dialogue_cn": "大雄：「我也要用！帮我写作业！」\n哆啦A梦：「……你连题目都不想看，用什么模型都没用。」",
+          "sfx": "ズコー"
+        }
+      ],
+      "panels_images": [
+        "panel-1.jpg",
+        "panel-2.jpg",
+        "panel-3.jpg",
+        "panel-4.jpg"
+      ]
+    },
+    {
+      "title": "AI巨头们的本周大动作：合纵连横与暗中较劲",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周AI行业动作频频：OpenAI与AWS达成重大合作，GPT系列模型正式入驻Amazon Bedrock，企业用户可直接通过AWS访问；Claude Opus 4.7则在消费级硬件上3小时复现AlphaZero，以7/8胜率暴打专业求解器，提出全新编码Agent评估范式。开源与商用两条线同步推进，格局悄然生变。",
+      "highlights": [
+        "OpenAI×AWS：GPT模型登陆Amazon Bedrock，企业分发渠道大扩张",
+        "Claude Opus 4.7三小时复现AlphaZero，暴打Connect Four求解器",
+        "新编码Agent评估范式：不只看代码补丁，要看能不能端到端构建ML系统"
+      ],
+      "community_quotes": [
+        {
+          "text": "OpenAI上AWS这事，说白了就是微软Azure不够用，得多找个备胎。",
+          "author": "Hacker News热评"
+        },
+        {
+          "text": "Claude 4.7用消费级显卡3小时搞定AlphaZero，我的GPU还在跑Hello World。",
+          "author": "X用户 @ml_hobbyist"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "OpenAI models coming to Amazon Bedrock",
+          "score": 9.0,
+          "url": "https://stratechery.com/2026/an-interview-with-openai-ceo-sam-altman-and-aws-ceo-matt-garman-about-bedrock-managed-agents/"
+        },
+        {
+          "title": "Claude Opus 4.7实现AlphaZero风格自博弈，7/8胜率击败专业求解器",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Doraemon drawing a map on a chalkboard showing OpenAI and AWS logos connected by a big arrow, Nobita sitting and watching",
+          "dialogue_cn": "哆啦A梦：「本周第一件大事——OpenAI和AWS牵手了，以后企业用GPT可以直接走亚马逊云。」\n大雄：「啊？OpenAI不是微软家的吗？」",
+          "sfx": "ポン"
+        },
+        {
+          "scene": "Doraemon holding up a sign that says 'more channels = more money', Nobita nodding slowly with a confused face",
+          "dialogue_cn": "哆啦A梦：「Sam Altman的意思是：鸡蛋不能只放微软一个篮子里。」\n大雄：「……所以他们分手了？」\n哆啦A梦：「没有，叫'开放合作'。」",
+          "sfx": "ハテナ"
+        },
+        {
+          "scene": "Doraemon showing a video on tablet of a robot playing Connect Four and winning, Nobita's jaw drops",
+          "dialogue_cn": "大雄：「第二件事呢？」\n哆啦A梦：「Claude Opus 4.7，用普通消费级显卡，3小时自己造了个AlphaZero，然后把专业求解器打得7比1。」",
+          "sfx": "ドドドド"
+        },
+        {
+          "scene": "Nobita looking at his own laptop sadly, Doraemon patting his head with a smirk",
+          "dialogue_cn": "大雄：「3小时……我3小时连数学作业都写不完。」\n哆啦A梦：「所以说，AI在进化，你在原地踏步，差距越来越大哦。」",
+          "sfx": "シュン"
+        }
+      ],
+      "panels_images": [
+        "panel-5.jpg",
+        "panel-6.jpg",
+        "panel-7.jpg",
+        "panel-8.jpg"
+      ]
+    },
+    {
+      "title": "AI每周必备技能：发布、跑分、然后说'革命性'",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "每周都有新模型发布，每周都说'超越GPT-4'，每周都说'革命性突破'——大雄终于忍不住问哆啦A梦：这些模型到底有没有真的变强？哆啦A梦的回答让他沉默了三秒，然后更沉默了。",
+      "highlights": [
+        "AI发布会三件套：跑分截图、'革命性'、开源或不开源",
+        "大雄的灵魂发问：上周的'最强模型'去哪了？",
+        "哆啦A梦毒舌揭秘：模型在进步，但你的问题永远是'帮我写作业'"
+      ],
+      "community_quotes": [
+        {
+          "text": "每周都有'史上最强开源模型'，我的收藏夹已经放不下了。",
+          "author": "X用户 @tired_dev_2025"
+        },
+        {
+          "text": "AI行业的'革命性'已经贬值到和超市打折标签一个级别了。",
+          "author": "Reddit r/artificial 神评论"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "DeepSeek-V4预览版正式上线并开源",
+          "score": 9.0
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita surrounded by newspapers with headlines like 'NEW BEST AI MODEL', looking overwhelmed and dizzy",
+          "dialogue_cn": "大雄：「哆啦A梦！这周又有新的'史上最强AI'发布了！」\n哆啦A梦：「嗯，上周也有，上上周也有。」",
+          "sfx": "ザワザワ"
+        },
+        {
+          "scene": "Nobita holding a checklist, counting on fingers with a suspicious expression",
+          "dialogue_cn": "大雄：「我发现规律了！每次发布都说'超越GPT-4'、'革命性'、然后要么开源要么很便宜！」\n哆啦A梦：「……你终于看出来了。」",
+          "sfx": "キラーン"
+        },
+        {
+          "scene": "Doraemon pulling out a flowchart from pocket showing: '发布→跑分→革命性→下周被超越→循环'",
+          "dialogue_cn": "大雄：「那这些模型到底有没有在变强？！」\n哆啦A梦：「有啊，真的有。每周都在进步。」\n大雄：「那为什么感觉没什么变化？」",
+          "sfx": "ポン"
+        },
+        {
+          "scene": "Doraemon staring at Nobita deadpan, Nobita frozen in embarrassment, a speech bubble shows Nobita's AI prompts: '帮我写作业/帮我写作业/帮我写作业'",
+          "dialogue_cn": "哆啦A梦：「因为不管模型多强，你每次问的都是'帮我写作业'。大雄，真正没在进步的，是你。」\n大雄：「…………」",
+          "sfx": "ズコーン"
+        }
+      ],
+      "doraemon_quote": "「AI每周都在进化，但你的问题永远是'帮我写作业'——这才是真正的人工智障。」——哆啦A梦",
+      "panels_images": [
+        "panel-9.jpg",
+        "panel-10.jpg",
+        "panel-11.jpg",
+        "panel-12.jpg"
+      ]
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "Matthieu Blazy Returns to Chanel's Roots With the Cruise 2027 Collection in Biarritz",
+      "url": "https://hypebeast.com/2026/4/chanel-cruise-2027-biarritz-return-runway-collection",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "🤖 DeepSeek-V4 的预览版本正式上线并同步开源，极其便宜大碗且适配 Agent  相比前代模型，DeepSeek-V4-Pro 的 Agent 能力显...",
+      "url": "https://t.me/zaihuapd/41185",
+      "score": 9.0,
+      "categories": [
+        "开源模型",
+        "Agent & Skills",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "In Biarritz, Chanel Shines Brighter Than the Sun",
+      "url": "https://www.harpersbazaar.com/fashion/a71155046/chanel-resort-2027-matthieu-blazy-biarritz/",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "OpenAI models coming to Amazon Bedrock: Interview with OpenAI and AWS CEOs",
+      "url": "https://stratechery.com/2026/an-interview-with-openai-ceo-sam-altman-and-aws-ceo-matt-garman-about-bedrock-managed-agents/",
+      "score": 9.0,
+      "categories": [
+        "商用产品",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "🤖 DeepSeek-V4 的预览版本正式上线并同步开源，极其便宜大碗且适配 Agent  相比前代模型，DeepSeek-V4-Pro 的 Agent 能力显...",
+      "url": "https://t.me/zaihuapd/41074",
+      "score": 9.0,
+      "categories": [
+        "开源模型",
+        "Agent & Skills",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "Pinned: Claude Opus 4.7 just implemented an AlphaZero-style self-play pipeline from scratch.  It did this on consumer ha...",
+      "url": "https://x.com/omarsar0/status/2050693576250753233#m",
+      "score": 8.5,
+      "categories": [
+        "Agent & Skills",
+        "商用产品",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "The Chanel Whisperer",
+      "url": "https://www.harpersbazaar.com/fashion/a71151662/chanel-matthieu-blazy-interview-may-2026/",
+      "score": 8.5,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "How Chanel Became the Hottest Brand in Fashion",
+      "url": "https://www.businessoffashion.com/briefings/luxury/how-chanel-became-the-hottest-brand-in-fashion/",
+      "score": 8.5,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "No One Noticed Miu Miu's Surprise New Balance Collab. Except Us",
+      "url": "https://www.highsnobiety.com/p/miu-miu-new-balance-2026/",
+      "score": 8.5,
+      "categories": [
+        "潮流",
+        "时装"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "CHANEL 2027 Cruise Collection コレクション",
+      "url": "https://www.fashionsnap.com/collection/chanel/cruise/2027ss-pre/",
+      "score": 8.5,
+      "categories": [
+        "时装"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "时装": 265,
+      "开源模型": 86,
+      "Agent & Skills": 146,
+      "商用产品": 159,
+      "训练与部署": 60,
+      "潮流": 288,
+      "其他": 1149,
+      "3D生成与重建": 4,
+      "AI × 时尚": 2,
+      "ComfyUI": 22
+    },
+    "by_source": {
+      "twitter": 266,
+      "github": 18,
+      "rss": 1183,
+      "telegram": 105,
+      "reddit": 103,
+      "hackernews": 94,
+      "youtube": 122
+    }
+  }
+}
