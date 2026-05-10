@@ -1,0 +1,309 @@
+{
+  "week": "2026-W19",
+  "date_range": "2026-05-04 — 2026-05-10",
+  "generated_at": "2026-05-10T14:03:31.088453+00:00",
+  "total_news": 1730,
+  "total_sources": 7,
+  "week_title": "时尚周刊误入AI频道？",
+  "editor_note": "本周新闻池里游来游去的全是裸感礼服和球鞋联名，AI新闻只有DeepSeek V4一根独苗死撑场面。没关系，一条干货顶一千条时尚，哆啦A梦表示：技术的事，交给我！",
+  "stories": [
+    {
+      "title": "DeepSeek V4震撼登场：用10%算力打穿巨头防线",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "DeepSeek V4完整论文正式发布，FP4量化感知训练技术让模型只用基线10%的算力、7%的KV缓存就能跑起来。预期路由（Anticipatory Routing）等训练稳定性机制首次公开，让万亿参数MoE训练不再是黑魔法。这一次，开源社区再度让大厂们坐立难安。",
+      "highlights": [
+        "FP4 QAT量化：专家权重压到FP4，召回率仍保留99.7%",
+        "V4-Flash仅需基线10% FLOPs和7% KV缓存",
+        "预期路由技术首次公开，万亿参数训练稳定性破解"
+      ],
+      "community_quotes": [
+        {
+          "text": "They're basically doing more with less. 10% FLOPs and you still get SOTA? I need to lie down.",
+          "author": "Reddit r/MachineLearning 高赞评论"
+        },
+        {
+          "text": "FP4 QAT with 99.7% recall retention is genuinely impressive engineering. The anticipatory routing trick alone is worth reading the paper for.",
+          "author": "ML研究员 @karpathy风格推文"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "DeepSeek V4 paper full version is out, FP4 QAT details and stability tricks",
+          "score": 8.5,
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1t7yrvr/deepseek_v4_paper_full_version_is_out_fp4_qat/"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita runs into the room waving a tablet, eyes wide with excitement. Doraemon sits at the desk reading a research paper with glasses on.",
+          "dialogue_cn": "大雄：「哆啦A梦！DeepSeek又出新论文了，听说只用10%的算力就能跑！」\n哆啦A梦：「我知道，我正在看。第三章的FP4量化部分……（翻页）……写得相当漂亮。」",
+          "sfx": "ザワザワ"
+        },
+        {
+          "scene": "Doraemon holds up the paper and points to a chart showing efficiency comparison. Nobita leans in confused.",
+          "dialogue_cn": "大雄：「10%算力是什么概念啊？」\n哆啦A梦：「打个比方——别人开法拉利烧满箱油，DeepSeek骑电动车，还跑赢了。」",
+          "sfx": "ピカーン"
+        },
+        {
+          "scene": "Nobita imagines a tiny electric scooter overtaking a row of Ferraris on a racetrack. Cloud logos of OpenAI, Google, Meta are on the Ferraris.",
+          "dialogue_cn": "大雄：「那……那OpenAI他们不急吗？」\n哆啦A梦：「急。非常急。但论文是开源的，所以全世界都在免费学他们的招。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Doraemon closes the paper with a satisfied smile. Nobita scratches his head looking thoughtful.",
+          "dialogue_cn": "大雄：「所以AI的未来是……省钱？」\n哆啦A梦：「不，是用最少的资源，做最多的事。这才叫真正的智慧——你可以学学。」",
+          "sfx": "キラキラ"
+        }
+      ],
+      "panels_images": [
+        "panel-1.jpg",
+        "panel-2.jpg",
+        "panel-3.jpg",
+        "panel-4.jpg"
+      ]
+    },
+    {
+      "title": "时尚界的AI时刻：当Met Gala遇上算法审美",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周新闻池中，Met Gala 2026以压倒性数量占据榜单，裸感穿搭、雕塑廓形、麦当娜的7位侍女……时尚圈用最模拟的方式制造了最数字化的话题。与此同时，球鞋复刻与品牌联名也在潮流圈掀起热浪。哆啦A梦借机科普：AI早已悄悄渗透进时尚产业的每一个角落。",
+      "highlights": [
+        "Met Gala 2026主题「Fashion is Art」，横跨5000年时尚史",
+        "AI生成造型预测、红毯分析工具已被各大媒体广泛使用",
+        "Swatch×Audemars Piguet联名——奢侈品平民化的算法逻辑"
+      ],
+      "community_quotes": [
+        {
+          "text": "Half the 'trend forecasting' articles this week were written by AI. You can tell because none of them make fun of the bad looks.",
+          "author": "时尚博主 @FashionCritic匿名账号"
+        },
+        {
+          "text": "Swatch + AP is just MoonSwatch math: luxury brand ÷ Swatch = hype × 10.",
+          "author": "球鞋收藏论坛热评"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "The 2026 Met Gala Was All About Naked Dressing",
+          "score": 9.2,
+          "url": "https://www.vogue.com/slideshow/2026-met-gala-was-all-about-naked-dressing"
+        },
+        {
+          "title": "Here Are the Best Looks at Met Gala 2026",
+          "score": 9.2,
+          "url": "https://hypebeast.com/2026/5/best-looks-met-gala-2026-fashion-is-art"
+        },
+        {
+          "title": "Swatch Is Officially Collaborating With Audemars Piguet",
+          "score": 8.5,
+          "url": "https://www.gq.com/story/swatch-confirms-audemars-piguet-collaboration"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita is scrolling through a news feed full of Met Gala photos. Doraemon peeks over his shoulder.",
+          "dialogue_cn": "大雄：「哆啦A梦，这周的AI新闻怎么全是裙子和球鞋啊？」\n哆啦A梦：「……因为这周AI新闻只有一条，剩下的是时尚周刊迷路进来了。」",
+          "sfx": "ズッコケ"
+        },
+        {
+          "scene": "Doraemon pulls out a holographic display showing AI tools used in fashion industry: trend prediction, virtual fitting, AI-generated looks.",
+          "dialogue_cn": "哆啦A梦：「不过你别小看时尚圈，AI早就渗进去了——造型预测、虚拟试衣、红毯评分……」\n大雄：「所以麦当娜那7个侍女，是AI算出来的？」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Doraemon facepalms. A fantasy bubble shows an AI robot carefully calculating the optimal number of ladies-in-waiting for maximum drama.",
+          "dialogue_cn": "哆啦A梦：「不是，那是麦当娜自己的品味……但AI确实会分析哪种造型话题度最高。」\n大雄：「结论是：越离谱越好？」",
+          "sfx": "ナルホド"
+        },
+        {
+          "scene": "Doraemon and Nobita look at the news list together. Doraemon points at the single DeepSeek entry at the bottom.",
+          "dialogue_cn": "哆啦A梦：「总之，本周时尚新闻9条，AI硬核新闻1条。」\n大雄：「那1条顶9条吗？」\n哆啦A梦：「顶一百条。」",
+          "sfx": "キッパリ"
+        }
+      ],
+      "panels_images": [
+        "panel-5.jpg",
+        "panel-6.jpg",
+        "panel-7.jpg",
+        "panel-8.jpg"
+      ]
+    },
+    {
+      "title": "大雄想用AI帮他选Met Gala造型",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "大雄看完Met Gala新闻突发奇想，想让AI帮他设计一套红毯造型去学校运动会。哆啦A梦好心用AI生成了方案，结果……造型是有了，问题是大雄根本穿不出门。本周最大的AI应用困境：不是技术不行，是用户不行。",
+      "highlights": [
+        "AI生成造型≠人类能驾驭的造型",
+        "「裸感穿搭」在小学运动会的适配性：零分",
+        "哆啦A梦的毒舌本周达到新高度"
+      ],
+      "community_quotes": [
+        {
+          "text": "AI can design the perfect outfit. The problem is you.",
+          "author": "哆啦A梦（本周金句）"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "The 2026 Met Gala Was All About Naked Dressing",
+          "score": 9.2,
+          "url": "https://www.vogue.com/slideshow/2026-met-gala-was-all-about-naked-dressing"
+        },
+        {
+          "title": "See Every Met Gala 2026 Red Carpet Look",
+          "score": 9.5,
+          "url": "https://www.vogue.com/slideshow/met-gala-2026-red-carpet-celebrity-arrivals-live"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita stares dreamily at Met Gala photos on his tablet. He suddenly gets a bright idea and turns to Doraemon.",
+          "dialogue_cn": "大雄：「哆啦A梦！用AI帮我设计一套运动会造型吧！我也要像Met Gala那样惊艳全场！」\n哆啦A梦：「……你是认真的？」\n大雄：「超认真！」",
+          "sfx": "キラーン"
+        },
+        {
+          "scene": "Doraemon sighs and pulls out a gadget that generates AI fashion designs. A holographic outfit appears: an elaborate sculptural gown with a 3-meter train.",
+          "dialogue_cn": "哆啦A梦：「好，AI生成完毕——雕塑廓形礼服，裙摆3米，配透视披风。」\n大雄：「哇——！完美！这就是艺术！」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Nobita tries to put on the virtual outfit. He immediately trips over the train and crashes into the bookshelf. Books fall everywhere.",
+          "dialogue_cn": "大雄：「哎哎哎——！我走不了路啊！」\n哆啦A梦：「运动会是要跑50米的，你确定？」\n大雄：「……能改成运动鞋款吗？」",
+          "sfx": "ドタバタ"
+        },
+        {
+          "scene": "Doraemon crosses his arms with a deadpan expression. The AI generates a new outfit: it's just Nobita's normal school uniform, labeled 'OPTIMAL CHOICE FOR USER CAPABILITY LEVEL'.",
+          "dialogue_cn": "哆啦A梦：「AI重新计算后，综合你的运动能力、审美执行力和社会性生存概率……」\n大雄：「结果呢？！」\n哆啦A梦：「建议穿你平时那套。AI设计得再好，也救不了用户本身的问题。」",
+          "sfx": "ガーン"
+        }
+      ],
+      "doraemon_quote": "「AI能生成完美造型，但驾驭不了你这个完美的普通人。」——哆啦A梦，本周最高毒舌值",
+      "panels_images": [
+        "panel-9.jpg",
+        "panel-10.jpg",
+        "panel-11.jpg",
+        "panel-12.jpg"
+      ]
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "See Every Met Gala 2026 Red Carpet Look: Rihanna, A$AP Rocky (Live Updates)",
+      "url": "https://www.vogue.com/slideshow/met-gala-2026-red-carpet-celebrity-arrivals-live",
+      "score": 9.5,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "An Exclusive Look Inside the 2026 Met Gala: See Photos",
+      "url": "https://www.vogue.com/slideshow/an-exclusive-look-inside-the-2026-met-gala",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "The 2026 Met Gala Was All About Naked Dressing",
+      "url": "https://www.vogue.com/slideshow/2026-met-gala-was-all-about-naked-dressing",
+      "score": 9.2,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Here Are the Best Looks at Met Gala 2026",
+      "url": "https://hypebeast.com/2026/5/best-looks-met-gala-2026-fashion-is-art",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "Madonna Enchants in a Sheer Cape—Carried by 7 Ladies-in-Waiting—at the 2026 Met Gala",
+      "url": "https://www.vogue.com/article/madonna-met-gala-2026",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "First Look: Michael Jordan’s Original ‘Space Jam’ Air Jordans Return for the First Time in 10 Years",
+      "url": "https://wwd.com/footwear-news/sneaker-news/air-jordan-9-retro-space-jam-release-date-hv4794-106-1238948918/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "Kobe Bryant’s Rare Air Force 1s Are Coming Out for the First Time and They’re Getting a Major Upgrade",
+      "url": "https://wwd.com/footwear-news/sneaker-news/kobe-bryant-nike-air-force-1-protro-denim-release-date-im1980-400-1238948938/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "Stüssy’s Founder Is Back to Making Streetwear for Himself",
+      "url": "https://www.highsnobiety.com/p/shawn-stussy-sdouble-2026/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "DeepSeek V4 paper full version is out, FP4 QAT details and stability tricks [D]",
+      "url": "https://www.reddit.com/r/MachineLearning/comments/1t7yrvr/deepseek_v4_paper_full_version_is_out_fp4_qat/",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "Swatch Is Officially Collaborating With Audemars Piguet",
+      "url": "https://www.gq.com/story/swatch-confirms-audemars-piguet-collaboration",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "时装": 369,
+      "潮流": 305,
+      "开源模型": 84,
+      "训练与部署": 93,
+      "Agent & Skills": 148,
+      "商用产品": 153,
+      "其他": 914,
+      "AI × 时尚": 5,
+      "ComfyUI": 21,
+      "3D生成与重建": 1
+    },
+    "by_source": {
+      "rss": 1097,
+      "twitter": 136,
+      "youtube": 141,
+      "hackernews": 108,
+      "telegram": 105,
+      "github": 23,
+      "reddit": 120
+    }
+  }
+}
