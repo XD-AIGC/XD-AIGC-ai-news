@@ -1,0 +1,302 @@
+{
+  "week": "2026-W22",
+  "date_range": "2026-05-25 — 2026-05-31",
+  "generated_at": "2026-05-31T14:02:21.794277+00:00",
+  "total_news": 1330,
+  "total_sources": 6,
+  "week_title": "时尚圈炸了，AI圈也没闲着",
+  "editor_note": "本周最劲爆的消息一半来自T台一半来自硅谷——Anthropic估值狂奔至9650亿美元，离万亿只差一步；与此同时Gucci杀进F1赛道，时尚与科技的边界正在消失。哦对了，还有一个3GB的模型能在浏览器里画图，悄悄把那些动辄几十GB的大模型们将了一军。",
+  "stories": [
+    {
+      "title": "Anthropic：我离万亿只差一个零",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "Anthropic完成H轮融资，金额高达650亿美元，融资后估值冲至9650亿美元，距离万亿美元仅一步之遥。这是AI史上最大单轮融资之一，Claude背后的公司正式跻身全球最贵科技公司行列。资本市场对AI安全赛道的押注已到了令人咋舌的程度。",
+      "highlights": [
+        "650亿美元融资额，AI史上最大轮次之一",
+        "融资后估值9650亿美元，距万亿仅差350亿",
+        "Claude系列模型商业价值获资本全面认可"
+      ],
+      "community_quotes": [
+        {
+          "text": "OpenAI：我们也不差啊……吧？",
+          "author": "硅谷吃瓜群众"
+        },
+        {
+          "text": "这钱够买下好几个F1车队了，不过他们好像更想买下AGI。",
+          "author": "科技财经观察员"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Anthropic raises $65B in Series H funding at $965B post-money valuation",
+          "score": 8.5,
+          "url": "https://www.anthropic.com/news/series-h"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita runs into the room waving a newspaper, Doraemon is eating dorayaki on the desk, morning sunlight through the window",
+          "dialogue_cn": "大雄：「哆啦A梦！Anthropic融了650亿美元！！」\n哆啦A梦：「嗯，我知道，我昨晚看了。」",
+          "sfx": "ドタドタ"
+        },
+        {
+          "scene": "Doraemon holds up a giant number display showing '9650億', Nobita's jaw drops to the floor, exaggerated manga style",
+          "dialogue_cn": "大雄：「9650亿美元估值……这是多少钱啊？！」\n哆啦A梦：「大概是你这辈子零花钱的……算了，计算器不够位数。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Nobita imagines himself as a CEO in a suit surrounded by money bags, Doraemon watches with a deadpan expression",
+          "dialogue_cn": "大雄：「要是我也做个AI公司，是不是也能融这么多钱？」\n哆啦A梦：「你连作业都要AI帮你写，投资人会直接报警的。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon points at a chart showing AI valuations skyrocketing, Nobita looks dizzy with stars around his head",
+          "dialogue_cn": "哆啦A梦：「反正记住一件事——AI这条赛道，资本已经踩死油门了。」\n大雄：「那万亿什么时候到？」\n哆啦A梦：「下一轮融资的时候。」",
+          "sfx": "ビシッ"
+        }
+      ],
+      "panels_images": [
+        "panel-1.jpg",
+        "panel-2.jpg",
+        "panel-3.jpg",
+        "panel-4.jpg"
+      ]
+    },
+    {
+      "title": "3GB打败16GB，小模型的逆袭",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "PrismML发布了Bonsai Image 4B的Binary和Ternary版本，这个基于1-bit/三值量化的文图生成模型仅约3GB，是FLUX.2 Klein 4B（16GB）体积的五分之一，却能直接在浏览器里跑WebGPU本地推理。同期Gucci赞助Alpine F1、Travis Scott联名Air Jordan等跨界事件也说明：「小而精」正在各行各业成为新趋势。",
+      "highlights": [
+        "Bonsai Image 4B仅3GB，比同类模型缩小80%",
+        "全程浏览器本地运行，零安装零隐私泄露",
+        "Apache-2.0开源，Hugging Face已可试玩"
+      ],
+      "community_quotes": [
+        {
+          "text": "终于可以在公司电脑上偷偷跑AI画图了，IT部门永远不会知道。",
+          "author": "某匿名打工人"
+        },
+        {
+          "text": "1-bit量化做到这个效果，感觉大模型军备竞赛的方向要变了。",
+          "author": "Hugging Face社区讨论"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "PrismML releases Binary and Ternary Bonsai Image 4B: runs 100% locally in browser on WebGPU",
+          "score": 8.5
+        },
+        {
+          "title": "Gucci Enters Formula 1 as Alpine's New Title Sponsor",
+          "score": 9.2,
+          "url": "https://hypebeast.com/2026/5/gucci-racing-alpine-formula-1-team-sponsor-announcement"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Doraemon opens his pocket and pulls out a tiny glowing model chip labeled '3GB', Nobita looks unimpressed",
+          "dialogue_cn": "哆啦A梦：「大雄，你看这个——3GB的AI画图模型，直接在浏览器里跑！」\n大雄：「才3GB？我手机里的游戏都比这大……」",
+          "sfx": "ポン"
+        },
+        {
+          "scene": "Side-by-side comparison: a tiny bonsai tree vs a giant sequoia, labeled '3GB Bonsai' and '16GB FLUX', Nobita scratches his head",
+          "dialogue_cn": "哆啦A梦：「同类模型要16GB，这个只要3GB，效果还差不多。」\n大雄：「所以……胖的不一定强？」\n哆啦A梦：「你在说模型还是在说你自己？」",
+          "sfx": "ズキューン"
+        },
+        {
+          "scene": "Nobita excitedly typing on a laptop browser, AI-generated image appearing on screen, Doraemon gives thumbs up",
+          "dialogue_cn": "大雄：「哇，真的在浏览器里就能画图！我要画我的漫画角色！」\n哆啦A梦：「而且数据完全本地，不上传，比较安全。」",
+          "sfx": "キラーン"
+        },
+        {
+          "scene": "Doraemon holds a tiny bonsai plant next to a massive tree, philosophical expression, sunset background",
+          "dialogue_cn": "哆啦A梦：「这就是'盆景哲学'——不是越大越好，是越精越好。」\n大雄：「哆啦A梦……你最近越来越像在说人生道理了。」\n哆啦A梦：「我说的是模型。你的人生另当别论。」",
+          "sfx": "しみじみ"
+        }
+      ],
+      "panels_images": [
+        "panel-5.jpg",
+        "panel-6.jpg",
+        "panel-7.jpg",
+        "panel-8.jpg"
+      ]
+    },
+    {
+      "title": "AI公司：我们超级注重安全……融资先",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "Anthropic以「AI安全」为核心使命起家，结果估值快到万亿了。大雄发现一个规律：越说自己不追求钱的AI公司，融的钱越多。哆啦A梦表示这不叫讽刺，这叫「市场对安全溢价的合理定价」。大雄表示听不懂，但感觉被骗了。",
+      "highlights": [
+        "Anthropic以AI安全为旗帜，估值却最不安全地暴涨",
+        "「我们和OpenAI不一样」——然后做了一模一样的事",
+        "大雄的灵魂拷问：安全和钱，到底谁是目的"
+      ],
+      "community_quotes": [
+        {
+          "text": "Anthropic：我们做AI是为了全人类的安全。投资人：好的给你650亿。",
+          "author": "推特/X 科技博主"
+        },
+        {
+          "text": "下一家AI独角兽的Pitch Deck第一页一定写着：我们非常非常非常注重安全。",
+          "author": "VC圈段子手"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Anthropic raises $65B in Series H funding at $965B post-money valuation",
+          "score": 8.5,
+          "url": "https://www.anthropic.com/news/series-h"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita reading news on tablet with confused expression, Doraemon drinking tea calmly",
+          "dialogue_cn": "大雄：「哆啦A梦，Anthropic说他们最注重AI安全，结果融了650亿……」\n哆啦A梦：「对啊，怎么了？」",
+          "sfx": "ピキーン"
+        },
+        {
+          "scene": "Nobita stands up dramatically pointing finger, Doraemon raises an eyebrow",
+          "dialogue_cn": "大雄：「越说不在乎钱的公司，融的钱越多！这不是很奇怪吗！！」\n哆啦A梦：「……你刚发现？」",
+          "sfx": "ビシッ"
+        },
+        {
+          "scene": "Doraemon pulls out a whiteboard showing equation: '安全使命 × 媒体曝光 = 估值暴涨', Nobita's eyes turn into dollar signs",
+          "dialogue_cn": "哆啦A梦：「这叫做'使命溢价'。你越说自己是为了人类，投资人越抢着给钱。」\n大雄：「那我也可以说我写作业是为了人类未来！」\n哆啦A梦：「你作业都是AI写的，这话说出去人类会哭的。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Nobita holds a sign saying '为了人类安全，请给我零花钱', Doraemon facepalms, mom appears at the door looking angry",
+          "dialogue_cn": "大雄：「妈！我不是在要零花钱！我是在为人类安全募资！」\n妈妈：「给我去写作业。」\n哆啦A梦：「连你妈都不投你，还是别做AI公司了。」",
+          "sfx": "ズコーッ"
+        }
+      ],
+      "doraemon_quote": "「使命感是最贵的商业模式——前提是你得真的有，或者至少说得像真的。」",
+      "panels_images": [
+        "panel-9.jpg",
+        "panel-10.jpg",
+        "panel-11.jpg",
+        "panel-12.jpg"
+      ]
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "Gucci Enters Formula 1 as Alpine's New Title Sponsor",
+      "url": "https://hypebeast.com/2026/5/gucci-racing-alpine-formula-1-team-sponsor-announcement",
+      "score": 9.2,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "Louis Vuitton Resort 2027 Menswear",
+      "url": "https://www.vogue.com/fashion-shows/resort-2027-menswear/louis-vuitton",
+      "score": 8.5,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Travis Scott x Air Jordan 1 Low OG SP \"Sail/Shy Pink\" Pack Drops This Month",
+      "url": "https://hypebeast.com/2026/5/travis-scott-air-jordan-1-low-og-sp-sail-shy-pink-iq7604-100-iq7604-101-release-info",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Can Gucci Turn Attention Into Sales?",
+      "url": "https://www.businessoffashion.com/articles/luxury/can-gucci-turn-attention-into-sales/",
+      "score": 8.5,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "Anthropic raises $65B in Series H funding at $965B post-money valuation",
+      "url": "https://www.anthropic.com/news/series-h",
+      "score": 8.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "ルイ・ヴィトンとキース・ヘリング財団が協業　2027年クルーズコレクションに登場",
+      "url": "https://www.fashionsnap.com/article/2026-05-27/louis-vuitton-keith-haring/",
+      "score": 8.5,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "トラヴィス・スコットとコラボした「エア ジョーダン 1 LOW」が発売",
+      "url": "https://www.fashionsnap.com/article/2026-05-27/travis-scott-nike-low/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "Maria Grazia Chiuri Looks to the Fendi Archives for Her Debut Cruise Collection",
+      "url": "https://www.elle.com/fashion/a71421450/fendi-cruise-2027-review/",
+      "score": 8.5,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "Drake's NOCTA and Nike Tease Upcoming 2026 Canada Soccer Collection and Cryoshot SP",
+      "url": "https://hypebeast.com/2026/5/drake-nocta-nike-cryoshot-sp-canmnt-canadian-team-kits-2026-fifa-world-cup-teaser",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "PrismML just released Binary and Ternary Bonsai Image 4B: 1-bit/ternary text-to-image diffusion transformers that can even run 100% locally in your browser on WebGPU.",
+      "url": "https://v.redd.it/2ltnmcnp2j3h1",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "训练与部署"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "时装": 143,
+      "潮流": 200,
+      "商用产品": 52,
+      "开源模型": 29,
+      "训练与部署": 28,
+      "Agent & Skills": 61,
+      "ComfyUI": 9,
+      "AI × 时尚": 8,
+      "其他": 926,
+      "3D生成与重建": 1
+    },
+    "by_source": {
+      "reddit": 75,
+      "telegram": 101,
+      "github": 23,
+      "youtube": 97,
+      "rss": 953,
+      "hackernews": 81
+    }
+  }
+}
