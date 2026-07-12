@@ -1,0 +1,305 @@
+{
+  "week": "2026-W28",
+  "date_range": "2026-07-06 — 2026-07-12",
+  "generated_at": "2026-07-12T14:02:02.273955+00:00",
+  "total_news": 1593,
+  "total_sources": 6,
+  "week_title": "AI刚证完数学难题，时装圈却在发光",
+  "editor_note": "本周最大的震撼来自数学界——GPT-5.6 Sol Ultra据称证明了困扰人类50年的圈双覆盖猜想，AI推理能力再次突破天花板。与此同时，OpenAI还宣布Sol、Terra、Luna三模型即将公开发布，模型命名越来越像太阳系。哦对了，时装圈也在用等离子体发光，但那不是AI的事。",
+  "stories": [
+    {
+      "title": "AI证明了50年数学悬案？！",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "OpenAI的GPT-5.6 Sol Ultra据称生成了图论领域悬而未决50年的「圈双覆盖猜想」的完整证明。这一猜想由Szekeres和Seymour在1970年代提出，无数数学家折戟其上。若证明经数学界验证属实，将是AI在纯数学推理领域有史以来最重大的突破，意义堪比AlphaFold解决蛋白质折叠问题。",
+      "highlights": [
+        "GPT-5.6 Sol Ultra生成圈双覆盖猜想疑似完整证明",
+        "该猜想自1970年代提出，悬而未决长达50年",
+        "数学界正在紧急验证，AI纯推理能力引发广泛震撼"
+      ],
+      "community_quotes": [
+        {
+          "text": "如果这个证明是对的，我们需要重新思考AI能做什么，以及数学家的工作意味着什么。",
+          "author": "Hacker News 高赞评论"
+        },
+        {
+          "text": "先别庆祝，让我们等数学家验证完再说。AI幻觉出一个'证明'的可能性不是零。",
+          "author": "Reddit r/math 用户"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "GPT-5.6 Sol Ultra produces proof of the Cycle Double Cover Conjecture",
+          "score": 9.2,
+          "url": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf"
+        },
+        {
+          "title": "GPT-5.6 Sol, Terra and Luna will launch publicly this Thursday",
+          "score": 9.0
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita's room, daytime. Nobita is lying on the floor looking bored, Doraemon sitting nearby reading a holographic newspaper with a shocked expression.",
+          "dialogue_cn": "大雄：「哆啦A梦，你在看什么？表情好奇怪……」\n哆啦A梦：「……GPT-5.6 Sol Ultra说它证明了圈双覆盖猜想。」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Nobita tilts his head, completely confused, with a big question mark floating above his head.",
+          "dialogue_cn": "大雄：「圈双……什么猜想？」\n哆啦A梦：「图论里一个困了数学家整整50年的超级难题。1970年代就提出来了，没有人能证明。」",
+          "sfx": "？？？"
+        },
+        {
+          "scene": "Doraemon pulls out a mini holographic display showing a complex graph theory diagram. Nobita looks increasingly pale.",
+          "dialogue_cn": "大雄：「50年……那岂不是比我爸爸年纪还大的题目？！」\n哆啦A梦：「对。而且AI用了……大概几分钟。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Nobita stares blankly at the ceiling. Doraemon closes the holographic newspaper with a serious look.",
+          "dialogue_cn": "大雄：「那……数学家们现在怎么办？」\n哆啦A梦：「正在疯狂验证证明对不对。如果是真的——大雄，AI刚刚改变了数学史。」",
+          "sfx": "シーン"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": [
+        "panel-1.jpg",
+        "panel-2.jpg",
+        "panel-3.jpg",
+        "panel-4.jpg"
+      ]
+    },
+    {
+      "title": "Sol、Terra、Luna齐登场，OpenAI在命名太阳系？",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "OpenAI本周宣布GPT-5.6 Sol、Terra、Luna三款新模型将于周四公开发布，并已在全球扩大预览权限。三个名字分别对应太阳、地球、月亮，暗示不同能力定位的模型矩阵。与此同时，Sol Ultra已在数学证明领域展现惊人实力，整个OpenAI产品线正以前所未有的速度扩张。",
+      "highlights": [
+        "Sol（太阳）、Terra（地球）、Luna（月亮）三模型同周发布",
+        "Sol Ultra已展示数学证明级别的超强推理能力",
+        "OpenAI产品线扩张速度令竞争对手应接不暇"
+      ],
+      "community_quotes": [
+        {
+          "text": "下一个是不是要叫Mars？然后Jupiter？OpenAI在搞太阳系收集活动吗？",
+          "author": "Twitter/X 网友调侃"
+        },
+        {
+          "text": "Sol负责推理，Terra负责多模态，Luna负责轻量部署？纯猜测但感觉有道理。",
+          "author": "AI研究者推测"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "GPT-5.6 Sol, Terra and Luna will launch publicly this Thursday",
+          "score": 9.0
+        },
+        {
+          "title": "GPT-5.6 Sol Ultra produces proof of the Cycle Double Cover Conjecture",
+          "score": 9.2,
+          "url": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita and Doraemon sitting at a desk, looking at a tablet showing OpenAI's announcement page.",
+          "dialogue_cn": "大雄：「哆啦A梦！OpenAI又发新模型了，这次叫Sol、Terra、Luna！」\n哆啦A梦：「嗯，太阳、地球、月亮。他们在给太阳系命名。」",
+          "sfx": "ワクワク"
+        },
+        {
+          "scene": "Doraemon draws a diagram in the air showing three circles labeled Sol/Terra/Luna with different characteristics.",
+          "dialogue_cn": "哆啦A梦：「Sol Ultra已经能证数学定理了，应该是最强推理模型。Terra和Luna可能定位不同——」\n大雄：「等等，Sol Ultra刚证完50年难题，这才周几？！」",
+          "sfx": "ビックリ"
+        },
+        {
+          "scene": "Nobita counts on his fingers looking overwhelmed. Doraemon looks at the calendar on the wall.",
+          "dialogue_cn": "大雄：「GPT-4、GPT-4o、GPT-5、GPT-5.6、然后Sol、Terra、Luna……我根本记不住！」\n哆啦A梦：「别担心，等你记住这个，下一个早出来了。」",
+          "sfx": "ズルズル"
+        },
+        {
+          "scene": "Nobita looks determined, pointing at the screen. Doraemon raises an eyebrow skeptically.",
+          "dialogue_cn": "大雄：「那我直接等最终版！等他们出『整个银河系』再说！」\n哆啦A梦：「……以OpenAI的速度，可能真的不用等太久。」",
+          "sfx": "ハハハ"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": [
+        "panel-5.jpg",
+        "panel-6.jpg",
+        "panel-7.jpg",
+        "panel-8.jpg"
+      ]
+    },
+    {
+      "title": "AI证明了数学猜想，大雄还没做完作业",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "GPT-5.6 Sol Ultra本周证明了人类50年没解出的数学难题，而与此同时，某位小学生的数学作业依然空白。这个残酷的对比，引发了哆啦A梦有史以来最无情的一次吐槽。",
+      "highlights": [
+        "AI证明50年数学难题，大雄连今天作业都没写",
+        "哆啦A梦的毒舌达到新高度",
+        "人类与AI的差距，具象化在一张数学卷子上"
+      ],
+      "community_quotes": [
+        {
+          "text": "AI解决了50年的数学难题，我还在为昨天的账单发愁。这就是现实。",
+          "author": "微博网友"
+        },
+        {
+          "text": "所以AI能帮我做作业吗？——能。那它会吗？——要看你问不问。",
+          "author": "某学生的心声"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "GPT-5.6 Sol Ultra produces proof of the Cycle Double Cover Conjecture",
+          "score": 9.2,
+          "url": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Evening, Nobita's room. Nobita is lying on the floor, feet in the air, staring at the ceiling. Math homework book open and completely blank beside him.",
+          "dialogue_cn": "大雄：「哆啦A梦……AI都证明50年的数学难题了，我这道应用题算什么嘛……」\n哆啦A梦：「对啊，算什么呢。（看了一眼）算你今晚要被妈妈骂。」",
+          "sfx": "グサッ"
+        },
+        {
+          "scene": "Nobita sits up dramatically, looking inspired, pointing at the sky.",
+          "dialogue_cn": "大雄：「既然AI这么厉害，以后数学就让AI做！人类去做更有意义的事！」\n哆啦A梦：「比如？」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Nobita looks very serious and noble, as if making a grand declaration.",
+          "dialogue_cn": "大雄：「比如……睡觉！睡觉对人类身心健康非常重要！这是人类独有的价值！」\n哆啦A梦：「……」",
+          "sfx": "シーン"
+        },
+        {
+          "scene": "Doraemon stares at Nobita with a deadpan expression, then slowly turns away.",
+          "dialogue_cn": "哆啦A梦：「大雄，AI证明了圈双覆盖猜想。你连'覆盖'两个字都不认识。你们之间的差距……不是AI追上了人类，是你落下了人类。」\n大雄：「……我去写作业了。」",
+          "sfx": "ガーン"
+        }
+      ],
+      "doraemon_quote": "AI用50年没人解出的数学题证明了自己的智慧，大雄用50分钟没动的作业证明了另一件事。",
+      "panels_images": [
+        "panel-9.jpg",
+        "panel-10.jpg",
+        "panel-11.jpg",
+        "panel-12.jpg"
+      ]
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "Iris van Herpen injects glass-covered gown with glowing plasma",
+      "url": "https://www.dezeen.com/2026/07/10/iris-van-herpen-glass-gown-glowing-plasma/",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "GPT-5.6 Sol Ultra produces proof of the Cycle Double Cover Conjecture [pdf]",
+      "url": "https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf",
+      "score": 9.2,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Pierpaolo Piccioli’s Glamorous Vision for Balenciaga Couture",
+      "url": "https://www.harpersbazaar.com/fashion/fashion-week/a71872055/balenciaga-couture-fall-2026/",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Pierpaolo Piccioli’s Balenciaga Couture Debut Celebrates Craft—and Color",
+      "url": "https://www.elle.com/runway/a71856227/balenciaga-couture-fall-2026-review/",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "First Reactions to Pierpaolo Piccioli’s Balenciaga Couture Debut",
+      "url": "https://www.vogue.com/article/first-reactions-to-pierpaolo-picciolis-balenciaga-couture-debut",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "ピッチョーリによる「バレンシアガ」の“ネオ・クチュール”　色彩とフォルムの解放",
+      "url": "https://www.fashionsnap.com/article/balenciaga-55th-couture/",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "Key Takeaways From Paris Couture Week",
+      "url": "https://www.vogue.com/article/key-takeaways-from-paris-couture-week",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "Balenciaga Shows Piccioli's Couture Debut & Chanel Acquires France's Oldest Shirtmaker in This Week's Top Fashion News",
+      "url": "https://hypebeast.com/2026/7/balenciaga-couture-chanel-schiaparelli-desire-doue-france",
+      "score": 9.0,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "Balenciaga But Bigger: Pierpaolo Piccioli's Fall 2026 Couture Debut",
+      "url": "https://hypebeast.com/2026/7/balenciaga-couture-2027-pierpaolo-piccioli-debut-collection",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "GPT-5.6 Sol, along with Terra and Luna, will launch publicly this Thursday. We’re expanding preview access globally now.",
+      "url": "https://x.com/OpenAI/status/2074704958419792299#m",
+      "score": 9.0,
+      "categories": [
+        "商用产品"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "时装": 148,
+      "商用产品": 105,
+      "潮流": 130,
+      "Agent & Skills": 79,
+      "训练与部署": 51,
+      "开源模型": 29,
+      "其他": 1191,
+      "3D生成与重建": 5,
+      "ComfyUI": 4,
+      "AI × 时尚": 2
+    },
+    "by_source": {
+      "twitter": 175,
+      "hackernews": 82,
+      "youtube": 113,
+      "telegram": 115,
+      "github": 24,
+      "rss": 1084
+    }
+  }
+}
