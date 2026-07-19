@@ -1,0 +1,304 @@
+{
+  "week": "2026-W29",
+  "date_range": "2026-07-13 — 2026-07-19",
+  "generated_at": "2026-07-19T14:02:05.750745+00:00",
+  "total_news": 1321,
+  "total_sources": 6,
+  "week_title": "数学50年难题被AI一小时秒了，开源圈也炸了",
+  "editor_note": "本周AI圈最劲爆的事儿，是GPT-5.6用64个Agent小弟组团，不到一小时就把困扰数学家半个世纪的猜想给证了。与此同时，月之暗面带着2.8万亿参数的Kimi K3横空出世，前端编程直接从第18名杀到第一。开源的春天，可能真的来了。",
+  "stories": [
+    {
+      "title": "AI用1小时，证了数学家50年没搞定的题",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "GPT-5.6 Sol Ultra用64个子Agent并行协作，在不到1小时内完成了存在约50年的「循环双覆盖猜想」数学证明。OpenAI还公开了那条神奇的Prompt，只有700个字符。数学界震惊，网友震惊，大雄的数学老师也震惊了。",
+      "highlights": [
+        "64个Agent组团打Boss，1小时证明50年数学猜想",
+        "OpenAI公开约700字符的完整Prompt，透明度拉满",
+        "将问题转化为有限域线性方程组——AI的解题思路和人类完全不同"
+      ],
+      "community_quotes": [
+        {
+          "text": "数学家花了50年，AI花了1小时，我花了5分钟看懂标题。",
+          "author": "网友@不明觉厉研究所"
+        },
+        {
+          "text": "700字符的Prompt能证明世纪难题，我写了800字的周报连老板都说没看懂。",
+          "author": "网友@打工人泪目"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "GPT-5.6 Sol Ultra 在不到1小时内完成循环双覆盖猜想证明",
+          "score": 9.2
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita sitting at a messy desk, staring blankly at a math textbook, pencil broken, eraser crumbs everywhere. Doraemon peeks in from the door with a newspaper.",
+          "dialogue_cn": "大雄：「这道题我做了三天了……老师说这种题'需要天赋'……」\n哆啦A梦：「哦？数学需要天赋？」",
+          "sfx": "ウーン"
+        },
+        {
+          "scene": "Doraemon slams a glowing holographic newspaper on the desk. The headline reads 'GPT-5.6 proves 50-year math conjecture in 1 hour!' Nobita's jaw drops.",
+          "dialogue_cn": "哆啦A梦：「GPT-5.6刚用1小时，证明了困扰数学家50年的'循环双覆盖猜想'。」\n大雄：「……五十……年……？」",
+          "sfx": "ドドドド"
+        },
+        {
+          "scene": "Doraemon explains excitedly with a holographic diagram showing 64 small robot agents working in parallel, arrows flying everywhere. Nobita looks increasingly pale.",
+          "dialogue_cn": "哆啦A梦：「它派出64个Agent小弟分工合作，把问题变成方程组，啪一下就解出来了！」\n大雄：「那……那我这道题……」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Nobita holds up his crumpled homework with a single tear rolling down his cheek. The problem on the paper is a simple middle-school algebra question. Doraemon facepalms.",
+          "dialogue_cn": "大雄：「AI能证明50年的世纪难题……我这道一元一次方程做了三天……」\n哆啦A梦：「……大雄，你的问题不是缺天赋，是缺CPU。」",
+          "sfx": "ガーン"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": [
+        "panel-1.jpg",
+        "panel-2.jpg",
+        "panel-3.jpg",
+        "panel-4.jpg"
+      ]
+    },
+    {
+      "title": "2.8万亿参数！Kimi K3来了，开源圈沸腾了",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "月之暗面发布Kimi K3，全球首个开源的2.8万亿参数MoE大模型，支持100万token超长上下文和原生视觉理解。综合性能仅次于Claude Fable 5和GPT-5.6 Sol，前端编程评测更是从第18名一路杀到第一。开源界的「卷王」又上线了。",
+      "highlights": [
+        "2.8万亿参数MoE架构，896个专家每次激活16个，效率极高",
+        "前端编程Arena评测从第18名跃居第一，1679分碾压全场",
+        "完整权重即将开放，开源社区重大里程碑"
+      ],
+      "community_quotes": [
+        {
+          "text": "Kimi K3前端编程第一，我司前端工程师已开始写简历了。",
+          "author": "网友@前端已死未死"
+        },
+        {
+          "text": "2.8万亿参数开源，这是把军火库搬到了GitHub上。",
+          "author": "网友@开源信徒"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Kimi 发布 2.8 万亿参数模型 K3，最高 1M 上下文，综合水平仅次于 Claude Fable 5 和 GPT-5.6 Sol",
+          "score": 9.0
+        },
+        {
+          "title": "Kimi K3 前端编程在 Arena 中超越 Fable 5 跃居第一",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita and Doraemon are watching a giant scoreboard floating in the sky showing AI model rankings. Kimi K3 is shooting up like a rocket from position 18 to position 1.",
+          "dialogue_cn": "大雄：「哆啦A梦，那个Kimi K3是什么？它在排行榜上飞！」\n哆啦A梦：「月之暗面刚发布的新模型，前端编程从第18名直接冲到第一！」",
+          "sfx": "シュルルル"
+        },
+        {
+          "scene": "Doraemon pulls out a giant blueprint showing the MoE architecture with 896 experts, only 16 lighting up at a time. Nobita scratches his head in confusion.",
+          "dialogue_cn": "哆啦A梦：「它有2.8万亿参数，但用的是MoE架构——896个专家，每次只叫16个出来干活。」\n大雄：「啊？那其他880个在干嘛？」",
+          "sfx": "ポリポリ"
+        },
+        {
+          "scene": "Doraemon imagines a scene of 880 tiny robot experts lounging in hammocks while 16 are working hard at computers. Nobita's eyes light up with envy.",
+          "dialogue_cn": "哆啦A梦：「……在待机。」\n大雄：「等等，880个参数可以躺着不干活？这不就是我的理想工作吗！」",
+          "sfx": "キラーン"
+        },
+        {
+          "scene": "Doraemon points to a banner that says 'Full weights open source soon!' Nobita is already typing on a laptop trying to download it. Doraemon looks at him skeptically.",
+          "dialogue_cn": "哆啦A梦：「而且完整权重马上开源，任何人都能下载！」\n大雄：「太好了！我下载回来帮我写作业！」\n哆啦A梦：「……你家电脑连模型都跑不起来。」",
+          "sfx": "ズコッ"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": [
+        "panel-5.jpg",
+        "panel-6.jpg",
+        "panel-7.jpg",
+        "panel-8.jpg"
+      ]
+    },
+    {
+      "title": "AI证明了世纪难题，大雄的数学还是不及格",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "本周AI圈最大的讽刺：GPT-5.6能证明50年数学猜想，Kimi K3前端编程天下第一——但大雄拿着这些工具，依然交了白卷。科技进步了，有些人的命运是不会变的。",
+      "highlights": [
+        "AI证明了世纪数学难题，但大雄的一元一次方程还是错的",
+        "最强AI工具唾手可得，最大的问题是人根本不会用",
+        "哆啦A梦的毒舌本周达到新高度"
+      ],
+      "community_quotes": [
+        {
+          "text": "AI越来越强，我越来越懒，这是一个完美的正相关。",
+          "author": "网友@懒人进化论"
+        },
+        {
+          "text": "工具不是问题，使用工具的人才是问题。",
+          "author": "网友@哲学家附体"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "GPT-5.6 Sol Ultra 1小时完成50年图论猜想证明",
+          "score": 9.2
+        },
+        {
+          "title": "Kimi K3 前端编程 Arena 排名第一",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita runs home excitedly, bursting through the door, shouting to Doraemon who is reading a book peacefully.",
+          "dialogue_cn": "大雄：「哆啦A梦！AI这么厉害，以后我什么都不用学了对不对！」\n哆啦A梦：（放下书）「哦？说来听听。」",
+          "sfx": "バタバタ"
+        },
+        {
+          "scene": "Nobita counts on his fingers with a smug expression: GPT proves math, Kimi does coding, AI writes essays. Doraemon listens with a suspicious smile.",
+          "dialogue_cn": "大雄：「GPT能证明数学猜想，Kimi能写代码，AI能写作文——我只要负责提问就好了！」\n哆啦A梦：「那你得先会提问。」",
+          "sfx": "ドヤッ"
+        },
+        {
+          "scene": "Doraemon hands Nobita a tablet showing a blank prompt input box. Nobita stares at it, completely frozen, sweat dripping down his face.",
+          "dialogue_cn": "哆啦A梦：「来，让AI帮你解今天的数学题，你来输入问题。」\n大雄：「……呃……那个……题目是……」\n哆啦A梦：「你连题目都不会读吗。」",
+          "sfx": "シーン"
+        },
+        {
+          "scene": "Nobita is crying at his desk with a big red zero on his test paper. Next to him, Doraemon is reading a news article that says 'AI solves 50-year math conjecture.' The contrast is devastating.",
+          "dialogue_cn": "大雄：「呜呜……我还是零分……」\n哆啦A梦：「AI用1小时证明了50年的数学猜想。」\n哆啦A梦：「你用50年，还是证明不了自己会做数学。」",
+          "sfx": "ガーン"
+        }
+      ],
+      "doraemon_quote": "工具进化的速度，永远追不上人类找借口的速度。",
+      "panels_images": [
+        "panel-9.jpg",
+        "panel-10.jpg",
+        "panel-11.jpg",
+        "panel-12.jpg"
+      ]
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "オリヴィエ・ルスタンが「ラバンヌ」新クリエイティブ・ディレクターに",
+      "url": "https://www.fashionsnap.com/article/2026-07-14/rabanne-olivier-rousteing/",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "Olivier Rousteing Is the New Creative Director of Rabanne",
+      "url": "https://www.harpersbazaar.com/fashion/a71929195/rabanne-creative-director-olivier-rousteing-announcement/",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Rabanne Names Olivier Rousteing Creative Director",
+      "url": "https://www.vogue.com/article/rabanne-names-olivier-rousteing-creative-director",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "🤖 GPT-5.6 一小时完成 50 年图论猜想证明",
+      "url": "https://www.qbitai.com/2026/07/447873.html",
+      "score": 9.2,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "🌙 Kimi 发布 2.8 万亿参数模型 K3 ，最高 1M 上下文，综合水平仅次于 Claude Fable 5 和 GPT-5.6 Sol  Kimi 发布...",
+      "url": "https://t.me/zaihuapd/42619",
+      "score": 9.0,
+      "categories": [
+        "开源模型",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "Olivier Rousteing Is Rabanne’s New Creative Director",
+      "url": "https://www.elle.com/fashion/a71590939/olivier-rousteing-creative-director-rabanne-news/",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "Confirmed: Olivier Rousteing Heads to Rabanne",
+      "url": "https://www.businessoffashion.com/news/luxury/olivier-rousteing-heads-to-rabanne/",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "How This ‘Shocked’ Designer Found Out Beyoncé Wore the Jimmy Choo x Timberland Boots She Helped Create",
+      "url": "https://wwd.com/footwear-news/shoe-trends/shanel-campbell-beyonce-jimmy-choo-timberland-boots-1239069256/",
+      "score": 8.5,
+      "categories": [
+        "潮流",
+        "时装"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "🌙 Kimi K3 发布：开源 2.8T 模型，前端编程在 Arena 中超越 Fable 5 跃居第一  月之暗面发布 Kimi K3，全球首个开源的 2.8...",
+      "url": "https://t.me/zaihuapd/42637",
+      "score": 8.5,
+      "categories": [
+        "开源模型"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "ルイ・ヴィトンがサッカーW杯2026の公式特注トロフィー・トランクを製作",
+      "url": "https://www.fashionsnap.com/article/2026-07-16/louis-vuitton-fifa26-trophy-trunk/",
+      "score": 8.5,
+      "categories": [
+        "时装"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "时装": 187,
+      "商用产品": 86,
+      "Agent & Skills": 86,
+      "开源模型": 35,
+      "潮流": 294,
+      "训练与部署": 28,
+      "ComfyUI": 4,
+      "3D生成与重建": 6,
+      "AI × 时尚": 7,
+      "其他": 772
+    },
+    "by_source": {
+      "telegram": 97,
+      "hackernews": 70,
+      "github": 22,
+      "youtube": 122,
+      "bilibili": 2,
+      "rss": 1008
+    }
+  }
+}
