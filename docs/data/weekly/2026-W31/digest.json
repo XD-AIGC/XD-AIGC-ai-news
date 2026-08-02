@@ -1,0 +1,296 @@
+{
+  "week": "2026-W31",
+  "date_range": "2026-07-27 — 2026-08-02",
+  "generated_at": "2026-08-02T14:01:20.055572+00:00",
+  "total_news": 1534,
+  "total_sources": 7,
+  "week_title": "AI开始解千年数学难题，人类数学家慌了",
+  "editor_note": "本周最震撼的消息来自OpenAI：内部模型Astra一口气解决了10个数学界长期未解的难题，花费仅2000美元，还顺手用Lean做了形式化验证。与此同时，开源界也不甘示弱，FLUX 3和Kimi-K3相继亮相。AI这周不是在颠覆行业，就是在颠覆学科。",
+  "stories": [
+    {
+      "title": "2000美元破解千年数学难题",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "OpenAI内部模型Astra解决了数学和理论计算机科学领域10个长期未解难题，涵盖球体堆积、von Neumann代数、非sofic群存在性等顶级问题，全部证明已在Lean中形式化验证，总token成本约2000美元。这是AI在纯数学原创研究领域的历史性突破，可能彻底重塑数学研究范式。",
+      "highlights": [
+        "一次推理解决10个数学界长期悬案",
+        "Lean形式化验证确保证明100%严格正确",
+        "总成本仅2000美元，博士生读到秃头也未必够"
+      ],
+      "community_quotes": [
+        {
+          "text": "GPT 5.6 Sol是我用过的第一个在数学上不犯错误的模型。",
+          "author": "Emad Mostaque"
+        },
+        {
+          "text": "Astra证明了非sofic群的存在——这是数学界几十年的悬案。",
+          "author": "Sebastien Bubeck, OpenAI研究员"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "OpenAI Astra内部版本解决10个数学开放难题",
+          "score": 9.2
+        },
+        {
+          "title": "GPT-5.6 Sol被评为首个数学零错误模型",
+          "score": 9.2
+        },
+        {
+          "title": "Sam Altman转发Astra数学突破公告",
+          "score": 9.2
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita sits at a messy desk covered in crumpled math homework, crying dramatically. Doraemon stands beside him looking calm.",
+          "dialogue_cn": "大雄：「呜呜呜……这道数学题我做了三个小时还不会！」\n哆啦A梦：「哦？什么题？」",
+          "sfx": "シクシク"
+        },
+        {
+          "scene": "Doraemon pulls out a glowing tablet from his pocket showing OpenAI's Astra announcement with 10 mathematical proofs listed.",
+          "dialogue_cn": "哆啦A梦：「你知道吗，OpenAI的新模型Astra这周解决了10个数学界几十年没人能解的顶级难题——」\n大雄：「啊？！」",
+          "sfx": "ドドドド"
+        },
+        {
+          "scene": "Close-up of the tablet showing 'Total cost: ~$2000' with math symbols flying around. Nobita's jaw drops to the floor.",
+          "dialogue_cn": "哆啦A梦：「——包括推翻Connes刚性猜想、证明非sofic群存在……总花费只要2000美元。」\n大雄：「2000美元？！数学教授们几十年的心血……」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Nobita stares blankly at his single homework problem. Doraemon smirks with arms crossed.",
+          "dialogue_cn": "大雄：「……那我这道题，让Astra算一下的话——」\n哆啦A梦：「你一道小学应用题，用不着它。更何况你连题目都懒得读完。」",
+          "sfx": "ズコー"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "开源界双响炮：FLUX 3全模态，Kimi-K3全球最大",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周开源模型界连发两枚重磅炸弹：Black Forest Labs发布FLUX 3，首次将图像、视频、音频生成与机器人动作预测整合进单一架构；月之暗面宣布即将开源Kimi-K3，定位全球首个3T级别前沿开放模型，原生支持工具调用、网页浏览和多步规划。闭源模型一家独大的时代，开源正在强势反击。",
+      "highlights": [
+        "FLUX 3：一个模型同时生成图像、视频、音频还能控制机器人",
+        "Kimi-K3：3万亿参数级别，开源界的「核弹」",
+        "两大模型均强调多模态与Agentic能力，指向同一个未来"
+      ],
+      "community_quotes": [
+        {
+          "text": "单一模态无法提供完整的世界理解。",
+          "author": "Black Forest Labs官方"
+        },
+        {
+          "text": "Kimi-K3将是全球首个开放的3T级前沿模型。",
+          "author": "月之暗面官方公告"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Black Forest Labs发布FLUX 3多模态基础模型",
+          "score": 9.2
+        },
+        {
+          "title": "月之暗面宣布开源Kimi-K3，全球首个3T级开放模型",
+          "score": 9.0
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita and Doraemon sitting in front of a TV showing a news ticker about open source AI releases. Nobita looks curious.",
+          "dialogue_cn": "大雄：「哆啦A梦，最近总听说'开源模型'，那是什么意思？」\n哆啦A梦：「就是把AI的'配方'免费公开，谁都能下载来用。」",
+          "sfx": "ポワン"
+        },
+        {
+          "scene": "Doraemon holds up two cards: one showing FLUX 3 logo with icons of image/video/audio/robot, another showing Kimi-K3 with '3T' in giant letters.",
+          "dialogue_cn": "哆啦A梦：「这周就来了两个大家伙！FLUX 3能同时生成图片、视频、音频，还能控制机器人——」\n大雄：「哇，一个顶四个！」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon points dramatically at the Kimi-K3 card. The '3T' glows ominously large.",
+          "dialogue_cn": "哆啦A梦：「还有月之暗面的Kimi-K3，3万亿参数级别，全球开源模型里最大的，原生就会上网、用工具、自己规划任务！」\n大雄：「3万亿……我的脑子只有三个细胞……」",
+          "sfx": "ドーン"
+        },
+        {
+          "scene": "Nobita looks determined, raising his fist. Doraemon raises an eyebrow skeptically.",
+          "dialogue_cn": "大雄：「那我也要下载来用！让它帮我写作业、做家务、应付妈妈！」\n哆啦A梦：「……它会多步规划，第一步大概就是'拒绝协助懒人'。」",
+          "sfx": "ジト"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "AI解了数学难题，数学家开始投简历了",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "Astra用2000美元解决了人类数学家几十年解不出的难题，顺带用Lean验证了正确性。大雄表示数学家要失业了，哆啦A梦表示AI下一个目标可能是漫画编剧，引发全场恐慌。",
+      "highlights": [
+        "2000美元 vs 数学博士四十年青春，性价比碾压",
+        "Lean形式化验证：AI不仅解题，还自己改卷子",
+        "大雄灵魂发问：那我学数学还有意义吗？"
+      ],
+      "community_quotes": [
+        {
+          "text": "这是AI在原创数学研究能力上的重大跃升。",
+          "author": "OpenAI公告"
+        },
+        {
+          "text": "von Neumann代数的Connes刚性猜想被推翻——这个猜想提出已有数十年。",
+          "author": "数学界观察人士"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Astra解决10大数学难题，总成本仅2000美元",
+          "score": 9.2
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita bursts through the door looking panicked, holding a newspaper with headline about Astra solving math problems.",
+          "dialogue_cn": "大雄：「哆啦A梦！AI解了10个数学难题！那些数学家……是不是要失业了？！」\n哆啦A梦：「有这个可能。」",
+          "sfx": "バタン"
+        },
+        {
+          "scene": "Nobita looks smug with arms crossed, as if he's made a smart observation.",
+          "dialogue_cn": "大雄：「哼，所以嘛，我从小数学就不好，这叫——先见之明！我早就知道数学没用！」\n哆啦A梦：「……」",
+          "sfx": "ドヤ"
+        },
+        {
+          "scene": "Doraemon scrolls through a tablet with a deadpan expression, showing a list of AI capabilities including 'manga scriptwriting'.",
+          "dialogue_cn": "哆啦A梦：「顺便说一下，Astra下一步要攻克的领域包括：蛋白质设计、代码生成……哦，还有'创意写作与剧本创作'。」\n大雄：「……」",
+          "sfx": "サーッ"
+        },
+        {
+          "scene": "Both Nobita and Doraemon stare at each other in silence. Then Nobita slowly raises his hand.",
+          "dialogue_cn": "大雄：「那……我们两个，是不是也要失业了？」\n哆啦A梦：「我是口袋里装着道具的AI猫型机器人，我怕什么。你嘛——」\n大雄：「别说了。」",
+          "sfx": "ズーン"
+        }
+      ],
+      "doraemon_quote": "「AI解题只要2000美元，而你补课费已经花了我口袋里20年的零花钱。」",
+      "panels_images": []
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "An internal version of Astra, our next major model, found new results across 10 long-standing open problems in math and ...",
+      "url": "https://x.com/reach_vb/status/2083474385252364537#m",
+      "score": 9.2,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "No human input, channeling the latent space of the new models. GPT 5.6 Sol is probably the first model I've used that do...",
+      "url": "https://x.com/EMostaque/status/2083507693189276130#m",
+      "score": 9.2,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "RT by @sama: An internal version of Astra, @OpenAI’s next major model family, solved 10 major open problems in mathemati...",
+      "url": "https://x.com/polynoamial/status/2083467194663571701#m",
+      "score": 9.2,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "🤖 OpenAI Astra 在十项长期数学难题上取得突破",
+      "url": "https://openai.com/index/ten-advances-in-mathematics/",
+      "score": 9.2,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "Met Seen Mounting John Galliano Retrospective",
+      "url": "https://wwd.com/fashion-news/fashion-scoops/costume-institute-met-next-exhibition-john-galliano-1239089295/",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "Black Forest Labs Releases FLUX 3: A Multimodal Flow Model for Image, Video, Audio and Robot Action Prediction",
+      "url": "https://www.marktechpost.com/2026/07/26/black-forest-labs-releases-flux-3-a-multimodal-flow-model-for-image-video-audio-and-robot-action-prediction/",
+      "score": 9.2,
+      "categories": [
+        "开源模型",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "METでジョン・ガリアーノ展　存命デザイナーでイヴ・サンローラン、川久保玲に次ぐ3人目",
+      "url": "https://www.fashionsnap.com/article/2026-08-01/met-2027-john-galliano/",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "The Met’s Next Fashion Blockbuster Will Spotlight Galliano",
+      "url": "https://www.businessoffashion.com/news/luxury/the-mets-next-fashion-blockbuster-will-spotlight-galliano/",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "John Galliano Is the Subject of the Next Costume Institute Show",
+      "url": "https://www.vogue.com/article/john-galliano-met-exhibition",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "🌙 月之暗面将开源 Kimi-K3，全球首个 3T 级前沿模型  月之暗面（Moonshot AI）即将在 Hugging Face 开源新一代模型 Kimi-...",
+      "url": "https://t.me/zaihuapd/42802",
+      "score": 9.0,
+      "categories": [
+        "开源模型",
+        "Agent & Skills"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "商用产品": 117,
+      "Agent & Skills": 118,
+      "时装": 201,
+      "开源模型": 37,
+      "训练与部署": 29,
+      "潮流": 277,
+      "AI × 时尚": 5,
+      "其他": 944,
+      "ComfyUI": 4,
+      "3D生成与重建": 4
+    },
+    "by_source": {
+      "telegram": 121,
+      "twitter": 107,
+      "hackernews": 94,
+      "github": 16,
+      "rss": 1058,
+      "bilibili": 1,
+      "youtube": 137
+    }
+  }
+}
