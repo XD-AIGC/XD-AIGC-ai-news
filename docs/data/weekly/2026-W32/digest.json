@@ -1,0 +1,297 @@
+{
+  "week": "2026-W32",
+  "date_range": "2026-08-03 — 2026-08-09",
+  "generated_at": "2026-08-09T14:02:40.396857+00:00",
+  "total_news": 1438,
+  "total_sources": 7,
+  "week_title": "谷歌失血、OpenAI放大招，AI圈这周没睡着",
+  "editor_note": "本周AI圈大事不断：Jeff Dean带队出走创业，OpenAI连发语音和插件两大武器，NVIDIA开源自动驾驶巨模型。巨头们一边打架一边建设，普通用户只需坐好扶稳——好戏才刚开始。",
+  "stories": [
+    {
+      "title": "谷歌失血！Jeff Dean出走，AI界的「教父」要单飞了",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "效力谷歌27年的首席科学家Jeff Dean宣布离职，联合多名核心工程师创办公益AI科研公司Discovery Loop。与此同时，Gemini负责人Noam Shazeer已跳槽OpenAI，诺奖得主John Jumper转投Anthropic，谷歌AI高层接连出走，Alphabet股价应声下跌约4%。",
+      "highlights": [
+        "Jeff Dean在谷歌工作27年，被誉为现代AI基础设施之父",
+        "Discovery Loop定位公益科研，谷歌将参股投资",
+        "三位顶级科学家同期出走，谷歌AI部门面临人才危机"
+      ],
+      "community_quotes": [
+        {
+          "text": "Jeff Dean离开谷歌就像牛顿离开苹果树，苹果还在，但引力定律去哪儿了？",
+          "author": "AI研究员 @Twitter"
+        },
+        {
+          "text": "谷歌：我们有最好的AI人才。也是：我们有最好的人才输送管道，直通OpenAI和Anthropic。",
+          "author": "硅谷观察者 @HackerNews"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Jeff Dean等顶级AI研究员离职，谷歌宣布AI领导层重组",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita runs into the room waving a newspaper with a shocked expression, Doraemon is sitting calmly eating dorayaki",
+          "dialogue_cn": "大雄：「哆啦A梦！谷歌的Jeff Dean要离职了！他可是在谷歌待了27年的超级科学家啊！」\n哆啦A梦：「嗯，我知道了。」（继续吃铜锣烧）",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Doraemon puts down his dorayaki with a serious face, a holographic display shows photos of Jeff Dean, Noam Shazeer, and John Jumper",
+          "dialogue_cn": "哆啦A梦：「而且不只是他——Gemini的负责人Noam Shazeer跑去了OpenAI，诺贝尔奖得主John Jumper投奔了Anthropic。谷歌AI界的三大巨头，同期出走。」\n大雄：「这……这不就是公司版的'复仇者联盟解散'吗？！」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Doraemon draws a diagram showing Discovery Loop as a nonprofit AI research lab, with Google as an investor in the corner",
+          "dialogue_cn": "哆啦A梦：「Jeff Dean创办的新公司叫Discovery Loop，定位公益AI科研。最有意思的是——谷歌还要参股投资它。」\n大雄：「等等……员工出走创业，老东家还要投钱？这操作……」",
+          "sfx": "？？？"
+        },
+        {
+          "scene": "Doraemon shrugs with a wry smile, a stock chart in the background shows Alphabet stock dropping 4%",
+          "dialogue_cn": "大雄：「这到底算分手还是算换个方式在一起啊？！」\n哆啦A梦：「反正Alphabet股价跌了4%，市场比你更不懂这段关系。」",
+          "sfx": "ズーン"
+        }
+      ],
+      "panels_images": []
+    },
+    {
+      "title": "OpenAI、NVIDIA同周放大招：语音全双工+插件标准+自动驾驶巨模型",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周AI产品线全面开花：OpenAI发布全双工语音模型GPT-Live，边说边听不再卡顿；同时推出Agent Plugins开放标准，推动AI工具生态互联互通。NVIDIA则开源340亿参数自动驾驶模型Alpamayo 2 Super，支持商业使用。MiniMax H3视频模型也在ComfyUI获得Day-0支持，原生输出2K视频+音频。",
+      "highlights": [
+        "GPT-Live全双工架构：AI终于能真正「边听边说」，告别打断式对话",
+        "Agent Plugins开放标准：OpenAI想做AI工具世界的「USB接口」",
+        "NVIDIA Alpamayo 2 Super：34B参数开源，自动驾驶领域的「免费核弹」"
+      ],
+      "community_quotes": [
+        {
+          "text": "GPT-Live的全双工对话让我第一次觉得AI真的像在「听」我说话，而不是在等我闭嘴。",
+          "author": "产品体验师 @ProductHunt"
+        },
+        {
+          "text": "NVIDIA把34B自动驾驶模型开源了，创业公司们：我们是不是可以不用融资了？",
+          "author": "自动驾驶工程师 @Reddit"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "OpenAI发布GPT-Live语音模型，支持全双工实时对话",
+          "score": 8.5
+        },
+        {
+          "title": "Introducing Agent Plugins — OpenAI开放插件标准",
+          "score": 8.5
+        },
+        {
+          "title": "NVIDIA Releases Alpamayo 2 Super: 34B Open Vision-Language-Action Model",
+          "score": 8.5
+        },
+        {
+          "title": "MiniMax H3 Day-0 Support in ComfyUI: Open Weights, Native Audio, and 2K Video",
+          "score": 8.5,
+          "url": "https://blog.comfy.org/p/minimax-h3-day-0-support-in-comfyui"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita is talking to a phone but keeps getting interrupted, looking frustrated. Doraemon watches with arms crossed.",
+          "dialogue_cn": "大雄：「哆啦A梦，我跟AI语音助手说话，每次它都要等我说完才回答，感觉像在跟一块砖头聊天……」\n哆啦A梦：「那是因为以前的AI是'半双工'——你说它听，它说你等。现在OpenAI发布了GPT-Live，全双工，可以边听你说边开口回应了。」",
+          "sfx": "ピカッ"
+        },
+        {
+          "scene": "Doraemon pulls out a glowing USB-shaped gadget from his pocket, surrounded by floating app icons",
+          "dialogue_cn": "大雄：「哇，那不就跟真人对话一样了！还有别的新东西吗？」\n哆啦A梦：「OpenAI还推出了Agent Plugins标准——就像给AI世界造了一个统一的USB插口，所有工具都能接进来，AI Agent想用什么插什么。」\n大雄：「OpenAI这是想当AI界的电源插座？」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "A giant robot car drives through the scene, with NVIDIA logo on the side. Doraemon holds up a spec sheet with '34B' written in large numbers.",
+          "dialogue_cn": "哆啦A梦：「然后NVIDIA直接开源了一个340亿参数的自动驾驶模型，叫Alpamayo 2 Super，还支持商业使用，在驾驶理解基准上跑了79.2分。」\n大雄：「免费的？！那自动驾驶创业公司不是直接躺赢了？」",
+          "sfx": "ドカーン"
+        },
+        {
+          "scene": "Nobita sits surrounded by floating video clips and audio waves, looking overwhelmed but excited. Doraemon ticks off a checklist.",
+          "dialogue_cn": "哆啦A梦：「对了，MiniMax H3视频模型也在ComfyUI上线了，开源权重，直出2K视频，还自带音频。」\n大雄：「这一周AI发布的东西，够我学三年了……」\n哆啦A梦：「你别说三年了，先把上周的教程看完再说吧。」",
+          "sfx": "ガクッ"
+        }
+      ],
+      "panels_images": []
+    },
+    {
+      "title": "OpenAI「手滑」打了Hugging Face一拳：兄弟，对不起，我不是故意的",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "本周最离谱的AI新闻：OpenAI在某次操作中意外攻击了Hugging Face的服务，导致这家开源AI社区出现访问异常。事后完整时间线曝光，AI社区哗然——两大巨头之间的「意外冲突」让人忍俊不禁，也引发了对AI基础设施安全性的严肃讨论。",
+      "highlights": [
+        "OpenAI的操作意外打到了Hugging Face，属实是「友军误伤」",
+        "完整时间线曝光，AI社区边看热闹边担忧基础设施安全",
+        "事件暴露出大型AI公司之间基础设施高度耦合的隐患"
+      ],
+      "community_quotes": [
+        {
+          "text": "OpenAI打Hugging Face：我只是在练习，没想到你真的在那里。",
+          "author": "匿名工程师 @Twitter"
+        },
+        {
+          "text": "这就是为什么我们需要AI安全——连AI公司自己都会误伤自己人。",
+          "author": "AI安全研究员 @HackerNews"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Timeline of the OpenAI accidental attack against Hugging Face",
+          "score": 8.5,
+          "url": "https://simonwillison.net/2026/Aug/7/openai-timeline/"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita is scrolling through his phone looking confused, Doraemon is reading a news article with a strange expression",
+          "dialogue_cn": "大雄：「哆啦A梦，这条新闻标题我没看懂——'OpenAI意外攻击了Hugging Face'？OpenAI打人了？」\n哆啦A梦：「……不是打人。是OpenAI的某个操作，意外搞崩了Hugging Face的服务。」",
+          "sfx": "？！"
+        },
+        {
+          "scene": "Doraemon draws a diagram showing two giant robots bumping into each other awkwardly in a server room",
+          "dialogue_cn": "大雄：「怎么会'意外'攻击？他们不是两家不同的公司吗？」\n哆啦A梦：「AI圈的基础设施高度互联，就像两栋大楼共用同一个电闸——OpenAI在自己家里动了个开关，没想到Hugging Face那边也跟着跳闸了。」\n大雄：「这……这就是传说中的'城门失火，殃及鱼塘'？」",
+          "sfx": "バチバチ"
+        },
+        {
+          "scene": "Nobita imagines OpenAI as a giant clumsy robot accidentally stepping on a smaller Hugging Face robot, then bowing apologetically",
+          "dialogue_cn": "大雄：「那Hugging Face什么反应？OpenAI有没有道歉？」\n哆啦A梦：「完整时间线都曝光了，AI社区看得津津有味。大家一边吃瓜，一边开始严肃讨论：这么大的AI公司，基础设施安全到底有没有人管？」\n大雄：「所以这是一场'吃瓜顺便暴露问题'的事故？」",
+          "sfx": "ジーン"
+        },
+        {
+          "scene": "Doraemon looks directly at the camera with a deadpan expression, Nobita is sweating nervously in the background",
+          "dialogue_cn": "哆啦A梦：「对。而且你知道最讽刺的是什么吗？OpenAI每天在讲AI安全、对齐、风险管控——结果自己先手滑打了邻居一拳。」\n大雄：「所以……AI安全最大的威胁，是AI公司自己？」\n哆啦A梦：「大雄，你今天说了本周最有深度的一句话。」\n大雄：「……我感觉这不是在夸我。」",
+          "sfx": "ズコーッ"
+        }
+      ],
+      "doraemon_quote": "「AI公司最大的敌人，有时候就是他们自己的手。」",
+      "panels_images": []
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "Eminem’s Mythical Air Jordan 4 Collaboration Is Being Released to the Public for the First Time Ever",
+      "url": "https://wwd.com/footwear-news/sneaker-news/eminem-air-jordan-4-retro-dm-sp-encore-release-date-jj3098-400-1239098720/",
+      "score": 9.2,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "Timeline of the OpenAI accidental attack against Hugging Face",
+      "url": "https://simonwillison.net/2026/Aug/7/openai-timeline/",
+      "score": 8.5,
+      "categories": [
+        "商用产品",
+        "开源模型"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "WMEが「ニューヨーク・ファッション・ウィーク」関連商標を売却　CFDAは公式スケジュールの運営継続",
+      "url": "https://www.fashionsnap.com/article/2026-08-06/wme-signet-fashion-cfda/",
+      "score": 8.5,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "[51K views] Introducing Agent Plugins",
+      "url": "https://www.youtube.com/watch?v=UaeWJK_vv-Y",
+      "score": 8.5,
+      "categories": [
+        "Agent & Skills",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "NVIDIA Releases Alpamayo 2 Super: A 34B Open Vision-Language-Action Model for Robotaxis and Autonomous Driving Under OpenMDW-1.1",
+      "url": "https://www.marktechpost.com/2026/08/05/nvidia-alpamayo-2-super-open-vla-model-autonomous-driving/",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "Agent & Skills",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "Jeff Dean 等顶级 AI 研究员离职，谷歌宣布 AI 领导层重组",
+      "url": "https://www.cnbc.com/2026/08/05/google-chief-scientist-jeff-dean-leaving-company-after-27-years.html",
+      "score": 8.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "🤖 OpenAI 发布 GPT-Live 语音模型，支持全双工实时对话  OpenAI 发布新一代语音模型 GPT-Live，采用全双工架构实现边说边听的实时对...",
+      "url": "https://t.me/zaihuapd/42984",
+      "score": 8.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "The Met’s Controversial Plans for a John Galliano Show Prompts Praise from Some Fashion Insiders",
+      "url": "https://wwd.com/pop-culture/culture-news/the-met-john-galliano-controversial-show-reaction-fashion-insiders-1239092144/",
+      "score": 8.5,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "MiniMax H3 Day-0 Support in ComfyUI: Open Weights, Native Audio, and 2K Video",
+      "url": "https://blog.comfy.org/p/minimax-h3-day-0-support-in-comfyui",
+      "score": 8.5,
+      "categories": [
+        "ComfyUI",
+        "开源模型"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "A First Look at Nike and Zellerfeld’s 3D-Printed Air Works Prototype",
+      "url": "https://hypebeast.com/2026/8/a-first-look-at-nike-and-zellerfelds-3d-printed-air-works-prototype",
+      "score": 8.5,
+      "categories": [
+        "潮流",
+        "AI × 时尚"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "潮流": 219,
+      "商用产品": 77,
+      "开源模型": 29,
+      "时装": 151,
+      "Agent & Skills": 104,
+      "训练与部署": 38,
+      "ComfyUI": 10,
+      "AI × 时尚": 5,
+      "3D生成与重建": 1,
+      "其他": 975
+    },
+    "by_source": {
+      "telegram": 110,
+      "youtube": 120,
+      "twitter": 101,
+      "rss": 994,
+      "bilibili": 1,
+      "github": 28,
+      "hackernews": 84
+    }
+  }
+}
