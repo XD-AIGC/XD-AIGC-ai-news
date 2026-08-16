@@ -1,0 +1,305 @@
+{
+  "week": "2026-W33",
+  "date_range": "2026-08-10 — 2026-08-16",
+  "generated_at": "2026-08-16T14:01:22.009416+00:00",
+  "total_news": 1297,
+  "total_sources": 6,
+  "week_title": "AI证明数学猜想，开源模型炸场，这周根本停不下来！",
+  "editor_note": "本周AI圈用实际行动告诉所有人：数学家要失业了，显卡党要高兴了，哦对了Claude还顺手推进了一个困扰数学界150年的猜想。开源浪潮继续汹涌，Qwen、Meta、LTX轮番上阵，消费级GPU跑大模型已经不是梦。坐好了，这周信息量有点大。",
+  "stories": [
+    {
+      "title": "Claude：我顺便证了个数学难题",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "Anthropic披露一个未公开的Claude研究版本，将黎曼zeta函数零点在临界线上的比例下界从41.6%提升至67.2%，刷新了数十年来的数学纪录。整个过程由约60个AI子代理协作完成，消耗3100万输出token，并生成了可形式化验证的Lean证明。这是AI在纯数学领域取得的里程碑式突破，已通过外部数学专家审查。",
+      "highlights": [
+        "黎曼假设相关下界从41.6%跳升至67.2%，150年悬案向前迈出一大步",
+        "60个AI子代理协同作战，消耗3100万token完成推理",
+        "生成Lean形式化证明，可被计算机严格验证，不是玄学"
+      ],
+      "community_quotes": [
+        {
+          "text": "这不是AI辅助数学，这是AI在做数学。区别很重要。",
+          "author": "某数学系教授 @ Twitter"
+        },
+        {
+          "text": "我读博五年没碰黎曼，Claude用了多少电费？",
+          "author": "网友 @知乎"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Claude 将黎曼 zeta 函数零点下界提升至 67.2%",
+          "score": 9.2,
+          "url": "https://www.anthropic.com/research/riemann-zeta"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita sits at his desk looking exhausted, staring at a math textbook. Doraemon floats nearby reading a tablet with a shocked expression.",
+          "dialogue_cn": "大雄：「哆啦A梦，这道数学题我做了一个小时还不会……」\n哆啦A梦：「……Claude刚刚推进了一个困扰数学界150年的猜想。」",
+          "sfx": "ジーン"
+        },
+        {
+          "scene": "Doraemon holds up a holographic display showing the Riemann Hypothesis formula, looking very excited. Nobita stares blankly.",
+          "dialogue_cn": "哆啦A梦：「黎曼zeta函数！零点下界从41.6%提升到67.2%！60个AI子代理协作完成！」\n大雄：「……那个百分比是我期末考试能及格的概率吗？」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon looks frustrated, pointing at a Lean proof verification screen. Nobita raises his hand with a question.",
+          "dialogue_cn": "哆啦A梦：「它还生成了Lean形式化证明，可以被计算机严格验证！这意味着AI开始真正做数学研究了！」\n大雄：「那它能帮我做作业吗？」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Doraemon facepalms dramatically. Nobita is already opening his homework notebook with a hopeful smile.",
+          "dialogue_cn": "哆啦A梦：「人家在挑战人类智识的边界……你在想作业。」\n大雄：「边界不边界的，我明天要交卷子！」",
+          "sfx": "ズコー"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "开源大爆发：这周每天都有新模型",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周开源模型界热闹非凡：Qwen 3.8-Max以2.4万亿参数震撼登场，能自主跑超10天完成项目；Meta发布30B的Muse Glimmer，24GB显存消费级显卡即可运行；LTX-2.5开源视频模型单张RTX 5090本地生成视频，文生视频评测排名第一；腾讯混元WorldClaw更是能自动生成大规模3D开放世界。开源社区这周集体爆发。",
+      "highlights": [
+        "Qwen 3.8-Max：2.4万亿参数，下周开源，能自主工作超10天",
+        "Meta Muse Glimmer：30B参数，24GB显存跑，Apache 2.0全开放",
+        "LTX-2.5：开源视频生成模型，文生视频评测十款中排名第一"
+      ],
+      "community_quotes": [
+        {
+          "text": "买了台4090，终于不是只用来打游戏了。",
+          "author": "网友 @微博"
+        },
+        {
+          "text": "开源社区这周的更新速度，感觉闭源厂商都在开会。",
+          "author": "开发者 @GitHub Discussions"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Qwen 3.8-Max：2.4万亿参数，首次开源Max级模型",
+          "score": 9.0
+        },
+        {
+          "title": "Meta AI 发布 Muse Glimmer：30B开源权重，消费级GPU可跑",
+          "score": 8.5
+        },
+        {
+          "title": "LTX 发布开源视频模型 LTX-2.5，单张RTX 5090即可本地运行",
+          "score": 8.5
+        },
+        {
+          "title": "WorldClaw Agentic 3D开放世界生成系统",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Doraemon excitedly shows Nobita a news feed on a tablet, multiple model logos floating in the air like confetti.",
+          "dialogue_cn": "哆啦A梦：「大雄！本周开源模型大爆发！Qwen发了2.4万亿参数的超级模型！」\n大雄：「2.4万亿……那是多大？」",
+          "sfx": "ドドドド"
+        },
+        {
+          "scene": "Doraemon pulls out a scale comparing model sizes like stacking buildings. Nobita looks overwhelmed.",
+          "dialogue_cn": "哆啦A梦：「Meta的Muse Glimmer 30B，你家那张显卡就能跑！LTX-2.5还能在本地生成视频！」\n大雄：「等等，我家显卡？我家只有台式风扇……」",
+          "sfx": "シュン"
+        },
+        {
+          "scene": "Doraemon points at a 3D world being generated on screen by WorldClaw, looking amazed. Nobita leans in curiously.",
+          "dialogue_cn": "哆啦A梦：「腾讯的WorldClaw还能自动生成3D开放世界！AI现在能帮游戏公司建整个游戏地图！」\n大雄：「那我的《勇者传说》攻略本是不是要失业了？」",
+          "sfx": "ポカン"
+        },
+        {
+          "scene": "Doraemon sighs and looks at Nobita seriously. Nobita is already downloading something on his phone.",
+          "dialogue_cn": "哆啦A梦：「这些模型全部开源、免费、可商用……开发者的时代来了。」\n大雄：「我已经在下载了。」\n哆啦A梦：「你要用来干嘛？」\n大雄：「让它帮我写作业。」",
+          "sfx": "ズコー"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "Gemini月活10亿，大雄表示不信",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "谷歌宣布Gemini月活用户突破10亿，是谷歌史上增长最快的产品。与此同时，Gemini 3.7 Flash新版本也同步发布。大雄对这个数字产生了严重质疑，并展开了一场灵魂拷问，最终被哆啦A梦的毒舌完美终结。",
+      "highlights": [
+        "Gemini月活10亿，谷歌史上增长最快产品",
+        "Gemini 3.7 Flash同步发布，轻量快速",
+        "大雄：「那10亿里有几个是真的在用？」"
+      ],
+      "community_quotes": [
+        {
+          "text": "月活10亿……其中9亿是被强制绑定进安卓手机的吧？",
+          "author": "网友 @Reddit"
+        },
+        {
+          "text": "我用过一次，问它今天天气，它给我讲了气象学历史。",
+          "author": "用户 @微博"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Gemini月活用户突破10亿，谷歌史上增长最快产品",
+          "score": 8.5
+        },
+        {
+          "title": "Introducing Gemini 3.7 Flash",
+          "score": 8.5,
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Doraemon reads news on tablet with a proud expression. Nobita is lying on the floor eating snacks.",
+          "dialogue_cn": "哆啦A梦：「大雄，谷歌Gemini月活用户突破10亿了！史上增长最快的产品！」\n大雄：「哦。」",
+          "sfx": "サラサラ"
+        },
+        {
+          "scene": "Nobita sits up with a suspicious squinting expression, pointing one finger up like he's making a point.",
+          "dialogue_cn": "大雄：「等等，10亿？那里面有几个是真的在用，几个是手机自动开的？」\n哆啦A梦：「……你这问题……」",
+          "sfx": "ピクッ"
+        },
+        {
+          "scene": "Doraemon opens mouth to argue but then pauses, looking uncertain, tapping chin thoughtfully.",
+          "dialogue_cn": "哆啦A梦：「他们说是谷歌史上增长最快的产品——」\n大雄：「我妈手机里有Gemini，她以为那是天气预报。」\n哆啦A梦：「……」",
+          "sfx": "ジーン"
+        },
+        {
+          "scene": "Doraemon finally snaps back with a sharp expression, pointing at Nobita with a smug smile. Nobita looks defeated.",
+          "dialogue_cn": "哆啦A梦：「就算只有1%是真实用户，那也是1000万人！比你这辈子认识的人多一万倍！」\n大雄：「……好吧你赢了。」\n哆啦A梦：「而且你妈至少打开过，你连打开都没有。」",
+          "sfx": "ガーン"
+        }
+      ],
+      "doraemon_quote": "月活10亿不重要，重要的是你妈都在用AI，你还在问我借作业答案。",
+      "panels_images": []
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "Claude 将黎曼 zeta 函数零点下界提升至 67.2%",
+      "url": "https://www.anthropic.com/research/riemann-zeta",
+      "score": 9.2,
+      "categories": [
+        "商用产品",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "🤖 Qwen 发布 3.8-Max：2.4 万亿参数，首次开源 Max 级模型  通义千问团队今日正式发布 Qwen 3.8-Max，参数规模达 2.4 万亿（...",
+      "url": "https://t.me/zaihuapd/43151",
+      "score": 9.0,
+      "categories": [
+        "开源模型",
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Supreme Just Turned Its Box Logo Archive Into a Leather Jacket",
+      "url": "https://hypebeast.com/2026/8/supreme-fall-winter-2026-teaser",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Introducing Gemini 3.7 Flash",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/",
+      "score": 8.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "More than 1 billion people are using the Gemini app every month.",
+      "url": "https://blog.google/innovation-and-ai/products/gemini-app/one-billion-monthly-users/",
+      "score": 8.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "WorldClaw Agentic 3D open-world generation at scale",
+      "url": "https://tencent-hunyuan.github.io/Hunyuan3D-WorldClaw/",
+      "score": 8.5,
+      "categories": [
+        "3D生成与重建",
+        "Agent & Skills",
+        "开源模型"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "LTX 发布开源视频模型 LTX-2.5，单张 RTX 5090 即可本地运行",
+      "url": "https://ltx.io/model/ltx-2-5",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "Meta AI Releases Muse Glimmer: A 30B Open-Weights Agentic Model That Runs on One Consumer GPU",
+      "url": "https://www.marktechpost.com/2026/08/10/meta-ai-releases-muse-glimmer/",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "Agent & Skills",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "📱 Meta 开源 30B 模型 Muse Glimmer",
+      "url": "https://www.nytimes.com/2026/08/10/technology/meta-ai-open-source.html",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "Agent & Skills",
+        "训练与部署"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "Nike Teases Major 'One Piece' Collaboration Is on the Way",
+      "url": "https://hypebeast.com/2026/8/nike-japan-teases-one-piece-collaboration",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "商用产品": 83,
+      "Agent & Skills": 101,
+      "开源模型": 38,
+      "潮流": 268,
+      "3D生成与重建": 4,
+      "训练与部署": 35,
+      "ComfyUI": 5,
+      "时装": 121,
+      "AI × 时尚": 5,
+      "其他": 808
+    },
+    "by_source": {
+      "bilibili": 2,
+      "github": 27,
+      "rss": 940,
+      "telegram": 116,
+      "hackernews": 90,
+      "youtube": 122
+    }
+  }
+}
