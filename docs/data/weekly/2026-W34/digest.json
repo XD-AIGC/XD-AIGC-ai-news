@@ -1,0 +1,284 @@
+{
+  "week": "2026-W34",
+  "date_range": "2026-08-17 — 2026-08-23",
+  "generated_at": "2026-08-23T14:03:39.487953+00:00",
+  "total_news": 1302,
+  "total_sources": 6,
+  "week_title": "AI满分！球鞋满分！本周全是大新闻",
+  "editor_note": "本周最劲爆的消息来自两个截然不同的世界：NVIDIA的AVO在ARC-AGI-3上打出100分满分，自主Agent领域迎来里程碑时刻；与此同时，OpenRouter被Stripe收购，AI基础设施版图悄然重组。时尚圈也不甘示弱，Supreme、JENNIE联名、经典AJ复刻轮番登场。这周，无论你是AI工程师还是球鞋党，都有你的高光时刻。",
+  "stories": [
+    {
+      "title": "NVIDIA AVO：AI考试得了满分！",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "NVIDIA发布AVO架构，在号称衡量通用人工智能推理能力「最难考卷」的ARC-AGI-3基准测试上取得100%满分。这是AI Agent领域的历史性突破，代表着长时域自主Agent向真正通用智能迈出了关键一步。大雄听说AI能考满分，立刻想让它帮自己写作业……",
+      "highlights": [
+        "ARC-AGI-3被认为是目前最接近测量「通用智能」的权威基准",
+        "AVO强调以语言模型为核心的Agent编排架构设计",
+        "100%得分在AI历史上属首次，被业界称为「里程碑时刻」"
+      ],
+      "community_quotes": [
+        {
+          "text": "ARC-AGI满分不是终点，是AGI竞赛发令枪刚刚打响的声音。",
+          "author": "AI研究员 @深夜代码"
+        },
+        {
+          "text": "NVIDIA不只卖显卡了，这次直接来抢OpenAI的饭碗。",
+          "author": "科技博主 @硅谷观察"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "NVIDIA AVO在ARC-AGI-3达到100%满分",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita sitting at a messy desk with a failed exam paper (score: 0), crying dramatically. Doraemon stands beside him with arms crossed, looking unimpressed.",
+          "dialogue_cn": "大雄：「呜呜呜……我数学又考了零分！为什么AI能考满分，我却不行！」\n哆啦A梦：「因为NVIDIA的AVO在ARC-AGI-3上得了100分。那是衡量通用智能的最难考卷。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Doraemon holding a holographic display showing '100%' in big glowing letters, with NVIDIA logo. Nobita stares with sparkling eyes.",
+          "dialogue_cn": "哆啦A梦：「AVO是专门为长时域自主Agent设计的架构——能自己规划、自己执行、自己纠错，像一个超级大脑。」\n大雄：「哇！那它能帮我写作业吗？！」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon facepalming. A small robot (representing AVO) is shown solving complex equations on a blackboard while Nobita lazily watches.",
+          "dialogue_cn": "哆啦A梦：「……人家是为了推动人类文明进步而存在的。」\n大雄：「对对对！我的作业就是我的文明进步！」",
+          "sfx": "ズコー"
+        },
+        {
+          "scene": "Wide shot of a futuristic city skyline. Doraemon looks thoughtfully at the horizon. Nobita is already asleep on the desk.",
+          "dialogue_cn": "哆啦A梦（旁白）：「当AI第一次在通用智能测试中考满分，人类文明的某扇门悄悄开了一条缝……」\n大雄（鼾声）：「Zzz……帮我写完叫我……Zzz……」",
+          "sfx": "ドキドキ"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "AI吃掉API市场：OpenRouter加入Stripe",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周AI基础设施圈发生大地震：OpenRouter宣布加入Stripe，据报道收购价超70亿美元。OpenRouter是开发者最爱的AI模型路由平台，聚合了数百个LLM接口。与此同时，时尚摄影大师Nick Knight也在自建专属AI工具，拒绝使用公开训练的通用AI。两件事都在说同一件事：AI正在被「私有化」和「基础设施化」。",
+      "highlights": [
+        "OpenRouter聚合数百个LLM API，是开发者访问各类模型的核心枢纽",
+        "Stripe以超70亿美元收购，显示支付巨头正在深度布局AI基础设施",
+        "Nick Knight自建AI的逻辑：拒绝用「喝了别人创意」的通用AI"
+      ],
+      "community_quotes": [
+        {
+          "text": "OpenRouter被收购，以后调API还要先过Stripe的账单系统？开发者表示：钱包已经开始颤抖。",
+          "author": "独立开发者 @API穷鬼"
+        },
+        {
+          "text": "Nick Knight说得对，艺术家的创意不应该成为AI的免费训练数据。",
+          "author": "设计师 @像素叛逆者"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "OpenRouter正式加入Stripe，估值超70亿美元",
+          "score": 8.5
+        },
+        {
+          "title": "Nick Knight正在自主研发专属AI工具",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Doraemon and Nobita looking at a map showing many AI model logos (GPT, Claude, Gemini etc.) all connected through one central hub labeled 'OpenRouter'.",
+          "dialogue_cn": "大雄：「哆啦A梦，这个OpenRouter是什么？感觉好像很厉害的样子。」\n哆啦A梦：「就是个AI模型的'中转站'，你想用哪个AI，它帮你接通，就像电话总机。」",
+          "sfx": "なるほど"
+        },
+        {
+          "scene": "A giant Stripe logo swallowing the OpenRouter hub. Dollar signs flying everywhere. Nobita watches with wide eyes.",
+          "dialogue_cn": "哆啦A梦：「然后这个总机……被支付公司Stripe花了超过70亿美元买走了。」\n大雄：「70亿？！我的零花钱要攒多少年才够……」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Split panel: Left side shows a famous photographer (Nick Knight) building a small custom robot. Right side shows generic AI robots trained on internet data looking soulless.",
+          "dialogue_cn": "哆啦A梦：「另一边，时尚摄影大师Nick Knight拒绝用通用AI，要自己造专属AI。」\n大雄：「为什么？通用AI不是更方便吗？」\n哆啦A梦：「因为通用AI学的是所有人的创意，他不想自己的风格被稀释成'大众口味'。」",
+          "sfx": "フムフム"
+        },
+        {
+          "scene": "Doraemon drawing a diagram on a whiteboard: 'AI is becoming infrastructure' with arrows pointing to payments, creativity tools, and agents.",
+          "dialogue_cn": "哆啦A梦：「本周的教训是：AI正在变成'水电煤'，每个行业都在抢着建自己的管道。」\n大雄：「所以以后用AI也要交水费了？」\n哆啦A梦：「……你已经在交了，叫做API账单。」",
+          "sfx": "ピキーン"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "AI考满分了，大雄还是零分",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "AI在最难的通用智能测试上考了满分，而大雄……依然在为数学补考发愁。这一期，大雄试图用「AI已经证明智能无用论」来说服哆啦A梦帮他逃课，却遭到了史上最毒舌的反驳。结局出乎意料——原来AI满分也救不了某些人的期末考试。",
+      "highlights": [
+        "大雄的歪理：AI都满分了，说明考试本身没意义",
+        "哆啦A梦的毒舌：AI满分是因为它真的会，你零分是因为你真的不会",
+        "反转笑点：哆啦A梦帮大雄复习，结果自己也被数学题难住了"
+      ],
+      "community_quotes": [
+        {
+          "text": "AI考满分这件事最大的受益者，是全球所有用「AI都会了人类学啥」当借口的学生。",
+          "author": "高中老师 @红笔不够用"
+        },
+        {
+          "text": "说真的，ARC-AGI-3满分之后，下一个被淘汰的是不是辅导老师？",
+          "author": "网友 @焦虑家长群"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "NVIDIA AVO在ARC-AGI-3达到100%满分",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita confidently presenting a newspaper headline 'AI scores 100% on intelligence test!' to Doraemon, looking smug with arms crossed.",
+          "dialogue_cn": "大雄：「哆啦A梦！你看！AI在智能测试上考了满分！这说明——考试这种东西，已经被时代淘汰了！」\n哆啦A梦：「……你想说什么？」",
+          "sfx": "ドヤァ"
+        },
+        {
+          "scene": "Nobita spreading his arms dramatically, looking philosophical, with a sunset background.",
+          "dialogue_cn": "大雄：「既然AI能考满分，人类就不需要再考试了！所以我明天的数学补考，从哲学角度来说，是没有意义的！」\n哆啦A梦：「……」",
+          "sfx": "シーン"
+        },
+        {
+          "scene": "Doraemon with a deadpan expression, holding up one finger to make a point. A small sweat drop on his forehead.",
+          "dialogue_cn": "哆啦A梦：「AI考满分，是因为它把所有知识点都学会了。」\n大雄：「对！」\n哆啦A梦：「你考零分，是因为你一个知识点都没学。」\n大雄：「……」\n哆啦A梦：「这两件事，逻辑上没有任何关系。」",
+          "sfx": "ズドーン"
+        },
+        {
+          "scene": "Doraemon and Nobita both sitting at a desk with math textbooks. Doraemon is staring at a particularly hard problem with a troubled expression, smoke coming from his head. Nobita looks shocked.",
+          "dialogue_cn": "大雄：「那你帮我复习吧，你是AI专家！」\n哆啦A梦：「……这道应用题……嗯……」\n大雄：「哆啦A梦？你、你算出来了吗？」\n哆啦A梦（冒汗）：「AVO能考满分是因为它有GPU集群。我只是一只猫。」",
+          "sfx": "ガクガク"
+        }
+      ],
+      "doraemon_quote": "「AI满分改变了世界，但改变不了你明天还要补考这个事实。」——哆啦A梦",
+      "panels_images": []
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "An All-Time Great Air Jordan Is Finally Returning In Its Purest Possible Form",
+      "url": "https://www.gq.com/story/air-jordan-4-bred-2026-retro",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "Nick Knight Is Building His Own AI",
+      "url": "https://www.businessoffashion.com/podcasts/creative-class/nick-knight-is-building-his-own-ai/",
+      "score": 8.5,
+      "categories": [
+        "AI × 时尚",
+        "时装"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "JENNIE'S First adidas Shoe Is a Real-Deal Ballerina Sneaker",
+      "url": "https://www.highsnobiety.com/p/jennie-adidas-superstar-square-ballet/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "NVIDIA AVO Reaches 100% on ARC-AGI-3, Demonstrating a Frontier-Level General-Purpose Architecture for Long-Horizon Autonomous Agents",
+      "url": "https://developer.nvidia.com/blog/nvidia-avo-reaches-100-on-arc-agi-3-demonstrating-a-frontier-level-general-purpose-architecture-for-long-horizon-autonomous-agents/",
+      "score": 8.5,
+      "categories": [
+        "Agent & Skills"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "Supreme Chief Creative Officer Steps Down After 22 Years",
+      "url": "https://hypebeast.com/2026/8/supreme-chief-creative-officer-steps-down-after-22-years",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "「シュプリーム」から最高クリエイティブ責任者のエリン・マギーが去る",
+      "url": "https://www.fashionsnap.com/article/2026-08-20/supreme-erin-magee-steps-down/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "OpenRouter is joining Stripe",
+      "url": "https://openrouter.ai/blog/announcements/openrouter-is-joining-stripe/",
+      "score": 8.5,
+      "categories": [
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "Michael Jordan’s Rare Unreleased Air Jordan 3 Is Finally Coming Out Next Year",
+      "url": "https://wwd.com/footwear-news/sneaker-news/air-jordan-3-retro-khaki-release-date-ct8532-203-1239128734/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "Calling All Rei Kawakubo Fans—dot COMME Is Auctioning 265 Pieces of His Epic Collection",
+      "url": "https://www.vogue.com/article/calling-all-rei-kawakubo-fan-comme-is-auctioning-pieces-of-his-epic-collection",
+      "score": 8.5,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "Supreme Is Building a World Again",
+      "url": "https://www.highsnobiety.com/p/supreme-fw26/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "潮流": 269,
+      "AI × 时尚": 6,
+      "时装": 134,
+      "Agent & Skills": 83,
+      "商用产品": 86,
+      "训练与部署": 26,
+      "开源模型": 18,
+      "3D生成与重建": 2,
+      "ComfyUI": 6,
+      "其他": 817
+    },
+    "by_source": {
+      "telegram": 116,
+      "hackernews": 84,
+      "bilibili": 1,
+      "github": 19,
+      "youtube": 104,
+      "rss": 978
+    }
+  }
+}
