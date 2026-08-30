@@ -1,0 +1,297 @@
+{
+  "week": "2026-W35",
+  "date_range": "2026-08-24 — 2026-08-30",
+  "generated_at": "2026-08-30T14:02:07.602941+00:00",
+  "total_news": 1324,
+  "total_sources": 6,
+  "week_title": "英伟达买下AI界的「菜市场」，OpenAI自己造芯片了！",
+  "editor_note": "本周AI圈两颗核弹同时引爆：英伟达130亿美元拿下Hugging Face，开源生态格局将被重塑；OpenAI悄悄造出自家芯片Jalapeño，黄仁勋和奥特曼同时笑了又同时慌了。Anthropic则低调上线了让AI控制显微镜和机械臂的新标准，AI正在伸出它的「实体之手」。",
+  "stories": [
+    {
+      "title": "英伟达：我把AI界的菜市场买下来了",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "英伟达宣布以130亿美元收购Hugging Face——全球最大的开源AI模型托管平台。这相当于有人把GitHub买走了，数十万个开源模型和数据集的命运一夜间悬而未决。开源社区的未来，现在握在一家卖GPU的公司手里。",
+      "highlights": [
+        "收购价130亿美元，约等于1300亿人民币",
+        "Hugging Face托管数十万个开源模型和数据集",
+        "开源AI社区陷入「姓英还是姓公」的世纪之问"
+      ],
+      "community_quotes": [
+        {
+          "text": "这就好比超市把农贸市场买了，以后买菜得先问超市老板愿不愿意卖。",
+          "author": "AI开发者社区"
+        },
+        {
+          "text": "Hugging Face曾经是「中立地带」，现在变成英伟达的后花园了。",
+          "author": "Twitter/X 网友"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Nvidia agrees to acquire Hugging Face for $13B",
+          "score": 9.5,
+          "url": "https://www.businessinsider.com/nvidia-in-talks-to-buy-hugging-face-13-billion-dollars-2026-8"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita runs into the room waving a newspaper, Doraemon is sitting eating dorayaki, morning sunlight through window",
+          "dialogue_cn": "大雄：「哆啦A梦！英伟达花130亿美元买下Hugging Face了！这是什么意思？！」\n哆啦A梦：「就是说……AI界最大的菜市场，现在有老板了。」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Doraemon explains with a holographic display showing Hugging Face logo surrounded by thousands of model icons, Nobita looks amazed",
+          "dialogue_cn": "哆啦A梦：「Hugging Face上有几十万个开源AI模型，全世界的开发者都在上面分享研究成果。」\n大雄：「哦——就像一个超大的AI共享单车停车场？」\n哆啦A梦：「……大概是这个意思。」",
+          "sfx": "ふむふむ"
+        },
+        {
+          "scene": "Doraemon looks worried, showing a scale with 'open source' on one side and 'Nvidia GPU profits' on the other side tipping heavily",
+          "dialogue_cn": "大雄：「那……英伟达买了以后，开源还是开源吗？」\n哆啦A梦：「这正是全世界开发者现在最担心的问题。开源社区最怕的就是『被收编』。」",
+          "sfx": "ガーン"
+        },
+        {
+          "scene": "Doraemon and Nobita sitting together, Doraemon holding a GPU chip, looking philosophical at sunset",
+          "dialogue_cn": "大雄：「所以以后用Hugging Face，要先给英伟达交钱？」\n哆啦A梦：「不知道。但有一件事是确定的——」\n大雄：「什么？」\n哆啦A梦：「黄仁勋的皮夹克又要多穿一件了。」",
+          "sfx": "ニヤリ"
+        }
+      ],
+      "panels_images": []
+    },
+    {
+      "title": "OpenAI造芯片 & Anthropic让AI动手了",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周AI硬件领域双线爆发：OpenAI发布自研推理芯片Jalapeño，在速度和能效上声称达到业界最高水平，宣告不再完全依赖英伟达；与此同时，Anthropic推出模型硬件标准（MHS），让AI智能体能直接操控显微镜、机械臂等物理设备，设备接入时间从数周压缩至几分钟。AI正在从「动嘴」走向「动手」。",
+      "highlights": [
+        "OpenAI自研芯片Jalapeño：更快、更省电，向英伟达说「我们可以自给自足」",
+        "Anthropic MHS标准：AI操控量子计算机激光锁定，成功率高达99.3%",
+        "两件事合在一起意味着：AI正在同时获得「大脑」和「双手」"
+      ],
+      "community_quotes": [
+        {
+          "text": "OpenAI造芯片这件事，最紧张的人应该是黄仁勋。",
+          "author": "半导体行业观察"
+        },
+        {
+          "text": "AI能控制机械臂了，科幻电影的第一幕正在发生。",
+          "author": "Anthropic开发者论坛"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Jalapeño's first results show industry-leading speed and efficiency in AI inference",
+          "score": 9.0
+        },
+        {
+          "title": "Anthropic 开放 AI 操控硬件标准预览，设备集成耗时缩至分钟级",
+          "score": 8.5,
+          "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Doraemon excitedly shows Nobita two newspaper headlines side by side on a tablet, both glowing with importance",
+          "dialogue_cn": "哆啦A梦：「大雄！本周有两个大新闻要一起讲！」\n大雄：「又是英伟达吗？我脑子不够用了……」\n哆啦A梦：「不是！这次是OpenAI和Anthropic！」",
+          "sfx": "ワクワク"
+        },
+        {
+          "scene": "Doraemon holds up a tiny spicy pepper-shaped chip (Jalapeño), dramatic lighting, Nobita's eyes wide",
+          "dialogue_cn": "哆啦A梦：「OpenAI造了自己的AI芯片，叫Jalapeño——就是那种墨西哥辣椒！」\n大雄：「名字好辣……性能呢？」\n哆啦A梦：「号称推理速度和能效业界第一。以后OpenAI不用全靠英伟达了。」\n大雄：「哦，就是自己种菜，不用去菜市场了？」\n哆啦A梦：「……你今天怎么老说菜市场。」",
+          "sfx": "ピリリ"
+        },
+        {
+          "scene": "Holographic display shows a robotic arm adjusting a microscope, Claude AI logo visible on a screen nearby, lab setting",
+          "dialogue_cn": "哆啦A梦：「然后Anthropic更厉害——他们发布了新标准，让AI可以直接控制显微镜、机械臂，甚至量子计算机！」\n大雄：「AI……能动手了？！」\n哆啦A梦：「对，而且量子计算机的激光锁定恢复，AI成功率达到99.3%，几乎不需要人帮忙。」",
+          "sfx": "ゴゴゴ"
+        },
+        {
+          "scene": "Nobita sits frozen with a blank stare, Doraemon pats his shoulder with a knowing smile",
+          "dialogue_cn": "大雄：「等等……AI有了超快的大脑（芯片），又有了能动的手（机械臂）……」\n哆啦A梦：「对。」\n大雄：「那还缺什么？」\n哆啦A梦：「腿。」\n大雄：「……」\n哆啦A梦：「别担心，那应该是下周的新闻。」",
+          "sfx": "ズーン"
+        }
+      ],
+      "panels_images": []
+    },
+    {
+      "title": "大雄想用AI帮他写作业，结果……",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "本周AI行业一边高喊「改变世界」，一边各家公司忙着收购、造芯片、控机械臂……大雄听完这些新闻只有一个朴素的愿望：让AI帮我写作业。哆啦A梦的回答让他当场社死。",
+      "highlights": [
+        "AI能控制量子计算机，但能帮大雄写作业吗？",
+        "英伟达130亿买平台，大雄的作业依然0分",
+        "哆啦A梦的毒舌达到本周新高"
+      ],
+      "community_quotes": [
+        {
+          "text": "AI行业每周都在「改变世界」，但我的工作量一点没少。",
+          "author": "打工人集体心声"
+        },
+        {
+          "text": "OpenAI造了最快的芯片，我的电脑还是转圈圈。",
+          "author": "普通用户代表"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Nvidia agrees to acquire Hugging Face for $13B",
+          "score": 9.5,
+          "url": "https://www.businessinsider.com/nvidia-in-talks-to-buy-hugging-face-13-billion-dollars-2026-8"
+        },
+        {
+          "title": "Jalapeño's first results show industry-leading speed and efficiency in AI inference",
+          "score": 9.0
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita lying on the floor surrounded by unfinished homework papers, looking up at Doraemon with pleading eyes, evening setting",
+          "dialogue_cn": "大雄：「哆啦A梦——！你说AI这么厉害，能帮我写作业吗？」\n哆啦A梦：「可以啊。」\n大雄：「真的？！」\n哆啦A梦：「AI能控制机械臂做实验、能推理量子计算机……帮你写小学作业，简直大材小用。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon pulls out a futuristic tablet showing an AI interface, Nobita eagerly leans in, homework papers flying around",
+          "dialogue_cn": "大雄：「太好了！快帮我写数学题！」\n哆啦A梦：「好，输入题目——」\nAI界面显示：「正在用Jalapeño芯片以业界最快速度处理……」\n大雄：「哇！好快！」",
+          "sfx": "ビビビ"
+        },
+        {
+          "scene": "Screen shows the AI answer, Nobita's face goes from excited to horrified, Doraemon reads with a poker face",
+          "dialogue_cn": "AI回答显示：「答案是42。过程如下：根据量子纠缠原理，结合Transformer架构……（后续3000字）」\n大雄：「……老师只要写三行。」\n哆啦A梦：「AI很认真的。」",
+          "sfx": "ガクッ"
+        },
+        {
+          "scene": "Nobita crying at his desk still doing homework by hand, Doraemon eating dorayaki watching him with zero sympathy, night time",
+          "dialogue_cn": "大雄：「结果AI写了3000字，我还要手抄……比自己做还累！！」\n哆啦A梦：（嚼着铜锣烧）「英伟达花了130亿买AI平台，你花了两小时手抄AI的答案。」\n大雄：「所以呢？！」\n哆啦A梦：「所以你们俩都是冤大头。」",
+          "sfx": "ズドーン"
+        }
+      ],
+      "doraemon_quote": "AI改变了世界，但改变不了你不想学习的心。这一点，连130亿美元也买不到。",
+      "panels_images": []
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "Nvidia agrees to acquire Hugging Face for $13B",
+      "url": "https://www.businessinsider.com/nvidia-in-talks-to-buy-hugging-face-13-billion-dollars-2026-8",
+      "score": 9.5,
+      "categories": [
+        "开源模型",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "Inside Demna’s Gucciverse: How Fashion’s Restless Disrupter Is Reinvigorating the Global Mega-Brand",
+      "url": "https://www.vogue.com/article/inside-demnas-gucciverse-september-2026",
+      "score": 9.2,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "文化勲章受章者の草間彌生氏が死去　享年97",
+      "url": "https://www.fashionsnap.com/article/2026-08-27/yayoi-kusama-passed-away/",
+      "score": 9.0,
+      "categories": [
+        "时装",
+        "其他"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Jalapeño’s first results show industry-leading speed and efficiency in AI inference",
+      "url": "https://openai.com/index/jalapeno-first-results",
+      "score": 9.0,
+      "categories": [
+        "训练与部署",
+        "商用产品"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "SKIMS Enlists Supreme Veteran & Lemaire Designer Duo Exits Uniqlo U in This Week's Top Fashion News",
+      "url": "https://hypebeast.com/2026/8/skims-supreme-uniqlo-u-ugg-willy-chavarria-gunna-under-armour-ovo-drake-info",
+      "score": 8.5,
+      "categories": [
+        "潮流",
+        "时装"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "【ユニクロ ユー】ルメール手掛けるラストコレクション　10年の集大成となる全アイテム紹介",
+      "url": "https://www.fashionsnap.com/article/uniqlo-u-26aw-list/",
+      "score": 8.5,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "Yayoi Kusama dies aged 97",
+      "url": "https://www.dezeen.com/2026/08/27/yayoi-kusama-dies-aged-97/",
+      "score": 8.5,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "Yayoi Kusama, Renowned for Infinity Rooms and Louis Vuitton Collaborations, Has Died",
+      "url": "https://www.businessoffashion.com/news/creative-class/yayoi-kusama-renown-for-infinity-rooms-and-louis-vuitton-collaborations-has-died/",
+      "score": 8.5,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "What Is Uniqlo U Without the Lemaire Duo?",
+      "url": "https://hypebeast.com/2026/8/uniqlo-u-christophe-lemaire-sarah-linh-tran-exit",
+      "score": 8.5,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "🤖 Anthropic 开放 AI 操控硬件标准预览，设备集成耗时缩至分钟级",
+      "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview",
+      "score": 8.5,
+      "categories": [
+        "Agent & Skills",
+        "商用产品"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "开源模型": 30,
+      "商用产品": 87,
+      "时装": 155,
+      "潮流": 283,
+      "其他": 819,
+      "训练与部署": 32,
+      "Agent & Skills": 95,
+      "AI × 时尚": 6,
+      "ComfyUI": 7,
+      "3D生成与重建": 3
+    },
+    "by_source": {
+      "rss": 986,
+      "bilibili": 2,
+      "hackernews": 99,
+      "youtube": 109,
+      "github": 25,
+      "telegram": 103
+    }
+  }
+}
