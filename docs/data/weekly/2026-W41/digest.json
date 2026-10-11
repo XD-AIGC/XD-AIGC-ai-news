@@ -1,0 +1,293 @@
+{
+  "week": "2026-W41",
+  "date_range": "2026-10-05 — 2026-10-11",
+  "generated_at": "2026-10-11T14:00:57.474114+00:00",
+  "total_news": 1465,
+  "total_sources": 5,
+  "week_title": "时尚圈大地震！设计师们都在搬家？",
+  "editor_note": "本周时尚圈热闹非凡：圣罗兰十年掌门人Vaccarello挥手告别，香奈儿新掌舵Blazy首秀惊艳全场。一个时代落幕，另一个时代开启，时尚就是这么残酷又迷人。哆啦A梦和大雄这次暂时放下AI，来聊聊衣服！",
+  "stories": [
+    {
+      "title": "圣罗兰的十年告别",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "Anthony Vaccarello正式宣布离开圣罗兰，结束长达十年的创意总监生涯。他任内将YSL打造成性感极简的顶级标杆，销售额峰值高达33亿欧元。继任者悬而未决，业界屏息等待下一位掌舵人。一个时代就此落幕。",
+      "highlights": [
+        "Vaccarello执掌YSL整整十年（2016-2025）",
+        "任期内销售额峰值达33亿欧元",
+        "继任者至今未公布，悬念十足"
+      ],
+      "community_quotes": [
+        {
+          "text": "他让圣罗兰的西装变成了一种态度，不只是一件衣服。",
+          "author": "WWD时装评论"
+        },
+        {
+          "text": "接棒Hedi Slimane已经够难了，下一位接棒Vaccarello的人压力更大。",
+          "author": "Vogue业内观察"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Anthony Vaccarello Exits Saint Laurent After a Decade at the Helm",
+          "score": 9.5,
+          "url": "https://hypebeast.com/2026/10/anthony-vaccarello-exits-saint-laurent-after-a-decade-announcement"
+        },
+        {
+          "title": "Anthony Vaccarello Is Leaving Saint Laurent",
+          "score": 9.2,
+          "url": "https://www.gq.com/story/anthony-vaccarello-leaving-saint-laurent"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita sitting at his desk looking shocked, holding a fashion magazine with a big headline. Doraemon peeks over his shoulder with wide eyes.",
+          "dialogue_cn": "大雄：「哆啦A梦！圣罗兰的设计师辞职了！！」\n哆啦A梦：「什么？Anthony Vaccarello？！」",
+          "sfx": "ガーン！"
+        },
+        {
+          "scene": "Doraemon standing proudly, explaining with a pointer at an imaginary timeline. Nobita listens with his mouth open.",
+          "dialogue_cn": "哆啦A梦：「他做了整整十年！把圣罗兰变成性感极简的代名词，销售额最高冲到33亿欧元！」\n大雄：「33亿？！那是多少件西装啊……」",
+          "sfx": "ドキドキ"
+        },
+        {
+          "scene": "Nobita looking worried, scratching his head. Doraemon crosses his arms with a serious expression.",
+          "dialogue_cn": "大雄：「那……下一个设计师是谁？」\n哆啦A梦：「还没公布。整个时尚圈都在等，比等新iPhone还紧张。」",
+          "sfx": "シーン…"
+        },
+        {
+          "scene": "Nobita suddenly looks inspired, pointing at himself dramatically. Doraemon stares at him with a deadpan face.",
+          "dialogue_cn": "大雄：「我可以去应聘！我每天都穿衣服，经验很丰富的！」\n哆啦A梦：「……你昨天穿反了衬衫。」",
+          "sfx": "ズコッ"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "香奈儿新时代：飞鸟与自由",
+      "theme": "trends",
+      "label": "时尚动态",
+      "summary": "Matthieu Blazy在巴黎大皇宫呈现香奈儿2027春夏系列，以Gabrielle Chanel的多重身份与自由为主题，现场明星云集，Nicole Kidman、Pedro Pascal、Dua Lipa起立鼓掌。与此同时，圣罗兰的权力交接悬而未决，两大顶级品牌命运形成鲜明对比——一个意气风发，一个等待新生。",
+      "highlights": [
+        "Blazy以「自由」为核心重新诠释香奈儿DNA",
+        "秀场从《You Don't Own Me》过渡至Britney Spears混音",
+        "Nicole Kidman、Pedro Pascal、Dua Lipa现场起立鼓掌"
+      ],
+      "community_quotes": [
+        {
+          "text": "Blazy没有抛弃香奈儿，他让香奈儿长出了新的翅膀。",
+          "author": "Harper's Bazaar 巴黎特派"
+        },
+        {
+          "text": "从Britney Spears混音响起的那一刻，全场沸腾了。",
+          "author": "现场观众 @fashionweekdiaries"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Matthieu Blazy Gives Chanel a Fresh Start for Spring/Summer 2027",
+          "score": 9.2,
+          "url": "https://www.elle.com/runway/a74031592/chanel-spring-2027-review/"
+        },
+        {
+          "title": "Chanel Spring 2027: Free as a Bird",
+          "score": 9.0
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Doraemon and Nobita watching a fashion show on TV. The screen shows birds flying over a glowing runway at Grand Palais.",
+          "dialogue_cn": "大雄：「哇，香奈儿的秀好漂亮！天花板上有发光的飞鸟！」\n哆啦A梦：「这是Matthieu Blazy的首秀，他刚接手香奈儿不久。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Doraemon explaining with a small chalkboard showing Chanel logo and a bird. Nobita looks genuinely interested.",
+          "dialogue_cn": "哆啦A梦：「他以Gabrielle Chanel的'自由'为主题——她一生都在打破束缚，Blazy要把这个精神带回来。」\n大雄：「所以香奈儿其实是……一只鸟？」",
+          "sfx": "ポカン"
+        },
+        {
+          "scene": "TV shows celebrities like Nicole Kidman and Dua Lipa standing and clapping. Nobita jumps up from his seat excitedly.",
+          "dialogue_cn": "大雄：「Nicole Kidman站起来鼓掌了！Dua Lipa也站起来了！！」\n哆啦A梦：「连Britney Spears的混音都放了，不站起来才奇怪。」",
+          "sfx": "ワーッ！"
+        },
+        {
+          "scene": "Nobita looks at his own plain T-shirt sadly. Doraemon pats his shoulder with a sympathetic but slightly smug expression.",
+          "dialogue_cn": "大雄：「……圣罗兰还没找到新设计师，香奈儿已经飞起来了。差距好大。」\n哆啦A梦：「时尚圈就是这样，有人谢幕，有人登场。就像你的成绩——永远在谢幕。」",
+          "sfx": "グサッ"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "联名鞋款：买还是不买，这是个问题",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "本周潮流圈也不消停：Jordan Brand推出《空中大灌篮》30周年纪念球鞋，NIGO与BTS的j-hope联手打造松鼠主题Nike Air Force 1。大雄盯着这些联名款两眼发光，哆啦A梦决定用任意门带他去买——结果发现队伍已经排到了平行宇宙。",
+      "highlights": [
+        "Jordan 11 Space Jam 30周年限定，情怀与稀缺性双爆表",
+        "NIGO × j-hope 松鼠Air Force 1，日系街头遇上K-pop",
+        "限量联名鞋的排队文化已经成为一种「运动」"
+      ],
+      "community_quotes": [
+        {
+          "text": "我不是在买鞋，我是在买一个1995年的夏天。",
+          "author": "球鞋收藏家 @sneakerhead_tokyo"
+        },
+        {
+          "text": "松鼠图案的Air Force 1……NIGO真的什么都能做成潮流。",
+          "author": "潮流博主 @streetwear_daily"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "30 Years Later, Jordan's Space Jam Shoes Are Fresher Than Ever",
+          "score": 8.5,
+          "url": "https://www.highsnobiety.com/p/jordan-space-jam-30th-anniversary-sneakers/"
+        },
+        {
+          "title": "NIGO & j-hope's Squirrel-Themed Nike Air Force 1 Is Absolutely Nuts",
+          "score": 8.5
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita drooling over a sneaker magazine showing Space Jam Jordan 11s and a squirrel-themed Air Force 1. Stars in his eyes.",
+          "dialogue_cn": "大雄：「哆啦A梦！Space Jam球鞋30周年复刻！还有松鼠Air Force 1！我全都要！！」\n哆啦A梦：「你上个月零花钱买了三包零食，还剩多少？」",
+          "sfx": "キラーン"
+        },
+        {
+          "scene": "Doraemon dramatically pulls out the Anywhere Door from his pocket. Nobita jumps with excitement.",
+          "dialogue_cn": "大雄：「用任意门带我去买！第一个到就能抢到限量款！」\n哆啦A梦：「好吧，为了让你闭嘴……」",
+          "sfx": "ジャジャーン！"
+        },
+        {
+          "scene": "They open the Anywhere Door to reveal an impossibly long queue stretching into the distance, past mountains, clouds, and into space.",
+          "dialogue_cn": "大雄：「……这队伍怎么排到外太空去了？」\n哆啦A梦：「有人昨天就用任意门来排队了。你以为只有你有这个？」",
+          "sfx": "ガビーン！！"
+        },
+        {
+          "scene": "A kid at the front of the queue is wearing the squirrel Air Force 1 AND the Space Jam Jordans at the same time, one on each foot. Nobita and Doraemon stare in disbelief.",
+          "dialogue_cn": "大雄：「前面那个小孩……他左脚松鼠、右脚Space Jam……」\n哆啦A梦：「潮流的尽头，是脚不对称。」",
+          "sfx": "ズーン…"
+        }
+      ],
+      "doraemon_quote": "「限量款的意义就在于——永远有人比你更早排队，比你更有钱，比你更不需要睡觉。」",
+      "panels_images": []
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "「サンローラン」アンソニー・ヴァカレロがクリエイティブディレクター退任",
+      "url": "https://www.fashionsnap.com/article/2026-10-09/saint-laurent-anthony-vaccarello-retirement/",
+      "score": 9.5,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "Anthony Vaccarello Bows Out at Saint Laurent",
+      "url": "https://www.vogue.com/article/anthony-vaccarello-bows-out-at-yves-saint-laurent",
+      "score": 9.5,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Anthony Vaccarello Departs Saint Laurent After a Decade",
+      "url": "https://www.elle.com/fashion/a73641103/anthony-vaccarello-leaves-saint-laurent/",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Anthony Vaccarello Is Leaving Saint Laurent",
+      "url": "https://www.gq.com/story/anthony-vaccarello-leaving-saint-laurent",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "Anthony Vaccarello Exits Saint Laurent After a Decade at the Helm",
+      "url": "https://hypebeast.com/2026/10/anthony-vaccarello-exits-saint-laurent-after-a-decade-announcement",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "Matthieu Blazy Gives Chanel a Fresh Start for Spring/Summer 2027",
+      "url": "https://www.elle.com/runway/a74031592/chanel-spring-2027-review/",
+      "score": 9.2,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "Matthieu Blazy Reimagines the Layered Legacies of Gabrielle Chanel for SS27",
+      "url": "https://hypebeast.com/2026/10/matthieu-blazy-chanel-paris-fashion-week-ss27-runway-collection",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "Chanel Spring 2027: Free as a Bird",
+      "url": "https://wwd.com/runway/spring-2027/paris/chanel/review/",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "30 Years Later, Jordan's Space Jam Shoes Are Fresher Than Ever (EXCLUSIVE)",
+      "url": "https://www.highsnobiety.com/p/jordan-space-jam-30th-anniversary-sneakers/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "NIGO & j-hope’s Squirrel-Themed Nike Air Force 1 Is Absolutely Nuts",
+      "url": "https://www.highsnobiety.com/p/nigo-nike-j-hope-air-force-1/",
+      "score": 8.5,
+      "categories": [
+        "潮流"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "时装": 313,
+      "潮流": 336,
+      "商用产品": 109,
+      "Agent & Skills": 112,
+      "开源模型": 21,
+      "AI × 时尚": 1,
+      "训练与部署": 22,
+      "其他": 759,
+      "ComfyUI": 5,
+      "3D生成与重建": 2
+    },
+    "by_source": {
+      "telegram": 112,
+      "rss": 1118,
+      "youtube": 133,
+      "github": 24,
+      "hackernews": 78
+    }
+  }
+}
