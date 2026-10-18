@@ -1,0 +1,309 @@
+{
+  "week": "2026-W42",
+  "date_range": "2026-10-12 — 2026-10-18",
+  "generated_at": "2026-10-18T14:01:01.873091+00:00",
+  "total_news": 1374,
+  "total_sources": 6,
+  "week_title": "时尚圈大洗牌，AI界悄悄开源",
+  "editor_note": "本周新闻榜单被时装圈彻底霸屏——Kim Jones单飞、McQueen换帅、Chanel焕新，设计师们集体出走创业或被替换。AI圈倒是低调地扔出了一颗炸弹：StepFun开源了6000亿参数的巨型MoE模型，100万token上下文，专为长周期Agent设计。时装周和开源周，本周都有。",
+  "stories": [
+    {
+      "title": "Kim Jones单飞！顶流设计师创立同名品牌",
+      "theme": "headline",
+      "label": "本周头条",
+      "summary": "曾先后执掌Louis Vuitton男装、Dior Men、Fendi的顶级设计师Kim Jones正式宣布创立同名品牌KIM JONES，以FW27系列首秀亮相。品牌服装主要在日本制造，皮具采用意大利工艺，首家旗舰店将于2027年10月在香港中环开业。这是一位大师从巨头奢侈品牌出走、以个人名义重新出发的重大宣言。",
+      "highlights": [
+        "Kim Jones历经LV、Dior、Fendi三大奢侈品牌后正式单飞",
+        "首秀FW27融合高定、街头与实用主义美学，主要在日本制造",
+        "首家旗舰店选址香港中环，2027年10月开业"
+      ],
+      "community_quotes": [
+        {
+          "text": "他在三大奢侈品牌积累了数十年声誉，现在终于要为自己工作了。",
+          "author": "Vogue Business"
+        },
+        {
+          "text": "香港中环作为首发地，标志着顶级设计师再度认可香港的高端时尚战略地位。",
+          "author": "BoF时装商业评论"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Kim Jones Announces Eponymous Label With FW27 Debut Collection",
+          "score": 9.2,
+          "url": "https://hypebeast.com/2026/10/kim-jones-announces-eponymous-label-with-fw27-debut-collection-hong-kong-store-opening-news"
+        },
+        {
+          "title": "Why is Kim Jones Launching His Eponymous Brand in Hong Kong?",
+          "score": 9.0,
+          "url": "https://www.vogue.com/article/why-is-kim-jones-launching-his-eponymous-brand-in-hong-kong"
+        },
+        {
+          "title": "Kim Jones Is Launching an Eponymous Label",
+          "score": 9.0,
+          "url": "https://www.gq.com/story/kim-jones-is-launching-an-eponymous-label"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita bursts through the door of Doraemon's room, holding a fashion magazine, eyes wide with excitement. Doraemon is sitting at the desk reading.",
+          "dialogue_cn": "大雄：「哆啦A梦！Kim Jones要自己开品牌了！他以前管过LV、Dior、Fendi……这到底是什么级别的大事啊！」",
+          "sfx": "ドカーン！"
+        },
+        {
+          "scene": "Doraemon adjusts his collar proudly, a holographic display showing logos of Louis Vuitton, Dior, and Fendi floating in the air.",
+          "dialogue_cn": "哆啦A梦：「想象一下，一个人先后掌管了三大顶级奢侈品牌的创意方向……然后有一天说：'够了，我要给自己打工。'这就是Kim Jones现在做的事。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Nobita looks dreamily into the distance, imagining himself in a fancy suit. A thought bubble shows him wearing designer clothes.",
+          "dialogue_cn": "大雄：「那他的新品牌卖什么风格？我也想买……等等，我有钱吗？」\n哆啦A梦：「融合高定、街头和实用主义，主要在日本制造。首家店开在香港中环……你的零花钱大概够买一个购物袋的角落。」",
+          "sfx": "ガクッ"
+        },
+        {
+          "scene": "Doraemon holds up a tiny map showing Hong Kong, with a glowing store icon on Central. Nobita is slumped on the floor dramatically.",
+          "dialogue_cn": "哆啦A梦：「2027年10月，香港中环见。记住这个日期——那是大师正式向世界宣告：'我就是品牌本身。'」\n大雄：「……我先去存零花钱。」",
+          "sfx": "ジーン"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "时装圈大换血：McQueen失帅，StepFun开源巨模",
+      "theme": "trends",
+      "label": "开源&工具",
+      "summary": "本周行业动态密集：Alexander McQueen创意总监Seán McGirr在任职不足三年后离职，McQueen同步启动大规模结构重组；Matthieu Blazy执掌香奈儿后以Gabrielle Chanel生平为主轴发布2027春夏系列。与此同时，AI领域StepFun悄然开源Step 5 Preview——6000亿参数MoE巨模，支持100万token超长上下文，专为Agent任务设计，是目前开源社区规模最大的MoE模型之一。",
+      "highlights": [
+        "Seán McGirr离开McQueen，任期不足三年，继任人选未定",
+        "Matthieu Blazy首秀香奈儿，以Gabrielle生平分三章呈现品牌未来",
+        "StepFun开源Step 5 Preview：600B MoE，27B激活参数，1M token上下文"
+      ],
+      "community_quotes": [
+        {
+          "text": "McGirr的离开伴随着Kering旗下McQueen的裁员和零售网络收缩，这不只是换帅，是品牌在重新思考自己是谁。",
+          "author": "WWD"
+        },
+        {
+          "text": "Step 5 Preview的开源意义重大——600B MoE在开源社区几乎是前所未有的规模。",
+          "author": "Hugging Face社区"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "McQueen Parts Ways With Creative Director Seán McGirr After Three Years",
+          "score": 9.0,
+          "url": "https://hypebeast.com/2026/10/kering-alexander-mcqueen-parts-ways-with-creative-director-sean-mcgirr-announcement"
+        },
+        {
+          "title": "マチュー・ブレイジーによる「シャネル」は過去から未来へ",
+          "score": 9.0,
+          "url": "https://www.fashionsnap.com/article/chanel-27ss-show/"
+        },
+        {
+          "title": "StepFun Releases Step 5 Preview Open Weights: 600B MoE, 27B Active, 1M Context",
+          "score": 8.5,
+          "url": "https://www.marktechpost.com/2026/10/16/stepfun-releases-step-5-preview-open-weights-600b-moe-27b-active-1m-context/"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Doraemon is reading multiple newspapers simultaneously, looking overwhelmed. Headlines float around him about fashion and AI.",
+          "dialogue_cn": "大雄：「哆啦A梦，本周发生了好多事啊，你能帮我理一理吗？」\n哆啦A梦：「好，时装圈和AI圈同时炸了，我们一起来看。」",
+          "sfx": "パラパラ"
+        },
+        {
+          "scene": "Doraemon points to a dramatic illustration of a fashion house with the door swinging open, a silhouette walking out.",
+          "dialogue_cn": "哆啦A梦：「先说时装圈——McQueen的创意总监Seán McGirr不到三年就走了，品牌还在大规模裁员重组。同时，香奈儿的新掌门Blazy用Gabrielle Chanel的一生讲了一场秀，95只飞鸟象征自由。」\n大雄：「设计师们都在换来换去……感觉比我换座位还频繁。」",
+          "sfx": "ザワザワ"
+        },
+        {
+          "scene": "Doraemon pulls out a futuristic holographic display showing a massive neural network diagram labeled '600B MoE'. Nobita's jaw drops.",
+          "dialogue_cn": "哆啦A梦：「然后是AI圈——StepFun悄悄开源了Step 5 Preview，6000亿参数，每次只激活270亿，支持100万token的超长上下文，专门为长周期Agent任务设计。」\n大雄：「100万token是什么概念？！」",
+          "sfx": "ドドドド"
+        },
+        {
+          "scene": "Doraemon holds up a thick book stack representing 1 million tokens, while Nobita looks dizzy. A split screen shows fashion chaos on one side and AI servers on the other.",
+          "dialogue_cn": "哆啦A梦：「大概相当于把《哈利·波特》全集塞进去还有富余。时装圈在换人，AI圈在开源——本周两个世界都在重新洗牌。」\n大雄：「……我只想知道哪个能帮我写作业。」",
+          "sfx": "ポカン"
+        }
+      ],
+      "doraemon_quote": null,
+      "panels_images": []
+    },
+    {
+      "title": "大雄想用AI设计球衣，结果被现实教做人",
+      "theme": "comedy",
+      "label": "轻松一刻",
+      "summary": "Tyler, The Creator为FC巴塞罗那重新设计球衣，Nike联手NIGO®和j-hope推出三方联名Air Force 1——艺术家跨界时尚已经是常规操作。大雄看完新闻突发奇想，想用AI帮自己设计一套联名球衣，结果哆啦A梦的一句话让他彻底清醒。",
+      "highlights": [
+        "Tyler, The Creator跨界为FC巴塞罗那重新设计球衣",
+        "Nike×NIGO®×j-hope三方联名Air Force 1，灵感源自90年代东京",
+        "大雄的AI联名梦想在哆啦A梦毒舌下破灭"
+      ],
+      "community_quotes": [
+        {
+          "text": "艺术家跨界做球衣、做球鞋早就不是新鲜事了，但Tyler做巴萨还是让人惊了一下。",
+          "author": "Hypebeast读者评论"
+        },
+        {
+          "text": "NIGO®+j-hope+Nike，这个组合的每一个元素单独拿出来都能卖爆，放在一起简直是降维打击。",
+          "author": "SNKRS用户"
+        }
+      ],
+      "related_news": [
+        {
+          "title": "Tyler, The Creator为FC巴塞罗那重新设计球衣",
+          "score": 9.2
+        },
+        {
+          "title": "ナイキがNIGO®とj-hopeとのトリプルコラボ発表",
+          "score": 9.0,
+          "url": "https://www.fashionsnap.com/article/2026-10-14/nike-nigo-jhope-air-force-1/"
+        }
+      ],
+      "panels": [
+        {
+          "scene": "Nobita is excitedly reading news on a tablet, pointing at images of Tyler the Creator's Barcelona jersey and NIGO x j-hope Nike collab.",
+          "dialogue_cn": "大雄：「哆啦A梦你看！Tyler, The Creator帮巴萨设计球衣，NIGO和j-hope跟Nike联名！艺术家跨界时尚太酷了！」\n哆啦A梦：「嗯，跨界联名已经是标配了。」",
+          "sfx": "キラキラ"
+        },
+        {
+          "scene": "Nobita stands up dramatically with a determined pose, pointing at himself with both thumbs.",
+          "dialogue_cn": "大雄：「我也要跨界！我要用AI帮我设计一套'大雄×哆啦A梦'联名球衣，然后卖给全世界！」\n哆啦A梦：「……你的跨界是从哪跨到哪？从不及格跨到不及格吗？」",
+          "sfx": "ズコッ"
+        },
+        {
+          "scene": "Nobita is typing furiously on a laptop, an AI chatbot interface visible on screen generating a jersey design. He looks thrilled.",
+          "dialogue_cn": "大雄：「你别小看我！我让AI生成了设计图，你看——'大雄蓝×铜锣烧橙'配色，限定100件，每件卖一万！」\n哆啦A梦（凑近看屏幕）：「……AI帮你设计的？那版权是你的还是AI的？」",
+          "sfx": "ピタッ"
+        },
+        {
+          "scene": "Nobita freezes completely, a single drop of sweat running down his face. Doraemon sips tea calmly with a smug expression.",
+          "dialogue_cn": "大雄：「……」\n哆啦A梦：「Tyler有创作版权，NIGO有文化积累，j-hope有全球粉丝。你有什么？」\n大雄：「我……有你？」\n哆啦A梦：「我不参与分成。」",
+          "sfx": "ガーン！"
+        }
+      ],
+      "doraemon_quote": "工具人人都能用，但'凭什么是你'这个问题，AI永远帮不了你回答。",
+      "panels_images": []
+    }
+  ],
+  "top10": [
+    {
+      "rank": 1,
+      "title": "Kim Jones Launches Label & Exits Occur at McQueen & Calvin Klein Collection in This Week's Top Fashion News",
+      "url": "https://hypebeast.com/2026/10/kim-jones-launches-label-exits-occur-at-mcqueen-calvin-klein-collection-in-this-weeks-top-fashion-news",
+      "score": 9.2,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 2,
+      "title": "Kim Jones Announces Eponymous Label With FW27 Debut Collection",
+      "url": "https://hypebeast.com/2026/10/kim-jones-announces-eponymous-label-with-fw27-debut-collection-hong-kong-store-opening-news",
+      "score": 9.2,
+      "categories": [
+        "时装",
+        "潮流"
+      ]
+    },
+    {
+      "rank": 3,
+      "title": "Seán McGirr Is Leaving McQueen",
+      "url": "https://www.harpersbazaar.com/fashion/designers/a74146769/sean-mcgirr-mcqueen-exit-announcement/",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 4,
+      "title": "Seán McGirr Departs McQueen",
+      "url": "https://www.vogue.com/article/sean-mcgirr-departs-mcqueen",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 5,
+      "title": "McQueen Parts Ways With Creative Director Seán McGirr After Three Years",
+      "url": "https://hypebeast.com/2026/10/kering-alexander-mcqueen-parts-ways-with-creative-director-sean-mcgirr-announcement",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 6,
+      "title": "ナイキがNIGO®とj-hopeとのトリプルコラボ発表　東京の90年代が着想源に",
+      "url": "https://www.fashionsnap.com/article/2026-10-14/nike-nigo-jhope-air-force-1/",
+      "score": 9.0,
+      "categories": [
+        "潮流"
+      ]
+    },
+    {
+      "rank": 7,
+      "title": "マチュー・ブレイジーによる「シャネル」は過去から未来へ　ガブリエルの人生が導く自由の精神",
+      "url": "https://www.fashionsnap.com/article/chanel-27ss-show/",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 8,
+      "title": "Why is Kim Jones Launching His Eponymous Brand in Hong Kong?",
+      "url": "https://www.vogue.com/article/why-is-kim-jones-launching-his-eponymous-brand-in-hong-kong",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 9,
+      "title": "Kim Jones Is Launching an Eponymous Label",
+      "url": "https://www.gq.com/story/kim-jones-is-launching-an-eponymous-label",
+      "score": 9.0,
+      "categories": [
+        "时装"
+      ]
+    },
+    {
+      "rank": 10,
+      "title": "StepFun Releases Step 5 Preview Open Weights: 600B MoE, 27B Active, 1M Context",
+      "url": "https://www.marktechpost.com/2026/10/16/stepfun-releases-step-5-preview-open-weights-600b-moe-27b-active-1m-context/",
+      "score": 8.5,
+      "categories": [
+        "开源模型",
+        "Agent & Skills",
+        "训练与部署"
+      ]
+    }
+  ],
+  "stats": {
+    "by_category": {
+      "时装": 272,
+      "潮流": 251,
+      "开源模型": 21,
+      "Agent & Skills": 101,
+      "训练与部署": 33,
+      "商用产品": 100,
+      "ComfyUI": 3,
+      "3D生成与重建": 3,
+      "其他": 786,
+      "AI × 时尚": 3
+    },
+    "by_source": {
+      "rss": 983,
+      "github": 26,
+      "bilibili": 8,
+      "telegram": 120,
+      "youtube": 133,
+      "hackernews": 104
+    }
+  }
+}
